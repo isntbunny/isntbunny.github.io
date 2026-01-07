@@ -1,6 +1,6 @@
 ---
-title: "名词分类积累"
-: 2023-12-1
+title: 名词分类积累
+published: 2023-12-1
 category: notes
 tags: [English]
 ---

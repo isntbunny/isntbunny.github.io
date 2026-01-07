@@ -21,7 +21,7 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-solid:envelope",
 			url: "mailto:isntbunny@outlook.com",
 			showName: false,
-		},	
+		},
 
 		{
 			name: "GitHub",

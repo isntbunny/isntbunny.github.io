@@ -1,6 +1,6 @@
 ---
-title: "You and me | SMS上的纠结与现实中的错过"
-: 2024-10-08
+title: You and me | SMS上的纠结与现实中的错过
+published: 2024-10-08
 category: 英语阅读
 tags: [English, reading]
 ---

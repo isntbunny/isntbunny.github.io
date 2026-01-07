@@ -20,13 +20,7 @@ export const siteConfig: SiteConfig = {
 		"歡迎來到Eucaly的部落格！分享學習筆記、生活點滴（也許還會有一些技術文章之類的）",
 
 	// 站点关键词
-	keywords: [
-		"Eucaly",
-		"落桉",
-		"博客",
-		"个人博客",
-		"学习笔记",
-	],
+	keywords: ["Eucaly", "落桉", "博客", "个人博客", "学习笔记"],
 
 	// 主题色
 	themeColor: {

@@ -1,6 +1,6 @@
 ---
-title: "日语声调"
-: 2025-06-30
+title: 日语声调
+published: 2025-06-30
 category: notes
 tags: [Japanese]
 ---

@@ -1,6 +1,6 @@
 ---
-title: "单词"
-: 2025-08-06
+title: 单词
+published: 2025-08-06
 category: notes
 tags: [English]
 ---

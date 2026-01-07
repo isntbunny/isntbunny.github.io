@@ -1,6 +1,6 @@
 ---
-title: "形容词分类积累"
-: 2023-12-01
+title: 形容词分类积累
+published: 2023-12-01
 category: notes
 tags: [English]
 ---
