@@ -102,6 +102,6 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		// 壁纸透明度
 		opacity: 0.8,
 		// 背景模糊程度
-		blur: 1,
+		blur: 0,
 	},
 };
