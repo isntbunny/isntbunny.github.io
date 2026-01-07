@@ -5,7 +5,7 @@ export const fontConfig = {
 	// 是否预加载字体文件
 	preload: true,
 	// 当前选择的字体，支持多个字体组合
-	selected: ["system"],
+	selected: ["myfont"],
 
 	// 字体列表
 	fonts: {
@@ -53,6 +53,15 @@ export const fontConfig = {
 			src: "https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Semibold.min.css",
 			family: "MiSans",
 			weight: 600,
+			display: "swap" as const,
+		},
+
+		//myfont
+		"myfont": {
+			id: "myfont",
+			name: "myfont",
+			src: "https://chinese-fonts-cdn.deno.dev/packages/GuanKiapTsingKhai/dist/GuanKiapTsingKhai/result.css",
+			family: "GuanKiapTsingKhai",
 			display: "swap" as const,
 		},
 	},

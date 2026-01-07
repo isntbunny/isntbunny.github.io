@@ -25,7 +25,7 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 270,
+		hue: 190,
 		// 是否对访问者隐藏主题色选择器
 		fixed: true,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
@@ -48,16 +48,16 @@ export const siteConfig: SiteConfig = {
 	navbar: {
 		// 导航栏Logo
 		// 支持三种类型：Astro图标库，本地图片，网络图片
-		// { type: "icon", value: "material-symbols:home-pin-outline" }
+		// { type: "icon", value: "" }
 		// { type: "image", value: "/assets/images/logo.webp", alt: "Firefly Logo" }
 		// { type: "image", value: "https://example.com/logo.png", alt: "Firefly Logo" }
 		logo: {
-			type: "image",
-			value: "https://i.postimg.cc/HxG7bTwc/250806.png",
-			alt: "logo",
+			type: "icon",
+			value: "material-symbols:home-pin-outline",
+			alt: "",
 		},
 		// 导航栏标题
-		title: "幸福（？）倒計時",
+		title: "Eucaly的博客",
 		// 全宽导航栏，导航栏是否占满屏幕宽度，true：占满，false：不占满
 		widthFull: true,
 		// 导航栏图标和标题是否跟随主题色
