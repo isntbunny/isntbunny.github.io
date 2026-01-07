@@ -1,147 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>幸福（？）倒計時</title><description>No description</description><link>https://isntbunny.github.io/</link><language>zh_CN</language><templateTheme>Firefly</templateTheme><templateThemeVersion>6.3.5</templateThemeVersion><templateThemeUrl>https://github.com/CuteLeaf/Firefly</templateThemeUrl><lastBuildDate>2026年1月7日 06:54:36</lastBuildDate><item><title>Firefly 一款清新美观的 Astro 博客主题模板</title><link>https://isntbunny.github.io/posts/firefly/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/firefly/</guid><description>Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。</description><pubDate>Fri, 02 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;🌟 项目概述&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Firefly&lt;/strong&gt; 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;🖥️在线预览： &lt;a href=&quot;https://firefly.cuteleaf.cn/&quot;&gt;Firefly - Demo site&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;🏠我的博客： &lt;a href=&quot;https://blog.cuteleaf.cn/&quot;&gt;https://blog.cuteleaf.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;📝Firefly使用文档： &lt;a href=&quot;https://docs-firefly.cuteleaf.cn/&quot;&gt;https://docs-firefly.cuteleaf.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;⭐Firefly开源地址：&lt;a href=&quot;https://github.com/CuteLeaf/Firefly&quot;&gt;https://github.com/CuteLeaf/Firefly&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;⭐Fuwari开源地址：&lt;a href=&quot;https://github.com/saicaca/fuwari&quot;&gt;https://github.com/saicaca/fuwari&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;::github{repo=&quot;CuteLeaf/Firefly&quot;}&lt;/p&gt;
-&lt;p&gt;::github{repo=&quot;saicaca/fuwari&quot;}&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/1.webp&quot; alt=&quot;Firefly&quot; /&gt;&lt;/p&gt;
-&lt;h2&gt;🚀 技术架构&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;静态站点生成&lt;/strong&gt;: 基于 Astro ，提供极快的加载速度和优秀的 SEO 优化&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;TypeScript 支持&lt;/strong&gt;: 完整的类型安全，提升开发体验和代码质量&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;响应式设计&lt;/strong&gt;: 使用 Tailwind CSS 构建，完美适配桌面端和移动端&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;组件化开发&lt;/strong&gt;: 支持 Astro、Svelte 组件，灵活可扩展&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;📖 配置说明&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;📚 &lt;strong&gt;详细配置文档&lt;/strong&gt;: 查看 &lt;a href=&quot;https://docs-firefly.cuteleaf.cn/&quot;&gt;Firefly使用文档&lt;/a&gt; 获取完整的配置指南&lt;/p&gt;
-&lt;/blockquote&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Firefly 简单使用指南</title><link>https://isntbunny.github.io/posts/guide/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/guide/</guid><description>如何使用 Firefly 博客模板。</description><pubDate>Fri, 02 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;这个博客模板是基于 &lt;a href=&quot;https://astro.build/&quot;&gt;Astro&lt;/a&gt; 构建的。对于本指南中未提及的内容，您可以在 &lt;a href=&quot;https://docs.astro.build/&quot;&gt;Astro 文档&lt;/a&gt; 中找到答案。&lt;/p&gt;
-&lt;h2&gt;文章的 Front-matter&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: 我的第一篇博客文章
-published: 2023-09-09
-description: 这是我新 Astro 博客的第一篇文章。
-image: ./cover.jpg
-tags: [前端, 开发]
-category: 前端开发
-draft: false
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;属性&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;title&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章标题。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;published&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章发布日期。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;pinned&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;是否将此文章置顶在文章列表顶部。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;description&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章的简短描述。显示在首页上。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;image&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章封面图片路径。&amp;lt;br/&amp;gt;1. 以 &lt;code&gt;http://&lt;/code&gt; 或 &lt;code&gt;https://&lt;/code&gt; 开头：使用网络图片&amp;lt;br/&amp;gt;2. 以 &lt;code&gt;/&lt;/code&gt; 开头：&lt;code&gt;public&lt;/code&gt; 目录中的图片&amp;lt;br/&amp;gt;3. 不带任何前缀：相对于 markdown 文件的路径&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;tags&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章标签。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;category&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章分类。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;licenseName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章内容的许可证名称。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;author&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章作者。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;sourceLink&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;文章内容的来源链接或参考。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;draft&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;如果这篇文章仍是草稿，则不会显示。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;slug&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;自定义文章 URL 路径。如果不设置，将使用文件名作为 URL。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;文章文件的放置位置&lt;/h2&gt;
-&lt;p&gt;您的文章文件应放置在 &lt;code&gt;src/content/posts/&lt;/code&gt; 目录中。您也可以创建子目录来更好地组织您的文章和资源。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;src/content/posts/
-├── post-1.md
-└── post-2/
-    ├── cover.png
-    └── index.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;自定义文章 URL (Slug)&lt;/h2&gt;
-&lt;h3&gt;什么是 Slug？&lt;/h3&gt;
-&lt;p&gt;Slug 是文章 URL 路径的自定义部分。如果不设置 slug，系统将使用文件名作为 URL。&lt;/p&gt;
-&lt;h3&gt;Slug 使用示例&lt;/h3&gt;
-&lt;h4&gt;示例 1：使用文件名作为 URL&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: 我的第一篇博客文章
-published: 2023-09-09
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;文件：&lt;code&gt;src/content/posts/my-first-blog-post.md&lt;/code&gt;
-URL：&lt;code&gt;/posts/my-first-blog-post&lt;/code&gt;&lt;/p&gt;
-&lt;h4&gt;示例 2：自定义 Slug&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: 我的第一篇博客文章
-published: 2023-09-09
-slug: hello-world
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;文件：&lt;code&gt;src/content/posts/my-first-blog-post.md&lt;/code&gt;
-URL：&lt;code&gt;/posts/hello-world&lt;/code&gt;&lt;/p&gt;
-&lt;h4&gt;示例 3：中文标题使用英文 Slug&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: 如何使用 Firefly 博客主题
-published: 2023-09-09
-slug: how-to-use-firefly-blog-theme
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;文件：&lt;code&gt;src/content/posts/firefly-guide.md&lt;/code&gt;
-URL：&lt;code&gt;/posts/how-to-use-firefly-blog-theme&lt;/code&gt;&lt;/p&gt;
-&lt;h3&gt;Slug 使用建议&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;使用英文和连字符&lt;/strong&gt;：&lt;code&gt;my-awesome-post&lt;/code&gt; 而不是 &lt;code&gt;my awesome post&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;保持简洁&lt;/strong&gt;：避免过长的 slug&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;具有描述性&lt;/strong&gt;：让 URL 能够反映文章内容&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;避免特殊字符&lt;/strong&gt;：只使用字母、数字和连字符&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;保持一致性&lt;/strong&gt;：在整个博客中使用相似的命名模式&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;注意事项&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Slug 一旦设置并发布，建议不要随意更改，以免影响 SEO 和已存在的链接&lt;/li&gt;
-&lt;li&gt;如果多个文章使用相同的 slug，后面的文章会覆盖前面的&lt;/li&gt;
-&lt;li&gt;Slug 会自动转换为小写&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded><author>Eucaly</author></item><item><title>有机物的命名</title><link>https://isntbunny.github.io/posts/toname/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/toname/</guid><pubDate>Wed, 10 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;有机物的命名&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>幸福（？）倒計時</title><description>No description</description><link>https://isntbunny.github.io/</link><language>zh_CN</language><templateTheme>Firefly</templateTheme><templateThemeVersion>6.3.5</templateThemeVersion><templateThemeUrl>https://github.com/CuteLeaf/Firefly</templateThemeUrl><lastBuildDate>2026年1月7日 08:40:08</lastBuildDate><item><title>有机物的命名</title><link>https://isntbunny.github.io/posts/toname/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/toname/</guid><pubDate>Wed, 10 Dec 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;有机物的命名&lt;/h1&gt;
 &lt;h2&gt;烷烃的命名&lt;/h2&gt;
 &lt;p&gt;找出最长的碳链当主链，依碳数命名主链，前十个以天干（甲、乙、丙、丁、戊、己、庚、辛、壬、癸）代表碳数，碳数多于十个时，以中文数字命名，如：十一烷。
 从最近的取代基位置编号：1、2、3...(使取代基的位置数字越小越好)。以数字代表取代基的位置。数字与中文数字之间以分隔符（“-”）隔开。
@@ -992,379 +849,6 @@ But I don’t take a drink. Instead, I do the stupidest thing possible. I give m
 &lt;p&gt;be ready to unwind&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded><author>Eucaly</author></item><item><title>名词分类积累</title><link>https://isntbunny.github.io/posts/word-noun/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/word-noun/</guid><pubDate>Fri, 01 Dec 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;物品&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;petrol 汽油&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;wet wipes 湿巾&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;toilet paper 卫生&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;face towel 面巾&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;undergo nucleic acid test 核酸检&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;人体&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;brow 眉毛&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;nail 指甲，钉&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;mustache 胡子&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;服饰&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;collar 领子&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sleeve 袖子&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cloak 斗篷，披&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;garment （一件）衣服&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;vest 背心&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;overcoat 大衣&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;gown 长礼服，裙服&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;miniskirt 超短&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;belt 腰带&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;stocking 长筒&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sneakers 帆布运动&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;boot 靴子&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;swimming goggles 游泳&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;首饰&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;necklace 项圈&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;jewel 宝石&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;purse（女用）小钱&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;家具&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;blanket 毛毯&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sheet床单&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;carpet 地毯&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;curtain 窗帘&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cushion 软垫&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;mat 席子&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;towel 毛巾&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;ashtray 烟灰&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cutlery 餐具（刀、叉和匙）；刀&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;leather 皮革&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cement 水泥&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;容器&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;pitcher 大水（a pitcher of&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;carton （装食物/液体）硬纸盒&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;植物&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;pine cone 松果&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;jasmine 茉莉&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;water lily 睡莲&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;daisy 雏菊&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;peanut 花生&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;avocado 牛油&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;stalk&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;人物&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;cashier 收银&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;hairdresser 理发师，理发&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;air hostess 空姐&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;landlord 房东&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;hostess 女主&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;waitress 女侍&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;chemist 化学药剂&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sales rep 销售代表，推销&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;employee 雇员&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;employer 雇主&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;clerk 文员，店v.当职&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;detective 私家侦探&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;librarian 图书管理馆长&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;professor 教授，讲&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;craftsman 工匠，手艺人&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;gatekeeper 看门人，把关&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;taikonaut 中国宇航&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Lifeguard 救生&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;survivor 幸存&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;outsider=stranger&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;household 一家人，家&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;meetup 聚会&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;医院&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Obstetrician 产科医师&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;物品&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;memorial 纪念碑，纪念&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;mural 大型壁画&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sled 雪橇&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Windmill 风车&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;suitcase 手提&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;briefcase    n. 公文&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;laundry detergent 洗洁&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;工具&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;duster 抹布&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;rag 破布，抹&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;broom 扫帚&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;stepladder 活梯&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;垃圾&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;garbage&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;refuse&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;trash&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Non-recyclable waste&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;食物&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;nourishment 食物，营养品&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;lollipop 棒棒&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;steak 牛排，肉&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;soya milk 豆浆&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;bean curd 豆腐&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;gravy 调味肉汁&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;takeaway 外卖食品&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;药品&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;sleeping pill 安眠&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;房子&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;chamber 室，卧室，议事厅&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cloakroom 衣帽&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;wardrobe 衣柜&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;ceiling 天花板，上限&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;hallway 走廊&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;pond 水池&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sink n.水池,污水vt.使下vi.淹没&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;television set 电视&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;场所&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;bakery 面包&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;department store 百货公司&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Chinatown 唐人&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;prison /prizn/ 监狱&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;slum 贫民&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;insane asylum /in&apos;sain ə&apos;sailəm/精神病院&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;cemetery / graveyard 墓地&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;crime 罪行，犯&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;tribulation 苦难，艰难，痛苦&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sobriquet 绰号，诨&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;天空&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;firework&lt;/li&gt;
-&lt;/ul&gt;
 </content:encoded><author>Eucaly</author></item><item><title>情景分类积累</title><link>https://isntbunny.github.io/posts/word-category/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/word-category/</guid><pubDate>Fri, 01 Dec 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;学校&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;during school hours&lt;/li&gt;
@@ -1749,1557 +1233,377 @@ But I don’t take a drink. Instead, I do the stupidest thing possible. I give m
 &lt;ul&gt;
 &lt;li&gt;the post is not well organized and a bit messy, so I hope it&apos;s still readable. 这个帖子组织得不是很好，有点乱，所以希望它仍然可以阅读&lt;/li&gt;
 &lt;/ul&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Firefly 布局系统详解</title><link>https://isntbunny.github.io/posts/firefly-layout-system/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/firefly-layout-system/</guid><description>深入了解 Firefly 的布局系统，包括侧边栏布局（左侧/双侧）和文章列表布局（列表/网格），以及全新的三列网格模式。</description><pubDate>Sat, 03 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;📖 概述&lt;/h2&gt;
-&lt;p&gt;Firefly 提供了灵活的布局系统，允许您根据内容需求和个人喜好自定义博客的视觉呈现方式。布局系统主要包括&lt;strong&gt;侧边栏布局&lt;/strong&gt;和&lt;strong&gt;文章列表布局&lt;/strong&gt;两个维度，它们相互配合，共同决定了页面的整体结构。&lt;/p&gt;
-&lt;p&gt;本文将详细介绍 Firefly 的各种布局模式、它们的特点、使用场景，以及不同布局组合的效果。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;一、侧边栏布局系统&lt;/h2&gt;
-&lt;p&gt;侧边栏是博客页面的重要组成部分，用于展示导航、分类、标签、统计信息等辅助内容。Firefly 支持两种侧边栏布局模式。&lt;/p&gt;
-&lt;h3&gt;1.1 左侧边栏模式 (position: &quot;left&quot;)&lt;/h3&gt;
-&lt;h4&gt;特点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;侧边栏固定在页面左侧&lt;/li&gt;
-&lt;li&gt;主内容区域位于右侧&lt;/li&gt;
-&lt;li&gt;符合从左到右的阅读习惯&lt;/li&gt;
-&lt;li&gt;适合展示导航和分类等重要信息&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;布局结构&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;./images/left-list.webp&quot; alt=&quot;左侧边栏布局&quot; /&gt;&lt;/p&gt;
-&lt;h4&gt;适用场景&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;传统博客风格&lt;/li&gt;
-&lt;li&gt;强调导航和分类的博客&lt;/li&gt;
-&lt;li&gt;需要突出用户资料的个人博客&lt;/li&gt;
-&lt;li&gt;内容为主，辅助信息次之的场景&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;:::tip
-开启左侧单侧边栏后，位于文章详情页右侧边栏的文章目录导航将失效&lt;/p&gt;
-&lt;p&gt;会改用浮动目录导航替代，需要手动点击弹出目录导航&lt;/p&gt;
-&lt;p&gt;但可以通过showRightSidebarOnPostPage配置是否在文章详情页显示右侧边栏&lt;/p&gt;
-&lt;p&gt;当position为left时开启此项后，文章详情页将显示双侧边栏，主页等其他页面保持左侧单侧边栏&lt;/p&gt;
-&lt;p&gt;适用在只想用左侧单侧栏，但在文章详情页想用右侧栏的目录等组件的场景
-:::&lt;/p&gt;
-&lt;h4&gt;配置示例&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// src/config/sidebarConfig.ts
-export const sidebarLayoutConfig: SidebarLayoutConfig = {
-  enable: true,
-  position: &quot;left&quot;, // 左侧边栏
-  showRightSidebarOnPostPage: true, // 是否在文章详情页显示右侧边栏
-};
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h3&gt;1.2 双侧边栏模式 (position: &quot;both&quot;)&lt;/h3&gt;
-&lt;h4&gt;特点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;左右两侧同时存在侧边栏&lt;/li&gt;
-&lt;li&gt;主内容区域位于中间&lt;/li&gt;
-&lt;li&gt;最大化利用屏幕空间&lt;/li&gt;
-&lt;li&gt;可以展示更多辅助信息&lt;/li&gt;
-&lt;li&gt;适合宽屏显示器&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;布局结构&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;./images/both-list.webp&quot; alt=&quot;双侧边栏布局&quot; /&gt;&lt;/p&gt;
-&lt;h4&gt;适用场景&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;宽屏桌面端浏览&lt;/li&gt;
-&lt;li&gt;信息密集型博客&lt;/li&gt;
-&lt;li&gt;需要展示大量辅助内容&lt;/li&gt;
-&lt;li&gt;专业性强的技术博客&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;配置示例&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// src/config/sidebarConfig.ts
-export const sidebarLayoutConfig: SidebarLayoutConfig = {
-  enable: true,
-  position: &quot;both&quot;, // 双侧边栏
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h2&gt;二、文章列表布局系统&lt;/h2&gt;
-&lt;p&gt;文章列表是博客首页和归档页的核心内容，Firefly 提供两种展示方式，并支持多种网格配置。&lt;/p&gt;
-&lt;h3&gt;2.1 列表模式 (defaultMode: &quot;list&quot;)&lt;/h3&gt;
-&lt;h4&gt;特点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;单列纵向排列&lt;/li&gt;
-&lt;li&gt;显示文章封面图&lt;/li&gt;
-&lt;li&gt;展示更多文章摘要&lt;/li&gt;
-&lt;li&gt;适合深度阅读&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;列表布局结构&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;./images/left-list.webp&quot; alt=&quot;列表模式布局&quot; /&gt;&lt;/p&gt;
-&lt;h4&gt;优点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;✅ 视觉冲击力强，封面图吸引眼球&lt;/li&gt;
-&lt;li&gt;✅ 可以展示更多文章信息（摘要、标签等）&lt;/li&gt;
-&lt;li&gt;✅ 适合图片内容丰富的博客&lt;/li&gt;
-&lt;li&gt;✅ 移动端友好，单列更易阅读&lt;/li&gt;
-&lt;li&gt;✅ 兼容所有侧边栏配置（单侧、双侧）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;配置示例&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// src/config/siteConfig.ts
-export const siteConfig: SiteConfig = {
-  postListLayout: {
-    defaultMode: &quot;list&quot;, // 列表模式
-    allowSwitch: true,   // 允许用户切换
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h3&gt;2.2 网格模式 (defaultMode: &quot;grid&quot;)&lt;/h3&gt;
-&lt;h4&gt;特点&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;多列横向排列（支持 2 列或 3 列）&lt;/li&gt;
-&lt;li&gt;紧凑布局，信息密度高&lt;/li&gt;
-&lt;li&gt;适合快速浏览&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;2.2.1 双列网格 (Columns: 2)&lt;/h4&gt;
-&lt;p&gt;这是网格模式的默认配置，适合大多数场景。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/left-grid2.webp&quot; alt=&quot;双列网格布局&quot; /&gt;&lt;/p&gt;
-&lt;h4&gt;2.2.2 三列网格 (Columns: 3) ✨ New&lt;/h4&gt;
-&lt;p&gt;在宽屏设备上，您可以开启三列网格模式，进一步提高信息密度。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/left-grid3.webp&quot; alt=&quot;三列网格布局&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;⚠️ 注意&lt;/strong&gt;：三列网格模式仅在&lt;strong&gt;左侧边栏模式&lt;/strong&gt;（或无侧边栏）下生效。如果您启用了双侧边栏，系统将自动回退到双列网格，以保证文章卡片有足够的展示宽度。&lt;/p&gt;
-&lt;h4&gt;配置示例&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// src/config/siteConfig.ts
-export const siteConfig: SiteConfig = {
-  postListLayout: {
-    defaultMode: &quot;grid&quot;,
-    allowSwitch: true,
-    grid: {
-      masonry: true,  // 开启瀑布流
-      columns: 3,     // 设置为 3 列模式（仅单侧边栏生效）
-    },
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h3&gt;2.3 瀑布流布局 (Masonry)&lt;/h3&gt;
-&lt;p&gt;Firefly 的网格模式内置了智能瀑布流布局支持，解决了网格布局中因图文混合文章导致的卡片高度不一致导致的空白问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/masonry.webp&quot; alt=&quot;瀑布流布局&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;智能排版&lt;/strong&gt;：采用 Z 字形分布（左右交替），严格保持文章的时间顺序。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;消除空白&lt;/strong&gt;：通过绝对定位精确计算每个卡片的位置，让卡片紧贴上一行的卡片，消除垂直方向的空白间隙。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;配置灵活&lt;/strong&gt;：您可以在 &lt;code&gt;siteConfig.ts&lt;/code&gt; 中通过 &lt;code&gt;postListLayout.grid.masonry&lt;/code&gt; 选项自由开启或关闭此功能。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h2&gt;三、布局组合指南&lt;/h2&gt;
-&lt;p&gt;Firefly 允许您自由组合侧边栏和文章列表布局。以下是各种组合的效果说明。&lt;/p&gt;
-&lt;h3&gt;3.1 左侧边栏 + 网格模式&lt;/h3&gt;
-&lt;p&gt;这是最灵活的组合。您可以选择 2 列或 3 列网格。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;2 列模式&lt;/strong&gt;：经典的网格布局，卡片宽度适中，阅读舒适。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;3 列模式&lt;/strong&gt;：适合宽屏（≥1024px），单屏展示更多内容，视觉效果震撼。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;3.2 双侧边栏 + 网格模式&lt;/h3&gt;
-&lt;p&gt;在旧版本中，此组合被禁用。但在最新版 Firefly 中，我们解除了限制，允许双侧边栏与网格模式共存。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/both-grid.webp&quot; alt=&quot;双侧边栏+网格布局&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;特点与限制&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;强制双列&lt;/strong&gt;：即使您配置了 &lt;code&gt;columns: 3&lt;/code&gt;，在此模式下也会强制显示为 2 列。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;空间紧凑&lt;/strong&gt;：由于左右都有侧边栏，中间的主内容区域相对较窄。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;信息密度极高&lt;/strong&gt;：这是信息密度最高的布局方式，适合需要同时展示大量导航信息和文章列表的站点。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;3.3 布局选择建议&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;侧边栏模式&lt;/th&gt;
-&lt;th&gt;文章列表模式&lt;/th&gt;
-&lt;th&gt;推荐度&lt;/th&gt;
-&lt;th&gt;适用场景&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;左侧边栏&lt;/td&gt;
-&lt;td&gt;列表模式&lt;/td&gt;
-&lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
-&lt;td&gt;摄影、设计、生活类博客，强调图片和沉浸感&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;左侧边栏&lt;/td&gt;
-&lt;td&gt;2列网格&lt;/td&gt;
-&lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
-&lt;td&gt;技术、笔记类博客，平衡阅读与检索效率&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;左侧边栏&lt;/td&gt;
-&lt;td&gt;3列网格&lt;/td&gt;
-&lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
-&lt;td&gt;内容量大的站点，宽屏体验极佳&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;双侧边栏&lt;/td&gt;
-&lt;td&gt;列表模式&lt;/td&gt;
-&lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
-&lt;td&gt;需要展示大量侧边栏信息的站点&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;双侧边栏&lt;/td&gt;
-&lt;td&gt;2列网格&lt;/td&gt;
-&lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
-&lt;td&gt;极客风格，追求最高信息密度&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr /&gt;
-&lt;h2&gt;四、响应式布局行为&lt;/h2&gt;
-&lt;p&gt;Firefly 的布局系统具有智能的响应式设计，会根据屏幕尺寸自动调整。&lt;/p&gt;
-&lt;h3&gt;4.1 智能降级规则&lt;/h3&gt;
-&lt;p&gt;为了保证最佳阅读体验，系统会在屏幕变窄时自动调整布局：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;3 列网格 -&amp;gt; 2 列网格&lt;/strong&gt;：当屏幕宽度不足以容纳 3 列时（或开启双侧边栏时），自动降级为单列表模式。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;网格模式 -&amp;gt; 列表模式&lt;/strong&gt;：当屏幕宽度小于 1200px（平板和手机）时，网格模式会自动切换为单列列表模式，以保证卡片内容的可读性。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;双侧边栏 -&amp;gt; 左侧边栏&lt;/strong&gt;：当屏幕宽度小于 1200px 时，右侧边栏会自动隐藏，文章目录导航会切换成浮动目录导航。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr /&gt;
-&lt;h2&gt;五、常见问题&lt;/h2&gt;
-&lt;h3&gt;Q1: 为什么我配置了 3 列网格，但只显示 2 列？&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 请检查以下情况：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;是否开启了双侧边栏（&lt;code&gt;position: &quot;both&quot;&lt;/code&gt;）？双侧边栏模式下强制 2 列。&lt;/li&gt;
-&lt;li&gt;屏幕宽度是否足够？3 列模式通常需要 ≥1024px 的宽度。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;Q2: 为什么在手机上看不到网格效果？&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 为了保证阅读体验，Firefly 在屏幕宽度小于 1200px 时会自动强制切换为列表模式。手机屏幕太窄，不适合展示多列网格。&lt;/p&gt;
-&lt;h3&gt;Q3: 布局切换按钮在哪里？&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;: 布局切换按钮位于导航栏右侧。它仅在屏幕宽度 ≥ 1200px 时显示，因为在小屏幕上系统强制使用列表模式，无需切换。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;六、总结&lt;/h2&gt;
-&lt;p&gt;Firefly 的新版布局系统给予了您更大的自由度。无论是追求视觉冲击力的&lt;strong&gt;三列网格&lt;/strong&gt;，还是追求信息密度的&lt;strong&gt;双侧边栏网格&lt;/strong&gt;，您都可以通过简单的配置实现。&lt;/p&gt;
-&lt;p&gt;我们建议您根据自己的内容类型和目标读者的设备偏好，尝试不同的组合，找到最适合您的博客形态。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;相关链接&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;📚 &lt;a href=&quot;https://docs-firefly.cuteleaf.cn/config/sidebarConfig-usage/&quot;&gt;侧边栏配置文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;📚 &lt;a href=&quot;https://docs-firefly.cuteleaf.cn/config/siteConfig-usage/&quot;&gt;站点配置文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;🏠 &lt;a href=&quot;https://docs-firefly.cuteleaf.cn/&quot;&gt;Firefly 官方文档&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;⭐ &lt;a href=&quot;https://github.com/CuteLeaf/Firefly&quot;&gt;Firefly GitHub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Firefly 代码块示例</title><link>https://isntbunny.github.io/posts/code-examples/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/code-examples/</guid><description>在Firefly中使用表达性代码的代码块在 Markdown 中的外观。</description><pubDate>Sat, 03 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在这里，我们将探索如何使用 &lt;a href=&quot;https://expressive-code.com/&quot;&gt;Expressive Code&lt;/a&gt; 展示代码块。提供的示例基于官方文档，您可以参考以获取更多详细信息。&lt;/p&gt;
-&lt;h2&gt;表达性代码&lt;/h2&gt;
-&lt;h3&gt;语法高亮&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/key-features/syntax-highlighting/&quot;&gt;语法高亮&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;常规语法高亮&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;console.log(&apos;此代码有语法高亮!&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;渲染 ANSI 转义序列&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;ANSI colors:
-- Regular: [31mRed[0m [32mGreen[0m [33mYellow[0m [34mBlue[0m [35mMagenta[0m [36mCyan[0m
-- Bold:    [1;31mRed[0m [1;32mGreen[0m [1;33mYellow[0m [1;34mBlue[0m [1;35mMagenta[0m [1;36mCyan[0m
-- Dimmed:  [2;31mRed[0m [2;32mGreen[0m [2;33mYellow[0m [2;34mBlue[0m [2;35mMagenta[0m [2;36mCyan[0m
-
-256 colors (showing colors 160-177):
-[38;5;160m160 [38;5;161m161 [38;5;162m162 [38;5;163m163 [38;5;164m164 [38;5;165m165[0m
-[38;5;166m166 [38;5;167m167 [38;5;168m168 [38;5;169m169 [38;5;170m170 [38;5;171m171[0m
-[38;5;172m172 [38;5;173m173 [38;5;174m174 [38;5;175m175 [38;5;176m176 [38;5;177m177[0m
-
-Full RGB colors:
-[38;2;34;139;34mForestGreen - RGB(34, 139, 34)[0m
-
-Text formatting: [1mBold[0m [2mDimmed[0m [3mItalic[0m [4mUnderline[0m
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;编辑器和终端框架&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/key-features/frames/&quot;&gt;编辑器和终端框架&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;代码编辑器框架&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;console.log(&apos;标题属性示例&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;!-- src/content/index.html --&amp;gt;
-&amp;lt;div&amp;gt;文件名注释示例&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;终端框架&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;echo &quot;此终端框架没有标题&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;Write-Output &quot;这个有标题!&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;覆盖框架类型&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;echo &quot;看，没有框架!&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;# 如果不覆盖，这将是一个终端框架
-function Watch-Tail { Get-Content -Tail 20 -Wait $args }
-New-Alias tail Watch-Tail
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;文本和行标记&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/key-features/text-markers/&quot;&gt;文本和行标记&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;标记整行和行范围&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// 第1行 - 通过行号定位
-// 第2行
-// 第3行
-// 第4行 - 通过行号定位
-// 第5行
-// 第6行
-// 第7行 - 通过范围 &quot;7-8&quot; 定位
-// 第8行 - 通过范围 &quot;7-8&quot; 定位
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;选择行标记类型 (mark, ins, del)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;function demo() {
-  console.log(&apos;此行标记为已删除&apos;)
-  // 此行和下一行标记为已插入
-  console.log(&apos;这是第二个插入行&apos;)
-
-  return &apos;此行使用中性默认标记类型&apos;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;为行标记添加标签&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// labeled-line-markers.jsx
-&amp;lt;button
-  role=&quot;button&quot;
-  {...props}
-  value={value}
-  className={buttonClassName}
-  disabled={disabled}
-  active={active}
-&amp;gt;
-  {children &amp;amp;&amp;amp;
-    !active &amp;amp;&amp;amp;
-    (typeof children === &apos;string&apos; ? &amp;lt;span&amp;gt;{children}&amp;lt;/span&amp;gt; : children)}
-&amp;lt;/button&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;在单独行上添加长标签&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// labeled-line-markers.jsx
-&amp;lt;button
-  role=&quot;button&quot;
-  {...props}
-
-  value={value}
-  className={buttonClassName}
-
-  disabled={disabled}
-  active={active}
-&amp;gt;
-
-  {children &amp;amp;&amp;amp;
-    !active &amp;amp;&amp;amp;
-    (typeof children === &apos;string&apos; ? &amp;lt;span&amp;gt;{children}&amp;lt;/span&amp;gt; : children)}
-&amp;lt;/button&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;使用类似 diff 的语法&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;+此行将标记为已插入
--此行将标记为已删除
-这是常规行
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;--- a/README.md
-+++ b/README.md
-@@ -1,3 +1,4 @@
-+this is an actual diff file
--all contents will remain unmodified
- no whitespace will be removed either
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;结合语法高亮和类似 diff 的语法&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;  function thisIsJavaScript() {
-    // 整个块都会以 JavaScript 高亮显示，
-    // 并且我们仍然可以为其添加 diff 标记！
--   console.log(&apos;要删除的旧代码&apos;)
-+   console.log(&apos;新的闪亮代码！&apos;)
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;标记行内的单独文本&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;function demo() {
-  // 标记行内的任何给定文本
-  return &apos;支持给定文本的多个匹配项&apos;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;正则表达式&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;console.log(&apos;单词 yes 和 yep 将被标记。&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;转义正斜杠&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;echo &quot;Test&quot; &amp;gt; /home/test.txt
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;选择内联标记类型 (mark, ins, del)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;function demo() {
-  console.log(&apos;这些是插入和删除的标记类型&apos;);
-  // return 语句使用默认标记类型
-  return true;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;自动换行&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/key-features/word-wrap/&quot;&gt;自动换行&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;为每个块配置自动换行&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// 启用换行的示例
-function getLongString() {
-  return &apos;这是一个非常长的字符串，除非容器极宽，否则很可能无法适应可用空间&apos;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;// wrap=false 的示例
-function getLongString() {
-  return &apos;这是一个非常长的字符串，除非容器极宽，否则很可能无法适应可用空间&apos;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;配置换行的缩进&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;// preserveIndent 示例（默认启用）
-function getLongString() {
-  return &apos;这是一个非常长的字符串，除非容器极宽，否则很可能无法适应可用空间&apos;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;// preserveIndent=false 的示例
-function getLongString() {
-  return &apos;这是一个非常长的字符串，除非容器极宽，否则很可能无法适应可用空间&apos;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;可折叠部分&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/plugins/collapsible-sections/&quot;&gt;可折叠部分&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// 所有这些样板设置代码将被折叠
-import { someBoilerplateEngine } from &apos;@example/some-boilerplate&apos;
-import { evenMoreBoilerplate } from &apos;@example/even-more-boilerplate&apos;
-
-const engine = someBoilerplateEngine(evenMoreBoilerplate())
-
-// 这部分代码默认可见
-engine.doSomething(1, 2, 3, calcFn)
-
-function calcFn() {
-  // 您可以有多个折叠部分
-  const a = 1
-  const b = 2
-  const c = a + b
-
-  // 这将保持可见
-  console.log(`计算结果: ${a} + ${b} = ${c}`)
-  return c
-}
-
-// 直到块末尾的所有代码将再次被折叠
-engine.closeConnection()
-engine.freeMemory()
-engine.shutdown({ reason: &apos;示例样板代码结束&apos; })
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;行号&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://expressive-code.com/plugins/line-numbers/&quot;&gt;行号&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;为每个块显示行号&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;// 此代码块将显示行号
-console.log(&apos;来自第2行的问候!&apos;)
-console.log(&apos;我在第3行&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;// 此块禁用行号
-console.log(&apos;你好?&apos;)
-console.log(&apos;抱歉，你知道我在第几行吗?&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;更改起始行号&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;console.log(&apos;来自第5行的问候!&apos;)
-console.log(&apos;我在第6行&apos;)
-&lt;/code&gt;&lt;/pre&gt;
-</content:encoded><author>Eucaly</author></item><item><title>KaTeX 数学公式示例</title><link>https://isntbunny.github.io/posts/katex-math-example/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/katex-math-example/</guid><description>展示 Firefly 主题对 KaTeX 数学公式的支持，包括行内公式、块级公式和复杂数学符号。</description><pubDate>Fri, 02 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;本文展示了 &lt;a href=&quot;https://github.com/CuteLeaf/Firefly&quot;&gt;Firefly&lt;/a&gt; 主题对 KaTeX 数学公式的渲染支持。&lt;/p&gt;
-&lt;h2&gt;行内公式 (Inline)&lt;/h2&gt;
-&lt;p&gt;行内公式使用单个 &lt;code&gt;$&lt;/code&gt; 符号包裹。&lt;/p&gt;
-&lt;p&gt;例如：欧拉公式 $e^{i\pi} + 1 = 0$ 是数学中最优美的公式之一。&lt;/p&gt;
-&lt;p&gt;质能方程 $E = mc^2$ 也是家喻户晓。&lt;/p&gt;
-&lt;h2&gt;块级公式 (Block)&lt;/h2&gt;
-&lt;p&gt;块级公式使用两个 &lt;code&gt;$$&lt;/code&gt; 符号包裹，会居中显示。&lt;/p&gt;
-&lt;p&gt;$$
-\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
-$$&lt;/p&gt;
-&lt;p&gt;$$
-x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-$$&lt;/p&gt;
-&lt;h2&gt;复杂示例&lt;/h2&gt;
-&lt;h3&gt;矩阵 (Matrices)&lt;/h3&gt;
-&lt;p&gt;$$
-\begin{pmatrix}
-a &amp;amp; b \
-c &amp;amp; d
-\end{pmatrix}
-\begin{pmatrix}
-\alpha &amp;amp; \beta \
-\gamma &amp;amp; \delta
-\end{pmatrix} =
-\begin{pmatrix}
-a\alpha + b\gamma &amp;amp; a\beta + b\delta \
-c\alpha + d\gamma &amp;amp; c\beta + d\delta
-\end{pmatrix}
-$$&lt;/p&gt;
-&lt;h3&gt;极限与求和 (Limits and Sums)&lt;/h3&gt;
-&lt;p&gt;$$
-\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
-$$&lt;/p&gt;
-&lt;p&gt;$$
-\lim_{x \to 0} \frac{\sin x}{x} = 1
-$$&lt;/p&gt;
-&lt;h3&gt;麦克斯韦方程组 (Maxwell&apos;s Equations)&lt;/h3&gt;
-&lt;p&gt;$$
-\begin{aligned}
-\nabla \cdot \mathbf{E} &amp;amp;= \frac{\rho}{\varepsilon_0} \
-\nabla \cdot \mathbf{B} &amp;amp;= 0 \
-\nabla \times \mathbf{E} &amp;amp;= -\frac{\partial \mathbf{B}}{\partial t} \
-\nabla \times \mathbf{B} &amp;amp;= \mu_0\mathbf{J} + \mu_0\varepsilon_0\frac{\partial \mathbf{E}}{\partial t}
-\end{aligned}
-$$&lt;/p&gt;
-&lt;h3&gt;化学方程式 (Chemical Equations)&lt;/h3&gt;
-&lt;p&gt;$$
-\ce{CH4 + 2O2 -&amp;gt; CO2 + 2H2O}
-$$&lt;/p&gt;
-&lt;h2&gt;更多符号&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;符号&lt;/th&gt;
-&lt;th&gt;代码&lt;/th&gt;
-&lt;th&gt;渲染结果&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Alpha&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\alpha&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\alpha$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Beta&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\beta&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\beta$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Gamma&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\Gamma&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\Gamma$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Pi&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\pi&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\pi$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Infinity&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\infty&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\infty$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Right Arrow&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\rightarrow&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\rightarrow$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Partial&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;\partial&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;$\partial$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;更多 KaTeX 语法请参考 &lt;a href=&quot;https://katex.org/docs/supported.html&quot;&gt;KaTeX Supported Functions&lt;/a&gt;。&lt;/p&gt;
-</content:encoded><author>Eucaly</author></item><item><title>MDX 格式文章示例</title><link>https://isntbunny.github.io/posts/mdx-example/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/mdx-example/</guid><description>这是一个 MDX 格式的示例文章，展示了如何在 Markdown 中使用 JSX。</description><pubDate>Fri, 02 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;import { Icon } from &apos;astro-icon/components&apos;&lt;/p&gt;
-&lt;p&gt;:::tip
-&lt;a href=&quot;https://github.com/CuteLeaf/Firefly&quot;&gt;Firefly&lt;/a&gt; 支持 &lt;code&gt;MDX&lt;/code&gt; 和 &lt;code&gt;Markdown&lt;/code&gt; 两种类型的文章，你可以在文章中混合使用两种格式，如果没有特别复杂内容和需求，推荐使用 Markdown 格式就够了。
-:::&lt;/p&gt;
-&lt;h2&gt;Markdown 和 MDX 的区别&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Markdown (MD) 是一种轻量级标记语言，允许用户使用纯文本格式编写文档，然后将其转换为格式化的HTML。它因其简洁易用的语法而广受欢迎，特别适合编写文档和博客文章。&lt;/li&gt;
-&lt;li&gt;MDX 是一种扩展了 Markdown 语法的格式，允许在 Markdown 文档中无缝地插入 JSX 代码。通过 MDX，用户可以在文档中嵌入 React 组件，从而实现更丰富的交互性和动态性。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;特性&lt;/th&gt;
-&lt;th&gt;Markdown&lt;/th&gt;
-&lt;th&gt;MDX&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;基础语法&lt;/td&gt;
-&lt;td&gt;支持 (CommonMark)&lt;/td&gt;
-&lt;td&gt;支持 (CommonMark)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;HTML 标签&lt;/td&gt;
-&lt;td&gt;支持&lt;/td&gt;
-&lt;td&gt;支持 (作为 JSX)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;组件导入&lt;/td&gt;
-&lt;td&gt;不支持&lt;/td&gt;
-&lt;td&gt;支持 (import)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;动态数据&lt;/td&gt;
-&lt;td&gt;不支持&lt;/td&gt;
-&lt;td&gt;支持 (JS 表达式)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;样式定制&lt;/td&gt;
-&lt;td&gt;有限 (class/style)&lt;/td&gt;
-&lt;td&gt;灵活 (className/CSS-in-JS)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;使用组件&lt;/h2&gt;
-&lt;p&gt;这是一个图标组件：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import { Icon } from &apos;astro-icon/components&apos;
-
-&amp;lt;div class=&quot;flex items-center gap-2 my-4&quot;&amp;gt;
-  &amp;lt;Icon name=&quot;fa6-solid:rocket&quot; class=&quot;text-4xl text-red-500&quot; /&amp;gt;
-  &amp;lt;span&amp;gt;火箭发射！&amp;lt;/span&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&amp;lt;div class=&quot;flex items-center gap-2 my-4&quot;&amp;gt;
-&amp;lt;Icon name=&quot;fa6-solid:rocket&quot; class=&quot;text-4xl text-red-500&quot; /&amp;gt;
-&amp;lt;span&amp;gt;火箭发射！&amp;lt;/span&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;使用 JSX&lt;/h2&gt;
-&lt;p&gt;你也可以直接写 HTML/JSX：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;div className=&quot;p-4 bg-blue-100 dark:bg-blue-900 rounded-lg my-4&quot;&amp;gt;
-  这是一个自定义样式的 div 块，使用了 Tailwind CSS 类。
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&amp;lt;div className=&quot;p-4 bg-blue-100 dark:bg-blue-900 rounded-lg my-4&quot;&amp;gt;
-这是一个自定义样式的 div 块，使用了 Tailwind CSS 类。
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;h2&gt;简单的变量导出&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;export const year = new Date().getFullYear()
-
-今年是 {year} 年。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;export const year = new Date().getFullYear()&lt;/p&gt;
-&lt;p&gt;今年是 {year} 年。&lt;/p&gt;
-&lt;p&gt;更多信息，请查看 &lt;a href=&quot;https://mdxjs.com/&quot;&gt;MDX 文档&lt;/a&gt;&lt;/p&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Markdown Mermaid 图表</title><link>https://isntbunny.github.io/posts/markdown-mermaid/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/markdown-mermaid/</guid><description>一个包含 Mermaid 的 Markdown 博客文章简单示例。</description><pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Markdown 中 Mermaid 图表完整指南&lt;/h1&gt;
-&lt;p&gt;本文演示如何在 Markdown 文档中使用 Mermaid 创建各种复杂图表，包括流程图、时序图、甘特图、类图和状态图。&lt;/p&gt;
-&lt;h2&gt;流程图示例&lt;/h2&gt;
-&lt;p&gt;流程图非常适合表示流程或算法步骤。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;graph TD
-    A[开始] --&amp;gt; B{条件检查}
-    B --&amp;gt;|是| C[处理步骤 1]
-    B --&amp;gt;|否| D[处理步骤 2]
-    C --&amp;gt; E[子过程]
-    D --&amp;gt; E
-    subgraph E [子过程详情]
-        E1[子步骤 1] --&amp;gt; E2[子步骤 2]
-        E2 --&amp;gt; E3[子步骤 3]
-    end
-    E --&amp;gt; F{另一个决策}
-    F --&amp;gt;|选项 1| G[结果 1]
-    F --&amp;gt;|选项 2| H[结果 2]
-    F --&amp;gt;|选项 3| I[结果 3]
-    G --&amp;gt; J[结束]
-    H --&amp;gt; J
-    I --&amp;gt; J
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;时序图示例&lt;/h2&gt;
-&lt;p&gt;时序图显示对象之间随时间的交互。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sequenceDiagram
-    participant User as 用户
-    participant WebApp as 网页应用
-    participant Server as 服务器
-    participant Database as 数据库
-
-    User-&amp;gt;&amp;gt;WebApp: 提交登录请求
-    WebApp-&amp;gt;&amp;gt;Server: 发送认证请求
-    Server-&amp;gt;&amp;gt;Database: 查询用户凭据
-    Database--&amp;gt;&amp;gt;Server: 返回用户数据
-    Server--&amp;gt;&amp;gt;WebApp: 返回认证结果
-    
-    alt 认证成功
-        WebApp-&amp;gt;&amp;gt;User: 显示欢迎页面
-        WebApp-&amp;gt;&amp;gt;Server: 请求用户数据
-        Server-&amp;gt;&amp;gt;Database: 获取用户偏好
-        Database--&amp;gt;&amp;gt;Server: 返回偏好设置
-        Server--&amp;gt;&amp;gt;WebApp: 返回用户数据
-        WebApp-&amp;gt;&amp;gt;User: 加载个性化界面
-    else 认证失败
-        WebApp-&amp;gt;&amp;gt;User: 显示错误消息
-        WebApp-&amp;gt;&amp;gt;User: 提示重新输入
-    end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;甘特图示例&lt;/h2&gt;
-&lt;p&gt;甘特图非常适合显示项目进度和时间线。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;gantt
-    title 网站开发项目时间线
-    dateFormat  YYYY-MM-DD
-    axisFormat  %m/%d
-    
-    section 设计阶段
-    需求分析      :a1, 2023-10-01, 7d
-    UI设计                 :a2, after a1, 10d
-    原型创建        :a3, after a2, 5d
-    
-    section 开发阶段
-    前端开发      :b1, 2023-10-20, 15d
-    后端开发       :b2, after a2, 18d
-    数据库设计           :b3, after a1, 12d
-    
-    section 测试阶段
-    单元测试              :c1, after b1, 8d
-    集成测试       :c2, after b2, 10d
-    用户验收测试   :c3, after c2, 7d
-    
-    section 部署
-    生产环境部署     :d1, after c3, 3d
-    发布                    :milestone, after d1, 0d
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;类图示例&lt;/h2&gt;
-&lt;p&gt;类图显示系统的静态结构，包括类、属性、方法及其关系。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;classDiagram
-    class User {
-        +String username
-        +String password
-        +String email
-        +Boolean active
-        +login()
-        +logout()
-        +updateProfile()
-    }
-    
-    class Article {
-        +String title
-        +String content
-        +Date publishDate
-        +Boolean published
-        +publish()
-        +edit()
-        +delete()
-    }
-    
-    class Comment {
-        +String content
-        +Date commentDate
-        +addComment()
-        +deleteComment()
-    }
-    
-    class Category {
-        +String name
-        +String description
-        +addArticle()
-        +removeArticle()
-    }
-    
-    User &quot;1&quot; -- &quot;*&quot; Article : 写作
-    User &quot;1&quot; -- &quot;*&quot; Comment : 发表
-    Article &quot;1&quot; -- &quot;*&quot; Comment : 拥有
-    Article &quot;1&quot; -- &quot;*&quot; Category : 属于
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;状态图示例&lt;/h2&gt;
-&lt;p&gt;状态图显示对象在其生命周期中经历的状态序列。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;stateDiagram-v2
-    [*] --&amp;gt; 草稿
-    
-    草稿 --&amp;gt; 审核中 : 提交
-    审核中 --&amp;gt; 草稿 : 拒绝
-    审核中 --&amp;gt; 已批准 : 批准
-    已批准 --&amp;gt; 已发布 : 发布
-    已发布 --&amp;gt; 已归档 : 归档
-    已发布 --&amp;gt; 草稿 : 撤回
-    
-    state 已发布 {
-        [*] --&amp;gt; 活跃
-        活跃 --&amp;gt; 隐藏 : 临时隐藏
-        隐藏 --&amp;gt; 活跃 : 恢复
-        活跃 --&amp;gt; [*]
-        隐藏 --&amp;gt; [*]
-    }
-    
-    已归档 --&amp;gt; [*]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;饼图示例&lt;/h2&gt;
-&lt;p&gt;饼图非常适合显示比例和百分比数据。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pie title 网站流量来源分析
-    &quot;搜索引擎&quot; : 45.6
-    &quot;直接访问&quot; : 30.1
-    &quot;社交媒体&quot; : 15.3
-    &quot;推荐链接&quot; : 6.4
-    &quot;其他来源&quot; : 2.6
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;总结&lt;/h2&gt;
-&lt;p&gt;Mermaid 是在 Markdown 文档中创建各种类型图表的强大工具。本文演示了如何使用流程图、时序图、甘特图、类图、状态图和饼图。这些图表可以帮助您更清晰地表达复杂的概念、流程和数据结构。&lt;/p&gt;
-&lt;p&gt;要使用 Mermaid，只需在代码块中指定 mermaid 语言，并使用简洁的文本语法描述图表。Mermaid 会自动将这些描述转换为美观的可视化图表。&lt;/p&gt;
-&lt;p&gt;尝试在您的下一篇技术博客文章或项目文档中使用 Mermaid 图表 - 它们将使您的内容更加专业且更易理解！&lt;/p&gt;
-</content:encoded><author>Eucaly</author></item><item><title>在文章中嵌入视频</title><link>https://isntbunny.github.io/posts/video/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/video/</guid><description>这篇文章演示如何在博客文章中嵌入视频。</description><pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;只需从 YouTube 或其他平台复制嵌入代码，然后将其粘贴到 markdown 文件中。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;---
-title: 在文章中嵌入视频
-published: 2023-10-19
-// ...
----
-
-&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;YouTube&lt;/h2&gt;
-&lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
-&lt;h2&gt;Bilibili&lt;/h2&gt;
-&lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;//player.bilibili.com/player.html?bvid=BV1fK4y1s7Qf&amp;amp;p=1&amp;amp;autoplay=0&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot; &amp;amp;autoplay=0&amp;gt; &amp;lt;/iframe&amp;gt;&lt;/p&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Markdown 扩展功能</title><link>https://isntbunny.github.io/posts/markdown-extended/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/markdown-extended/</guid><description>了解 Firefly 中的 Markdown 功能</description><pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;GitHub 仓库卡片&lt;/h2&gt;
-&lt;p&gt;您可以添加链接到 GitHub 仓库的动态卡片，在页面加载时，仓库信息会从 GitHub API 获取。&lt;/p&gt;
-&lt;p&gt;::github{repo=&quot;CuteLeaf/Firefly&quot;}&lt;/p&gt;
-&lt;p&gt;使用代码 &lt;code&gt;::github{repo=&quot;CuteLeaf/Firefly&quot;}&lt;/code&gt; 创建 GitHub 仓库卡片。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;::github{repo=&quot;CuteLeaf/Firefly&quot;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;提醒框&lt;/h2&gt;
-&lt;p&gt;支持以下类型的提醒框：&lt;code&gt;note&lt;/code&gt; &lt;code&gt;tip&lt;/code&gt; &lt;code&gt;important&lt;/code&gt; &lt;code&gt;warning&lt;/code&gt; &lt;code&gt;caution&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;:::note
-突出显示用户应该考虑的信息，即使在快速浏览时也是如此。
-:::&lt;/p&gt;
-&lt;p&gt;:::tip
-可选信息，帮助用户更成功。
-:::&lt;/p&gt;
-&lt;p&gt;:::important
-用户成功所必需的关键信息。
-:::&lt;/p&gt;
-&lt;p&gt;:::warning
-由于潜在风险需要用户立即注意的关键内容。
-:::&lt;/p&gt;
-&lt;p&gt;:::caution
-行动的负面潜在后果。
-:::&lt;/p&gt;
-&lt;h3&gt;基本语法&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;:::note
-突出显示用户应该考虑的信息，即使在快速浏览时也是如此。
-:::
-
-:::tip
-可选信息，帮助用户更成功。
-:::
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;自定义标题&lt;/h3&gt;
-&lt;p&gt;可以自定义提醒框的标题。&lt;/p&gt;
-&lt;p&gt;:::note[我的自定义标题]
-这是一个带有自定义标题的注释。
-:::&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::note[我的自定义标题]
-这是一个带有自定义标题的注释。
-:::
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;GitHub 语法&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!TIP]
-也支持 &lt;a href=&quot;https://github.com/orgs/community/discussions/16925&quot;&gt;GitHub 语法&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; [!NOTE]
-&amp;gt; 也支持 GitHub 语法。
-
-&amp;gt; [!TIP]
-&amp;gt; 也支持 GitHub 语法。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;剧透&lt;/h3&gt;
-&lt;p&gt;您可以为文本添加剧透。文本也支持 &lt;strong&gt;Markdown&lt;/strong&gt; 语法。&lt;/p&gt;
-&lt;p&gt;内容 :spoiler[被隐藏了 &lt;strong&gt;哈哈&lt;/strong&gt;]！&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;内容 :spoiler[被隐藏了 **哈哈**]！&lt;/code&gt;&lt;/pre&gt;
-</content:encoded><author>Eucaly</author></item><item><title>Markdown 教程</title><link>https://isntbunny.github.io/posts/markdown-tutorial/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/markdown-tutorial/</guid><description>一个简明的 Markdown 博客示例。</description><pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;这是一个展示如何编写 Markdown 文件的示例。本文档汇总了核心语法与常见扩展（GFM）。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#block-elements&quot;&gt;块级元素&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#paragraphs-and-line-breaks&quot;&gt;段落与换行&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#headers&quot;&gt;标题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#blockquotes&quot;&gt;引用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#lists&quot;&gt;列表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#code-blocks&quot;&gt;代码块&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#horizontal-rules&quot;&gt;分割线&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#table&quot;&gt;表格&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#span-elements&quot;&gt;内联元素&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#links&quot;&gt;链接&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#emphasis&quot;&gt;强调&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#code&quot;&gt;行内代码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#images&quot;&gt;图片&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#strikethrough&quot;&gt;删除线&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#miscellaneous&quot;&gt;杂项&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#automatic-links&quot;&gt;自动链接&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#backslash-escapes&quot;&gt;反斜杠转义&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#inline-html&quot;&gt;内联 HTML&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&amp;lt;a id=&quot;block-elements&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h2&gt;块级元素&lt;/h2&gt;
-&lt;p&gt;&amp;lt;a id=&quot;paragraphs-and-line-breaks&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;段落与换行&lt;/h3&gt;
-&lt;h4&gt;段落&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;使用一个或多个空行分隔段落。（仅包含&lt;strong&gt;空格&lt;/strong&gt;或&lt;strong&gt;制表符&lt;/strong&gt;的行也视为空行。）&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This will be
-inline.
-
-This is second paragraph.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This will be
-inline.&lt;/p&gt;
-&lt;p&gt;This is second paragraph.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4&gt;换行&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;br /&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;在行末添加&lt;strong&gt;两个或更多空格&lt;/strong&gt;来产生换行。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This will be not
-inline.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This will be not&lt;br /&gt;
-inline.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;headers&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;标题&lt;/h3&gt;
-&lt;p&gt;Markdown 支持两种标题样式：Setext 与 atx。&lt;/p&gt;
-&lt;h4&gt;Setext&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;使用&lt;strong&gt;等号 (=)&lt;/strong&gt; 表示 &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;、使用&lt;strong&gt;短横线 (-)&lt;/strong&gt; 表示 &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;，数量不限，作为“下划线”。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is an H1
-=============
-This is an H2
--------------
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1&gt;This is an H1&lt;/h1&gt;
-&lt;h2&gt;This is an H2&lt;/h2&gt;
-&lt;hr /&gt;
-&lt;h4&gt;atx&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h3&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h4&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h5&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;在行首使用 1-6 个&lt;strong&gt;井号 (#)&lt;/strong&gt;，对应 &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; 至 &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# This is an H1
-## This is an H2
-###### This is an H6
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1&gt;This is an H1&lt;/h1&gt;
-&lt;h2&gt;This is an H2&lt;/h2&gt;
-&lt;h6&gt;This is an H6&lt;/h6&gt;
-&lt;hr /&gt;
-&lt;p&gt;可选：你可以在行尾“闭合” atx 标题。末尾的井号数量&lt;strong&gt;不必与&lt;/strong&gt;开头一致。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# This is an H1 #
-## This is an H2 ##
-### This is an H3 ######
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1&gt;This is an H1&lt;/h1&gt;
-&lt;h2&gt;This is an H2&lt;/h2&gt;
-&lt;h3&gt;This is an H3&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;blockquotes&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;引用&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;blockquote&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Markdown 使用邮件风格的 &lt;strong&gt;&amp;gt;&lt;/strong&gt; 作为引用符号。若手动换行并在每行前加 &amp;gt;，显示效果最佳。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-&amp;gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-&amp;gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-&amp;gt;
-&amp;gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-&amp;gt; id sem consectetuer libero luctus adipiscing.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
-&lt;p&gt;Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;p&gt;Markdown 允许“偷懒”：在一个硬换行段落中，只在第一行前加 &amp;gt; 即可。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-&amp;gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;p&gt;引用可以嵌套（引用中的引用），通过增加 &amp;gt; 层级实现。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; This is the first level of quoting.
-&amp;gt;
-&amp;gt; &amp;gt; This is nested blockquote.
-&amp;gt;
-&amp;gt; Back to the first level.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is the first level of quoting.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is nested blockquote.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Back to the first level.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;p&gt;引用内可包含其他 Markdown 元素，包括标题、列表与代码块。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; ## This is a header.
-&amp;gt;
-&amp;gt; 1.   This is the first list item.
-&amp;gt; 2.   This is the second list item.
-&amp;gt;
-&amp;gt; Here&apos;s some example code:
-&amp;gt;
-&amp;gt;     return shell_exec(&quot;echo $input | $markdown_script&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;blockquote&gt;
-&lt;h2&gt;This is a header.&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;This is the first list item.&lt;/li&gt;
-&lt;li&gt;This is the second list item.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Here&apos;s some example code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;return shell_exec(&quot;echo $input | $markdown_script&quot;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;lists&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;列表&lt;/h3&gt;
-&lt;p&gt;Markdown 支持有序（数字）与无序（圆点）列表。&lt;/p&gt;
-&lt;h4&gt;无序列表&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;ul&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;无序列表可使用 &lt;strong&gt;星号 (*)&lt;/strong&gt;、&lt;strong&gt;加号 (+)&lt;/strong&gt; 或 &lt;strong&gt;短横线 (-)&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;*   Red
-*   Green
-*   Blue
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;ul&gt;
-&lt;li&gt;Red&lt;/li&gt;
-&lt;li&gt;Green&lt;/li&gt;
-&lt;li&gt;Blue&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;等价于：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;+   Red
-+   Green
-+   Blue
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;或者：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;-   Red
--   Green
--   Blue
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;有序列表&lt;/h4&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;ol&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;有序列表使用数字加英文句点：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1.  Bird
-2.  McHale
-3.  Parish
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li&gt;Bird&lt;/li&gt;
-&lt;li&gt;McHale&lt;/li&gt;
-&lt;li&gt;Parish&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr /&gt;
-&lt;p&gt;注意：像下面这样可能会“意外触发”有序列表：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1986. What a great season.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li&gt;What a great season.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr /&gt;
-&lt;p&gt;你可以用&lt;strong&gt;反斜杠转义 (\)&lt;/strong&gt; 句点：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1986\. What a great season.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;1986. What a great season.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4&gt;列表中的缩进内容&lt;/h4&gt;
-&lt;h5&gt;列表项里的引用&lt;/h5&gt;
-&lt;p&gt;在列表项内放置引用，需要将 &amp;gt; 符号整体缩进：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;*   A list item with a blockquote:
-
-    &amp;gt; This is a blockquote
-    &amp;gt; inside a list item.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
+</content:encoded><author>Eucaly</author></item><item><title>名词分类积累</title><link>https://isntbunny.github.io/posts/word-noun/</link><guid isPermaLink="true">https://isntbunny.github.io/posts/word-noun/</guid><pubDate>Fri, 01 Dec 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;物品&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;A list item with a blockquote:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote
-inside a list item.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;petrol 汽油&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;wet wipes 湿巾&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;toilet paper 卫生&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;face towel 面巾&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;undergo nucleic acid test 核酸检&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h5&gt;列表项里的代码块&lt;/h5&gt;
-&lt;p&gt;在列表项内放置代码块，需要缩进两层——&lt;strong&gt;8 个空格&lt;/strong&gt;或&lt;strong&gt;两个 Tab&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;*   A list item with a code block:
-
-        &amp;lt;code goes here&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
+&lt;h2&gt;人体&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;A list item with a code block:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;code goes here&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;brow 眉毛&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;nail 指甲，钉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mustache 胡子&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr /&gt;
-&lt;h5&gt;嵌套列表&lt;/h5&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* A
-  * A1
-  * A2
-* B
-* C
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
+&lt;h2&gt;服饰&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;A
+&lt;li&gt;
+&lt;p&gt;collar 领子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sleeve 袖子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cloak 斗篷，披&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;garment （一件）衣服&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vest 背心&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;overcoat 大衣&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gown 长礼服，裙服&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;miniskirt 超短&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;belt 腰带&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stocking 长筒&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sneakers 帆布运动&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;boot 靴子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;swimming goggles 游泳&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;首饰&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;A1&lt;/li&gt;
-&lt;li&gt;A2&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;necklace 项圈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;jewel 宝石&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;purse（女用）小钱&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;家具&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;blanket 毛毯&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sheet床单&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;carpet 地毯&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;curtain 窗帘&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cushion 软垫&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mat 席子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;towel 毛巾&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ashtray 烟灰&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cutlery 餐具（刀、叉和匙）；刀&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;leather 皮革&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cement 水泥&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;容器&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;pitcher 大水（a pitcher of&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;carton （装食物/液体）硬纸盒&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;植物&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;pine cone 松果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;jasmine 茉莉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;water lily 睡莲&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;daisy 雏菊&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;peanut 花生&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avocado 牛油&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stalk&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;人物&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;cashier 收银&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hairdresser 理发师，理发&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;air hostess 空姐&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;landlord 房东&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hostess 女主&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;waitress 女侍&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;chemist 化学药剂&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sales rep 销售代表，推销&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;employee 雇员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;employer 雇主&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;B&lt;/li&gt;
-&lt;li&gt;C&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;clerk 文员，店v.当职&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;detective 私家侦探&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;librarian 图书管理馆长&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;professor 教授，讲&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;craftsman 工匠，手艺人&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gatekeeper 看门人，把关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;taikonaut 中国宇航&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lifeguard 救生&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;survivor 幸存&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;outsider=stranger&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;household 一家人，家&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;meetup 聚会&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;code-blocks&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;代码块&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;将代码块中的每行缩进至少&lt;strong&gt;4 个空格&lt;/strong&gt;或&lt;strong&gt;1 个制表符&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is a normal paragraph:
-
-    This is a code block.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This is a normal paragraph:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is a code block.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;p&gt;代码块会一直持续，直到遇到未缩进的行（或文末）。&lt;/p&gt;
-&lt;p&gt;在代码块内，&lt;strong&gt;与号 (&amp;amp;)&lt;/strong&gt; 和尖括号 &lt;strong&gt;(&amp;lt; &amp;gt;)&lt;/strong&gt; 会自动转为 HTML 实体。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    &amp;lt;div class=&quot;footer&quot;&amp;gt;
-        &amp;amp;copy; 2004 Foo Corporation
-    &amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;footer&quot;&amp;gt;
-    &amp;amp;copy; 2004 Foo Corporation
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;p&gt;下文的“围栏代码块”和“语法高亮”属于扩展语法，你也可以用它们来书写代码块。&lt;/p&gt;
-&lt;h4&gt;围栏代码块&lt;/h4&gt;
-&lt;p&gt;使用成对的反引号围起来（如下所示），就不需要四空格缩进了。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Here&apos;s an example:
-
-```
-function test() {
-  console.log(&quot;notice the blank line before this function?&quot;);
-}
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Here&apos;s an example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function test() {
-  console.log(&quot;notice the blank line before this function?&quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;h4&gt;语法高亮&lt;/h4&gt;
-&lt;p&gt;在围栏代码块后添加可选的语言标识，即可启用语法高亮（参见支持语言列表）。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;```ruby
-require &apos;redcarpet&apos;
-markdown = Redcarpet.new(&quot;Hello World!&quot;)
-puts markdown.to_html
-```
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;require &apos;redcarpet&apos;
-markdown = Redcarpet.new(&quot;Hello World!&quot;)
-puts markdown.to_html
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;horizontal-rules&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;分割线（水平线）&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;hr /&amp;gt;&lt;/code&gt;
-一行中放置&lt;strong&gt;三个或以上的短横线 (-)、星号 (*) 或下划线 (_)&lt;/strong&gt;。符号之间允许有空格。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* * *
-***
-*****
-- - -
----------------------------------------
-___
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;table&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;表格&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这是扩展语法。&lt;/p&gt;
-&lt;p&gt;用&lt;strong&gt;竖线 (|)&lt;/strong&gt; 分隔列，用&lt;strong&gt;短横线 (-)&lt;/strong&gt; 分隔表头，使用&lt;strong&gt;冒号 (:)&lt;/strong&gt; 指定对齐方式。&lt;/p&gt;
-&lt;p&gt;两侧的&lt;strong&gt;竖线 (|)&lt;/strong&gt; 与对齐可选。用于表头分隔时，每列至少需要 &lt;strong&gt;3 个短横线&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;| Left | Center | Right |
-|:-----|:------:|------:|
-|aaa   |bbb     |ccc    |
-|ddd   |eee     |fff    |
-
- A | B
----|---
-123|456
-
-
-A |B
---|--
-12|45
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Left&lt;/th&gt;
-&lt;th&gt;Center&lt;/th&gt;
-&lt;th&gt;Right&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;aaa&lt;/td&gt;
-&lt;td&gt;bbb&lt;/td&gt;
-&lt;td&gt;ccc&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ddd&lt;/td&gt;
-&lt;td&gt;eee&lt;/td&gt;
-&lt;td&gt;fff&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;A&lt;/th&gt;
-&lt;th&gt;B&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;123&lt;/td&gt;
-&lt;td&gt;456&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;A&lt;/th&gt;
-&lt;th&gt;B&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;12&lt;/td&gt;
-&lt;td&gt;45&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;span-elements&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h2&gt;内联元素&lt;/h2&gt;
-&lt;p&gt;&amp;lt;a id=&quot;links&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;链接&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Markdown 支持两种链接样式：行内链接与引用式链接。&lt;/p&gt;
-&lt;h4&gt;行内链接&lt;/h4&gt;
-&lt;p&gt;行内链接格式：&lt;code&gt;[文本](URL &quot;标题&quot;)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;标题可选。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is [an example](http://example.com/ &quot;Title&quot;) inline link.
-
-[This link](http://example.net/) has no title attribute.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot;&gt;an example&lt;/a&gt; inline link.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no title attribute.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;如果引用同一站点的本地资源，可以使用相对路径：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;See my [About](/about/) page for details.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;See my &lt;a href=&quot;/about/&quot;&gt;About&lt;/a&gt; page for details.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h4&gt;引用式链接&lt;/h4&gt;
-&lt;p&gt;可以预定义链接引用。定义格式：&lt;code&gt;[id]: URL &quot;标题&quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;标题同样可选。引用时使用：&lt;code&gt;[文本][id]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[id]: http://example.com/  &quot;Optional Title Here&quot;
-This is [an example][id] reference-style link.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot;&gt;an example&lt;/a&gt; reference-style link.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;h2&gt;医院&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;方括号中包含链接标识（&lt;strong&gt;不区分大小写&lt;/strong&gt;，可在左侧缩进最多三格空格）；&lt;/li&gt;
-&lt;li&gt;随后是冒号；&lt;/li&gt;
-&lt;li&gt;再跟一个或多个空格（或 tab）；&lt;/li&gt;
-&lt;li&gt;然后是链接 URL；&lt;/li&gt;
-&lt;li&gt;URL 可选地用尖括号包裹；&lt;/li&gt;
-&lt;li&gt;可选地跟随标题属性，用引号或圆括号包裹。&lt;/li&gt;
+&lt;li&gt;Obstetrician 产科医师&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;以下三种定义等价：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[foo]: http://example.com/  &quot;Optional Title Here&quot;
-[foo]: http://example.com/  &apos;Optional Title Here&apos;
-[foo]: http://example.com/  (Optional Title Here)
-[foo]: &amp;lt;http://example.com/&amp;gt;  &quot;Optional Title Here&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果使用空的方括号，则链接文本本身会作为名称。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[Google]: http://google.com/
-[Google][]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;a href=&quot;http://google.com/&quot;&gt;Google&lt;/a&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;emphasis&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;强调&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;，&lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Markdown 使用 &lt;strong&gt;星号 (*)&lt;/strong&gt; 或 &lt;strong&gt;下划线 (_)&lt;/strong&gt; 表示强调。&lt;strong&gt;一个分隔符&lt;/strong&gt;对应 &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;；&lt;strong&gt;两个分隔符&lt;/strong&gt;对应 &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;single asterisks&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;single underscores&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;double asterisks&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;double underscores&lt;/strong&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;但如果两侧有空格，则会被视作普通字符而非强调语法。&lt;/p&gt;
-&lt;p&gt;你可以使用反斜杠进行转义：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;\*this text is surrounded by literal asterisks\*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;*this text is surrounded by literal asterisks*&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;code&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;行内代码&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;用&lt;strong&gt;反引号 (`)&lt;/strong&gt; 包裹。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Use the `printf()` function.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;若行内代码中需要包含反引号字符，可使用&lt;strong&gt;多重反引号&lt;/strong&gt;作为定界符：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;``There is a literal backtick (`) here.``
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;code&gt;There is a literal backtick (`) here.&lt;/code&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;行内代码两侧的定界符允许包含空格（开头一个、结尾一个），方便在代码起始或结尾放置反引号字符：&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;A single backtick in a code span: `` ` ``
-
-A backtick-delimited string in a code span: `` `foo` ``
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;A backtick-delimited string in a code span: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;images&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;图片&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;img /&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Markdown 的图片语法与链接类似，支持行内与引用两种方式。&lt;/p&gt;
-&lt;h4&gt;行内图片&lt;/h4&gt;
-&lt;p&gt;行内图片语法：&lt;code&gt;![替代文本](URL &quot;标题&quot;)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;标题可选。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;![Alt text](/path/to/img.jpg)
-
-![Alt text](/path/to/img.jpg &quot;Optional title&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp&quot; alt=&quot;Alt text&quot; title=&quot;Optional title&quot; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;说明：&lt;/p&gt;
+&lt;h2&gt;物品&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;一个感叹号 !；&lt;/li&gt;
-&lt;li&gt;后接方括号，放置图片的替代文本；&lt;/li&gt;
-&lt;li&gt;再接圆括号，内含图片 URL/路径，及可选的标题（引号包裹）。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;memorial 纪念碑，纪念&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mural 大型壁画&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sled 雪橇&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windmill 风车&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;suitcase 手提&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;briefcase    n. 公文&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;laundry detergent 洗洁&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4&gt;引用式图片&lt;/h4&gt;
-&lt;p&gt;引用式图片语法：&lt;code&gt;![替代文本][id]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[img id]: https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp  &quot;Optional title attribute&quot;
-![Alt text][img id]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp&quot; alt=&quot;Alt text&quot; title=&quot;Optional title attribute&quot; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;strikethrough&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;删除线&lt;/h3&gt;
-&lt;p&gt;HTML 标签：&lt;code&gt;&amp;lt;del&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这是扩展语法。&lt;/p&gt;
-&lt;p&gt;GFM 增加了删除线语法。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;~~Mistaken text.~~
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;s&gt;Mistaken text.&lt;/s&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;miscellaneous&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h2&gt;杂项&lt;/h2&gt;
-&lt;p&gt;&amp;lt;a id=&quot;automatic-links&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;自动链接&lt;/h3&gt;
-&lt;p&gt;Markdown 支持一种便捷写法来创建“自动链接”（URL 与邮箱地址）：只需用尖括号将其包住即可。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;http://example.com/&amp;gt;
-
-&amp;lt;address@example.com&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;a href=&quot;http://example.com/&quot;&gt;http://example.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;mailto:address@example.com&quot;&gt;address@example.com&lt;/a&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;GFM 会自动识别标准 URL 并转换为链接。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;https://github.com/emn178/markdown
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;https://github.com/emn178/markdown&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;a id=&quot;backslash-escapes&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h3&gt;反斜杠转义&lt;/h3&gt;
-&lt;p&gt;Markdown 允许使用反斜杠来转义那些本用于 Markdown 语法的特殊字符，使其按字面显示。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;\*literal asterisks\*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;*literal asterisks*&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;以下字符可通过反斜杠转义以按字面量输出：&lt;/p&gt;
-&lt;p&gt;Code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;\   backslash
-`   backtick
-*   asterisk
-_   underscore
-{}  curly braces
-[]  square brackets
-()  parentheses
-#   hash mark
-+   plus sign
--   minus sign (hyphen)
-.   dot
-!   exclamation mark
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&amp;lt;a id=&quot;inline-html&quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/p&gt;
-&lt;h2&gt;内联 HTML&lt;/h2&gt;
-&lt;p&gt;对于 Markdown 语法未覆盖的标记，直接使用原生 HTML 即可。无需特别声明从 Markdown 切换到 HTML，直接写标签就行。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;This is a regular paragraph.
-
-&amp;lt;table&amp;gt;
-    &amp;lt;tr&amp;gt;
-        &amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-&amp;lt;/table&amp;gt;
-
-This is another regular paragraph.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;This is a regular paragraph.&lt;/p&gt;
-&lt;p&gt;&amp;lt;table&amp;gt;
-&amp;lt;tr&amp;gt;
-&amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;
-&amp;lt;/tr&amp;gt;
-&amp;lt;/table&amp;gt;&lt;/p&gt;
-&lt;p&gt;This is another regular paragraph.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;请注意：在&lt;strong&gt;块级 HTML 标签&lt;/strong&gt;内不会处理 Markdown 语法。&lt;/p&gt;
-&lt;p&gt;与块级标签不同，在&lt;strong&gt;行内级标签&lt;/strong&gt;内会处理 Markdown 语法。&lt;/p&gt;
-&lt;p&gt;代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;span&amp;gt;**Work**&amp;lt;/span&amp;gt;
-
-&amp;lt;div&amp;gt;
-    **No Work**
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;预览：&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;lt;span&amp;gt;&lt;strong&gt;Work&lt;/strong&gt;&amp;lt;/span&amp;gt;&lt;/p&gt;
-&lt;p&gt;&amp;lt;div&amp;gt;
-&lt;strong&gt;No Work&lt;/strong&gt;
-&amp;lt;/div&amp;gt;&lt;/p&gt;
-&lt;hr /&gt;
-</content:encoded><author>emn178</author></item></channel></rss>
+&lt;h2&gt;工具&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;duster 抹布&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rag 破布，抹&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;broom 扫帚&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stepladder 活梯&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;垃圾&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;garbage&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;refuse&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;trash&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Non-recyclable waste&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;食物&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;nourishment 食物，营养品&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lollipop 棒棒&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;steak 牛排，肉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;soya milk 豆浆&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bean curd 豆腐&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gravy 调味肉汁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;takeaway 外卖食品&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;药品&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;sleeping pill 安眠&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;房子&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;chamber 室，卧室，议事厅&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cloakroom 衣帽&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;wardrobe 衣柜&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ceiling 天花板，上限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hallway 走廊&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pond 水池&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sink n.水池,污水vt.使下vi.淹没&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;television set 电视&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;场所&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;bakery 面包&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;department store 百货公司&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chinatown 唐人&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prison /prizn/ 监狱&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;slum 贫民&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;insane asylum /in&apos;sain ə&apos;sailəm/精神病院&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cemetery / graveyard 墓地&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;crime 罪行，犯&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tribulation 苦难，艰难，痛苦&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sobriquet 绰号，诨&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;天空&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;firework&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded><author>Eucaly</author></item></channel></rss>
