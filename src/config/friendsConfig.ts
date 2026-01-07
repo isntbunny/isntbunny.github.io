@@ -11,31 +11,13 @@ export const friendsPageConfig: FriendsPageConfig = {
 // 友链配置
 export const friendsConfig: FriendLink[] = [
 	{
-		title: "夏夜流萤",
-		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
-		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
+		title: "摸鱼小站官方介绍网站",
+		imgurl: "https://moyuxiaozhan.mysxl.cn/",
+		desc: "我们是一群来自不同网站，不同地区，甚至不同星球的摸鱼爱好者，我们所做的一切，都是为摸鱼而生！",
 		siteurl: "https://blog.cuteleaf.cn",
-		tags: ["Blog"],
+		tags: ["团队"],
 		weight: 10, // 权重，数字越大排序越靠前
 		enabled: true, // 是否启用
-	},
-	{
-		title: "Firefly Docs",
-		imgurl: "https://docs-firefly.cuteleaf.cn/logo.png",
-		desc: "Firefly主题模板文档",
-		siteurl: "https://docs-firefly.cuteleaf.cn",
-		tags: ["Docs"],
-		weight: 9,
-		enabled: true,
-	},
-	{
-		title: "Astro",
-		imgurl: "https://avatars.githubusercontent.com/u/44914786?v=4&s=640",
-		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
-		siteurl: "https://github.com/withastro/astro",
-		tags: ["Framework"],
-		weight: 8,
-		enabled: true,
 	},
 ];
 

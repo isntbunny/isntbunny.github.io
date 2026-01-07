@@ -1,0 +1,16 @@
+---
+// filepath: d:\myproject\blog\src\pages\categories.astro
+import { getCollection } from "astro:content";
+
+// 获取所有文章
+const posts = await getCollection("posts");
+
+// 收集所有分类并去重
+const categories = Array.from(
+  new Set(posts.map(post => post.data.category).filter(Boolean))
+);
+---
+<h1>分类页面</h1>
+<ul>
+  {categories.map(cat => <li>{cat}</li>)}
+</ul>

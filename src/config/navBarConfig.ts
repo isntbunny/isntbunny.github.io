@@ -16,8 +16,14 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 		// 归档
 		LinkPreset.Archive,
+		
 	];
-
+    links.push({
+      name: "分类",
+      url: "/categories/",
+      icon: "material-symbols:category",
+    });
+	
 	// 自定义导航栏链接,并且支持多级菜单
 	links.push({
 		name: "我的网站",
@@ -28,13 +34,13 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			{
 				name: "真心话大冒险",
-				url: "https://github.com/CuteLeaf/Firefly",
+				url: "https://isntbunny.netlify.app/",
 				external: true,
 				icon: "fa6-brands:github",
 			},
 			{
 				name: "网址导航",
-				url: "https://space.bilibili.com/38932988",
+				url: "https://bidianer.com/isntbunny",
 				external: true,
 				icon: "fa6-brands:bilibili",
 			},
@@ -51,7 +57,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 	// 关于及其子菜单
 	links.push({
-		name: "关于",
+		name: "关于我",
 		url: "/content/",
 		icon: "material-symbols:info",
 		children: [

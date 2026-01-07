@@ -26,7 +26,7 @@ export const sponsorConfig: SponsorConfig = {
 			qrCode: "/assets/images/sponsor/alipay.png",
 			link: "",
 			description: "使用 支付宝 扫码赞助",
-			enabled: true,
+			enabled: false,
 		},
 		{
 			name: "微信",
@@ -34,7 +34,7 @@ export const sponsorConfig: SponsorConfig = {
 			qrCode: "/assets/images/sponsor/wechat.png",
 			link: "",
 			description: "使用 微信 扫码赞助",
-			enabled: true,
+			enabled: false,
 		},
 		{
 			name: "爱发电",
@@ -42,13 +42,13 @@ export const sponsorConfig: SponsorConfig = {
 			qrCode: "",
 			link: "https://afdian.com/a/cuteleaf",
 			description: "通过 爱发电 进行赞助",
-			enabled: true,
+			enabled: false,
 		},
 		{
 			name: "Github",
 			icon: "fa6-brands:github",
 			qrCode: "",
-			link: "https://github.com/CuteLeaf/Firefly",
+			link: "https://github.com/isntbunny/isntbunny.github.io",
 			description: "点个Star就是最大的支持",
 			enabled: true,
 		},

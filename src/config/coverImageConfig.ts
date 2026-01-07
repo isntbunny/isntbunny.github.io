@@ -56,7 +56,7 @@ export const coverImageConfig: CoverImageConfig = {
 			// 水印开关
 			enable: true,
 			// 水印文本
-			text: "Random Cover",
+			text: "Eucaly's Blog",
 			/**
 			 * 水印位置
 			 * - "top-left": 左上角
