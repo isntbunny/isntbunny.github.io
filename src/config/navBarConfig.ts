@@ -16,14 +16,13 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 		// 归档
 		LinkPreset.Archive,
-		
 	];
-    links.push({
-      name: "分类",
-      url: "/categories/",
-      icon: "material-symbols:category",
-    });
-	
+	links.push({
+		name: "分类",
+		url: "/categories/",
+		icon: "material-symbols:category",
+	});
+
 	// 自定义导航栏链接,并且支持多级菜单
 	links.push({
 		name: "我的网站",

@@ -2,15 +2,37 @@
 // filepath: d:\myproject\blog\src\pages\categories.astro
 import { getCollection } from "astro:content";
 
-// 获取所有文章
 const posts = await getCollection("posts");
-
-// 收集所有分类并去重
 const categories = Array.from(
-  new Set(posts.map(post => post.data.category).filter(Boolean))
+    new Set(posts.map((post) => post.data.category).filter(Boolean)),
 );
 ---
-<h1>分类页面</h1>
-<ul>
-  {categories.map(cat => <li>{cat}</li>)}
-</ul>
+<MainGridLayout title="分类">
+  <div class="category-btn-list">
+    {categories.map(cat => (
+      <a class="category-btn" href={`/categories/${cat}`}>{cat}</a>
+    ))}
+  </div>
+  <style>
+    .category-btn-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .category-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #4f8cff;
+      color: #fff;
+      border-radius: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s;
+    }
+    .category-btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</MainGridLayout>

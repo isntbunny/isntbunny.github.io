@@ -57,7 +57,7 @@ export const fontConfig = {
 		},
 
 		//myfont
-		"myfont": {
+		myfont: {
 			id: "myfont",
 			name: "myfont",
 			src: "https://chinese-fonts-cdn.deno.dev/packages/GuanKiapTsingKhai/dist/GuanKiapTsingKhai/result.css",
