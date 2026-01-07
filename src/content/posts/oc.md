@@ -1,8 +1,8 @@
 ---
 title: "OC檔案"
-date: 2025-07-15
+: 2025-07-15
 tags: [Bio]
-categories: [OC]
+category: OC
 keyword:
 top_img: https://i.postimg.cc/vByjBGwv/25birthfrommmw.jpg
 comments:

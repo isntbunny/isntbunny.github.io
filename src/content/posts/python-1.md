@@ -1,7 +1,7 @@
 ---
 title: "python学习"
-date: 2025-06-07
-categories: [notes]
+: 2025-06-07
+category: notes
 tags: [Python]
 ---
 
@@ -142,7 +142,7 @@ decide the **alignment** of  the widget
 - Internal padding (ipadx and ipady) for the padding inside widgets and external padding (padx and pady), which all default to a value of zero
 
 if frame is itself packed with a plain pack() method with no mention of a pack option,
-it will take the minimum space required to accommodate all of its child widgets.
+it will take the minimum space required to accommo all of its child widgets.
 
 - **grid**
  *the most commonly used geometry manager*

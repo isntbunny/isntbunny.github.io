@@ -1,7 +1,7 @@
 ---
 title: "有机物的命名"
-date: 2025-12-10
-categories: [notes]
+: 2025-12-10
+category: notes
 tags: [Chemistry]
 ---
 

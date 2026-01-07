@@ -1,7 +1,7 @@
 ---
 title: "名词分类积累"
-date: 2023-12-1
-categories: [notes]
+: 2023-12-1
+category: notes
 tags: [English]
 ---
 

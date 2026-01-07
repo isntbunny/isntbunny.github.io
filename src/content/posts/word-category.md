@@ -1,7 +1,7 @@
 ---
 title: "情景分类积累"
-date: 2023-12-01
-categories: [notes]
+: 2023-12-01
+category: notes
 tags: [English]
 ---
 

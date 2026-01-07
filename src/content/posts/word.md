@@ -1,7 +1,7 @@
 ---
 title: "单词"
-date: 2025-08-06
-categories: [notes]
+: 2025-08-06
+category: notes
 tags: [English]
 ---
 

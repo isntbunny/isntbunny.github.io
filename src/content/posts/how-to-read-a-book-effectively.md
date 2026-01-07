@@ -1,7 +1,7 @@
 ---
 title: "如何有效阅读一本书——超实用笔记读书法"
-date: 2024-11-25
-categories: [notes]
+: 2024-11-25
+category: notes
 tags: [English]
 ---
 

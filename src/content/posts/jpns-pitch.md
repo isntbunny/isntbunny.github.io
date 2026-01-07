@@ -1,7 +1,7 @@
 ---
 title: "日语声调"
-date: 2025-06-30
-categories: [notes]
+: 2025-06-30
+category: notes
 tags: [Japanese]
 ---
 
