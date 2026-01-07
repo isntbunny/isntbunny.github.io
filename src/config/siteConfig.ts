@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
 	title: "幸福（？）倒計時",
 
 	// 站点副标题
-	subtitle: "一隻透明小刺蝟的博客網站",
+	subtitle: "",
 
 	// 站点 URL
 	site_url: "https://isntbunny.github.io",
