@@ -2,7 +2,7 @@ import type { BackgroundWallpaperConfig } from "@/types/config";
 
 export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 壁纸模式："banner" 横幅壁纸，"overlay" 全屏透明，"none" 纯色背景无壁纸
-	mode: "banner",
+	mode: "overlay",
 	// 是否允许用户通过导航栏切换壁纸模式，设为false可提升性能（只渲染当前模式）
 	switchable: false,
 	// 背景图片配置
@@ -29,12 +29,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			titleSize: "3.8rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"ただ息をして待つばかりさ",
+				"泡沫に呑まれ消えゆく日を",
+				"戻ることない失った日々を",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
@@ -63,13 +60,13 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 				// 桌面端要显示的来源文本
 				desktop: "Pixiv - ",
 				// 移动端要显示的来源文本
-				mobile: "Pixiv - KiraraShss",
+				mobile: "Pixiv - ",
 			},
 			url: {
 				// 桌面端原始艺术品或艺术家页面的 URL 链接
-				desktop: "https://www.pixiv.net/artworks/135490046",
+				desktop: "",
 				// 移动端原始艺术品或艺术家页面的 URL 链接
-				mobile: "https://www.pixiv.net/users/42715864",
+				mobile: "",
 			},
 		},
 		// 横幅导航栏配置

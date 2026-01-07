@@ -8,7 +8,7 @@ export const profileConfig: ProfileConfig = {
 	name: "Eucaly",
 
 	// 个人签名
-	bio: "ただ息をして待つばかりさ 泡沫に呑まれ消えゆく日を 戻ることない失った日々を",
+	bio: "井蛙不可以语于海者，拘于虚也；夏虫不可以语于冰者，笃于时也",
 
 	// 链接配置
 	// 已经预装的图标集：fa6-brands，fa6-regular，fa6-solid，material-symbols，simple-icons

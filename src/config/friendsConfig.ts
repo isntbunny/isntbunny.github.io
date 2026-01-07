@@ -12,9 +12,9 @@ export const friendsPageConfig: FriendsPageConfig = {
 export const friendsConfig: FriendLink[] = [
 	{
 		title: "摸鱼小站官方介绍网站",
-		imgurl: "https://moyuxiaozhan.mysxl.cn/",
+		imgurl: "https://favicon.im/moyuxiaozhan.mysxl.cn",
 		desc: "我们是一群来自不同网站，不同地区，甚至不同星球的摸鱼爱好者，我们所做的一切，都是为摸鱼而生！",
-		siteurl: "https://blog.cuteleaf.cn",
+		siteurl: "https://moyuxiaozhan.mysxl.cn/",
 		tags: ["团队"],
 		weight: 10, // 权重，数字越大排序越靠前
 		enabled: true, // 是否启用
