@@ -1,6 +1,6 @@
 ---
 title: "OC檔案"
-: 2025-07-15
+published: 2025-07-15
 tags: [Bio]
 category: OC
 keyword:
