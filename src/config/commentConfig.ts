@@ -6,7 +6,7 @@ export const commentConfig: CommentConfig = {
 
 	//twikoo评论系统配置
 	twikoo: {
-		envId: "twikoo-production-b071.up.railway.app",
+		envId: "https://twikoo-production-b071.up.railway.app",
 		// 设置 Twikoo 评论系统语言
 		lang: "zh-CN",
 		// 是否启用文章访问量统计功能
