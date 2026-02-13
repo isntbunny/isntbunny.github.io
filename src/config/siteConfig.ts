@@ -124,7 +124,7 @@ export const siteConfig: SiteConfig = {
 		// Google Analytics ID
 		googleAnalyticsId: "",
 		// Microsoft Clarity ID
-		microsoftClarityId: "",
+		microsoftClarityId: "ux7devi0nw",
 	},
 
 	// 字体配置
