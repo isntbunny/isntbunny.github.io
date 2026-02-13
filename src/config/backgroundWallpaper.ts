@@ -8,9 +8,11 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 背景图片配置
 	src: {
 		// 桌面背景图片
-		desktop: "https://i.postimg.cc/J0bfgL1S/hitori-band-playing-bocchi-the-rock-hd-wallpaper-uhdpaper-com-395-5-k.jpg",
+		desktop:
+			"https://i.postimg.cc/J0bfgL1S/hitori-band-playing-bocchi-the-rock-hd-wallpaper-uhdpaper-com-395-5-k.jpg",
 		// 移动背景图片
-		mobile: "https://i.postimg.cc/J0bfgL1S/hitori-band-playing-bocchi-the-rock-hd-wallpaper-uhdpaper-com-395-5-k.jpg",
+		mobile:
+			"https://i.postimg.cc/J0bfgL1S/hitori-band-playing-bocchi-the-rock-hd-wallpaper-uhdpaper-com-395-5-k.jpg",
 	},
 	// Banner模式特有配置
 	banner: {
