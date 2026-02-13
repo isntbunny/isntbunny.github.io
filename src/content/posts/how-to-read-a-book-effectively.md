@@ -2,7 +2,7 @@
 title: 如何有效阅读一本书——超实用笔记读书法
 published: 2024-11-25
 category: notes
-tags: 
+tags: []
 ---
 
 书里内容做的总结，自己还没实践过，不过感觉会很有用
