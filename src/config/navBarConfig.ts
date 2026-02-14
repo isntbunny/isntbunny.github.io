@@ -18,8 +18,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		LinkPreset.Archive,
 	];
 	links.push({
-		name: "分类",
-		url: "/categories/",
+		name: "树洞",
+		url: "/memos/",
 		icon: "material-symbols:category",
 	});
 

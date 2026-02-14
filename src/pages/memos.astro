@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import Markdown from "@components/misc/Markdown.astro";
+
+const rawMemos = await getCollection("memos" as any);
+const memos = (rawMemos || []) as any[];
+
+memos.sort((a, b) => {
+	const dateA = new Date(a.data?.date || 0).getTime();
+	const dateB = new Date(b.data?.date || 0).getTime();
+	return dateB - dateA;
+});
+---
+
+<MainGridLayout title="树洞 / Memos">
+  <ul style="padding-left: 0; list-style: none;">
+    {
+      memos.map((memo) => (
+        <li style="margin-bottom: 2.5rem;">
+          <div style="color: #888; font-size: 0.9em; margin-bottom: 0.5rem;">
+            {memo.data?.date}
+          </div>
+          <article class="prose max-w-none">
+            {/* 这里的 @ts-ignore 是为了彻底杀掉由于主题组件定义不规范导致的红线 */}
+            {/* @ts-ignore */}
+            <Markdown class="mb-4" content={memo.body}>
+              {memo.body}
+            </Markdown>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</MainGridLayout>
