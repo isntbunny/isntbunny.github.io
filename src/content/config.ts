@@ -1,17 +1,15 @@
 import { defineCollection, z } from "astro:content";
 
-// 1. 定义 memos 集合的结构
-const memosCollection = defineCollection({
+// 1. 定义说说集合
+const memos = defineCollection({
 	type: "content",
 	schema: z.object({
-		date: z.date().or(z.string()), // 允许日期或字符串
+		date: z.date().or(z.string()),
 	}),
 });
 
-// 2. 导出集合（这步最关键！一定要包含 'memos'）
+// 2. 这里不要管 posts 了，先把 memos 跑通
+// 如果你还有其他集合（比如 posts），必须确保它们的定义也是完全正确的
 export const collections = {
-	posts: defineCollection({
-		/* 你原本 posts 的配置 */
-	}),
-	memos: memosCollection, // 这里的 key 必须叫 memos
+	memos: memos,
 };
