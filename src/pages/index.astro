@@ -73,44 +73,27 @@ const latestNotes = allNotes
 </PageLayout>
 
 <script is:inline>
-	const initHomeHero = () => {
-		const typingTarget = document.getElementById("home-typing");
-		const typingText = "Hello World!";
-		let idx = 0;
-		let deleting = false;
-		if ((window).__homeTypingTimer) clearInterval((window).__homeTypingTimer);
-		(window).__homeTypingTimer = setInterval(() => {
-			if (!typingTarget) return;
-			typingTarget.textContent = typingText.slice(0, idx);
-			if (!deleting) {
-				idx += 1;
-				if (idx > typingText.length) {
-					deleting = true;
-					idx = typingText.length;
-				}
-			} else {
-				idx -= 1;
-				if (idx < 0) {
-					deleting = false;
-					idx = 0;
-				}
-			}
-		}, 120);
+	const typingTarget = document.getElementById("home-typing");
+	const typingText = "Hello World!";
+	let idx = 0;
+	const timer = setInterval(() => {
+		if (!typingTarget) return;
+		typingTarget.textContent = typingText.slice(0, idx);
+		idx += 1;
+		if (idx > typingText.length) clearInterval(timer);
+	}, 120);
 
-		const locationTarget = document.getElementById("home-location");
-		fetch("https://ipapi.co/json/")
-			.then((res) => res.json())
-			.then((data) => {
-				const cn = data?.country_name === "China";
-				const locationName = cn
-					? [data?.region, data?.city].filter(Boolean).join(", ") || "中国"
-					: data?.country_name || "远方";
-				if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
-			})
-			.catch(() => {
-				if (locationTarget) locationTarget.textContent = "欢迎来自远方的朋友~";
-			});
-	};
-	document.addEventListener("astro:page-load", initHomeHero);
-	initHomeHero();
+	const locationTarget = document.getElementById("home-location");
+	fetch("https://ipapi.co/json/")
+		.then((res) => res.json())
+		.then((data) => {
+			const cn = data?.country_name === "China";
+			const locationName = cn
+				? `${data?.region || ""}${data?.city || ""}`.trim() || "中国"
+				: data?.country_name || "远方";
+			if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
+		})
+		.catch(() => {
+			if (locationTarget) locationTarget.textContent = "欢迎来自远方的朋友~";
+		});
 </script>
