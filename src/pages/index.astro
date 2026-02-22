@@ -1,4 +1,5 @@
 ---
+import { execSync } from "node:child_process";
 import Search from "@/components/Search.astro";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
@@ -6,17 +7,6 @@ import { menuLinks } from "@/site.config";
 import { collectionDateSort } from "@/utils/date";
 
 const allPostsByDate = (await getAllPosts()).sort(collectionDateSort);
-const latestPost = allPostsByDate[0];
-const latestUpdateDays = latestPost
-	? Math.max(
-			0,
-			Math.floor(
-				(Date.now() -
-					new Date(latestPost.data.updatedDate ?? latestPost.data.publishDate).getTime()) /
-					(1000 * 60 * 60 * 24),
-			),
-		)
-	: 0;
 
 const currentYear = new Date().getFullYear();
 const monthEnd = new Date(currentYear, new Date().getMonth() + 1, 0);
@@ -34,22 +24,33 @@ const countdownItems = [
 
 const homepageTags = [...new Set(allPostsByDate.flatMap((p) => p.data.tags))].slice(0, 20);
 
-const rightNavLinks = menuLinks.flatMap((item) =>
-	item.children?.length ? item.children : item.path ? [item] : [],
-);
+const rightNavLinks = menuLinks
+	.flatMap((item) => (item.children?.length ? item.children : item.path ? [item] : []))
+	.filter((item) => item.path !== "/" && item.path !== "/gallery/");
+
+const daysSinceLastCommit = (() => {
+	try {
+		const lastCommitUnix = execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim();
+		const last = Number(lastCommitUnix) * 1000;
+		if (!Number.isFinite(last)) return 0;
+		return Math.max(0, Math.floor((Date.now() - last) / (1000 * 60 * 60 * 24)));
+	} catch {
+		return 0;
+	}
+})();
 
 const playlist = [
 	{
-		title: "Nujabes - Aruarian Dance",
-		src: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8e4b4fe5f.mp3?filename=lofi-study-112191.mp3",
+		title: "网易云 · 風になる",
+		src: "https://music.163.com/song/media/outer/url?id=22828370.mp3",
 	},
 	{
-		title: "Lo-Fi Night",
-		src: "https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3?filename=lofi-chill-medium-version-159456.mp3",
+		title: "网易云 · 打上花火",
+		src: "https://music.163.com/song/media/outer/url?id=436514312.mp3",
 	},
 	{
-		title: "Rain + Piano",
-		src: "https://cdn.pixabay.com/download/audio/2022/10/25/audio_eb891b3f95.mp3?filename=rain-and-piano-124841.mp3",
+		title: "网易云 · Lemon",
+		src: "https://music.163.com/song/media/outer/url?id=544698553.mp3",
 	},
 ];
 ---
@@ -77,17 +78,44 @@ const playlist = [
 				</ul>
 			</section>
 
+			<a
+				class="block overflow-hidden rounded-md border border-zinc-200 bg-global-bg/80 p-1 transition hover:border-sky-400 dark:border-zinc-800"
+				href="/gallery/"
+			>
+				<div
+					class="h-30 rounded-md bg-cover bg-center"
+					style="background-image:url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80')"
+				></div>
+				<p class="py-2 text-center font-semibold text-sky-500">进入 Gallery</p>
+			</a>
+
 			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
 				<h2 class="title mb-4 text-xl">音乐播放器</h2>
 				<div class="flex flex-col gap-3">
-					<select id="playlist-select" class="rounded-md border border-zinc-300 bg-transparent px-3 py-2 dark:border-zinc-700">
+					<select
+						id="playlist-select"
+						class="rounded-md border border-zinc-300 bg-white px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+					>
 						{playlist.map((song, index) => (
-							<option value={song.src} data-title={song.title} selected={index === 0}>
+							<option value={song.src} selected={index === 0}>
 								{song.title}
 							</option>
 						))}
 					</select>
 					<audio id="home-audio" controls class="w-full" src={playlist[0]?.src}></audio>
+				</div>
+			</section>
+
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h2 class="title mb-4 text-xl">取色器</h2>
+				<div class="flex flex-col gap-3">
+					<input class="h-36 w-full cursor-pointer rounded-md" id="home-color-picker" type="color" value="#22c55e" />
+					<input
+						class="rounded-md border border-zinc-300 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+						id="home-color-hex"
+						type="text"
+						value="#22c55e"
+					/>
 				</div>
 			</section>
 		</div>
@@ -99,15 +127,16 @@ const playlist = [
 					class="mb-3 h-44 w-full rounded-md object-cover"
 					src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=1200&q=80"
 				/>
-				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次更新 {latestUpdateDays} days ago</p>
+				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次提交距今 {daysSinceLastCommit} days ago</p>
 			</section>
 
 			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
-				<h2 class="title mb-4 text-xl">导航</h2>
-				<div class="mb-3">
-					<Search />
-				</div>
-				<nav class="flex flex-col gap-2" aria-label="Home quick links">
+				<h2 class="title mb-4 text-center text-xl">导航</h2>
+				<button class="text-accent mb-2 block w-full text-center font-semibold" id="open-home-search" type="button">
+					Search
+				</button>
+				<div class="hidden"><Search /></div>
+				<nav aria-label="Home quick links" class="flex flex-col gap-2 text-center">
 					{rightNavLinks.map((link) => (
 						<a
 							class="rounded-md border border-zinc-200 px-3 py-2 hover:border-sky-300 hover:bg-sky-50/60 dark:border-zinc-700 dark:hover:border-sky-800 dark:hover:bg-sky-900/30"
@@ -188,6 +217,32 @@ const playlist = [
 					player.play().catch(() => {});
 				});
 			}
+		}
+
+		const colorPicker = document.getElementById("home-color-picker");
+		const colorHex = document.getElementById("home-color-hex");
+		if (colorPicker instanceof HTMLInputElement && colorHex instanceof HTMLInputElement) {
+			if (colorPicker.dataset.bound !== "1") {
+				colorPicker.dataset.bound = "1";
+				colorPicker.addEventListener("input", () => {
+					colorHex.value = colorPicker.value.toUpperCase();
+				});
+			}
+			if (colorHex.dataset.bound !== "1") {
+				colorHex.dataset.bound = "1";
+				colorHex.addEventListener("input", () => {
+					const value = colorHex.value.trim();
+					if (/^#([0-9A-Fa-f]{6})$/.test(value)) colorPicker.value = value;
+				});
+			}
+		}
+
+		const openSearchBtn = document.getElementById("open-home-search");
+		if (openSearchBtn instanceof HTMLButtonElement && openSearchBtn.dataset.bound !== "1") {
+			openSearchBtn.dataset.bound = "1";
+			openSearchBtn.addEventListener("click", () => {
+				document.querySelector<HTMLButtonElement>("site-search button[data-open-modal]")?.click();
+			});
 		}
 	};
 	document.addEventListener("astro:page-load", initHomeHero);

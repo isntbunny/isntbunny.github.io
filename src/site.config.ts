@@ -55,7 +55,6 @@ export const menuLinks: MenuLink[] = [
 		children: [
 			{ path: "/about/", title: "About" },
 			{ path: "/bangumi/", title: "番组计划" },
-			{ path: "/xxx/", title: "XXX" },
 		],
 	},
 ];
