@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /_astro/
-
+Allow: /
 Sitemap: https://isntbunny.github.io/sitemap-index.xml

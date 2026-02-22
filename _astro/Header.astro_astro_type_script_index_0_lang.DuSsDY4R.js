@@ -1,0 +1,1 @@
+import{t as n}from"./domElement.CpM5XNjJ.js";class o extends HTMLElement{#e=!1;connectedCallback(){const e=document.getElementById("main-header"),t=this.querySelector("button");t?.addEventListener("click",()=>{e&&n(e,"menu-open"),this.#e=!this.#e,t.setAttribute("aria-expanded",this.#e.toString())})}}customElements.define("mobile-button",o);
