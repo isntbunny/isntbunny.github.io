@@ -76,25 +76,11 @@ const latestNotes = allNotes
 	const typingTarget = document.getElementById("home-typing");
 	const typingText = "Hello World!";
 	let idx = 0;
-	let deleting = false;
-
-	setInterval(() => {
+	const timer = setInterval(() => {
 		if (!typingTarget) return;
 		typingTarget.textContent = typingText.slice(0, idx);
-
-		if (!deleting) {
-			idx += 1;
-			if (idx > typingText.length) {
-				deleting = true;
-				idx = typingText.length;
-			}
-		} else {
-			idx -= 1;
-			if (idx < 0) {
-				deleting = false;
-				idx = 0;
-			}
-		}
+		idx += 1;
+		if (idx > typingText.length) clearInterval(timer);
 	}, 120);
 
 	const locationTarget = document.getElementById("home-location");
@@ -103,7 +89,7 @@ const latestNotes = allNotes
 		.then((data) => {
 			const cn = data?.country_name === "China";
 			const locationName = cn
-				? [data?.region, data?.city].filter(Boolean).join(", ") || "中国"
+				? `${data?.region || ""}${data?.city || ""}`.trim() || "中国"
 				: data?.country_name || "远方";
 			if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
 		})

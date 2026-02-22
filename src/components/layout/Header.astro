@@ -40,21 +40,11 @@ import { siteConfig } from "../../site.config";
 			id="navigation-menu"
 		>
 			{
-				menuLinks.map((link, index) =>
+				menuLinks.map((link) =>
 					link.children?.length ? (
-						<div class="relative px-2 py-4 font-semibold sm:px-4 sm:py-0">
-							<button
-								aria-expanded="false"
-								class="text-accent cursor-pointer"
-								data-submenu-toggle
-								type="button"
-							>
-								{link.title} ▾
-							</button>
-							<div
-								class="submenu bg-global-bg mt-2 hidden flex-col gap-2 sm:absolute sm:start-0 sm:top-full sm:min-w-52 sm:rounded-md sm:border sm:border-sky-200 sm:p-2 sm:shadow-sm dark:sm:border-sky-900"
-								data-submenu={index}
-							>
+						<div class="relative px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:[&:hover_.submenu]:pointer-events-auto sm:[&:hover_.submenu]:opacity-100">
+							<span class="text-accent cursor-default">{link.title} ▾</span>
+							<div class="submenu bg-global-bg mt-3 flex flex-col gap-2 sm:pointer-events-none sm:absolute sm:top-6 sm:mt-2 sm:min-w-52 sm:rounded-md sm:border sm:border-sky-200 sm:p-2 sm:opacity-0 sm:shadow-sm dark:sm:border-sky-900">
 								{link.children.map((item) => (
 									<a
 										class="text-accent rounded px-2 py-1 hover:bg-sky-100/60 dark:hover:bg-sky-900/40"
@@ -152,7 +142,6 @@ import { siteConfig } from "../../site.config";
 
 	submenuToggles.forEach((btn, idx) => {
 		btn.addEventListener("click", (event) => {
-			event.preventDefault();
 			event.stopPropagation();
 			const targetMenu = document.querySelector<HTMLElement>(`[data-submenu='${idx}']`);
 			const isOpen = !targetMenu?.classList.contains("hidden");
@@ -166,8 +155,7 @@ import { siteConfig } from "../../site.config";
 
 	document.addEventListener("click", (event) => {
 		if (!(event.target instanceof Element)) return;
-		if (event.target.closest("[data-submenu]") || event.target.closest("[data-submenu-toggle]"))
-			return;
+		if (event.target.closest("[data-submenu]") || event.target.closest("[data-submenu-toggle]")) return;
 		closeAllSubmenus();
 	});
 </script>
