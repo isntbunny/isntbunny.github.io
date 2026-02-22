@@ -1,20 +1,40 @@
 ---
+import { Icon } from "astro-icon/components";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
 	description: "I'm a starter theme for Astro.build",
 	title: "About",
 };
+
+const contacts = [
+	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
+	{ icon: "mdi:web", label: "Status", url: "https://status.cafe/users/isntbunny" },
+];
 ---
 
 <PageLayout meta={meta}>
 	<h1 class="title mb-12">About</h1>
 	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>
-			泥好！窝是落桉（Eucaly），也可以叫窝bunny酱。不一定什么时候有时间开电脑的忙忙的高中牲。
-		</p>
-		<p>
-			还没想好介绍怎么写，先搁置吧（拖延症）qwq
-		</p>
+		<p>泥好！窝是落桉（Eucaly），也可以叫窝bunny酱。不一定什么时候有时间开电脑的忙忙的高中牲。</p>
+		<p>还没想好介绍怎么写，先搁置吧（拖延症）qwq</p>
 	</div>
+
+	<section class="mt-10 rounded-md border border-sky-200 bg-sky-50/60 p-4 dark:border-sky-900 dark:bg-sky-950/40">
+		<p class="mb-3 font-semibold">Find me on</p>
+		<ul class="space-y-2">
+			{contacts.map((item) => (
+				<li>
+					<a class="inline-flex items-center gap-2 hover:underline" href={item.url} target="_blank" rel="noreferrer">
+						<Icon name={item.icon} class="h-5 w-5" />
+						<span>{item.label}</span>
+					</a>
+				</li>
+			))}
+			<li class="inline-flex items-center gap-2">
+				<Icon name="mdi:email-outline" class="h-5 w-5" />
+				<span>Email: isntbunny@outlook.com</span>
+			</li>
+		</ul>
+	</section>
 </PageLayout>
