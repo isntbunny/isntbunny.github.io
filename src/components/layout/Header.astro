@@ -119,6 +119,8 @@ import { siteConfig } from "../../site.config";
 		#menuOpen: boolean = false;
 
 		connectedCallback() {
+			if (this.dataset.bound === "1") return;
+			this.dataset.bound = "1";
 			const headerEl = document.getElementById("main-header")!;
 			const mobileButtonEl = this.querySelector<HTMLButtonElement>("button");
 
