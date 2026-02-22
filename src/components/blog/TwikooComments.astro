@@ -1,0 +1,30 @@
+<div class="mt-12">
+	<h2 class="mb-6 text-2xl font-semibold">点赞与评论</h2>
+	<div id="twikoo-comments"></div>
+</div>
+
+<script is:inline>
+	const initTwikooComments = () => {
+		if (document.getElementById("twikoo-comments")?.childElementCount) return;
+		const twikooEnvId = "https://your-twikoo-env-id.example.com";
+		const doInit = () => {
+			// @ts-expect-error twikoo runtime inject
+			window.twikoo?.init?.({
+				envId: twikooEnvId,
+				el: "#twikoo-comments",
+				path: window.location.pathname,
+			});
+		};
+		if (!window.twikoo) {
+			const script = document.createElement("script");
+			script.src = "https://cdn.staticfile.net/twikoo/1.6.41/twikoo.all.min.js";
+			script.defer = true;
+			script.onload = doInit;
+			document.body.appendChild(script);
+		} else {
+			doInit();
+		}
+	};
+	document.addEventListener("astro:page-load", initTwikooComments);
+	initTwikooComments();
+</script>

@@ -22,7 +22,7 @@ const isHome = Astro.url.pathname === "/";
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen max-w-3xl flex-col bg-cover bg-fixed bg-center px-4 pt-16 font-mono text-sm font-normal antialiased sm:px-8"
+		class="bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-fixed bg-center px-4 pt-8 font-mono text-base font-normal antialiased sm:px-8 sm:pt-16"
 		class:list={[isHome && "home-page-bg"]}
 		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${isHome ? "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80" : siteConfig.backgroundImage});`}
 		data-theme-bg

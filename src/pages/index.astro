@@ -25,6 +25,7 @@ const heatmapDays = dayKeys.map((key) => ({ key, count: postDateCount.get(key) ?
 
 const MAX_PINNED_POSTS = 3;
 const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PINNED_POSTS);
+const homepageTags = [...new Set(allPostsByDate.flatMap((p) => p.data.tags))].slice(0, 20);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
@@ -32,7 +33,9 @@ const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PIN
 		<h1 class="title mb-4" id="home-typing"></h1>
 		<p class="mb-6" id="home-location">欢迎来自远方的朋友~</p>
 
-		<section class="mb-12 w-full">
+		<section
+			class="mb-12 w-full rounded-md border border-sky-200 bg-sky-50/60 p-4 dark:border-sky-900 dark:bg-sky-950/40"
+		>
 			<h2 class="title mb-4 text-xl">更新热力图</h2>
 			<div class="mx-auto grid w-full grid-cols-14 gap-1 sm:max-w-3xl">
 				{
@@ -62,6 +65,20 @@ const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PIN
 							</li>
 						))}
 					</ul>
+				</section>
+			)
+		}
+		{
+			homepageTags.length > 0 && (
+				<section class="mt-8 w-full text-start">
+					<h2 class="title mb-4 text-xl">Tags</h2>
+					<div class="flex flex-wrap gap-2">
+						{homepageTags.map((tag) => (
+							<a class="cactus-link" href={`/tags/${tag}/`}>
+								#{tag}
+							</a>
+						))}
+					</div>
 				</section>
 			)
 		}
