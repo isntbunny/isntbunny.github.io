@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "幸福（？）倒計時",
+	title: "幸せのカウントダウン",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://isntbunny.github.io/",
 	// 页面背景图（图床链接）
