@@ -17,7 +17,10 @@ const year = new Date().getFullYear();
 <script is:inline>
 	const startDate = new Date("2025-07-30T00:00:00+08:00");
 	const now = new Date();
-	const days = Math.max(1, Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+	const days = Math.max(
+		1,
+		Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1,
+	);
 	const runtimeEl = document.getElementById("site-runtime");
 	if (runtimeEl) runtimeEl.textContent = `此网站运行了 ${days} 天`;
 </script>
