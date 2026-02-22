@@ -1,7 +1,14 @@
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 import type { SiteConfig } from "@/types";
 
-export const siteConfig: SiteConfig = {
+export type MenuLink = {
+	title: string;
+	path?: string;
+	external?: boolean;
+	children?: MenuLink[];
+};
+
+export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername: string } = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "Eucaly",
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
@@ -28,34 +35,27 @@ export const siteConfig: SiteConfig = {
 	title: "幸福（？）倒計時",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://isntbunny.github.io/",
+	// 页面背景图（图床链接）
+	backgroundImage:
+		"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80",
+	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
+	bangumiUsername: "isntbunny",
 };
 
 // Used to generate links in both the Header & Footer.
-export const menuLinks: { path: string; title: string; external?: boolean }[] = [
+export const menuLinks: MenuLink[] = [
+	{ path: "/", title: "Home" },
+	{ path: "/posts/", title: "Blog" },
+	{ path: "/notes/", title: "Notes" },
+	{ path: "https://status.cafe/users/isntbunny", title: "Memos", external: true },
+	{ path: "/gallery/", title: "Gallery" },
+	{ path: "/guestbook/", title: "Guestbook" },
 	{
-		path: "/",
-		title: "Home",
-	},
-	{
-		path: "/posts/",
-		title: "Blog",
-	},
-	{
-		path: "https://status.cafe/users/isntbunny",
-		title: "Memos",
-		external: true,
-	},
-	{
-		path: "/gallery/",
-		title: "Gallery",
-	},
-	{
-		path: "/guestbook/",
-		title: "Guestbook",
-	},
-	{
-		path: "/about/",
 		title: "About",
+		children: [
+			{ path: "/about/", title: "About" },
+			{ path: "/bangumi/", title: "番组计划" },
+		],
 	},
 ];
 
@@ -74,17 +74,13 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		uiLineHeight: "inherit",
 	},
 	themeCssSelector(theme, { styleVariants }) {
-		// If one dark and one light theme are available
-		// generate theme CSS selectors compatible with cactus-theme dark mode switch
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
 			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
 			if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
 		}
-		// return default selector
 		return `[data-theme="${theme.name}"]`;
 	},
-	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
 	themes: ["dracula", "github-light"],
 	useThemedScrollbars: false,
 };

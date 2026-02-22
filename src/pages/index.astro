@@ -1,78 +1,250 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import Note from "@/components/note/Note.astro";
-import SocialList from "@/components/SocialList.astro";
+import { execSync } from "node:child_process";
+import Search from "@/components/Search.astro";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import { menuLinks } from "@/site.config";
 import { collectionDateSort } from "@/utils/date";
 
-// Posts
-const MAX_POSTS = 10;
-const allPosts = await getAllPosts();
-const allPostsByDate = allPosts.sort(collectionDateSort) as CollectionEntry<"post">[];
-const latestPosts = allPostsByDate.slice(0, MAX_POSTS);
+const allPostsByDate = (await getAllPosts()).sort(collectionDateSort);
 
-// Pinned Posts, set to a max of 3;
-const MAX_PINNED_POSTS = 3;
-const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PINNED_POSTS);
+const currentYear = new Date().getFullYear();
+const monthEnd = new Date(currentYear, new Date().getMonth() + 1, 0);
+const nextYear = new Date(currentYear + 1, 0, 1);
+const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
 
-// Notes
-const MAX_NOTES = 5;
-const allNotes = await getCollection("note");
-const latestNotes = allNotes
-	.sort(collectionDateSort)
-	.slice(0, MAX_NOTES) as CollectionEntry<"note">[];
+const daysLeft = (targetDate: Date) =>
+	Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+
+const countdownItems = [
+	{ label: "距离月末还有", days: daysLeft(monthEnd), suffix: "天" },
+	{ label: "距离下一年还有", days: daysLeft(nextYear), suffix: "天" },
+	{ label: "距离2027年高考还有", days: daysLeft(gaokao2027), suffix: "天" },
+];
+
+const homepageTags = [...new Set(allPostsByDate.flatMap((p) => p.data.tags))].slice(0, 20);
+
+const rightNavLinks = menuLinks
+	.flatMap((item) => (item.children?.length ? item.children : item.path ? [item] : []))
+	.filter((item) => item.path !== "/" && item.path !== "/gallery/");
+
+const daysSinceLastCommit = (() => {
+	try {
+		const lastCommitUnix = execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim();
+		const last = Number(lastCommitUnix) * 1000;
+		if (!Number.isFinite(last)) return 0;
+		return Math.max(0, Math.floor((Date.now() - last) / (1000 * 60 * 60 * 24)));
+	} catch {
+		return 0;
+	}
+})();
+
+const playlist = [
+	{
+		title: "网易云 · 風になる",
+		src: "https://music.163.com/song/media/outer/url?id=22828370.mp3",
+	},
+	{
+		title: "网易云 · 打上花火",
+		src: "https://music.163.com/song/media/outer/url?id=436514312.mp3",
+	},
+	{
+		title: "网易云 · Lemon",
+		src: "https://music.163.com/song/media/outer/url?id=544698553.mp3",
+	},
+];
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section>
-		<h1 class="title mb-12">Hello World!</h1>
-		<p class="mb-4">
-			
-		</p>
-		<SocialList />
-	</section>
-	{
-		pinnedPosts.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title mb-6 text-xl">Pinned Posts</h2>
-				<ul class="space-y-4" role="list">
-					{pinnedPosts.map((p) => (
-						<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-							<PostPreview post={p} />
+	<section class="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+		<div class="space-y-6">
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h1 class="title mb-3" id="home-typing"></h1>
+				<p id="home-location">欢迎来自远方的朋友~</p>
+			</section>
+
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h2 class="title mb-4 text-xl">倒计时</h2>
+				<ul class="space-y-3">
+					{countdownItems.map((item) => (
+						<li class="flex items-center justify-between rounded-md bg-zinc-100/70 px-3 py-2 dark:bg-zinc-900/70">
+							<span>{item.label}</span>
+							<strong>
+								{item.days}
+								{item.suffix}
+							</strong>
 						</li>
 					))}
 				</ul>
 			</section>
-		)
-	}
-	<section class="mt-16">
-		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-4" role="list">
+
+			<a
+				class="block overflow-hidden rounded-md border border-zinc-200 bg-global-bg/80 p-1 transition hover:border-sky-400 dark:border-zinc-800"
+				href="/gallery/"
+			>
+				<div
+					class="h-30 rounded-md bg-cover bg-center"
+					style="background-image:url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80')"
+				></div>
+				<p class="py-2 text-center font-semibold text-sky-500">进入 Gallery</p>
+			</a>
+
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h2 class="title mb-4 text-xl">音乐播放器</h2>
+				<div class="flex flex-col gap-3">
+					<select
+						id="playlist-select"
+						class="rounded-md border border-zinc-300 bg-white px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+					>
+						{playlist.map((song, index) => (
+							<option value={song.src} selected={index === 0}>
+								{song.title}
+							</option>
+						))}
+					</select>
+					<audio id="home-audio" controls class="w-full" src={playlist[0]?.src}></audio>
+				</div>
+			</section>
+
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h2 class="title mb-4 text-xl">取色器</h2>
+				<div class="flex flex-col gap-3">
+					<input class="h-36 w-full cursor-pointer rounded-md" id="home-color-picker" type="color" value="#22c55e" />
+					<input
+						class="rounded-md border border-zinc-300 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+						id="home-color-hex"
+						type="text"
+						value="#22c55e"
+					/>
+				</div>
+			</section>
+		</div>
+
+		<div class="space-y-6">
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-4 dark:border-zinc-800">
+				<img
+					alt="homepage cover"
+					class="mb-3 h-44 w-full rounded-md object-cover"
+					src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=1200&q=80"
+				/>
+				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次提交距今 {daysSinceLastCommit} days ago</p>
+			</section>
+
+			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+				<h2 class="title mb-4 text-center text-xl">导航</h2>
+				<button class="text-accent mb-2 block w-full text-center font-semibold" id="open-home-search" type="button">
+					Search
+				</button>
+				<div class="hidden"><Search /></div>
+				<nav aria-label="Home quick links" class="flex flex-col gap-2 text-center">
+					{rightNavLinks.map((link) => (
+						<a
+							class="rounded-md border border-zinc-200 px-3 py-2 hover:border-sky-300 hover:bg-sky-50/60 dark:border-zinc-700 dark:hover:border-sky-800 dark:hover:bg-sky-900/30"
+							href={link.path}
+							target={link.external ? "_blank" : undefined}
+							rel={link.external ? "noreferrer" : undefined}
+						>
+							{link.title}
+						</a>
+					))}
+				</nav>
+			</section>
+
 			{
-				latestPosts.map((p) => (
-					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
-					</li>
-				))
+				homepageTags.length > 0 && (
+					<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+						<h2 class="title mb-4 text-xl">Tags</h2>
+						<div class="flex flex-wrap gap-2">
+							{homepageTags.map((tag) => (
+								<a class="cactus-link" href={`/tags/${tag}/`}>
+									#{tag}
+								</a>
+							))}
+						</div>
+					</section>
+				)
 			}
-		</ul>
+		</div>
 	</section>
-	{
-		latestNotes.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title text-accent mb-6 text-xl">
-					<a href="/notes/">Notes</a>
-				</h2>
-				<ul class="space-y-6" role="list">
-					{latestNotes.map((note) => (
-						<li>
-							<Note note={note} as="h3" isPreview />
-						</li>
-					))}
-				</ul>
-			</section>
-		)
-	}
 </PageLayout>
+
+<script is:inline>
+	const initHomeHero = () => {
+		const typingTarget = document.getElementById("home-typing");
+		const typingText = "Hello World!";
+		let idx = 0;
+		let deleting = false;
+		if (window.__homeTypingTimer) clearInterval(window.__homeTypingTimer);
+		window.__homeTypingTimer = setInterval(() => {
+			if (!typingTarget) return;
+			typingTarget.textContent = typingText.slice(0, idx);
+			if (!deleting) {
+				idx += 1;
+				if (idx > typingText.length) {
+					deleting = true;
+					idx = typingText.length;
+				}
+			} else {
+				idx -= 1;
+				if (idx < 1) {
+					deleting = false;
+					idx = 1;
+				}
+			}
+		}, 120);
+
+		const locationTarget = document.getElementById("home-location");
+		fetch("https://ipapi.co/json/")
+			.then((res) => res.json())
+			.then((data) => {
+				const cn = data?.country_name === "China";
+				const locationName = cn
+					? [data?.region, data?.city].filter(Boolean).join(" ") || "中国"
+					: data?.country_name || "远方";
+				if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
+			})
+			.catch(() => {
+				if (locationTarget) locationTarget.textContent = "欢迎来自远方的朋友~";
+			});
+
+		const player = document.getElementById("home-audio");
+		const playlistSelect = document.getElementById("playlist-select");
+		if (player instanceof HTMLAudioElement && playlistSelect instanceof HTMLSelectElement) {
+			if (playlistSelect.dataset.bound !== "1") {
+				playlistSelect.dataset.bound = "1";
+				playlistSelect.addEventListener("change", () => {
+					player.src = playlistSelect.value;
+					player.play().catch(() => {});
+				});
+			}
+		}
+
+		const colorPicker = document.getElementById("home-color-picker");
+		const colorHex = document.getElementById("home-color-hex");
+		if (colorPicker instanceof HTMLInputElement && colorHex instanceof HTMLInputElement) {
+			if (colorPicker.dataset.bound !== "1") {
+				colorPicker.dataset.bound = "1";
+				colorPicker.addEventListener("input", () => {
+					colorHex.value = colorPicker.value.toUpperCase();
+				});
+			}
+			if (colorHex.dataset.bound !== "1") {
+				colorHex.dataset.bound = "1";
+				colorHex.addEventListener("input", () => {
+					const value = colorHex.value.trim();
+					if (/^#([0-9A-Fa-f]{6})$/.test(value)) colorPicker.value = value;
+				});
+			}
+		}
+
+		const openSearchBtn = document.getElementById("open-home-search");
+		if (openSearchBtn instanceof HTMLButtonElement && openSearchBtn.dataset.bound !== "1") {
+			openSearchBtn.dataset.bound = "1";
+			openSearchBtn.addEventListener("click", () => {
+				document.querySelector<HTMLButtonElement>("site-search button[data-open-modal]")?.click();
+			});
+		}
+	};
+	document.addEventListener("astro:page-load", initHomeHero);
+	initHomeHero();
+</script>
