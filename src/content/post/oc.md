@@ -1,12 +1,6 @@
 ---
-title: "OC檔案"
-published: 2025-07-15
-tags: [Bio]
-category: OC
-keyword:
-top_img: 
-comments:
-cover:
+title: oc档案
+publishDate: 2025-07-15
 ---
 ## 基本信息
 - 姓名：Bunny（前）/Eucaly（后）
