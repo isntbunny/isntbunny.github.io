@@ -39,20 +39,7 @@ const daysSinceLastCommit = (() => {
 	}
 })();
 
-const playlist = [
-	{
-		title: "网易云 · 風になる",
-		src: "https://music.163.com/song/media/outer/url?id=22828370.mp3",
-	},
-	{
-		title: "网易云 · 打上花火",
-		src: "https://music.163.com/song/media/outer/url?id=436514312.mp3",
-	},
-	{
-		title: "网易云 · Lemon",
-		src: "https://music.163.com/song/media/outer/url?id=544698553.mp3",
-	},
-];
+
 ---
 
 <PageLayout meta={{ title: "Home" }}>
@@ -84,27 +71,11 @@ const playlist = [
 			>
 				<div
 					class="h-30 rounded-md bg-cover bg-center"
-					style="background-image:url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80')"
+					style="background-image:url('https://i.postimg.cc/43GZ382v/e2511.png')"
 				></div>
-				<p class="py-2 text-center font-semibold text-sky-500">进入 Gallery</p>
+				<p class="py-2 text-center font-semibold text-sky-500">Gallery</p>
 			</a>
 
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
-				<h2 class="title mb-4 text-xl">音乐播放器</h2>
-				<div class="flex flex-col gap-3">
-					<select
-						id="playlist-select"
-						class="rounded-md border border-zinc-300 bg-white px-3 py-2 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-					>
-						{playlist.map((song, index) => (
-							<option value={song.src} selected={index === 0}>
-								{song.title}
-							</option>
-						))}
-					</select>
-					<audio id="home-audio" controls class="w-full" src={playlist[0]?.src}></audio>
-				</div>
-			</section>
 
 			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
 				<h2 class="title mb-4 text-xl">取色器</h2>
@@ -125,16 +96,13 @@ const playlist = [
 				<img
 					alt="homepage cover"
 					class="mb-3 h-44 w-full rounded-md object-cover"
-					src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=1200&q=80"
+					src="https://i.postimg.cc/4dLTBX4R/e250416.jpg"
 				/>
-				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次提交距今 {daysSinceLastCommit} days ago</p>
+				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次更新距今 {daysSinceLastCommit} days ago</p>
 			</section>
 
 			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
 				<h2 class="title mb-4 text-center text-xl">导航</h2>
-				<button class="text-accent mb-2 block w-full text-center font-semibold" id="open-home-search" type="button">
-					Search
-				</button>
 				<div class="hidden"><Search /></div>
 				<nav aria-label="Home quick links" class="flex flex-col gap-2 text-center">
 					{rightNavLinks.map((link) => (

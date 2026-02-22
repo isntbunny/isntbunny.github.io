@@ -37,7 +37,7 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 	url: "https://isntbunny.github.io/",
 	// 页面背景图（图床链接）
 	backgroundImage:
-		"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80",
+		"https://i.postimg.cc/J0bfgL1S/hitori_band_playing_bocchi_the_rock_hd_wallpaper_uhdpaper_com_395_5_k.jpg",
 	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
 	bangumiUsername: "isntbunny",
 };
