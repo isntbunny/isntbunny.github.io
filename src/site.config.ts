@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = {
 };
 
 // Used to generate links in both the Header & Footer.
-export const menuLinks: { path: string; title: string }[] = [
+export const menuLinks: { path: string; title: string; external?: boolean }[] = [
 	{
 		path: "/",
 		title: "Home",
@@ -43,6 +43,7 @@ export const menuLinks: { path: string; title: string }[] = [
 	{
 		path: "https://status.cafe/users/isntbunny",
 		title: "Memos",
+		external: true,
 	},
 	{
 		path: "/gallery/",
