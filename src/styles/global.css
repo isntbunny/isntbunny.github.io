@@ -6,14 +6,14 @@
 /* use a selector-based strategy for dark mode */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* you could refactor below to use light-dark(), depending on your target audience */
 @theme {
-	--color-global-bg: oklch(98.48% 0 0);
-	--color-global-text: oklch(26.99% 0.0096 235.05);
-	--color-link: oklch(55.44% 0.0431 185.69);
-	--color-accent: oklch(55.27% 0.195 19.06);
-	--color-accent-2: oklch(18.15% 0 0);
-	--color-quote: oklch(55.27% 0.195 19.06);
+	--color-global-bg: oklch(97.5% 0.02 235);
+	--color-global-text: oklch(30% 0.04 245);
+	--color-link: oklch(52% 0.13 240);
+	--color-accent: oklch(58% 0.14 225);
+	--color-accent-2: oklch(34% 0.07 245);
+	--color-quote: oklch(50% 0.08 235);
+	--color-bg-overlay: rgba(240, 248, 255, 0.82);
 }
 
 @layer base {
@@ -28,12 +28,13 @@
 
 		&[data-theme="dark"] {
 			color-scheme: dark;
-			--color-global-bg: oklch(23.64% 0.0045 248);
-			--color-global-text: oklch(83.54% 0 264);
-			--color-link: oklch(70.44% 0.1133 349);
-			--color-accent: oklch(70.91% 0.1415 163.7);
-			--color-accent-2: oklch(94.66% 0 0);
-			--color-quote: oklch(94.8% 0.106 136.49);
+			--color-global-bg: oklch(20% 0.03 250);
+			--color-global-text: oklch(88% 0.02 245);
+			--color-link: oklch(80% 0.12 230);
+			--color-accent: oklch(77% 0.14 225);
+			--color-accent-2: oklch(91% 0.03 240);
+			--color-quote: oklch(82% 0.07 235);
+			--color-bg-overlay: rgba(12, 22, 35, 0.72);
 		}
 	}
 
@@ -45,7 +46,6 @@
 		navigation: auto;
 	}
 
-	/* Astro image responsive styles, modified from -> https://docs.astro.build/en/guides/images/#responsive-image-styles */
 	:where([data-astro-image]) {
 		object-fit: var(--fit);
 		object-position: var(--pos);
