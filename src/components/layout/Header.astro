@@ -36,19 +36,47 @@ import { siteConfig } from "../../site.config";
 		</a>
 		<nav
 			aria-label="Main menu"
-			class="bg-global-bg absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:bg-transparent sm:p-0"
+			class="bg-global-bg/95 absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 shadow-md backdrop-blur-sm group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none"
 			id="navigation-menu"
 		>
 			{
-				menuLinks.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="text-accent px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline"
-						href={link.path}
-					>
-						{link.title}
-					</a>
-				))
+				menuLinks.map((link, index) =>
+					link.children?.length ? (
+						<div class="relative px-2 py-4 font-semibold sm:px-4 sm:py-0">
+							<button
+								aria-expanded="false"
+								class="text-accent cursor-pointer"
+								data-submenu-toggle
+								type="button"
+							>
+								{link.title} ▾
+							</button>
+							<div
+								class="submenu bg-global-bg mt-2 hidden flex-col gap-2 sm:absolute sm:start-0 sm:top-full sm:min-w-52 sm:rounded-md sm:border sm:border-sky-200 sm:p-2 sm:shadow-sm dark:sm:border-sky-900"
+								data-submenu={index}
+							>
+								{link.children.map((item) => (
+									<a
+										class="text-accent rounded px-2 py-1 hover:bg-sky-100/60 dark:hover:bg-sky-900/40"
+										href={item.path}
+									>
+										{item.title}
+									</a>
+								))}
+							</div>
+						</div>
+					) : (
+						<a
+							aria-current={Astro.url.pathname === link.path ? "page" : false}
+							class="text-accent px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline"
+							href={link.path}
+							target={link.external ? "_blank" : undefined}
+							rel={link.external ? "noreferrer" : undefined}
+						>
+							{link.title}
+						</a>
+					)
+				)
 			}
 		</nav>
 	</div>
@@ -80,7 +108,6 @@ import { siteConfig } from "../../site.config";
 			<svg
 				aria-hidden="true"
 				class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
-				class="text-accent"
 				fill="none"
 				focusable="false"
 				id="cross-svg"
@@ -114,4 +141,31 @@ import { siteConfig } from "../../site.config";
 	}
 
 	customElements.define("mobile-button", MobileNavBtn);
+
+	const submenuToggles = document.querySelectorAll<HTMLButtonElement>("[data-submenu-toggle]");
+	const submenus = document.querySelectorAll<HTMLElement>("[data-submenu]");
+
+	const closeAllSubmenus = () => {
+		submenus.forEach((menu) => menu.classList.add("hidden"));
+		submenuToggles.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+	};
+
+	submenuToggles.forEach((btn, idx) => {
+		btn.addEventListener("click", (event) => {
+			event.stopPropagation();
+			const targetMenu = document.querySelector<HTMLElement>(`[data-submenu='${idx}']`);
+			const isOpen = !targetMenu?.classList.contains("hidden");
+			closeAllSubmenus();
+			if (!isOpen && targetMenu) {
+				targetMenu.classList.remove("hidden");
+				btn.setAttribute("aria-expanded", "true");
+			}
+		});
+	});
+
+	document.addEventListener("click", (event) => {
+		if (!(event.target instanceof Element)) return;
+		if (event.target.closest("[data-submenu]") || event.target.closest("[data-submenu-toggle]")) return;
+		closeAllSubmenus();
+	});
 </script>
