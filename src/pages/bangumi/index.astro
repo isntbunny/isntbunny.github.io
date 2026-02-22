@@ -5,7 +5,7 @@ import { siteConfig } from "@/site.config";
 const username = siteConfig.bangumiUsername;
 ---
 
-<PageLayout meta={{ title: "番组计划", description: "Bangumi 动画与漫画列表" }}>
+<PageLayout meta={{ title: "番组计划", description: "Bangumi 追番列表" }}>
 	<h1 class="title mb-6">番组计划</h1>
 	<p class="mb-3">
 		数据来源：Bangumi.tv API。当前用户：<code>{username}</code>
@@ -14,24 +14,14 @@ const username = siteConfig.bangumiUsername;
 		如果要换账号，修改 <code>src/site.config.ts</code> 中的 <code>bangumiUsername</code>。
 	</p>
 
-	<section class="mb-10">
-		<h2 class="title mb-4 text-xl">动画</h2>
-		<div class="grid gap-4" id="bangumi-anime-list">
-			<p>正在加载动画列表...</p>
-		</div>
-	</section>
-
-	<section>
-		<h2 class="title mb-4 text-xl">漫画</h2>
-		<div class="grid gap-4" id="bangumi-manga-list">
-			<p>正在加载漫画列表...</p>
-		</div>
-	</section>
+	<div class="grid gap-4" id="bangumi-list">
+		<p>正在加载追番数据...</p>
+	</div>
 </PageLayout>
 
-<script define:vars={{ username }} is:inline>
-	const animeRoot = document.getElementById("bangumi-anime-list");
-	const mangaRoot = document.getElementById("bangumi-manga-list");
+<script define:vars={{ username }}>
+	const endpoint = `https://api.bgm.tv/v0/users/${username}/collections?subject_type=2&limit=24`;
+	const root = document.getElementById("bangumi-list");
 
 	const statusMap = {
 		1: "想看",
@@ -49,54 +39,46 @@ const username = siteConfig.bangumiUsername;
 			.replaceAll('"', "&quot;")
 			.replaceAll("'", "&#39;");
 
-	function renderCollection(root, items, emptyText) {
-		if (!root) return;
-		if (!items.length) {
-			root.innerHTML = `<p>${emptyText}</p>`;
-			return;
-		}
+	fetch(endpoint)
+		.then((res) => {
+			if (!res.ok) throw new Error(`Bangumi API 请求失败：${res.status}`);
+			return res.json();
+		})
+		.then((data) => {
+			const items = data?.data ?? [];
+			if (!items.length) {
+				if (root) root.innerHTML = "<p>还没有获取到追番数据。</p>";
+				return;
+			}
 
-		root.innerHTML = items
-			.map((entry) => {
-				const subject = entry?.subject;
-				const title = escapeHtml(subject?.name_cn || subject?.name || "未命名条目");
-				const image = subject?.images?.common || subject?.images?.medium || "";
-				const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
-				const status = statusMap[entry?.type] || "未分类";
-				const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
+			if (root) {
+				root.innerHTML = items
+					.map((entry) => {
+						const subject = entry?.subject;
+						const title = escapeHtml(subject?.name_cn || subject?.name || "未命名条目");
+						const image = subject?.images?.common || subject?.images?.medium || "";
+						const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
+						const status = statusMap[entry?.type] || "未分类";
+						const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
 
-				return `
-				<article class="rounded-lg border border-sky-200/80 bg-sky-50/60 p-3 dark:border-sky-900 dark:bg-sky-950/40">
-					<a href="${url}" target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
-						${image ? `<img src="${image}" alt="${title}" class="h-24 w-[70px] rounded object-cover" loading="lazy" />` : "<div class='h-24 w-[70px] rounded bg-sky-100 dark:bg-sky-900'></div>"}
-						<div>
-							<h3 class="font-semibold">${title}</h3>
-							<p class="mt-2 text-xs opacity-80">状态：${status}</p>
-							<p class="text-xs opacity-80">${score}</p>
-						</div>
-					</a>
-				</article>`;
-			})
-			.join("");
-	}
-
-	async function fetchCollection(subjectType) {
-		const endpoint = `https://api.bgm.tv/v0/users/${username}/collections?subject_type=${subjectType}&limit=24`;
-		const res = await fetch(endpoint);
-		if (!res.ok) throw new Error(`Bangumi API 请求失败：${res.status}`);
-		const data = await res.json();
-		return data?.data ?? [];
-	}
-
-	Promise.all([fetchCollection(2), fetchCollection(1)])
-		.then(([animeItems, mangaItems]) => {
-			renderCollection(animeRoot, animeItems, "还没有获取到动画数据。");
-			renderCollection(mangaRoot, mangaItems, "还没有获取到漫画数据。");
+						return `
+						<article class="rounded-lg border border-sky-200/80 bg-sky-50/60 p-3 dark:border-sky-900 dark:bg-sky-950/40">
+							<a href="${url}" target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
+								${image ? `<img src="${image}" alt="${title}" class="h-24 w-[70px] rounded object-cover" loading="lazy" />` : "<div class='h-24 w-[70px] rounded bg-sky-100 dark:bg-sky-900'></div>"}
+								<div>
+									<h2 class="font-semibold">${title}</h2>
+									<p class="mt-2 text-xs opacity-80">状态：${status}</p>
+									<p class="text-xs opacity-80">${score}</p>
+								</div>
+							</a>
+						</article>`;
+					})
+					.join("");
+			}
 		})
 		.catch((err) => {
-			if (animeRoot)
-				animeRoot.innerHTML = `<p>获取动画数据失败：${String(err)}。请检查用户名或稍后重试。</p>`;
-			if (mangaRoot)
-				mangaRoot.innerHTML = `<p>获取漫画数据失败：${String(err)}。请检查用户名或稍后重试。</p>`;
+			if (root) {
+				root.innerHTML = `<p>获取 Bangumi 数据失败：${String(err)}。请检查用户名或稍后重试。</p>`;
+			}
 		});
 </script>

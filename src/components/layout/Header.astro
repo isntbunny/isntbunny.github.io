@@ -42,9 +42,9 @@ import { siteConfig } from "../../site.config";
 			{
 				menuLinks.map((link) =>
 					link.children?.length ? (
-						<div class="group/submenu relative px-2 py-4 font-semibold sm:px-4 sm:py-0">
+						<div class="relative px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:[&:hover_.submenu]:pointer-events-auto sm:[&:hover_.submenu]:opacity-100">
 							<span class="text-accent cursor-default">{link.title} ▾</span>
-							<div class="submenu bg-global-bg mt-2 flex flex-col gap-2 sm:pointer-events-none sm:absolute sm:start-0 sm:top-full sm:min-w-52 sm:rounded-md sm:border sm:border-sky-200 sm:p-2 sm:opacity-0 sm:transition-opacity sm:duration-150 sm:group-hover/submenu:pointer-events-auto sm:group-hover/submenu:opacity-100 sm:group-focus-within/submenu:pointer-events-auto sm:group-focus-within/submenu:opacity-100 dark:sm:border-sky-900">
+							<div class="submenu bg-global-bg mt-3 flex flex-col gap-2 sm:pointer-events-none sm:absolute sm:top-6 sm:mt-2 sm:min-w-52 sm:rounded-md sm:border sm:border-sky-200 sm:p-2 sm:opacity-0 sm:shadow-sm dark:sm:border-sky-900">
 								{link.children.map((item) => (
 									<a
 										class="text-accent rounded px-2 py-1 hover:bg-sky-100/60 dark:hover:bg-sky-900/40"
@@ -65,7 +65,7 @@ import { siteConfig } from "../../site.config";
 						>
 							{link.title}
 						</a>
-					)
+					),
 				)
 			}
 		</nav>
