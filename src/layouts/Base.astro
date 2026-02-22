@@ -29,7 +29,7 @@ const isHome = Astro.url.pathname === "/";
 	>
 		<ThemeProvider />
 		<SkipLink />
-		<Header />
+		{!isHome && <Header />}
 		<main id="main">
 			<slot />
 		</main>
