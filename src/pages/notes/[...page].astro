@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import { Icon } from "astro-icon/components";
+import Note from "@/components/note/Note.astro";
+import Pagination from "@/components/Paginator.astro";
+import { getAllNotes } from "@/data/note";
+import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const MAX_NOTES_PER_PAGE = 10;
+	const allNotes = await getAllNotes();
+	const allNotesByDate = allNotes.sort(collectionDateSort);
+	return paginate(allNotesByDate, {
+		pageSize: MAX_NOTES_PER_PAGE,
+	});
+}) satisfies GetStaticPaths;
+
+interface Props {
+	page: Page<CollectionEntry<"note">>;
+}
+
+const { page } = Astro.props;
+
+const meta = {
+	description: "碎碎念短博客",
+	title: "Notes",
+};
+
+const paginationProps = {
+	...(page.url.prev && {
+		prevUrl: {
+			text: "← Previous Page",
+			url: page.url.prev,
+		},
+	}),
+	...(page.url.next && {
+		nextUrl: {
+			text: "Next Page →",
+			url: page.url.next,
+		},
+	}),
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="mb-12 flex items-center gap-3">
+		<h1 class="title">Notes</h1>
+		<a class="text-accent" href="/notes/rss.xml" target="_blank">
+			<span class="sr-only">Notes RSS feed</span>
+			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
+		</a>
+	</div>
+	<ul class="space-y-6" role="list">
+		{page.data.map((note) => <Note note={note} as="h2" isPreview />)}
+	</ul>
+	<Pagination {...paginationProps} />
+</PageLayout>
