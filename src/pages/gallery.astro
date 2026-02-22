@@ -1,0 +1,24 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const sourceUrl = "https://postimg.cc/gallery/tHJV36qY";
+---
+
+<PageLayout meta={{ title: "Gallery", description: "我的画廊" }}>
+	<h1 class="title mb-6">Gallery</h1>
+	<p class="mb-3 text-sm opacity-80">推荐方案：直接查看独立画廊页（最稳定）</p>
+	<p class="mb-6">
+		<a class="cactus-link" href={sourceUrl} target="_blank" rel="noreferrer">打开画廊（新窗口）</a>
+	</p>
+
+	<iframe
+		title="Postimg Gallery"
+		src={sourceUrl}
+		class="mb-6 h-[75vh] w-full rounded-lg border border-sky-200 dark:border-sky-900"
+		loading="lazy"
+	></iframe>
+
+	<p class="text-xs opacity-70">
+		如果你后续想完全不依赖 Postimg，建议把图片同步到本仓库的 <code>public/gallery/</code>，然后直接渲染本地文件。
+	</p>
+</PageLayout>
