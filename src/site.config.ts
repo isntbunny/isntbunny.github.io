@@ -1,6 +1,6 @@
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 import type { SiteConfig } from "@/types";
-import { siteSettings } from "./config/site-settings";
+import { themeConfig } from "./config/theme";
 
 export type MenuLink = {
 	title: string;
@@ -36,15 +36,14 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 	title: "幸せのカウントダウン",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://isntbunny.github.io/",
-	// 页面背景图（图床链接）
-	backgroundImage: siteSettings.backgrounds.default,
+	// 页面背景图
+	backgroundImage: themeConfig.backgrounds.default,
 	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
 	bangumiUsername: "isntbunny",
 };
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: MenuLink[] = [
-	{ path: "/", title: "Home" },
 	{ path: "/posts/", title: "Blog" },
 	{ path: "/memos/", title: "Memos" },
 	{ path: "/gallery/", title: "Gallery" },

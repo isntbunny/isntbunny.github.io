@@ -56,9 +56,23 @@ const tag = defineCollection({
 	}),
 });
 
+const gallery = defineCollection({
+	loader: glob({ base: "./src/content/gallery", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		title: z.string(),
+		items: z.array(
+			z.object({
+				title: z.string(),
+				image: z.string().url(),
+				description: z.string().optional(),
+			}),
+		),
+	}),
+});
+
 const page = defineCollection({
 	loader: glob({ base: "./src/content/page", pattern: "**/*.{md,mdx}" }),
 	schema: z.object({}),
 });
 
-export const collections = { post, note, tag, page };
+export const collections = { post, note, tag, page, gallery };

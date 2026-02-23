@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
-import { siteSettings } from "@/config/site-settings";
+import { getPageBackground, themeConfig } from "@/config/theme";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -16,6 +16,9 @@ const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 const isHome = Astro.url.pathname === "/";
+const pageBackground = isHome
+	? themeConfig.backgrounds.home
+	: getPageBackground(Astro.url.pathname);
 ---
 
 <html class="scroll-smooth" lang={siteConfig.lang}>
@@ -23,9 +26,9 @@ const isHome = Astro.url.pathname === "/";
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class={`bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 ${siteSettings.font.bodyClass} text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-16`}
+		class={`bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-16`}
 		class:list={[isHome && "home-page-bg"]}
-		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${isHome ? siteSettings.backgrounds.home : siteConfig.backgroundImage});`}
+		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
 		data-theme-bg
 	>
 		<ThemeProvider />
