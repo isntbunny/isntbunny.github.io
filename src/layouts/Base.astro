@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
-import { getPageBackground, themeConfig } from "@/config/theme";
+import { getPageBackground, siteSettings } from "@/settings/site";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 const isHome = Astro.url.pathname === "/";
 const pageBackground = isHome
-	? themeConfig.backgrounds.home
+	? siteSettings.backgrounds.home
 	: getPageBackground(Astro.url.pathname);
 ---
 
