@@ -1,5 +1,5 @@
 export const homeConfig = {
-	typingText: "HAPPINESS COUNTDOWN",
+	typingText: "幸せのカウントダウン",
 	welcomeText: "WELCOME FRIEND FROM FAR AWAY :P",
 	countdownTargets: [
 		{ key: "monthEnd", label: "Days until month end:", suffix: " days" },
@@ -23,12 +23,12 @@ export const siteSettings = {
 	},
 	backgrounds: {
 		home:
-			"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80",
+			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		default:
-			"https://i.postimg.cc/J0bfgL1S/hitori-band-playing-bocchi-the-rock-hd-wallpaper-uhdpaper-com-395-5-k.jpg",
+			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		pages: {
 			"/gallery/":
-				"https://images.unsplash.com/photo-1508261303786-79cf9a29f6f3?auto=format&fit=crop&w=2000&q=80",
+				"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		},
 	},
 } as const;
