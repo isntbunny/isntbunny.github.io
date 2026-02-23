@@ -1,1 +1,7 @@
-export const GET = () => Response.redirect("/memos/rss.xml", 301);
+export const GET = () =>
+	new Response(null, {
+		status: 301,
+		headers: {
+			Location: "/memos/rss.xml",
+		},
+	});

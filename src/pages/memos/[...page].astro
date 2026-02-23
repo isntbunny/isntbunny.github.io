@@ -4,28 +4,23 @@ import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
 import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
+import { siteSettings } from "@/config/site-settings";
 import { getAllNotes } from "@/data/note";
 import PageLayout from "@/layouts/Base.astro";
-import { getStatusCafeItems, type StatusCafeItem } from "@/utils/statusCafe";
+import { collectionDateSort } from "@/utils/date";
 
-type MemoItem =
-	| { source: "note"; id: string; publishDate: Date; note: CollectionEntry<"note"> }
-	| StatusCafeItem;
+type MemoItem = { source: "note"; id: string; publishDate: Date; note: CollectionEntry<"note"> };
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_MEMOS_PER_PAGE = 10;
-	const notes = await getAllNotes();
-	const statusItems = await getStatusCafeItems();
+	const notes = (await getAllNotes()).sort(collectionDateSort);
 	const noteItems: MemoItem[] = notes.map((note) => ({
 		source: "note",
 		id: note.id,
 		publishDate: note.data.publishDate,
 		note,
 	}));
-	const merged = [...noteItems, ...statusItems].sort(
-		(a, b) => b.publishDate.valueOf() - a.publishDate.valueOf(),
-	);
-	return paginate(merged, {
+	return paginate(noteItems, {
 		pageSize: MAX_MEMOS_PER_PAGE,
 	});
 }) satisfies GetStaticPaths;
@@ -37,7 +32,7 @@ interface Props {
 const { page } = Astro.props;
 
 const meta = {
-	description: "状态 + 短博客",
+	description: "status.cafe + 短博客",
 	title: "Memos",
 };
 
@@ -65,22 +60,60 @@ const paginationProps = {
 			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
 		</a>
 	</div>
-	<ul class="space-y-6" role="list">
-		{page.data.map((memo) =>
-			memo.source === "note" ? (
-				<li>
-					<Note note={memo.note} as="h2" isPreview />
-				</li>
-			) : (
-				<li class="bg-global-text/5 inline-grid w-full rounded-md px-4 py-3">
-					<p class="text-xs font-semibold uppercase tracking-wider text-sky-500">status.cafe</p>
-					<time class="mt-1 text-sm text-gray-500 dark:text-gray-400" datetime={memo.publishDate.toISOString()}>
-						{memo.publishDate.toLocaleString("zh-CN")}
-					</time>
-					<p class="mt-3 whitespace-pre-wrap">{memo.text}</p>
-				</li>
-			),
-		)}
+	<ul class="space-y-6" id="memo-list" role="list">
+		<li class="bg-global-text/5 hidden w-full rounded-md px-4 py-3" id="status-cafe-item">
+			<p class="text-xs font-semibold uppercase tracking-wider text-sky-500">status.cafe</p>
+			<time class="mt-1 block text-sm text-gray-500 dark:text-gray-400" id="status-cafe-time"></time>
+			<p class="mt-3 whitespace-pre-wrap" id="status-cafe-text"></p>
+		</li>
+		{page.data.map((memo) => (
+			<li data-note-date={memo.publishDate.toISOString()}>
+				<Note note={memo.note} as="h2" isPreview />
+			</li>
+		))}
 	</ul>
 	<Pagination {...paginationProps} />
+
+	<div class="hidden" id="statuscafe">
+		<div id="statuscafe-username"></div>
+		<div id="statuscafe-content"></div>
+		<div id="statuscafe-time"></div>
+	</div>
 </PageLayout>
+
+<script define:vars={{ statusCafeScriptSrc: siteSettings.statusCafe.scriptSrc, statusCafeUsername: siteSettings.statusCafe.username }}>
+	const initStatusCafe = () => {
+		const existing = document.querySelector("script[data-status-cafe='1']");
+		if (existing) return;
+		const script = document.createElement("script");
+		script.src = `${statusCafeScriptSrc}?name=${encodeURIComponent(statusCafeUsername)}`;
+		script.defer = true;
+		script.dataset.statusCafe = "1";
+		script.onload = () => {
+			const sourceText = document.getElementById("statuscafe-content")?.textContent?.trim();
+			if (!sourceText) return;
+			const sourceTimeText = document.getElementById("statuscafe-time")?.textContent?.trim() || "";
+			const item = document.getElementById("status-cafe-item");
+			const itemText = document.getElementById("status-cafe-text");
+			const itemTime = document.getElementById("status-cafe-time");
+			if (!item || !itemText || !itemTime) return;
+
+			itemText.textContent = sourceText;
+			itemTime.textContent = sourceTimeText || "刚刚";
+			item.classList.remove("hidden");
+
+			const list = document.getElementById("memo-list");
+			if (list) {
+				const firstNote = list.querySelector("li[data-note-date]");
+				if (firstNote) {
+					list.insertBefore(item, firstNote);
+				} else {
+					list.appendChild(item);
+				}
+			}
+		};
+		document.body.appendChild(script);
+	};
+	document.addEventListener("astro:page-load", initStatusCafe);
+	initStatusCafe();
+</script>

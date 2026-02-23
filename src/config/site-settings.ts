@@ -15,6 +15,6 @@ export const siteSettings = {
 	},
 	statusCafe: {
 		username: "isntbunny",
-		endpoint: "https://status.cafe/current-status",
+		scriptSrc: "https://status.cafe/current-status.js",
 	},
 } as const;
