@@ -1,0 +1,23 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Note from "@/components/note/Note.astro";
+import { getAllNotes } from "@/data/note";
+import PageLayout from "@/layouts/Base.astro";
+
+export const getStaticPaths = (async () => {
+	const noteEntries = await getAllNotes();
+	return noteEntries.map((note) => ({
+		params: { slug: note.id },
+		props: { note },
+	}));
+}) satisfies GetStaticPaths;
+
+const { note } = Astro.props;
+await render(note);
+const noteDescription = note.data.description ?? "短博客";
+---
+
+<PageLayout meta={{ title: note.data.title, description: noteDescription }}>
+	<Note note={note} as="h1" />
+</PageLayout>

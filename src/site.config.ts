@@ -1,5 +1,6 @@
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 import type { SiteConfig } from "@/types";
+import { siteSettings } from "./config/site-settings";
 
 export type MenuLink = {
 	title: string;
@@ -36,8 +37,7 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://isntbunny.github.io/",
 	// 页面背景图（图床链接）
-	backgroundImage:
-		"https://i.postimg.cc/J0bfgL1S/hitori_band_playing_bocchi_the_rock_hd_wallpaper_uhdpaper_com_395_5_k.jpg",
+	backgroundImage: siteSettings.backgrounds.default,
 	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
 	bangumiUsername: "isntbunny",
 };
@@ -46,8 +46,7 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 export const menuLinks: MenuLink[] = [
 	{ path: "/", title: "Home" },
 	{ path: "/posts/", title: "Blog" },
-	{ path: "/notes/", title: "Notes" },
-	{ path: "https://status.cafe/users/isntbunny", title: "Memos", external: true },
+	{ path: "/memos/", title: "Memos" },
 	{ path: "/gallery/", title: "Gallery" },
 	{ path: "/guestbook/", title: "Guestbook" },
 	{

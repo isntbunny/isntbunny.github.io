@@ -1,4 +1,5 @@
 ---
+import { getEntry, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import PageLayout from "@/layouts/Base.astro";
 
@@ -11,13 +12,16 @@ const contacts = [
 	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
 	{ icon: "mdi:web", label: "Status", url: "https://status.cafe/users/isntbunny" },
 ];
+
+const aboutEntry = await getEntry("page", "about");
+if (!aboutEntry) throw new Error("Missing src/content/page/about.md");
+const { Content } = await render(aboutEntry);
 ---
 
 <PageLayout meta={meta}>
 	<h1 class="title mb-12">About</h1>
 	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>泥好！窝是落桉（Eucaly），也可以叫窝bunny酱。不一定什么时候有时间开电脑的忙忙的高中牲。</p>
-		<p>还没想好介绍怎么写，先搁置吧（拖延症）qwq</p>
+		<Content />
 	</div>
 
 	<section class="mt-10 rounded-md border border-sky-200 bg-sky-50/60 p-4 dark:border-sky-900 dark:bg-sky-950/40">

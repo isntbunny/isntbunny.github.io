@@ -38,6 +38,16 @@
 		}
 	}
 
+	body {
+		background-color: var(--color-global-bg);
+	}
+
+	@media (max-width: 640px) {
+		body {
+			background-attachment: scroll;
+		}
+	}
+
 	:target {
 		scroll-margin-block: 5ex;
 	}
