@@ -1,137 +1,78 @@
 ---
 import { execSync } from "node:child_process";
 import Search from "@/components/Search.astro";
-import { homeConfig } from "@/config/home";
+import { homeConfig } from "@/settings/site";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { menuLinks } from "@/site.config";
 import { collectionDateSort } from "@/utils/date";
 
 const allPostsByDate = (await getAllPosts()).sort(collectionDateSort);
-
 const currentYear = new Date().getFullYear();
 const monthEnd = new Date(currentYear, new Date().getMonth() + 1, 0);
 const nextYear = new Date(currentYear + 1, 0, 1);
 const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
-
-const daysLeft = (targetDate: Date) =>
-	Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
-
+const daysLeft = (targetDate: Date) => Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
 const countdownTargetMap = { monthEnd, nextYear, gaokao2027 } as const;
-
-const countdownItems = homeConfig.countdownTargets.map((item) => ({
-	...item,
-	days: daysLeft(countdownTargetMap[item.key]),
-}));
-
+const countdownItems = homeConfig.countdownTargets.map((item) => ({ ...item, days: daysLeft(countdownTargetMap[item.key]) }));
 const homepageTags = [...new Set(allPostsByDate.flatMap((p) => p.data.tags))].slice(0, 20);
-
-const rightNavLinks = menuLinks
-	.flatMap((item) => (item.children?.length ? item.children : item.path ? [item] : []))
-	.filter((item) => item.path !== "/" && item.path !== "/gallery/");
-
+const rightNavLinks = menuLinks.flatMap((item) => (item.children?.length ? item.children : item.path ? [item] : [])).filter((item) => item.path !== "/" && item.path !== "/gallery/");
 const daysSinceLastCommit = (() => {
 	try {
-		const lastCommitUnix = execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim();
-		const last = Number(lastCommitUnix) * 1000;
+		const last = Number(execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim()) * 1000;
 		if (!Number.isFinite(last)) return 0;
 		return Math.max(0, Math.floor((Date.now() - last) / (1000 * 60 * 60 * 24)));
-	} catch {
-		return 0;
-	}
+	} catch { return 0; }
 })();
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+	<section class="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
 		<div class="space-y-6">
-			<section class="glass-panel rounded-md p-5">
+			<section class="status-card">
 				<h1 class="title mb-3" id="home-typing"></h1>
 				<p id="home-location">欢迎来自远方的朋友~</p>
+				<div class="mt-4 flex flex-wrap gap-2">
+					{rightNavLinks.map((link) => (
+						<a class="glass-panel card-chip" href={link.path} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>{link.title}</a>
+					))}
+				</div>
 			</section>
 
-			<section class="glass-panel rounded-md p-5">
-				<h2 class="title mb-4 text-xl">倒计时</h2>
-				<ul class="space-y-3">
+			{homepageTags.length > 0 && (
+				<section class="status-card">
+					<h2 class="title mb-4 text-xl">Tags</h2>
+					<div class="flex flex-wrap gap-2">
+						{homepageTags.map((tag) => <a class="cactus-link" href={`/tags/${tag}/`}>#{tag}</a>)}
+					</div>
+				</section>
+			)}
+
+			<a class="status-card block overflow-hidden p-1" href="/gallery/">
+				<div class="h-30 rounded-md bg-cover bg-center" style={`background-image:url('${homeConfig.galleryCardImage}')`}></div>
+				<p class="py-2 text-center font-semibold">Gallery</p>
+			</a>
+		</div>
+
+		<div class="space-y-6">
+			<section class="status-card">
+				<img alt="homepage cover" class="mb-3 h-44 w-full rounded-md object-cover" src={homeConfig.profileCoverImage} />
+				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次更新距今 {daysSinceLastCommit} days ago</p>
+				<ul class="mt-4 space-y-2 text-sm">
 					{countdownItems.map((item) => (
-						<li class="flex items-center justify-between rounded-md bg-zinc-100/70 px-3 py-2 dark:bg-zinc-900/70">
-							<span>{item.label}</span>
-							<strong>
-								{item.days}
-								{item.suffix}
-							</strong>
-						</li>
+						<li class="flex items-center justify-between rounded-md bg-zinc-100/70 px-3 py-2 dark:bg-zinc-900/70"><span>{item.label}</span><strong>{item.days}{item.suffix}</strong></li>
 					))}
 				</ul>
 			</section>
 
-			<a
-				class="glass-panel block overflow-hidden rounded-md p-1 transition hover:bg-white/80 dark:hover:bg-slate-900/80"
-				href="/gallery/"
-			>
-				<div
-					class="h-30 rounded-md bg-cover bg-center"
-					style={`background-image:url('${homeConfig.galleryCardImage}')`}
-				></div>
-				<p class="py-2 text-center font-semibold text-sky-500">Gallery</p>
-			</a>
-
-
-			<section class="glass-panel rounded-md p-5">
-				<h2 class="title mb-4 text-xl">取色器</h2>
-				<div class="flex flex-col gap-3">
-					<input class="h-36 w-full cursor-pointer rounded-md" id="home-color-picker" type="color" value={homeConfig.defaultColor} />
-					<input
-						class="rounded-md bg-white/75 px-3 py-2 dark:bg-slate-900/70"
-						id="home-color-hex"
-						type="text"
-						value={homeConfig.defaultColor}
-					/>
+			<section class="status-card">
+				<h2 class="title mb-3 text-xl">取色器</h2>
+				<div class="flex items-center gap-2">
+					<input class="h-10 w-10 cursor-pointer rounded-md" id="home-color-picker" type="color" value={homeConfig.defaultColor} />
+					<input class="rounded-md bg-white/75 px-3 py-2 dark:bg-slate-900/70" id="home-color-hex" type="text" value={homeConfig.defaultColor} />
 				</div>
 			</section>
-		</div>
-
-		<div class="space-y-6">
-			<section class="glass-panel rounded-md p-4">
-				<img
-					alt="homepage cover"
-					class="mb-3 h-44 w-full rounded-md object-cover"
-					src={homeConfig.profileCoverImage}
-				/>
-				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次更新距今 {daysSinceLastCommit} days ago</p>
-			</section>
-
-			<section class="glass-panel rounded-md p-5">
-				<h2 class="title mb-4 text-center text-xl">导航</h2>
-				<div class="hidden"><Search /></div>
-				<nav aria-label="Home quick links" class="flex flex-col gap-2 text-center">
-					{rightNavLinks.map((link) => (
-						<a
-							class="glass-panel rounded-md px-3 py-2 hover:bg-sky-100/70 dark:hover:bg-sky-900/30"
-							href={link.path}
-							target={link.external ? "_blank" : undefined}
-							rel={link.external ? "noreferrer" : undefined}
-						>
-							{link.title}
-						</a>
-					))}
-				</nav>
-			</section>
-
-			{
-				homepageTags.length > 0 && (
-					<section class="glass-panel rounded-md p-5">
-						<h2 class="title mb-4 text-xl">Tags</h2>
-						<div class="flex flex-wrap gap-2">
-							{homepageTags.map((tag) => (
-								<a class="cactus-link" href={`/tags/${tag}/`}>
-									#{tag}
-								</a>
-							))}
-						</div>
-					</section>
-				)
-			}
+			<div class="hidden"><Search /></div>
 		</div>
 	</section>
 </PageLayout>
@@ -139,18 +80,17 @@ const daysSinceLastCommit = (() => {
 <script define:vars={{ typingText: homeConfig.typingText, welcomeText: homeConfig.welcomeText }} is:inline>
 	const initHomeHero = () => {
 		const typingTarget = document.getElementById("home-typing");
-		const typingValue = typingText;
 		let idx = 0;
 		let deleting = false;
 		if (window.__homeTypingTimer) clearInterval(window.__homeTypingTimer);
 		window.__homeTypingTimer = setInterval(() => {
 			if (!typingTarget) return;
-			typingTarget.textContent = typingValue.slice(0, idx);
+			typingTarget.textContent = typingText.slice(0, idx);
 			if (!deleting) {
 				idx += 1;
-				if (idx > typingValue.length) {
+				if (idx > typingText.length) {
 					deleting = true;
-					idx = typingValue.length;
+					idx = typingText.length;
 				}
 			} else {
 				idx -= 1;
@@ -163,30 +103,12 @@ const daysSinceLastCommit = (() => {
 
 		const locationTarget = document.getElementById("home-location");
 		if (locationTarget) locationTarget.textContent = welcomeText;
-		fetch("https://ipapi.co/json/")
-			.then((res) => res.json())
-			.then((data) => {
-				const cn = data?.country_name === "China";
-				const locationName = cn
-					? [data?.region, data?.city].filter(Boolean).join(" ") || "中国"
-					: data?.country_name || "远方";
-				if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
-			})
-			.catch(() => {
-				if (locationTarget) locationTarget.textContent = welcomeText;
-			});
-
-		const player = document.getElementById("home-audio");
-		const playlistSelect = document.getElementById("playlist-select");
-		if (player instanceof HTMLAudioElement && playlistSelect instanceof HTMLSelectElement) {
-			if (playlistSelect.dataset.bound !== "1") {
-				playlistSelect.dataset.bound = "1";
-				playlistSelect.addEventListener("change", () => {
-					player.src = playlistSelect.value;
-					player.play().catch(() => {});
-				});
-			}
-		}
+		fetch("https://ipapi.co/json/").then((res) => res.json()).then((data) => {
+			const locationName = data?.country_name === "China" ? [data?.region, data?.city].filter(Boolean).join(" ") || "中国" : data?.country_name || "远方";
+			if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
+		}).catch(() => {
+			if (locationTarget) locationTarget.textContent = welcomeText;
+		});
 
 		const colorPicker = document.getElementById("home-color-picker");
 		const colorHex = document.getElementById("home-color-hex");
@@ -204,14 +126,6 @@ const daysSinceLastCommit = (() => {
 					if (/^#([0-9A-Fa-f]{6})$/.test(value)) colorPicker.value = value;
 				});
 			}
-		}
-
-		const openSearchBtn = document.getElementById("open-home-search");
-		if (openSearchBtn instanceof HTMLButtonElement && openSearchBtn.dataset.bound !== "1") {
-			openSearchBtn.dataset.bound = "1";
-			openSearchBtn.addEventListener("click", () => {
-				document.querySelector<HTMLButtonElement>("site-search button[data-open-modal]")?.click();
-			});
 		}
 	};
 	document.addEventListener("astro:page-load", initHomeHero);

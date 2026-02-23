@@ -42,8 +42,8 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 	</div>
 
 	<div class="mb-8 flex flex-wrap gap-2">
-		<button class="rounded border border-sky-300 bg-sky-100 px-3 py-1 dark:bg-sky-900/40" data-tab="all" type="button">all</button>
-		{tags.map((tag) => <button class="rounded border border-sky-300 px-3 py-1" data-tab={tag} type="button">{tag}</button>)}
+		<button class="glass-panel card-chip" data-tab="all" type="button">all</button>
+		{tags.map((tag) => <button class="glass-panel card-chip" data-tab={tag} type="button">{tag}</button>)}
 	</div>
 
 	{descYearKeys.map((yearKey) => (
@@ -72,8 +72,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		const activate = (tag) => {
 			tabButtons.forEach((btn) => {
 				const active = btn.dataset.tab === tag;
-				btn.classList.toggle("bg-sky-100", active);
-				btn.classList.toggle("dark:bg-sky-900/40", active);
+				btn.classList.toggle("font-semibold", active);
 			});
 
 			rows.forEach((row) => {

@@ -82,6 +82,16 @@
 		background: var(--color-surface);
 		backdrop-filter: blur(6px);
 	}
+
+	.status-card {
+		@apply rounded-md px-4 py-3;
+		background: var(--color-surface);
+		backdrop-filter: blur(6px);
+	}
+
+	.card-chip {
+		@apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
+	}
 }
 
 @utility prose {

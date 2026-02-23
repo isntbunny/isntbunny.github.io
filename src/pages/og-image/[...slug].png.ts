@@ -2,24 +2,43 @@ import { Resvg } from "@resvg/resvg-js";
 import type { APIContext, InferGetStaticPropsType } from "astro";
 import satori, { type SatoriOptions } from "satori";
 import { html } from "satori-html";
-import RobotoMonoBold from "@/assets/roboto-mono-700.ttf";
-import RobotoMono from "@/assets/roboto-mono-regular.ttf";
+import { readFileSync } from "node:fs";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 import { getFormattedDate } from "@/utils/date";
+
+
+const loadOgFont = () => {
+	const candidates = [
+		"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+		"/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf",
+	];
+
+	for (const file of candidates) {
+		try {
+			return readFileSync(file);
+		} catch {
+			continue;
+		}
+	}
+
+	throw new Error("No usable system font found for OG image generation.");
+};
+
+const ogFont = loadOgFont();
 
 const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
 		{
-			data: Buffer.from(RobotoMono),
-			name: "Roboto Mono",
+			data: Buffer.from(ogFont),
+			name: "DejaVu Sans",
 			style: "normal",
 			weight: 400,
 		},
 		{
-			data: Buffer.from(RobotoMonoBold),
-			name: "Roboto Mono",
+			data: Buffer.from(ogFont),
+			name: "DejaVu Sans",
 			style: "normal",
 			weight: 700,
 		},

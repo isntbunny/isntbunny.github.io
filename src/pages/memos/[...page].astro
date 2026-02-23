@@ -1,66 +1,65 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
-import { Icon } from "astro-icon/components";
 import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
-import { siteSettings } from "@/config/site-settings";
+import { siteSettings } from "@/settings/site";
 import { getAllNotes } from "@/data/note";
 import PageLayout from "@/layouts/Base.astro";
-import { getStatusCafeFromAtom, type StatusCafeAtomItem } from "@/utils/statusCafeAtom";
+
+type StatusCafeItem = {
+	source: "status.cafe";
+	id: string;
+	text: string;
+	publishDate: Date;
+};
 
 type MemoItem =
 	| { source: "note"; id: string; publishDate: Date; note: CollectionEntry<"note"> }
-	| StatusCafeAtomItem;
+	| StatusCafeItem;
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const MAX_MEMOS_PER_PAGE = 10;
 	const notes = await getAllNotes();
-	const statusItems = await getStatusCafeFromAtom(siteSettings.statusCafe.atomUrl);
-
+	const statusItems: StatusCafeItem[] = await (async () => {
+		try {
+			const response = await fetch(siteSettings.statusCafe.atomUrl, {
+				headers: {
+					accept: "application/atom+xml,application/xml,text/xml;q=0.9,*/*;q=0.8",
+					"user-agent": "isntbunny-blog/1.0",
+				},
+			});
+			if (!response.ok) return [];
+			const xml = await response.text();
+			return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
+				.map((entry) => {
+					const body = entry[1] ?? "";
+					const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? "";
+					const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+					const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? "";
+					const publishDate = new Date(updated);
+					if (!id || !content || Number.isNaN(publishDate.valueOf())) return null;
+					return { source: "status.cafe" as const, id, text: content, publishDate };
+				})
+				.filter((item): item is StatusCafeItem => item !== null)
+				.sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf());
+		} catch {
+			return [];
+		}
+	})();
 	const noteItems: MemoItem[] = notes.map((note) => ({
 		source: "note",
 		id: note.id,
 		publishDate: note.data.publishDate,
 		note,
 	}));
-
-	const merged = [...noteItems, ...statusItems].sort(
-		(a, b) => b.publishDate.valueOf() - a.publishDate.valueOf(),
-	);
-	return paginate(merged, {
-		pageSize: MAX_MEMOS_PER_PAGE,
-	});
+	return paginate([...noteItems, ...statusItems].sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf()), { pageSize: 10 });
 }) satisfies GetStaticPaths;
 
-interface Props {
-	page: Page<MemoItem>;
-}
-
+interface Props { page: Page<MemoItem>; }
 const { page } = Astro.props;
-
-const meta = {
-	description: "status.cafe",
-	title: "Memos",
-};
-
-const paginationProps = {
-	...(page.url.prev && {
-		prevUrl: {
-			text: "← Previous Page",
-			url: page.url.prev,
-		},
-	}),
-	...(page.url.next && {
-		nextUrl: {
-			text: "Next Page →",
-			url: page.url.next,
-		},
-	}),
-};
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={{ description: "status.cafe", title: "Memos" }}>
 	<div class="mb-12 flex items-center gap-3">
 		<h1 class="title">Memos</h1>
 	</div>
@@ -68,11 +67,9 @@ const paginationProps = {
 	<ul class="space-y-6" role="list">
 		{page.data.map((memo) =>
 			memo.source === "note" ? (
-				<li>
-					<Note note={memo.note} as="h2" isPreview />
-				</li>
+				<li><Note note={memo.note} as="h2" isPreview /></li>
 			) : (
-				<li class="glass-panel inline-grid w-full rounded-md px-4 py-3">
+				<li class="status-card inline-grid w-full">
 					<time class="mt-1 block text-sm text-gray-500 dark:text-gray-400" datetime={memo.publishDate.toISOString()}>
 						{memo.publishDate.toLocaleString("zh-CN")}
 					</time>
@@ -81,5 +78,8 @@ const paginationProps = {
 			),
 		)}
 	</ul>
-	<Pagination {...paginationProps} />
+	<Pagination
+		{...(page.url.prev && { prevUrl: { text: "← Previous Page", url: page.url.prev } })}
+		{...(page.url.next && { nextUrl: { text: "Next Page →", url: page.url.next } })}
+	/>
 </PageLayout>

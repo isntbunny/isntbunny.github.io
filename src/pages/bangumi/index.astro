@@ -33,10 +33,10 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 	<p class="mb-6 text-xs opacity-80">当前用户：<code>{username}</code></p>
 
 	<div class="mb-6 flex gap-2">
-		<button class="rounded border border-sky-300 bg-sky-100 px-3 py-1" data-tab="anime" type="button">
+		<button class="glass-panel card-chip" data-tab="anime" type="button">
 			动画
 		</button>
-		<button class="rounded border border-sky-300 px-3 py-1" data-tab="manga" type="button">漫画</button>
+		<button class="glass-panel card-chip" data-tab="manga" type="button">漫画</button>
 	</div>
 
 	<section data-tab-panel="anime">
@@ -50,12 +50,12 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 					const status = statusMap[entry?.type] || "未分类";
 					const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
 					return (
-						<article class="rounded-lg border border-sky-200/80 bg-sky-50/60 p-3 dark:border-sky-900 dark:bg-sky-950/40">
+						<article class="status-card">
 							<a href={url} target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
 								{image ? (
 									<img src={image} alt={title} class="h-24 w-[70px] rounded object-cover" loading="lazy" />
 								) : (
-									<div class="h-24 w-[70px] rounded bg-sky-100 dark:bg-sky-900"></div>
+									<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>
 								)}
 								<div>
 									<h3 class="font-semibold">{title}</h3>
@@ -83,12 +83,12 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 					const status = statusMap[entry?.type] || "未分类";
 					const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
 					return (
-						<article class="rounded-lg border border-sky-200/80 bg-sky-50/60 p-3 dark:border-sky-900 dark:bg-sky-950/40">
+						<article class="status-card">
 							<a href={url} target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
 								{image ? (
 									<img src={image} alt={title} class="h-24 w-[70px] rounded object-cover" loading="lazy" />
 								) : (
-									<div class="h-24 w-[70px] rounded bg-sky-100 dark:bg-sky-900"></div>
+									<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>
 								)}
 								<div>
 									<h3 class="font-semibold">{title}</h3>
@@ -114,8 +114,7 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 		const activateTab = (tab) => {
 			tabButtons.forEach((btn) => {
 				const isActive = btn.getAttribute("data-tab") === tab;
-				btn.classList.toggle("bg-sky-100", isActive);
-				btn.classList.toggle("dark:bg-sky-900/40", isActive);
+				btn.classList.toggle("font-semibold", isActive);
 			});
 			tabPanels.forEach((panel) => {
 				panel.classList.toggle("hidden", panel.getAttribute("data-tab-panel") !== tab);
@@ -151,7 +150,7 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 						const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
 						const status = ({1:"想看",2:"看过",3:"在看",4:"搁置",5:"抛弃"})[entry?.type] || "未分类";
 						const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
-						return `<article class="rounded-lg border border-sky-200/80 bg-sky-50/60 p-3 dark:border-sky-900 dark:bg-sky-950/40"><a href="${url}" target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">${image ? `<img src="${image}" alt="${title}" class="h-24 w-[70px] rounded object-cover" loading="lazy" />` : `<div class="h-24 w-[70px] rounded bg-sky-100 dark:bg-sky-900"></div>`}<div><h3 class="font-semibold">${title}</h3><p class="mt-2 text-xs opacity-80">状态：${status}</p><p class="text-xs opacity-80">${score}</p></div></a></article>`;
+						return `<article class="status-card"><a href="${url}" target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">${image ? `<img src="${image}" alt="${title}" class="h-24 w-[70px] rounded object-cover" loading="lazy" />` : `<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>`}<div><h3 class="font-semibold">${title}</h3><p class="mt-2 text-xs opacity-80">状态：${status}</p><p class="text-xs opacity-80">${score}</p></div></a></article>`;
 					})
 					.join("");
 			};
