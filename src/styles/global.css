@@ -1,9 +1,7 @@
 /* would like to ignore ./src/pages/og-image/[slug].png.ts */
 @import "tailwindcss";
-/* config for tailwindcss-typography plugin */
 @config "../../tailwind.config.ts";
 
-/* use a selector-based strategy for dark mode */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
@@ -18,6 +16,12 @@
 }
 
 @layer base {
+	@font-face {
+		font-family: "HomePixel";
+		src: url("/assets/fonts/HomePixel.woff2") format("woff2"), url("/assets/fonts/HomePixel.ttf") format("truetype");
+		font-display: swap;
+	}
+
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
@@ -92,6 +96,68 @@
 	.card-chip {
 		@apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
 	}
+
+	.win-card {
+		border: 2px solid #111;
+		background: #c9c9c9;
+		box-shadow: 4px 4px 0 #1f1f1f;
+	}
+
+	.win-title-bar {
+		background: linear-gradient(90deg, #000080, #1084d0);
+		color: #fff;
+		font-size: 0.75rem;
+		letter-spacing: 0.06em;
+		padding: 0.35rem 0.55rem;
+		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
+	}
+
+	.win-body {
+		padding: 0.8rem;
+		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
+	}
+
+	.home-welcome-jump {
+		animation: jump 0.7s infinite alternate ease-in-out;
+	}
+
+	.guestbook-card .win-body {
+		background: repeating-linear-gradient(180deg, #fff, #fff 24px, #dde7f8 24px, #dde7f8 25px);
+	}
+
+	.home-win-grid .title {
+		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
+	}
+}
+
+@keyframes jump {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-4px);
+	}
+}
+
+#global-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 300;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.82);
+	padding: 1rem;
+}
+
+#global-lightbox[data-open="true"] {
+	display: flex;
+}
+
+#global-lightbox img {
+	max-height: 92vh;
+	max-width: 92vw;
+	object-fit: contain;
 }
 
 @utility prose {

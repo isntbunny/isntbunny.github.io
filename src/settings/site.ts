@@ -1,10 +1,10 @@
 export const homeConfig = {
-	typingText: "幸せのカウントダウン",
-	welcomeText: "欢迎来自远方的朋友~",
+	typingText: "HAPPINESS COUNTDOWN",
+	welcomeText: "WELCOME FRIEND FROM FAR AWAY :P",
 	countdownTargets: [
-		{ key: "monthEnd", label: "距离月末还有", suffix: "天" },
-		{ key: "nextYear", label: "距离下一年还有", suffix: "天" },
-		{ key: "gaokao2027", label: "距离2027年高考还有", suffix: "天" },
+		{ key: "monthEnd", label: "Days until month end:", suffix: " days" },
+		{ key: "nextYear", label: "Days until next year:", suffix: " days" },
+		{ key: "gaokao2027", label: "Days until Gaokao 2027:", suffix: " days" },
 	],
 	galleryCardImage: "https://i.postimg.cc/43GZ382v/e2511.png",
 	profileCoverImage: "https://i.postimg.cc/4dLTBX4R/e250416.jpg",
