@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
+import { siteSettings } from "@/config/site-settings";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -22,9 +23,9 @@ const isHome = Astro.url.pathname === "/";
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-fixed bg-center px-4 pt-8 font-mono text-base font-normal antialiased sm:px-8 sm:pt-16"
+		class={`bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 ${siteSettings.font.bodyClass} text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-16`}
 		class:list={[isHome && "home-page-bg"]}
-		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${isHome ? "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80" : siteConfig.backgroundImage});`}
+		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${isHome ? siteSettings.backgrounds.home : siteConfig.backgroundImage});`}
 		data-theme-bg
 	>
 		<ThemeProvider />
