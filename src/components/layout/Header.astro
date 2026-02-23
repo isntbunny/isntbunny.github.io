@@ -5,31 +5,13 @@ import { menuLinks } from "@/site.config";
 import { siteConfig } from "../../site.config";
 ---
 
-<header class="group relative mb-10 flex items-center sm:mb-20 sm:ps-18" id="main-header">
-	<div class="flex sm:flex-col">
+<header class="group relative mb-10 flex items-center justify-between sm:mb-20" id="main-header">
+	<div class="flex items-center">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="inline-flex items-center sm:relative sm:inline-block sm:grayscale sm:hover:filter-none"
+			class="inline-flex items-center"
 			href="/"
 		>
-			<svg
-				aria-hidden="true"
-				class="me-3 h-10 w-6 sm:absolute sm:-start-18 sm:me-0 sm:h-20 sm:w-12"
-				fill="none"
-				focusable="false"
-				viewBox="0 0 272 480"
-				xmlns="http://www.w3.org/2000/svg"
-				><title>Astro Cactus Logo</title><path
-					fill="#cdffb8"
-					d="M181.334 93.333v-40L226.667 80v40zM136.001 53.333 90.667 26.667v426.666L136.001 480zM45.333 220 0 193.334v140L45.333 360z"
-				></path><path
-					fill="#d482ab"
-					d="M90.667 26.667 136.001 0l45.333 26.667-45.333 26.666zM181.334 53.33l45.333-26.72L272 53.33 226.667 80zM136 240l-45.333-26.67v53.34zM0 193.33l45.333-26.72 45.334 26.72L45.333 220zM181.334 93.277 226.667 120l-45.333 26.67z"
-				></path><path
-					fill="#2abc89"
-					d="m136 53.333 45.333-26.666v120L226.667 120V80L272 53.333V160l-90.667 53.333v240L136 480V306.667L45.334 360V220l45.333-26.667v73.334L136 240z"
-				></path></svg
-			>
 			<span class="text-xl font-bold sm:text-2xl">{siteConfig.title}</span>
 		</a>
 		<nav
@@ -78,44 +60,46 @@ import { siteConfig } from "../../site.config";
 			}
 		</nav>
 	</div>
-	<Search />
-	<ThemeToggle />
-	<mobile-button>
-		<button
-			aria-expanded="false"
-			aria-haspopup="menu"
-			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
-			id="toggle-navigation-menu"
-			type="button"
-		>
-			<span class="sr-only">Open main menu</span>
-			<svg
-				aria-hidden="true"
-				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
-				fill="none"
-				focusable="false"
-				id="line-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
+	<div class="flex items-center">
+		<Search />
+		<ThemeToggle />
+		<mobile-button>
+			<button
+				aria-expanded="false"
+				aria-haspopup="menu"
+				class="group relative ms-3 h-7 w-7 sm:invisible sm:hidden"
+				id="toggle-navigation-menu"
+				type="button"
+			>
+				<span class="sr-only">Open main menu</span>
+				<svg
+					aria-hidden="true"
+					class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+					fill="none"
+					focusable="false"
+					id="line-svg"
+					stroke="currentColor"
+					stroke-width="1.5"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
 				><path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
 				></path></svg
-			>
-			<svg
-				aria-hidden="true"
-				class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
-				fill="none"
-				focusable="false"
-				id="cross-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
+				>
+				<svg
+					aria-hidden="true"
+					class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+					fill="none"
+					focusable="false"
+					id="cross-svg"
+					stroke="currentColor"
+					stroke-width="1.5"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
 				><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg
-			>
-		</button>
-	</mobile-button>
+				>
+			</button>
+		</mobile-button>
+	</div>
 </header>
 
 <script>
@@ -157,21 +141,18 @@ import { siteConfig } from "../../site.config";
 				const target = document.querySelector<HTMLElement>(`[data-submenu='${idx}']`);
 				const open = target && !target.classList.contains("hidden");
 				closeAll();
-				if (!open && target) {
+				if (target && !open) {
 					target.classList.remove("hidden");
 					btn.setAttribute("aria-expanded", "true");
 				}
 			});
 		});
 
-		if (!(window as any).__submenuDocBound) {
-			(window as any).__submenuDocBound = true;
-			document.addEventListener("click", (e) => {
-				if (!(e.target instanceof Element)) return;
-				if (e.target.closest("[data-submenu]") || e.target.closest("[data-submenu-toggle]")) return;
-				closeAll();
-			});
-		}
+		document.addEventListener("click", (e) => {
+			const target = e.target as Node;
+			const inside = (target as Element)?.closest?.("[data-submenu], [data-submenu-toggle]");
+			if (!inside) closeAll();
+		});
 	};
 
 	document.addEventListener("astro:page-load", initSubmenus);

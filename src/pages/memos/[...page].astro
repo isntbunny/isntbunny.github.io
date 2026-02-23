@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import { Icon } from "astro-icon/components";
+import Note from "@/components/note/Note.astro";
+import Pagination from "@/components/Paginator.astro";
+import { getAllNotes } from "@/data/note";
+import PageLayout from "@/layouts/Base.astro";
+import { getStatusCafeItems, type StatusCafeItem } from "@/utils/statusCafe";
+
+type MemoItem =
+	| { source: "note"; id: string; publishDate: Date; note: CollectionEntry<"note"> }
+	| StatusCafeItem;
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const MAX_MEMOS_PER_PAGE = 10;
+	const notes = await getAllNotes();
+	const statusItems = await getStatusCafeItems();
+	const noteItems: MemoItem[] = notes.map((note) => ({
+		source: "note",
+		id: note.id,
+		publishDate: note.data.publishDate,
+		note,
+	}));
+	const merged = [...noteItems, ...statusItems].sort(
+		(a, b) => b.publishDate.valueOf() - a.publishDate.valueOf(),
+	);
+	return paginate(merged, {
+		pageSize: MAX_MEMOS_PER_PAGE,
+	});
+}) satisfies GetStaticPaths;
+
+interface Props {
+	page: Page<MemoItem>;
+}
+
+const { page } = Astro.props;
+
+const meta = {
+	description: "状态 + 短博客",
+	title: "Memos",
+};
+
+const paginationProps = {
+	...(page.url.prev && {
+		prevUrl: {
+			text: "← Previous Page",
+			url: page.url.prev,
+		},
+	}),
+	...(page.url.next && {
+		nextUrl: {
+			text: "Next Page →",
+			url: page.url.next,
+		},
+	}),
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="mb-12 flex items-center gap-3">
+		<h1 class="title">Memos</h1>
+		<a class="text-accent" href="/memos/rss.xml" target="_blank">
+			<span class="sr-only">Memos RSS feed</span>
+			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
+		</a>
+	</div>
+	<ul class="space-y-6" role="list">
+		{page.data.map((memo) =>
+			memo.source === "note" ? (
+				<li>
+					<Note note={memo.note} as="h2" isPreview />
+				</li>
+			) : (
+				<li class="bg-global-text/5 inline-grid w-full rounded-md px-4 py-3">
+					<p class="text-xs font-semibold uppercase tracking-wider text-sky-500">status.cafe</p>
+					<time class="mt-1 text-sm text-gray-500 dark:text-gray-400" datetime={memo.publishDate.toISOString()}>
+						{memo.publishDate.toLocaleString("zh-CN")}
+					</time>
+					<p class="mt-3 whitespace-pre-wrap">{memo.text}</p>
+				</li>
+			),
+		)}
+	</ul>
+	<Pagination {...paginationProps} />
+</PageLayout>
