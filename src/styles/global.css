@@ -38,6 +38,20 @@
 		}
 	}
 
+	body {
+		background-color: var(--color-global-bg);
+	}
+
+	:where(.border, [class^="border-"], [class*=" border-"]) {
+		border-style: none;
+	}
+
+	@media (max-width: 640px) {
+		body {
+			background-attachment: scroll;
+		}
+	}
+
 	:target {
 		scroll-margin-block: 5ex;
 	}
