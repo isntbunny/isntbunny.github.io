@@ -1,26 +1,45 @@
 ---
-import { siteConfig } from "@/site.config";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
 
-const year = new Date().getFullYear();
+const startDateISO = "2025-07-30T00:00:00+08:00";
+
+const countContentCharacters = (dir: string): number => {
+	let total = 0;
+	for (const entry of readdirSync(dir)) {
+		const target = join(dir, entry);
+		const stat = statSync(target);
+		if (stat.isDirectory()) {
+			total += countContentCharacters(target);
+			continue;
+		}
+		if (!/\.(md|mdx)$/i.test(entry)) continue;
+		const text = readFileSync(target, "utf-8");
+		total += text.replace(/\s+/g, "").length;
+	}
+	return total;
+};
+
+const contentChars = countContentCharacters("src/content");
 ---
 
 <footer
 	class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top font-semibold text-gray-600 sm:flex-row sm:justify-between sm:text-xs dark:text-gray-400"
 >
-	<div class="me-0 sm:me-4">
-		&copy; {siteConfig.author}
-		{year}.<span class="inline-block">&nbsp;💊&nbsp;{siteConfig.title}</span>
-	</div>
-	<div id="site-runtime">此网站运行了计算中...</div>
+	<div class="me-0 sm:me-4">&copy; Eucaly 2026.</div>
+	<div id="site-runtime" data-start-date={startDateISO} data-total-words={contentChars}>此网站运行了计算中...</div>
 </footer>
 
 <script is:inline>
-	const startDate = new Date("2025-07-30T00:00:00+08:00");
-	const now = new Date();
-	const days = Math.max(
-		1,
-		Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1,
-	);
 	const runtimeEl = document.getElementById("site-runtime");
-	if (runtimeEl) runtimeEl.textContent = `此网站运行了 ${days} 天`;
+	if (runtimeEl) {
+		const startDate = new Date(runtimeEl.dataset.startDate || "2025-07-30T00:00:00+08:00");
+		const totalWords = Number(runtimeEl.dataset.totalWords || "0");
+		const now = new Date();
+		const days = Math.max(
+			1,
+			Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1,
+		);
+		runtimeEl.textContent = `此网站运行了 ${days} 天，共嘟嘟了 ${totalWords} 字`;
+	}
 </script>

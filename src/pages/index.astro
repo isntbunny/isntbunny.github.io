@@ -1,6 +1,7 @@
 ---
 import { execSync } from "node:child_process";
 import Search from "@/components/Search.astro";
+import { homeConfig } from "@/config/home";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { menuLinks } from "@/site.config";
@@ -16,11 +17,12 @@ const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
 const daysLeft = (targetDate: Date) =>
 	Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
 
-const countdownItems = [
-	{ label: "距离月末还有", days: daysLeft(monthEnd), suffix: "天" },
-	{ label: "距离下一年还有", days: daysLeft(nextYear), suffix: "天" },
-	{ label: "距离2027年高考还有", days: daysLeft(gaokao2027), suffix: "天" },
-];
+const countdownTargetMap = { monthEnd, nextYear, gaokao2027 } as const;
+
+const countdownItems = homeConfig.countdownTargets.map((item) => ({
+	...item,
+	days: daysLeft(countdownTargetMap[item.key]),
+}));
 
 const homepageTags = [...new Set(allPostsByDate.flatMap((p) => p.data.tags))].slice(0, 20);
 
@@ -43,12 +45,12 @@ const daysSinceLastCommit = (() => {
 <PageLayout meta={{ title: "Home" }}>
 	<section class="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
 		<div class="space-y-6">
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+			<section class="glass-panel rounded-md p-5">
 				<h1 class="title mb-3" id="home-typing"></h1>
 				<p id="home-location">欢迎来自远方的朋友~</p>
 			</section>
 
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+			<section class="glass-panel rounded-md p-5">
 				<h2 class="title mb-4 text-xl">倒计时</h2>
 				<ul class="space-y-3">
 					{countdownItems.map((item) => (
@@ -64,48 +66,48 @@ const daysSinceLastCommit = (() => {
 			</section>
 
 			<a
-				class="block overflow-hidden rounded-md border border-zinc-200 bg-global-bg/80 p-1 transition hover:border-sky-400 dark:border-zinc-800"
+				class="glass-panel block overflow-hidden rounded-md p-1 transition hover:bg-white/80 dark:hover:bg-slate-900/80"
 				href="/gallery/"
 			>
 				<div
 					class="h-30 rounded-md bg-cover bg-center"
-					style="background-image:url('https://i.postimg.cc/43GZ382v/e2511.png')"
+					style={`background-image:url('${homeConfig.galleryCardImage}')`}
 				></div>
 				<p class="py-2 text-center font-semibold text-sky-500">Gallery</p>
 			</a>
 
 
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+			<section class="glass-panel rounded-md p-5">
 				<h2 class="title mb-4 text-xl">取色器</h2>
 				<div class="flex flex-col gap-3">
-					<input class="h-36 w-full cursor-pointer rounded-md" id="home-color-picker" type="color" value="#22c55e" />
+					<input class="h-36 w-full cursor-pointer rounded-md" id="home-color-picker" type="color" value={homeConfig.defaultColor} />
 					<input
-						class="rounded-md border border-zinc-300 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+						class="rounded-md bg-white/75 px-3 py-2 dark:bg-slate-900/70"
 						id="home-color-hex"
 						type="text"
-						value="#22c55e"
+						value={homeConfig.defaultColor}
 					/>
 				</div>
 			</section>
 		</div>
 
 		<div class="space-y-6">
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-4 dark:border-zinc-800">
+			<section class="glass-panel rounded-md p-4">
 				<img
 					alt="homepage cover"
 					class="mb-3 h-44 w-full rounded-md object-cover"
-					src="https://i.postimg.cc/4dLTBX4R/e250416.jpg"
+					src={homeConfig.profileCoverImage}
 				/>
 				<p class="text-sm text-zinc-600 dark:text-zinc-400">上次更新距今 {daysSinceLastCommit} days ago</p>
 			</section>
 
-			<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+			<section class="glass-panel rounded-md p-5">
 				<h2 class="title mb-4 text-center text-xl">导航</h2>
 				<div class="hidden"><Search /></div>
 				<nav aria-label="Home quick links" class="flex flex-col gap-2 text-center">
 					{rightNavLinks.map((link) => (
 						<a
-							class="rounded-md border border-zinc-200 px-3 py-2 hover:border-sky-300 hover:bg-sky-50/60 dark:border-zinc-700 dark:hover:border-sky-800 dark:hover:bg-sky-900/30"
+							class="glass-panel rounded-md px-3 py-2 hover:bg-sky-100/70 dark:hover:bg-sky-900/30"
 							href={link.path}
 							target={link.external ? "_blank" : undefined}
 							rel={link.external ? "noreferrer" : undefined}
@@ -118,7 +120,7 @@ const daysSinceLastCommit = (() => {
 
 			{
 				homepageTags.length > 0 && (
-					<section class="rounded-md border border-zinc-200 bg-global-bg/80 p-5 dark:border-zinc-800">
+					<section class="glass-panel rounded-md p-5">
 						<h2 class="title mb-4 text-xl">Tags</h2>
 						<div class="flex flex-wrap gap-2">
 							{homepageTags.map((tag) => (
@@ -134,21 +136,21 @@ const daysSinceLastCommit = (() => {
 	</section>
 </PageLayout>
 
-<script is:inline>
+<script define:vars={{ typingText: homeConfig.typingText, welcomeText: homeConfig.welcomeText }} is:inline>
 	const initHomeHero = () => {
 		const typingTarget = document.getElementById("home-typing");
-		const typingText = "幸せのカウントダウン";
+		const typingValue = typingText;
 		let idx = 0;
 		let deleting = false;
 		if (window.__homeTypingTimer) clearInterval(window.__homeTypingTimer);
 		window.__homeTypingTimer = setInterval(() => {
 			if (!typingTarget) return;
-			typingTarget.textContent = typingText.slice(0, idx);
+			typingTarget.textContent = typingValue.slice(0, idx);
 			if (!deleting) {
 				idx += 1;
-				if (idx > typingText.length) {
+				if (idx > typingValue.length) {
 					deleting = true;
-					idx = typingText.length;
+					idx = typingValue.length;
 				}
 			} else {
 				idx -= 1;
@@ -160,6 +162,7 @@ const daysSinceLastCommit = (() => {
 		}, 120);
 
 		const locationTarget = document.getElementById("home-location");
+		if (locationTarget) locationTarget.textContent = welcomeText;
 		fetch("https://ipapi.co/json/")
 			.then((res) => res.json())
 			.then((data) => {
@@ -170,7 +173,7 @@ const daysSinceLastCommit = (() => {
 				if (locationTarget) locationTarget.textContent = `欢迎来自${locationName}的朋友~`;
 			})
 			.catch(() => {
-				if (locationTarget) locationTarget.textContent = "欢迎来自远方的朋友~";
+				if (locationTarget) locationTarget.textContent = welcomeText;
 			});
 
 		const player = document.getElementById("home-audio");

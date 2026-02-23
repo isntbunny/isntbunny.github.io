@@ -7,13 +7,13 @@
 #cactus__search {
 	--pagefind-ui-primary: var(--color-accent);
 	--pagefind-ui-text: var(--color-global-text);
-	--pagefind-ui-background: var(--color-zinc-100);
-	--pagefind-ui-border: var(--color-zinc-300);
-	--pagefind-ui-border-width: 1px;
+	--pagefind-ui-background: var(--color-surface);
+	--pagefind-ui-border: transparent;
+	--pagefind-ui-border-width: 0px;
 
 	[data-theme="dark"] & {
-		--pagefind-ui-background: var(--color-zinc-800);
-		--pagefind-ui-border: var(--color-zinc-500);
+		--pagefind-ui-background: var(--color-surface);
+		--pagefind-ui-border: transparent;
 	}
 }
 
@@ -72,4 +72,12 @@
 	color: var(--color-quote);
 	background-color: transparent;
 	font-weight: 600;
+}
+
+#cactus__search .pagefind-ui__drawer,
+#cactus__search .pagefind-ui__search-input,
+#cactus__search .pagefind-ui__result {
+	border: 0;
+	background: color-mix(in oklab, var(--color-surface) 90%, transparent);
+	border-radius: 0.75rem;
 }

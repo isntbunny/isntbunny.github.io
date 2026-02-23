@@ -1,5 +1,9 @@
+---
+import { themeCssVars } from "@/config/theme";
+---
+
 {/* Inlined to avoid FOUC. This is a parser blocking script. */}
-<script is:inline>
+<script define:vars={{ darkVars: themeCssVars.dark, lightVars: themeCssVars.light }} is:inline>
 	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
 
 	function getStoredTheme() {
@@ -9,6 +13,10 @@
 	function getUserPref() {
 		const storedTheme = getStoredTheme();
 		return storedTheme || (lightModePref.matches ? "light" : "dark");
+	}
+
+	function applyThemeVars(root, theme) {
+		root.style.cssText += theme === "dark" ? darkVars : lightVars;
 	}
 
 	function setTheme(newTheme, persist = true) {
@@ -22,6 +30,7 @@
 		if (newTheme === root.getAttribute("data-theme")) return;
 
 		root.setAttribute("data-theme", newTheme);
+		applyThemeVars(root, newTheme);
 
 		if (persist && typeof localStorage !== "undefined") {
 			localStorage.setItem("theme", newTheme);

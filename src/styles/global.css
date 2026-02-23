@@ -7,13 +7,14 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-	--color-global-bg: oklch(97.5% 0.02 235);
-	--color-global-text: oklch(30% 0.04 245);
-	--color-link: oklch(52% 0.13 240);
-	--color-accent: oklch(58% 0.14 225);
-	--color-accent-2: oklch(34% 0.07 245);
-	--color-quote: oklch(50% 0.08 235);
-	--color-bg-overlay: rgba(240, 248, 255, 0.82);
+	--color-global-bg: oklch(96% 0.018 220);
+	--color-global-text: oklch(34% 0.03 232);
+	--color-link: oklch(52% 0.085 220);
+	--color-accent: oklch(60% 0.09 218);
+	--color-accent-2: oklch(38% 0.045 232);
+	--color-quote: oklch(48% 0.055 220);
+	--color-bg-overlay: rgba(236, 245, 248, 0.78);
+	--color-surface: rgba(255, 255, 255, 0.7);
 }
 
 @layer base {
@@ -28,13 +29,6 @@
 
 		&[data-theme="dark"] {
 			color-scheme: dark;
-			--color-global-bg: oklch(20% 0.03 250);
-			--color-global-text: oklch(88% 0.02 245);
-			--color-link: oklch(80% 0.12 230);
-			--color-accent: oklch(77% 0.14 225);
-			--color-accent-2: oklch(91% 0.03 240);
-			--color-quote: oklch(82% 0.07 235);
-			--color-bg-overlay: rgba(12, 22, 35, 0.72);
 		}
 	}
 
@@ -42,7 +36,7 @@
 		background-color: var(--color-global-bg);
 	}
 
-	:where(.border, [class^="border-"], [class*=" border-"]) {
+	:where(*) {
 		border-style: none;
 	}
 
@@ -83,6 +77,11 @@
 	.title {
 		@apply text-accent-2 text-2xl font-semibold;
 	}
+
+	.glass-panel {
+		background: var(--color-surface);
+		backdrop-filter: blur(6px);
+	}
 }
 
 @utility prose {
@@ -94,5 +93,5 @@
 	--tw-prose-hr: 0.5px dashed #666;
 	--tw-prose-links: var(--color-global-text);
 	--tw-prose-quotes: var(--color-quote);
-	--tw-prose-th-borders: #666;
+	--tw-prose-th-borders: transparent;
 }

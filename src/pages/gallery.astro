@@ -1,26 +1,22 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base.astro";
 
-const sourceUrl = "https://postimg.cc/gallery/tHJV36qY";
-const galleryEntry = await getEntry("page", "gallery");
-if (!galleryEntry) throw new Error("Missing src/content/page/gallery.md");
-const { Content } = await render(galleryEntry);
+const [gallery] = await getCollection("gallery");
+if (!gallery) throw new Error("Missing src/content/gallery/index.md");
 ---
 
 <PageLayout meta={{ title: "Gallery", description: "我的画廊" }}>
-	<h1 class="title mb-6">Gallery</h1>
-	<div class="prose prose-sm prose-cactus mb-6 max-w-none">
-		<Content />
+	<h1 class="title mb-6">{gallery.data.title}</h1>
+	<div class="grid gap-6 sm:grid-cols-2">
+		{gallery.data.items.map((item) => (
+			<article class="glass-panel overflow-hidden rounded-xl">
+				<img src={item.image} alt={item.title} class="h-56 w-full object-cover" loading="lazy" />
+				<div class="p-4">
+					<h2 class="text-lg font-semibold">{item.title}</h2>
+					{item.description && <p class="mt-2 text-sm opacity-80">{item.description}</p>}
+				</div>
+			</article>
+		))}
 	</div>
-	<p class="mb-6">
-		<a class="cactus-link" href={sourceUrl} target="_blank" rel="noreferrer">打开画廊（新窗口）</a>
-	</p>
-
-	<iframe
-		title="Postimg Gallery"
-		src={sourceUrl}
-		class="mb-6 h-[75vh] w-full rounded-lg border border-sky-200 dark:border-sky-900"
-		loading="lazy"
-	></iframe>
 </PageLayout>
