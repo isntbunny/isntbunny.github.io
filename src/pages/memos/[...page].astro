@@ -18,30 +18,34 @@ type MemoItem =
 	| { source: "note"; id: string; publishDate: Date; note: CollectionEntry<"note"> }
 	| StatusCafeItem;
 
+const parseStatusFeed = (xml: string): StatusCafeItem[] =>
+	[...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
+		.map((entry) => {
+			const body = entry[1] ?? "";
+			const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? "";
+			const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+			const content = body
+				.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]
+				?.replace(/&lt;/g, "<")
+				?.replace(/&gt;/g, ">")
+				?.replace(/&amp;/g, "&")
+				?.replace(/<[^>]*>/g, " ")
+				?.replace(/\s+/g, " ")
+				?.trim() ?? "";
+			const publishDate = new Date(updated);
+			if (!id || !content || Number.isNaN(publishDate.valueOf())) return null;
+			return { source: "status.cafe" as const, id, text: content, publishDate };
+		})
+		.filter((item): item is StatusCafeItem => item !== null)
+		.sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf());
+
 export const getStaticPaths = (async ({ paginate }) => {
 	const notes = await getAllNotes();
 	const statusItems: StatusCafeItem[] = await (async () => {
 		try {
-			const response = await fetch(siteSettings.statusCafe.atomUrl, {
-				headers: {
-					accept: "application/atom+xml,application/xml,text/xml;q=0.9,*/*;q=0.8",
-					"user-agent": "isntbunny-blog/1.0",
-				},
-			});
+			const response = await fetch(siteSettings.statusCafe.atomUrl);
 			if (!response.ok) return [];
-			const xml = await response.text();
-			return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
-				.map((entry) => {
-					const body = entry[1] ?? "";
-					const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? "";
-					const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
-					const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? "";
-					const publishDate = new Date(updated);
-					if (!id || !content || Number.isNaN(publishDate.valueOf())) return null;
-					return { source: "status.cafe" as const, id, text: content, publishDate };
-				})
-				.filter((item): item is StatusCafeItem => item !== null)
-				.sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf());
+			return parseStatusFeed(await response.text());
 		} catch {
 			return [];
 		}
@@ -55,8 +59,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 	return paginate([...noteItems, ...statusItems].sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf()), { pageSize: 10 });
 }) satisfies GetStaticPaths;
 
-interface Props { page: Page<MemoItem>; }
-const { page } = Astro.props;
+const { page } = Astro.props as { page: Page<MemoItem> };
 ---
 
 <PageLayout meta={{ description: "status.cafe", title: "Memos" }}>
@@ -64,12 +67,13 @@ const { page } = Astro.props;
 		<h1 class="title">Memos</h1>
 	</div>
 
+	<div class="mb-6 hidden" id="statuscafe-latest"></div>
 	<ul class="space-y-6" role="list">
 		{page.data.map((memo) =>
 			memo.source === "note" ? (
 				<li><Note note={memo.note} as="h2" isPreview /></li>
 			) : (
-				<li class="status-card inline-grid w-full">
+				<li class="status-card inline-grid w-full" data-statuscafe-id={memo.id}>
 					<time class="mt-1 block text-sm text-gray-500 dark:text-gray-400" datetime={memo.publishDate.toISOString()}>
 						{memo.publishDate.toLocaleString("zh-CN")}
 					</time>
@@ -83,3 +87,31 @@ const { page } = Astro.props;
 		{...(page.url.next && { nextUrl: { text: "Next Page →", url: page.url.next } })}
 	/>
 </PageLayout>
+
+<script define:vars={{ statusCafeAtomUrl: siteSettings.statusCafe.atomUrl }} is:inline>
+	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => {
+		const body = entry[1] ?? "";
+		const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? "";
+		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+		const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? "";
+		if (!id || !content || Number.isNaN(new Date(updated).valueOf())) return null;
+		return { id, content, updated };
+	}).filter(Boolean);
+
+	const syncLatestStatusCafe = async () => {
+		const container = document.getElementById("statuscafe-latest");
+		if (!container) return;
+		try {
+			const res = await fetch(`${statusCafeAtomUrl}?t=${Date.now()}`, { cache: "no-store" });
+			if (!res.ok) return;
+			const latest = parseStatusFeed(await res.text())[0];
+			if (!latest) return;
+			container.innerHTML = `<article class="status-card inline-grid w-full"><time class="mt-1 block text-sm text-gray-500 dark:text-gray-400">${new Date(latest.updated).toLocaleString("zh-CN")}</time><p class="mt-3 whitespace-pre-wrap">${latest.content}</p></article>`;
+			container.classList.remove("hidden");
+		} catch {
+			// ignore network errors
+		}
+	};
+	document.addEventListener("astro:page-load", syncLatestStatusCafe);
+	syncLatestStatusCafe();
+</script>

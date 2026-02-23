@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base.astro";
+
+const [gallery] = await getCollection("gallery");
+if (!gallery) throw new Error("Missing src/content/gallery/index.md");
+---
+
+<PageLayout meta={{ title: "Gallery", description: gallery.data.description ?? "Art gallery" }}>
+	<h1 class="title mb-2">{gallery.data.title}</h1>
+	{gallery.data.description && <p class="mb-6 text-sm opacity-80">{gallery.data.description}</p>}
+	<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		{gallery.data.sections.map((section) => (
+			<a class="glass-panel block overflow-hidden rounded-xl" href={`/gallery/${section.slug}/`}>
+				<img src={section.cover} alt={section.title} class="h-44 w-full object-cover" loading="lazy" />
+				<div class="p-4">
+					<h2 class="text-lg font-semibold">{section.title}</h2>
+					{section.description && <p class="mt-2 text-sm opacity-80">{section.description}</p>}
+				</div>
+			</a>
+		))}
+	</div>
+</PageLayout>

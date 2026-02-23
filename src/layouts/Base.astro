@@ -16,9 +16,7 @@ const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 const isHome = Astro.url.pathname === "/";
-const pageBackground = isHome
-	? siteSettings.backgrounds.home
-	: getPageBackground(Astro.url.pathname);
+const pageBackground = isHome ? siteSettings.backgrounds.home : getPageBackground(Astro.url.pathname);
 ---
 
 <html class="scroll-smooth" lang={siteConfig.lang}>
@@ -38,25 +36,51 @@ const pageBackground = isHome
 			<slot />
 		</main>
 		<Footer />
+		<div aria-hidden="true" id="global-lightbox">
+			<img alt="Enlarged image" id="global-lightbox-image" src="" />
+		</div>
 		<script is:inline type="speculationrules">
 			{
-				"prefetch": [
-					{
-						"where": {
-							"href_matches": "/*"
-						},
-						"eagerness": "immediate"
-					}
-				],
-				"prerender": [
-					{
-						"where": {
-							"href_matches": "/*"
-						},
-						"eagerness": "moderate"
-					}
-				]
+				"prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }],
+				"prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }]
 			}
 		</script>
 	</body>
 </html>
+
+<script is:inline>
+	const bindGlobalLightbox = () => {
+		const lightbox = document.getElementById("global-lightbox");
+		const lightboxImage = document.getElementById("global-lightbox-image");
+		if (!lightbox || !(lightboxImage instanceof HTMLImageElement)) return;
+
+		document.querySelectorAll("article img, .prose img, .gallery-image").forEach((img) => {
+			if (!(img instanceof HTMLImageElement) || !img.src) return;
+			img.style.cursor = "zoom-in";
+			if (img.dataset.lightboxBound === "1") return;
+			img.dataset.lightboxBound = "1";
+			img.addEventListener("click", () => {
+				lightboxImage.src = img.currentSrc || img.src;
+				lightboxImage.alt = img.alt || "Image";
+				lightbox.dataset.open = "true";
+				lightbox.setAttribute("aria-hidden", "false");
+			});
+		});
+
+		if (lightbox.dataset.bound !== "1") {
+			lightbox.dataset.bound = "1";
+			lightbox.addEventListener("click", () => {
+				lightbox.dataset.open = "false";
+				lightbox.setAttribute("aria-hidden", "true");
+			});
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape") {
+					lightbox.dataset.open = "false";
+					lightbox.setAttribute("aria-hidden", "true");
+				}
+			});
+		}
+	};
+	document.addEventListener("astro:page-load", bindGlobalLightbox);
+	bindGlobalLightbox();
+</script>

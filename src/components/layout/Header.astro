@@ -38,6 +38,7 @@ import { siteConfig } from "@/site.config";
 <script>
 	const initSubmenus = () => {
 		document.querySelectorAll("[data-submenu-toggle]").forEach((btn) => {
+			if (!(btn instanceof HTMLElement)) return;
 			if (btn.dataset.bound === "1") return;
 			btn.dataset.bound = "1";
 			btn.addEventListener("click", () => {

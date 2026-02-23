@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base.astro";
+
+export const getStaticPaths = (async () => {
+	const [gallery] = await getCollection("gallery");
+	if (!gallery) return [];
+	return gallery.data.sections.map((section) => ({
+		params: { section: section.slug },
+		props: { sectionData: section },
+	}));
+}) satisfies GetStaticPaths;
+
+const { sectionData } = Astro.props;
+---
+
+<PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
+	<a class="cactus-link text-sm" href="/gallery/">← Back to Gallery</a>
+	<h1 class="title mb-2 mt-3">{sectionData.title}</h1>
+	{sectionData.description && <p class="mb-6 text-sm opacity-80">{sectionData.description}</p>}
+
+	<div class="space-y-8">
+		{sectionData.months.map((group) => (
+			<section>
+				<h2 class="mb-4 text-lg font-semibold">{group.month}</h2>
+				<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+					{group.items.map((item) => (
+						<article class="glass-panel overflow-hidden rounded-xl">
+							<img src={item.image} alt={item.title} class="gallery-image h-56 w-full object-cover" loading="lazy" />
+							<div class="p-4">
+								<h3 class="font-semibold">{item.title}</h3>
+								{item.description && <p class="mt-2 text-sm opacity-80">{item.description}</p>}
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		))}
+	</div>
+</PageLayout>
