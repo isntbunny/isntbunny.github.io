@@ -65,8 +65,8 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 
 <script is:inline>
 	const initPostTabs = () => {
-		const tabButtons = document.querySelectorAll<HTMLButtonElement>("[data-tab]");
-		const rows = document.querySelectorAll<HTMLElement>("li[data-tags]");
+		const tabButtons = document.querySelectorAll("[data-tab]");
+		const rows = document.querySelectorAll("li[data-tags]");
 		if (!tabButtons.length || !rows.length) return;
 
 		const activate = (tag) => {
@@ -77,12 +77,12 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			});
 
 			rows.forEach((row) => {
-				const tags = (row.dataset.tags || "").split(" ").filter(Boolean);
-				const visible = tag === "all" || tags.includes(tag);
+				const rowTags = (row.dataset.tags || "").split(" ").filter(Boolean);
+				const visible = tag === "all" || rowTags.includes(tag);
 				row.classList.toggle("hidden", !visible);
 			});
 
-			document.querySelectorAll<HTMLElement>("section[data-year]").forEach((section) => {
+			document.querySelectorAll("section[data-year]").forEach((section) => {
 				const hasVisible = !!section.querySelector("li[data-tags]:not(.hidden)");
 				section.classList.toggle("hidden", !hasVisible);
 			});
@@ -93,6 +93,8 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			btn.dataset.bound = "1";
 			btn.addEventListener("click", () => activate(btn.dataset.tab || "all"));
 		});
+
+		activate("all");
 	};
 	document.addEventListener("astro:page-load", initPostTabs);
 	initPostTabs();

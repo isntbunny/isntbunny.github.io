@@ -15,6 +15,6 @@ export const siteSettings = {
 	},
 	statusCafe: {
 		username: "isntbunny",
-		scriptSrc: "https://status.cafe/current-status.js",
+		atomUrl: "https://status.cafe/users/isntbunny.atom",
 	},
 } as const;
