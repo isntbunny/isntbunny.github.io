@@ -40,7 +40,7 @@ interface Props {
 const { page } = Astro.props;
 
 const meta = {
-	description: "status.cafe + 短博客",
+	description: "status.cafe",
 	title: "Memos",
 };
 
@@ -63,10 +63,6 @@ const paginationProps = {
 <PageLayout meta={meta}>
 	<div class="mb-12 flex items-center gap-3">
 		<h1 class="title">Memos</h1>
-		<a class="text-accent" href="/memos/rss.xml" target="_blank">
-			<span class="sr-only">Memos RSS feed</span>
-			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
-		</a>
 	</div>
 
 	<ul class="space-y-6" role="list">

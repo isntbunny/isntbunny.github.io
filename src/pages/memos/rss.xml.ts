@@ -7,7 +7,7 @@ export const GET = async () => {
 
 	return rss({
 		title: `${siteConfig.title} - Memos`,
-		description: "状态与短博客 RSS",
+		description: "状态",
 		site: import.meta.env.SITE,
 		items: notes.map((note) => ({
 			title: note.data.title,
