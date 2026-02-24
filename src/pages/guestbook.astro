@@ -1,10 +1,9 @@
 ---
 import { getEntry, render } from "astro:content";
-import { siteSettings } from "@/settings/site";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "欢迎留言～",
+	description: "欢迎留言",
 	title: "Guestbook",
 };
 
@@ -18,18 +17,19 @@ const { Content } = await render(guestbookEntry);
 	<div class="prose prose-sm prose-cactus mb-6 max-w-none">
 		<Content />
 	</div>
-	<div id="twikoo"></div>
+	<div id="twikoo">
+
+	</div>
 </PageLayout>
 
-<script define:vars={{ twikooEnvId: siteSettings.comments.twikoo.envId, twikooScriptSrc: siteSettings.comments.twikoo.scriptSrc }}>
+<script>
 	if (typeof window !== "undefined") {
 		const script = document.createElement("script");
-		script.src = twikooScriptSrc;
+		script.src = "https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js";
 		script.defer = true;
 		script.onload = () => {
-			// @ts-expect-error twikoo is injected by script
 			twikoo.init({
-				envId: twikooEnvId,
+				envId: "https://eucaly.netlify.app/.netlify/functions/twikoo",
 				el: "#twikoo",
 				path: window.location.pathname,
 			});

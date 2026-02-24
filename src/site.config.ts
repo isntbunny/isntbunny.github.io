@@ -35,8 +35,6 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 	title: "幸せのカウントダウン",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://isntbunny.github.io/",
-	// 页面背景图
-	backgroundImage: "https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
 	bangumiUsername: "isntbunny",
 };

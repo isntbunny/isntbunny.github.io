@@ -12,12 +12,6 @@ export const homeConfig = {
 } as const;
 
 export const siteSettings = {
-	comments: {
-		twikoo: {
-			envId: "https://eucaly.netlify.app/.netlify/functions/twikoo",
-			scriptSrc: "https://cdn.staticfile.net/twikoo/1.6.41/twikoo.all.min.js",
-		},
-	},
 	statusCafe: {
 		atomUrl: "https://status.cafe/users/isntbunny.atom",
 	},
