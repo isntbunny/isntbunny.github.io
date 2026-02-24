@@ -109,12 +109,10 @@
 		font-size: 0.75rem;
 		letter-spacing: 0.06em;
 		padding: 0.35rem 0.55rem;
-		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
 	}
 
 	.win-body {
 		padding: 0.8rem;
-		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
 	}
 
 	.home-welcome-jump {
@@ -123,10 +121,6 @@
 
 	.guestbook-card .win-body {
 		background: repeating-linear-gradient(180deg, #fff, #fff 24px, #dde7f8 24px, #dde7f8 25px);
-	}
-
-	.home-win-grid .title {
-		font-family: "HomePixel", "MS Gothic", "Courier New", monospace;
 	}
 }
 
