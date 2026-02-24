@@ -65,11 +65,11 @@ Updated:
 <aside aria-label="My custom title" class="admonition" data-admonition-type="note"><p class="admonition-title" aria-hidden="true">My custom title</p><div class="admonition-content"><p>This is a note with a custom title.</p></div></aside>
 <h2 id="github-repository-cards"><a class="not-prose" href="#github-repository-cards">GitHub Repository Cards</a></h2>
 <p>You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.</p>
-<div id="GC-67a85946-bca2-4512-9e6f-4cb4b9694311" class="github-card gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/chrismwilliams/astro-theme-cactus" rel="noreferrer noopener" target="_blank">chrismwilliams/astro-theme-cactus</a><span class="gh-icon"></span></div><div class="gh-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div><div class="gh-chips"><span class="gh-stars">00K</span><span class="gh-forks">00K</span><span class="gh-license">MIT</span><span class="gh-language"></span></div><script>
+<div id="GC-ea48911e-2b01-4c4c-818b-8de4ece81c6b" class="github-card gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/chrismwilliams/astro-theme-cactus" rel="noreferrer noopener" target="_blank">chrismwilliams/astro-theme-cactus</a><span class="gh-icon"></span></div><div class="gh-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div><div class="gh-chips"><span class="gh-stars">00K</span><span class="gh-forks">00K</span><span class="gh-license">MIT</span><span class="gh-language"></span></div><script>
 fetch('https://api.github.com/repos/chrismwilliams/astro-theme-cactus', { referrerPolicy: "no-referrer" })
 .then(response => response.json())
 .then(data => {
-const t = document.getElementById('GC-67a85946-bca2-4512-9e6f-4cb4b9694311');
+const t = document.getElementById('GC-ea48911e-2b01-4c4c-818b-8de4ece81c6b');
 t.classList.remove("gh-loading");
 
 if (data.description) {
@@ -90,16 +90,16 @@ t.querySelector('.gh-license').style.display = 'none';
 };
 })
 .catch(err => {
-document.getElementById('GC-67a85946-bca2-4512-9e6f-4cb4b9694311').classList.add("gh-error")
-console.warn("[GITHUB-CARD] Error loading card for chrismwilliams/astro-theme-cactus | GC-67a85946-bca2-4512-9e6f-4cb4b9694311.", err)
+document.getElementById('GC-ea48911e-2b01-4c4c-818b-8de4ece81c6b').classList.add("gh-error")
+console.warn("[GITHUB-CARD] Error loading card for chrismwilliams/astro-theme-cactus | GC-ea48911e-2b01-4c4c-818b-8de4ece81c6b.", err)
 })
 </script></div>
 <p>You can also link a Github user:</p>
-<div id="GC-97409479-0d8e-4d05-87ba-ac1ea4e37bad" class="github-card gh-simple gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/withastro" rel="noreferrer noopener" target="_blank">withastro</a><span class="gh-icon"></span></div><div class="gh-chips"><span class="gh-followers">00K</span><span class="gh-repositories">00K</span><span class="gh-region"></span></div><script>
+<div id="GC-e31de516-9aae-4655-a6eb-65f0103d770b" class="github-card gh-simple gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/withastro" rel="noreferrer noopener" target="_blank">withastro</a><span class="gh-icon"></span></div><div class="gh-chips"><span class="gh-followers">00K</span><span class="gh-repositories">00K</span><span class="gh-region"></span></div><script>
 fetch('https://api.github.com/users/withastro', { referrerPolicy: "no-referrer" })
 .then(response => response.json())
 .then(data => {
-const t = document.getElementById('GC-97409479-0d8e-4d05-87ba-ac1ea4e37bad');
+const t = document.getElementById('GC-e31de516-9aae-4655-a6eb-65f0103d770b');
 t.classList.remove("gh-loading");
 
 const avatarEl = t.querySelector('.gh-avatar');
@@ -110,8 +110,8 @@ if (data.location) t.querySelector('.gh-region').innerText = data.location;
 
 })
 .catch(err => {
-const c = document.getElementById('GC-97409479-0d8e-4d05-87ba-ac1ea4e37bad').classList.add("gh-error")
-console.warn("[GITHUB-CARD] Error loading card for withastro | GC-97409479-0d8e-4d05-87ba-ac1ea4e37bad.", err)
+const c = document.getElementById('GC-e31de516-9aae-4655-a6eb-65f0103d770b').classList.add("gh-error")
+console.warn("[GITHUB-CARD] Error loading card for withastro | GC-e31de516-9aae-4655-a6eb-65f0103d770b.", err)
 })
 </script></div>
 <p>To use this feature you just use the “Github” directive:</p>
@@ -141,7 +141,7 @@ const twikooScriptSrc = "https://cdn.staticfile.net/twikoo/1.6.41/twikoo.all.min
 	};
 	document.addEventListener("astro:page-load", initTwikooComments);
 	initTwikooComments();
-})();</script> </div> </div> </article> <button class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700" data-show="false" id="to-top-btn"> <span class="sr-only">Back to top</span> <svg aria-hidden="true" class="h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button>  </main> <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top text-gray-600 sm:flex-row sm:justify-between sm:text-xs dark:text-gray-400"> <div class="me-0 sm:me-4">&copy; Eucaly 2026.</div> <div id="site-runtime" data-start-date="2025-07-30T00:00:00+08:00" data-total-words="14161">此网站运行了计算中...</div> </footer> <script>
+})();</script> </div> </div> </article> <button class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700" data-show="false" id="to-top-btn"> <span class="sr-only">Back to top</span> <svg aria-hidden="true" class="h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button>  </main> <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top text-gray-600 sm:flex-row sm:justify-between sm:text-xs dark:text-gray-400"> <div class="me-0 sm:me-4">&copy; Eucaly 2026.</div> <div id="site-runtime" data-start-date="2025-07-30T00:00:00+08:00" data-total-words="18484">此网站运行了计算中...</div> </footer> <script>
 	const runtimeEl = document.getElementById("site-runtime");
 	if (runtimeEl) {
 		const startDate = new Date(runtimeEl.dataset.startDate || "2025-07-30T00:00:00+08:00");
