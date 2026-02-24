@@ -22,21 +22,6 @@
 	}
 
 	@font-face {
-		font-family: 'ArkPixelLatin';
-		src: url('/assets/fonts/ark-pixel-12px-proportional-latin.otf') format('opentype');
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'ArkPixelZhCn';
-		src: url('/assets/fonts/ark-pixel-12px-proportional-zh_cn.otf') format('opentype');
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'ArkPixelJa';
-		src: url('/assets/fonts/ark-pixel-12px-proportional-ja.otf') format('opentype');
-		font-display: swap;
-	}
-	@font-face {
 		font-family: 'ArkPixelMonoZhCn';
 		src: url('/assets/fonts/ark-pixel-12px-monospaced-zh_cn.otf') format('opentype');
 		font-display: swap;
@@ -48,7 +33,7 @@
 	}
 
 	html, body {
-		font-family: 'ArkPixelLatin', 'ArkPixelMonoZhCn', 'ArkPixelMonoZhTw', 'ArkPixelJa', monospace, sans-serif;
+		font-family: 'ArkPixelLatin', 'ArkPixelMonoZhCn', 'ArkPixelMonoZhTw', 'ArkPixelJa', 'Microsoft YaHei', 'Arial', monospace, sans-serif;
 		line-height: 1.5;
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
