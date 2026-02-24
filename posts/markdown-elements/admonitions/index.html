@@ -65,11 +65,11 @@ Updated:
 <aside aria-label="My custom title" class="admonition" data-admonition-type="note"><p class="admonition-title" aria-hidden="true">My custom title</p><div class="admonition-content"><p>This is a note with a custom title.</p></div></aside>
 <h2 id="github-repository-cards"><a class="not-prose" href="#github-repository-cards">GitHub Repository Cards</a></h2>
 <p>You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.</p>
-<div id="GC-144dfaab-758a-45e9-85d4-59fe51bcaf00" class="github-card gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/chrismwilliams/astro-theme-cactus" rel="noreferrer noopener" target="_blank">chrismwilliams/astro-theme-cactus</a><span class="gh-icon"></span></div><div class="gh-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div><div class="gh-chips"><span class="gh-stars">00K</span><span class="gh-forks">00K</span><span class="gh-license">MIT</span><span class="gh-language"></span></div><script>
+<div id="GC-7fa72f60-12d5-48c1-8933-1d3b381096e7" class="github-card gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/chrismwilliams/astro-theme-cactus" rel="noreferrer noopener" target="_blank">chrismwilliams/astro-theme-cactus</a><span class="gh-icon"></span></div><div class="gh-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div><div class="gh-chips"><span class="gh-stars">00K</span><span class="gh-forks">00K</span><span class="gh-license">MIT</span><span class="gh-language"></span></div><script>
 fetch('https://api.github.com/repos/chrismwilliams/astro-theme-cactus', { referrerPolicy: "no-referrer" })
 .then(response => response.json())
 .then(data => {
-const t = document.getElementById('GC-144dfaab-758a-45e9-85d4-59fe51bcaf00');
+const t = document.getElementById('GC-7fa72f60-12d5-48c1-8933-1d3b381096e7');
 t.classList.remove("gh-loading");
 
 if (data.description) {
@@ -90,16 +90,16 @@ t.querySelector('.gh-license').style.display = 'none';
 };
 })
 .catch(err => {
-document.getElementById('GC-144dfaab-758a-45e9-85d4-59fe51bcaf00').classList.add("gh-error")
-console.warn("[GITHUB-CARD] Error loading card for chrismwilliams/astro-theme-cactus | GC-144dfaab-758a-45e9-85d4-59fe51bcaf00.", err)
+document.getElementById('GC-7fa72f60-12d5-48c1-8933-1d3b381096e7').classList.add("gh-error")
+console.warn("[GITHUB-CARD] Error loading card for chrismwilliams/astro-theme-cactus | GC-7fa72f60-12d5-48c1-8933-1d3b381096e7.", err)
 })
 </script></div>
 <p>You can also link a Github user:</p>
-<div id="GC-7219da8a-b327-40a8-b541-9c4f646932f2" class="github-card gh-simple gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/withastro" rel="noreferrer noopener" target="_blank">withastro</a><span class="gh-icon"></span></div><div class="gh-chips"><span class="gh-followers">00K</span><span class="gh-repositories">00K</span><span class="gh-region"></span></div><script>
+<div id="GC-788d7b19-c076-43d3-8ac2-e3be02dca745" class="github-card gh-simple gh-loading"><div class="gh-title title"><span class="gh-avatar"></span><a class="gh-text not-prose cactus-link" href="https://github.com/withastro" rel="noreferrer noopener" target="_blank">withastro</a><span class="gh-icon"></span></div><div class="gh-chips"><span class="gh-followers">00K</span><span class="gh-repositories">00K</span><span class="gh-region"></span></div><script>
 fetch('https://api.github.com/users/withastro', { referrerPolicy: "no-referrer" })
 .then(response => response.json())
 .then(data => {
-const t = document.getElementById('GC-7219da8a-b327-40a8-b541-9c4f646932f2');
+const t = document.getElementById('GC-788d7b19-c076-43d3-8ac2-e3be02dca745');
 t.classList.remove("gh-loading");
 
 const avatarEl = t.querySelector('.gh-avatar');
@@ -110,8 +110,8 @@ if (data.location) t.querySelector('.gh-region').innerText = data.location;
 
 })
 .catch(err => {
-const c = document.getElementById('GC-7219da8a-b327-40a8-b541-9c4f646932f2').classList.add("gh-error")
-console.warn("[GITHUB-CARD] Error loading card for withastro | GC-7219da8a-b327-40a8-b541-9c4f646932f2.", err)
+const c = document.getElementById('GC-788d7b19-c076-43d3-8ac2-e3be02dca745').classList.add("gh-error")
+console.warn("[GITHUB-CARD] Error loading card for withastro | GC-788d7b19-c076-43d3-8ac2-e3be02dca745.", err)
 })
 </script></div>
 <p>To use this feature you just use the “Github” directive:</p>
