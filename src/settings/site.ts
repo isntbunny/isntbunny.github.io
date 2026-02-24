@@ -1,6 +1,6 @@
 export const homeConfig = {
 	typingText: "幸せのカウントダウン",
-	welcomeText: "WELCOME FRIEND FROM FAR AWAY :P",
+	welcomeText: "WELCOME:P",
 	countdownTargets: [
 		{ key: "monthEnd", label: "Days until month end:", suffix: " days" },
 		{ key: "nextYear", label: "Days until next year:", suffix: " days" },
@@ -24,9 +24,9 @@ export const siteSettings = {
 	backgrounds: {
 		default:
 			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
+		home:
+			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		pages: {
-			"/home/":
-				"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 			"/gallery/":
 				"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		},
