@@ -17,23 +17,7 @@ const { Content } = await render(guestbookEntry);
 	<div class="prose prose-sm prose-cactus mb-6 max-w-none">
 		<Content />
 	</div>
-	<div id="twikoo">
+	<div>
 
 	</div>
 </PageLayout>
-
-<script>
-	if (typeof window !== "undefined") {
-		const script = document.createElement("script");
-		script.src = "https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js";
-		script.defer = true;
-		script.onload = () => {
-			twikoo.init({
-				envId: "https://eucaly.netlify.app/.netlify/functions/twikoo",
-				el: "#twikoo",
-				path: window.location.pathname,
-			});
-		};
-		document.body.appendChild(script);
-	}
-</script>
