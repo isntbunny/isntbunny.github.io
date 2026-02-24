@@ -95,12 +95,12 @@
 	}
 
 	.win-card {
-		border: 1px solid #111;
+		border: 1px solid #555555;
 		background: #c9c9c9;
 	}
 
 	.win-title-bar {
-		background: linear-gradient(90deg, #424988, #c8d7e0);
+		background: linear-gradient(90deg, #4c557a, #b0bdcf);
 		color: #fff;
 		font-size: 0.75rem;
 		letter-spacing: 0.06em;

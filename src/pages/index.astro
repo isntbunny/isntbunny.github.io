@@ -34,14 +34,16 @@ const daysSinceLastCommit = (() => {
 			</section>
 
 			<a class="win-card block" href="/posts/">
-				<div class="win-title-bar">OPEN BLOG</div>
-				<div class="win-body text-sm">Enter the blog archive.</div>
+				<div class="win-title-bar">ARCHIVE.HTML</div>
+				<div class="win-body text-sm">Press to enter the blog archive.</div>
 			</a>
 
 			<a class="win-card block overflow-hidden" href="/gallery/">
 				<div class="win-title-bar">GALLERY</div>
 				<div class="win-body">
-					<div class="mb-3 w-full rounded-md object-contain" style={`background-image:url('${homeConfig.galleryCardImage}')`}></div>
+					<a href="/gallery/">
+						<img alt="gallery entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.galleryCardImage} />
+					</a>
 				</div>
 			</a>
 		</div>

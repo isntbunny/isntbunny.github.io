@@ -22,11 +22,11 @@ export const siteSettings = {
 		atomUrl: "https://status.cafe/users/isntbunny.atom",
 	},
 	backgrounds: {
-		home:
-			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		default:
 			"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		pages: {
+			"/home/":
+				"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 			"/gallery/":
 				"https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
 		},
