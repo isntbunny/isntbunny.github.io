@@ -1,17 +1,3 @@
-.cactus-link {
-    @apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
-}
-
-.title {
-    @apply text-accent-2 text-2xl font-semibold;
-}
-
-.glass-panel {
-    background: var(--color-surface);
-    backdrop-filter: blur(6px);
-}
-
-
 
 .card-chip {
     @apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
@@ -31,6 +17,7 @@
 }
 
 .win-body {
+    color: #2d3a4a;
     padding: 0.8rem;
 }
 
