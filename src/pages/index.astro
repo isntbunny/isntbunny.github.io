@@ -23,7 +23,9 @@ const daysSinceLastCommit = (() => {
 
 <PageLayout meta={{ title: "Home" }}>
 	<section class="grid gap-6 lg:grid-cols-[1fr_1.4fr] home-win-grid">
+
 		<div class="space-y-6">
+
 			<section class="win-card">
 				<div class="win-title-bar">WELCOME.EXE</div>
 				<div class="win-body">
@@ -43,36 +45,44 @@ const daysSinceLastCommit = (() => {
 				<div class="win-body text-sm">Open the diary.</div>
 			</a>
 
-			<section class="win-card block overflow-hidden">
+			<a class="win-card block" href="/gallery/">
 				<div class="win-title-bar">GALLERY</div>
-				<div class="win-body">
-					<a href="/gallery/">
-						<img alt="gallery entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.galleryCardImage} />
-					</a>
-				</div>
-			</section>
-		</div>
-
-		<div class="space-y-6">
-			<section class="win-card">
-				<div class="win-title-bar">STATUS</div>
-				<div class="win-body">
-					<a href="/about/">
-						<img alt="readme entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.profileCoverImage} />
-					</a>
-					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
-					<ul class="mt-4 space-y-2 text-sm">
-						{countdownItems.map((item) => (
-							<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70"><span>{item.label}</span> <strong>{item.days}{item.suffix}</strong></li>
-						))}
-					</ul>
-				</div>
-			</section>
+				<div class="win-body"><img alt="gallery entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.galleryCardImage} /></div>
+			</a>
 
 			<a class="win-card guestbook-card block" href="/guestbook/">
 				<div class="win-title-bar">GUESTBOOK.TXT</div>
 				<div class="win-body text-sm">Leave a footprint.</div>
 			</a>
+		</div>
+
+		<div class="space-y-6">
+
+			<section class="win-card">
+				<div class="win-title-bar">STATUS</div>
+				<div class="win-body">
+
+					<a href="/about/">
+						<img alt="readme entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.profileCoverImage} />
+					</a>
+
+					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
+
+					<a href="https://status.cafe/users/isntbunny"><img src="https://status.cafe/users/isntbunny/badge.png" alt="Status Cafe Profile"/></a>
+
+					<ul class="mt-4 space-y-2 text-sm">
+						{countdownItems.map((item) => (
+							<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70">
+								<span>{item.label}</span> 
+								<strong>{item.days}{item.suffix}</strong>
+							</li>
+						))}
+					</ul>
+
+				</div>
+			</section>
+
+
 		</div>
 	</section>
 </PageLayout>
