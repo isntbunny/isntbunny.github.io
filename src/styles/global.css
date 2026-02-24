@@ -24,7 +24,6 @@
 	@font-face {
 		font-family: 'pixel';
 		src: url('/assets/fonts/pixel.ttf') format('truetype');
-		font-display: swap;
 	}
 
 	html, body {
