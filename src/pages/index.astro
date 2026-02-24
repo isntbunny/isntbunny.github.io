@@ -41,7 +41,7 @@ const daysSinceLastCommit = (() => {
 			<a class="win-card block overflow-hidden" href="/gallery/">
 				<div class="win-title-bar">GALLERY</div>
 				<div class="win-body">
-					<div class="h-30 rounded-md bg-cover bg-center" style={`background-image:url('${homeConfig.galleryCardImage}')`}></div>
+					<div class="rounded-md bg-cover bg-center h-auto max-h-48" style={`background-image:url('${homeConfig.galleryCardImage}')`}></div>
 				</div>
 			</a>
 		</div>
@@ -76,7 +76,7 @@ const daysSinceLastCommit = (() => {
 		const toRad = (deg) => (deg * Math.PI) / 180;
 		const earthRadiusKm = 6371;
 		const dLat = toRad(lat2 - lat1);
-		const dLon = toRad(lon2 - lon1);
+		const dLon = toRad(lat2 - lon1);
 		const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
 		return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	};

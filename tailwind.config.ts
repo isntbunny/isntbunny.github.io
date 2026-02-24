@@ -87,6 +87,12 @@ export default {
 						},
 					},
 				},
+				fontFamily: {
+					kurewa: [
+						'KurewaGothicCjkJp',
+						'sans-serif',
+					],
+				},
 			}),
 		},
 	},

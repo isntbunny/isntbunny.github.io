@@ -22,6 +22,13 @@
 		font-display: swap;
 	}
 
+	@font-face {
+		font-family: 'KurewaGothicCjkJp';
+		src: url('/assets/fonts/KurewaGothicCjkJp-Regular-2.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
+
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
@@ -38,6 +45,7 @@
 
 	body {
 		background-color: var(--color-global-bg);
+		font-family: 'KurewaGothicCjkJp', sans-serif;
 	}
 
 	:where(*) {

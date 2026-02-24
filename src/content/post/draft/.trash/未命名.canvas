@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"id":"4a4e8328446535b7","x":-57,"y":-29,"width":250,"height":60,"type":"text","text":"测试"},
+		{"id":"8479f23e5d5c9556","x":-257,"y":84,"width":250,"height":60,"type":"text","text":"说你是"}
+	],
+	"edges":[
+		{"id":"c19a985faf298143","fromNode":"4a4e8328446535b7","fromSide":"bottom","toNode":"8479f23e5d5c9556","toSide":"top"}
+	]
+}
