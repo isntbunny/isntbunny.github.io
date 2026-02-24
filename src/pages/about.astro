@@ -11,6 +11,7 @@ const meta = {
 const contacts = [
 	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
 	{ icon: "mdi:web", label: "Status", url: "https://status.cafe/users/isntbunny" },
+	{ icon: "mdi:email-outline", label: "Email", url: "mailto:isntbunny@outlook.com" },
 ];
 
 const aboutEntry = await getEntry("page", "about");
@@ -19,6 +20,7 @@ const { Content } = await render(aboutEntry);
 ---
 
 <PageLayout meta={meta}>
+	
 	<h1 class="title mb-12">About</h1>
 	<div class="prose prose-sm prose-cactus max-w-none">
 		<Content />
@@ -35,10 +37,7 @@ const { Content } = await render(aboutEntry);
 					</a>
 				</li>
 			))}
-			<li class="inline-flex items-center gap-2">
-				<Icon name="mdi:email-outline" class="h-5 w-5" />
-				<span>Email: isntbunny@outlook.com</span>
-			</li>
 		</ul>
 	</section>
+
 </PageLayout>
