@@ -1,0 +1,39 @@
+.cactus-link {
+    @apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
+}
+
+.title {
+    @apply text-accent-2 text-2xl font-semibold;
+}
+
+.glass-panel {
+    background: var(--color-surface);
+    backdrop-filter: blur(6px);
+}
+
+
+
+.card-chip {
+    @apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
+}
+
+.win-card {
+    border: 1px solid #555555;
+    background: #c9c9c9;
+}
+
+.win-title-bar {
+    background: linear-gradient(90deg, #4c557a, #b0bdcf);
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.55rem;
+}
+
+.win-body {
+    padding: 0.8rem;
+}
+
+.home-welcome-jump {
+    animation: jump 0.7s infinite alternate ease-in-out;
+}
