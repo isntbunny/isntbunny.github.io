@@ -14,7 +14,7 @@ export const homeConfig = {
 export const siteSettings = {
 	comments: {
 		twikoo: {
-			envId: "https://your-twikoo-env-id.example.com",
+			envId: "hincredible-torte-50fbcf.netlify.app",
 			scriptSrc: "https://cdn.staticfile.net/twikoo/1.6.41/twikoo.all.min.js",
 		},
 	},
