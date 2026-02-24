@@ -18,22 +18,17 @@
 @layer base {
 	@font-face {
 		font-family: "HomePixel";
-		src: url("/assets/fonts/ark-pixel-12px-proportional-latin.otf") format('opentype');
+		src: url("/assets/fonts/pixel.ttf") format('truetype');
 	}
 
 	@font-face {
-		font-family: 'ArkPixelMonoZhCn';
-		src: url('/assets/fonts/ark-pixel-12px-monospaced-zh_cn.otf') format('opentype');
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'ArkPixelMonoZhTw';
-		src: url('/assets/fonts/ark-pixel-12px-monospaced-zh_tw.otf') format('opentype');
+		font-family: 'pixel';
+		src: url('/assets/fonts/pixel.ttf') format('truetype');
 		font-display: swap;
 	}
 
 	html, body {
-		font-family: 'ArkPixelLatin', 'ArkPixelMonoZhCn', 'ArkPixelMonoZhTw', 'ArkPixelJa', 'Microsoft YaHei', 'Arial', monospace, sans-serif;
+		font-family: 'Pixel', monospace, sans-serif, 'Microsoft YaHei', 'Arial', ;
 		line-height: 1.5;
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
