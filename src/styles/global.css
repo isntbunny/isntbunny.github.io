@@ -88,11 +88,7 @@
 		backdrop-filter: blur(6px);
 	}
 
-	.status-card {
-		@apply rounded-md px-4 py-3;
-		background: var(--color-surface);
-		backdrop-filter: blur(6px);
-	}
+
 
 	.card-chip {
 		@apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
@@ -104,7 +100,7 @@
 	}
 
 	.win-title-bar {
-		background: linear-gradient(90deg, #000080, #1084d0);
+		background: linear-gradient(90deg, #424988, #c8d7e0);
 		color: #fff;
 		font-size: 0.75rem;
 		letter-spacing: 0.06em;
@@ -122,6 +118,12 @@
 	.guestbook-card .win-body {
 		background: repeating-linear-gradient(180deg, #fff, #fff 24px, #dde7f8 24px, #dde7f8 25px);
 	}
+
+	.status-card {
+		@apply rounded-md px-4 py-3;
+		background: var(--color-surface);
+		backdrop-filter: blur(6px);
+	}	
 }
 
 @keyframes jump {
