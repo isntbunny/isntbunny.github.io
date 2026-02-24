@@ -18,21 +18,35 @@
 @layer base {
 	@font-face {
 		font-family: "HomePixel";
-		src: url("/assets/fonts/HomePixel.woff2") format("woff2"), url("/assets/fonts/HomePixel.ttf") format("truetype");
-		font-display: swap;
+		src: url("/assets/fonts/ark-pixel-12px-proportional-latin.otf") format('opentype');
 	}
 
 	@font-face {
-		font-family: 'KurewaGothicCjkJp';
-		src: url('/assets/fonts/KurewaGothicCjkJp-Regular-2.ttf') format('truetype');
-		font-weight: normal;
-		font-style: normal;
+		font-family: 'ArkPixelLatin';
+		src: url('/assets/fonts/ark-pixel-12px-proportional-latin.otf') format('opentype');
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'ArkPixelZhCn';
+		src: url('/assets/fonts/ark-pixel-12px-proportional-zh_cn.otf') format('opentype');
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'ArkPixelJa';
+		src: url('/assets/fonts/ark-pixel-12px-proportional-ja.otf') format('opentype');
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'ArkPixelKo';
+		src: url('/assets/fonts/ark-pixel-12px-proportional-ko.otf') format('opentype');
+		font-display: swap;
 	}
 
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
 		scrollbar-gutter: stable;
+		font-family: 'ArkPixelLatin', 'ArkPixelZhCn', 'ArkPixelJa', 'ArkPixelKo', sans-serif;
 
 		&[data-theme="light"] {
 			color-scheme: light;
@@ -45,7 +59,7 @@
 
 	body {
 		background-color: var(--color-global-bg);
-		font-family: 'KurewaGothicCjkJp', sans-serif;
+		font-family: 'ArkPixelLatin', 'ArkPixelZhCn', 'ArkPixelJa', 'ArkPixelKo', sans-serif;
 	}
 
 	:where(*) {
