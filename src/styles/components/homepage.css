@@ -54,6 +54,12 @@
 	}
 }
 
+.site-frame {
+    border: 2px solid #6f7f99;
+    background: rgba(220, 232, 248, 0.68);
+    padding: 0.55rem;
+}
+
 .win-card {
 	border: 2px solid #7e8faa;
 	background: #c9d7e8;
