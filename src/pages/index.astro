@@ -10,6 +10,9 @@ const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
 const daysLeft = (targetDate: Date) => Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
 const countdownTargetMap = { monthEnd, nextYear, gaokao2027 } as const;
 const countdownItems = homeConfig.countdownTargets.map((item) => ({ ...item, days: daysLeft(countdownTargetMap[item.key]) }));
+const typingText = homeConfig.typingText;
+const statusCafeAtomUrl = homeConfig.statusCafeAtomUrl;
+const statusImages = homeConfig.statusSideImages;
 const daysSinceLastCommit = (() => {
 	try {
 		const last = Number(execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim()) * 1000;
@@ -22,8 +25,8 @@ const daysSinceLastCommit = (() => {
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="grid lg:grid-cols-[1fr_1.4fr] home-main-grid" id="home-main-grid">
-		<div class="home-column" id="home-left-column">
+	<section class="grid lg:grid-cols-[1fr_1.4fr] home-layout-grid">
+		<div class="home-layout-column" id="home-left-column">
 			<section class="win-card">
 				<div class="win-title-bar"><span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
@@ -52,10 +55,10 @@ const daysSinceLastCommit = (() => {
 				<div class="win-title-bar"><span>GUESTBOOK.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body text-sm card-enter-wrap"><span>Leave a footprint.</span><span class="win-enter-btn">ENTER</span></div>
 			</a>
-			<div aria-hidden="true" class="home-column-filler hidden" id="home-left-filler">(๑˃ᴗ˂)ﻭ ✧</div>
+			<div aria-hidden="true" class="home-column-filler hidden" id="home-left-filler">❄(◕‿◕)❄</div>
 		</div>
 
-		<div class="home-column" id="home-right-column">
+		<div class="home-layout-column" id="home-right-column">
 			<section class="win-card">
 				<div class="win-title-bar"><span>README.MD</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
@@ -65,13 +68,13 @@ const daysSinceLastCommit = (() => {
 					</a>
 					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
 					<p class="readme-badges-row">
-						<img alt="C++" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" height="25px"/>
-						<img alt="Python" src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" height="25px"/>
-						<img alt="html5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" height="25px"/>
-						<img alt="Css3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" height="25px"/>
-						<img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"  height="25px"/>
-						<img alt="Nodejs" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white"  height="25px"/>
-						<img alt="Astro" src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE" height="25px"/>
+						<img alt="C++" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" height="25px" />
+						<img alt="Python" src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" height="25px" />
+						<img alt="html5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" height="25px" />
+						<img alt="Css3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" height="25px" />
+						<img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" height="25px" />
+						<img alt="Nodejs" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white" height="25px" />
+						<img alt="Astro" src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE" height="25px" />
 					</p>
 					<ul class="mt-4 space-y-2 text-sm">
 						{countdownItems.map((item) => (
@@ -96,15 +99,12 @@ const daysSinceLastCommit = (() => {
 					</div>
 				</div>
 			</a>
-			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">(｡•̀ᴗ-)✧</div>
+			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">(ﾉ*･ω･)ﾉ❄</div>
 		</div>
 	</section>
 </PageLayout>
 
-<script define:vars={{ _typingText: homeConfig.typingText, _statusCafeAtomUrl: homeConfig.statusCafeAtomUrl, _statusImages: homeConfig.statusSideImages }} is:inline>
-	const typingText = _typingText;
-	const statusCafeAtomUrl = _statusCafeAtomUrl;
-	const statusImages = _statusImages;
+<script define:vars={{ typingText, statusCafeAtomUrl, statusImages }} is:inline>
 	const qinhuangdao = { lat: 39.9354, lon: 119.5996 };
 	const statusProxyUrl = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 	const haversineKm = (lat1, lon1, lat2, lon2) => {
@@ -161,23 +161,23 @@ const daysSinceLastCommit = (() => {
 
 	const initHomeHero = () => {
 		const typingTarget = document.getElementById("home-typing");
-		let idx = 0;
+		let typingIndex = 0;
 		let deleting = false;
 		if (window.__homeTypingTimer) clearInterval(window.__homeTypingTimer);
 		window.__homeTypingTimer = setInterval(() => {
 			if (!typingTarget) return;
-			typingTarget.textContent = typingText.slice(0, idx).toUpperCase();
+			typingTarget.textContent = typingText.slice(0, typingIndex).toUpperCase();
 			if (!deleting) {
-				idx += 1;
-				if (idx > typingText.length) {
+				typingIndex += 1;
+				if (typingIndex > typingText.length) {
 					deleting = true;
-					idx = typingText.length;
+					typingIndex = typingText.length;
 				}
 			} else {
-				idx -= 1;
-				if (idx < 1) {
+				typingIndex -= 1;
+				if (typingIndex < 1) {
 					deleting = false;
-					idx = 1;
+					typingIndex = 1;
 				}
 			}
 		}, 120);
@@ -210,11 +210,11 @@ const daysSinceLastCommit = (() => {
 		}
 		const sideImage = document.getElementById("home-status-side-image");
 		if (sideImage instanceof HTMLImageElement) {
-			let idx = 0;
+			let imageIndex = 0;
 			sideImage.addEventListener("click", (event) => {
 				event.preventDefault();
-				idx = (idx + 1) % statusImages.length;
-				sideImage.src = statusImages[idx];
+				imageIndex = (imageIndex + 1) % statusImages.length;
+				sideImage.src = statusImages[imageIndex];
 			});
 		}
 	};

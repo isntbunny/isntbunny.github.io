@@ -6,13 +6,14 @@
 
 @theme {
 	--color-global-bg: oklch(96% 0.018 220);
-	--color-global-text: oklch(34% 0.03 232);
+	--color-global-text: oklch(30% 0.032 232);
 	--color-link: oklch(52% 0.085 220);
 	--color-accent: oklch(60% 0.09 218);
 	--color-accent-2: oklch(38% 0.045 232);
 	--color-quote: oklch(48% 0.055 220);
 	--color-bg-overlay: rgba(236, 245, 248, 0.78);
 	--color-surface: rgba(255, 255, 255, 0.7);
+	--color-surface-dark: rgba(33, 45, 66, 0.82);
 }
 
 @layer base {
@@ -100,7 +101,13 @@
 		@apply rounded-md px-4 py-3;
 		background: var(--color-surface);
 		backdrop-filter: blur(6px);
-	}	
+	}
+
+	.dark .status-card,
+	[data-theme="dark"] .status-card {
+		background: var(--color-surface-dark);
+		color: #edf4ff;
+	}
 }
 
 @keyframes jump {

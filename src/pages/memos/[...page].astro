@@ -1,11 +1,11 @@
 ---
 import type { GetStaticPaths, Page } from "astro";
-import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
 import Waline from "@/components/Waline.astro";
-import { siteSettings } from "@/settings/site";
+import Note from "@/components/note/Note.astro";
 import { getAllNotes } from "@/data/note";
 import PageLayout from "@/layouts/Base.astro";
+import { siteSettings } from "@/settings/site";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const notes = await getAllNotes();
@@ -16,22 +16,22 @@ const { page } = Astro.props as { page: Page<Awaited<ReturnType<typeof getAllNot
 ---
 
 <PageLayout meta={{ description: "status.cafe + notes stream", title: "Memos" }}>
-	<section class="memos-feed-page">
-		<header class="memos-feed-header">
+	<section class="memos-page-layout">
+		<header class="memos-page-header">
 			<h1 class="title">Memos</h1>
-			<p class="text-sm opacity-80">实时信息流：status.cafe + notes</p>
+			<p class="text-sm opacity-80">记录窝的无营养日常吐槽与想法</p>
 		</header>
 
-		<section aria-labelledby="status-feed-title" class="memos-feed-section">
-			<h2 class="memos-section-title" id="status-feed-title">STATUS CAFE STREAM</h2>
-			<div class="memos-status-feed" id="statuscafe-stream" role="feed"></div>
+		<section aria-labelledby="status-feed-title" class="memos-panel-section">
+			<h2 class="memos-panel-title" id="status-feed-title">STATUS CAFE STREAM</h2>
+			<div class="memos-status-stream-grid" id="statuscafe-stream" role="feed"></div>
 		</section>
 
-		<section aria-labelledby="note-feed-title" class="memos-feed-section">
-			<h2 class="memos-section-title" id="note-feed-title">NOTES STREAM</h2>
-			<div class="memos-note-feed" role="feed">
+		<section aria-labelledby="note-waterfall-title" class="memos-panel-section">
+			<h2 class="memos-panel-title" id="note-waterfall-title">NOTE WATERFALL</h2>
+			<div class="memos-note-waterfall" role="feed">
 				{page.data.map((note) => (
-					<article class="memos-note-feed-item"><Note note={note} as="h2" isPreview /></article>
+					<article class="memos-note-waterfall-item"><Note note={note} as="h2" isPreview /></article>
 				))}
 			</div>
 		</section>
@@ -41,8 +41,8 @@ const { page } = Astro.props as { page: Page<Awaited<ReturnType<typeof getAllNot
 			{...(page.url.next && { nextUrl: { text: "Next Page →", url: page.url.next } })}
 		/>
 
-		<section class="memos-comments-section">
-			<h2 class="memos-section-title">COMMENTS</h2>
+		<section class="memos-panel-section">
+			<h2 class="memos-panel-title">COMMENTS</h2>
 			<Waline path={Astro.url.pathname} />
 		</section>
 	</section>
@@ -78,7 +78,7 @@ const { page } = Astro.props as { page: Page<Awaited<ReturnType<typeof getAllNot
 		if (!statusFeedContainer) return;
 		try {
 			const items = parseStatusFeed(await fetchStatusFeedText());
-			statusFeedContainer.innerHTML = items.map((item) => `<article class="status-card memos-status-feed-item"><time class="block text-xs opacity-70">${new Date(item.updated).toLocaleString("zh-CN")}</time><p class="mt-2 whitespace-pre-wrap text-sm">${item.content}</p></article>`).join("");
+			statusFeedContainer.innerHTML = items.map((item) => `<article class="status-card memos-status-stream-item"><time class="block text-xs opacity-70">${new Date(item.updated).toLocaleString("zh-CN")}</time><p class="mt-2 whitespace-pre-wrap text-sm">${item.content}</p></article>`).join("");
 		} catch {
 			statusFeedContainer.innerHTML = `<p class="status-card">Unable to load status.cafe stream right now.</p>`;
 		}
@@ -94,36 +94,46 @@ const { page } = Astro.props as { page: Page<Awaited<ReturnType<typeof getAllNot
 </script>
 
 <style>
-	.memos-feed-page {
+	.memos-page-layout {
 		display: grid;
 		gap: 1rem;
 	}
 
-	.memos-feed-header {
-		display: grid;
-		gap: 0.25rem;
-	}
-
-	.memos-feed-section,
-	.memos-comments-section {
+	.memos-page-header,
+	.memos-panel-section {
 		display: grid;
 		gap: 0.65rem;
 	}
 
-	.memos-section-title {
+	.memos-panel-title {
 		font-size: 0.8rem;
 		font-weight: 700;
 		letter-spacing: 0.12em;
 	}
 
-	.memos-status-feed,
-	.memos-note-feed {
+	.memos-status-stream-grid {
 		display: grid;
-		gap: 0.75rem;
+		gap: 1rem;
 	}
 
-	.memos-status-feed-item,
-	.memos-note-feed-item {
+	.memos-note-waterfall {
+		column-count: 2;
+		column-gap: 0.8rem;
+	}
+
+	.memos-note-waterfall-item {
+		break-inside: avoid;
+		margin-bottom: 0.8rem;
 		border: 2px solid #7e8faa;
+	}
+
+	.memos-status-stream-item {
+		border: 2px solid #7e8faa;
+	}
+
+	@media (max-width: 640px) {
+		.memos-note-waterfall {
+			column-count: 1;
+		}
 	}
 </style>
