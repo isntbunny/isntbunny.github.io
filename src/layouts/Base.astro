@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
-import { getPageBackground, siteSettings } from "@/settings/site";
+import { getPageBackground, homeConfig, siteSettings } from "@/settings/site";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -24,18 +24,26 @@ const pageBackground = isHome ? siteSettings.backgrounds.home : getPageBackgroun
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class={`bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-16`}
+		class={`bg-global-bg text-global-text mx-auto flex min-h-screen w-full max-w-6xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-10`}
 		class:list={[isHome && "home-page-bg"]}
 		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
 		data-theme-bg
 	>
 		<ThemeProvider />
 		<SkipLink />
-		{!isHome && <Header />}
-		<main id="main">
-			<slot />
-		</main>
-		<Footer />
+		<div class="site-frame">
+			<div class="global-hero-strip mb-3">
+				<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="home-top-image-link" href="/">
+					<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
+				</a>
+				<div class="home-marquee"><span>{homeConfig.marqueeText}</span></div>
+			</div>
+			{!isHome && <Header />}
+			<main id="main">
+				<slot />
+			</main>
+			<Footer />
+		</div>
 		<div aria-hidden="true" id="global-lightbox">
 			<img alt="Enlarged image" id="global-lightbox-image" src="" />
 		</div>

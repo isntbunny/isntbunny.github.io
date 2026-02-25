@@ -1,16 +1,10 @@
 ---
 import Search from "@/components/Search.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
-import { homeConfig } from "@/settings/site";
 import { menuLinks } from "@/site.config";
 ---
 
 <header class="mb-8" id="main-header">
-	<div class="home-top-strip mb-3">
-		<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="home-top-image-link" href="/">
-			<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
-		</a>
-	</div>
 	<div class="win-nav-wrap flex items-center justify-between gap-2">
 		<nav aria-label="Main menu" class="win-nav hidden sm:flex" id="navigation-menu">
 			{menuLinks.map((link, index) =>

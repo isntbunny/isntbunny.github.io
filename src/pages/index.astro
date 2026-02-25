@@ -22,15 +22,8 @@ const daysSinceLastCommit = (() => {
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="home-top-strip">
-		<a href="/" class="home-top-image-link">
-			<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
-		</a>
-		<div class="home-marquee"><span>{homeConfig.marqueeText}</span></div>
-	</section>
-
-	<section class="grid gap-0 lg:grid-cols-[1fr_1.4fr] home-win-grid">
-		<div class="space-y-0">
+	<section class="grid lg:grid-cols-[1fr_1.4fr] home-main-grid" id="home-main-grid">
+		<div class="home-column" id="home-left-column">
 			<section class="win-card">
 				<div class="win-title-bar"><span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
@@ -59,9 +52,10 @@ const daysSinceLastCommit = (() => {
 				<div class="win-title-bar"><span>GUESTBOOK.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body text-sm card-enter-wrap"><span>Leave a footprint.</span><span class="win-enter-btn">ENTER</span></div>
 			</a>
+			<div aria-hidden="true" class="home-column-filler hidden" id="home-left-filler">(๑˃ᴗ˂)ﻭ ✧</div>
 		</div>
 
-		<div class="space-y-0">
+		<div class="home-column" id="home-right-column">
 			<section class="win-card">
 				<div class="win-title-bar"><span>README.MD</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
@@ -102,6 +96,7 @@ const daysSinceLastCommit = (() => {
 					</div>
 				</div>
 			</a>
+			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">(｡•̀ᴗ-)✧</div>
 		</div>
 	</section>
 </PageLayout>
@@ -111,6 +106,7 @@ const daysSinceLastCommit = (() => {
 	const statusCafeAtomUrl = _statusCafeAtomUrl;
 	const statusImages = _statusImages;
 	const qinhuangdao = { lat: 39.9354, lon: 119.5996 };
+	const statusProxyUrl = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 	const haversineKm = (lat1, lon1, lat2, lon2) => {
 		const toRad = (deg) => (deg * Math.PI) / 180;
 		const earthRadiusKm = 6371;
@@ -126,6 +122,42 @@ const daysSinceLastCommit = (() => {
 		if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
 		return { updated, content };
 	}).filter(Boolean);
+
+	const fetchStatusFeedText = async () => {
+		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`;
+		const direct = await fetch(feedUrl, { cache: "no-store" }).catch(() => null);
+		if (direct?.ok) return direct.text();
+		const viaProxy = await fetch(statusProxyUrl(feedUrl), { cache: "no-store" });
+		if (!viaProxy.ok) throw new Error("status feed unavailable");
+		return viaProxy.text();
+	};
+
+	const syncHomeColumnsBottom = () => {
+		const leftColumn = document.getElementById("home-left-column");
+		const rightColumn = document.getElementById("home-right-column");
+		const leftFiller = document.getElementById("home-left-filler");
+		const rightFiller = document.getElementById("home-right-filler");
+		if (!leftColumn || !rightColumn || !leftFiller || !rightFiller || window.innerWidth < 1024) {
+			leftFiller?.classList.add("hidden");
+			rightFiller?.classList.add("hidden");
+			return;
+		}
+		leftFiller.classList.add("hidden");
+		rightFiller.classList.add("hidden");
+		leftFiller.style.minHeight = "0px";
+		rightFiller.style.minHeight = "0px";
+		const leftHeight = leftColumn.offsetHeight;
+		const rightHeight = rightColumn.offsetHeight;
+		const gap = Math.abs(leftHeight - rightHeight);
+		if (gap < 6) return;
+		if (leftHeight < rightHeight) {
+			leftFiller.style.minHeight = `${gap}px`;
+			leftFiller.classList.remove("hidden");
+		} else {
+			rightFiller.style.minHeight = `${gap}px`;
+			rightFiller.classList.remove("hidden");
+		}
+	};
 
 	const initHomeHero = () => {
 		const typingTarget = document.getElementById("home-typing");
@@ -169,9 +201,7 @@ const daysSinceLastCommit = (() => {
 		const textEl = document.getElementById("home-status-content");
 		if (!dateEl || !textEl) return;
 		try {
-			const res = await fetch(`${statusCafeAtomUrl}?t=${Date.now()}`, { cache: "no-store" });
-			if (!res.ok) return;
-			const latest = parseStatusFeed(await res.text())[0];
+			const latest = parseStatusFeed(await fetchStatusFeedText())[0];
 			if (!latest) return;
 			dateEl.textContent = new Date(latest.updated).toLocaleString("zh-CN");
 			textEl.textContent = latest.content;
@@ -188,10 +218,14 @@ const daysSinceLastCommit = (() => {
 			});
 		}
 	};
+
 	document.addEventListener("astro:page-load", () => {
 		initHomeHero();
 		initHomeStatus();
+		syncHomeColumnsBottom();
+		window.addEventListener("resize", syncHomeColumnsBottom, { passive: true });
 	});
 	initHomeHero();
 	initHomeStatus();
+	setTimeout(syncHomeColumnsBottom, 120);
 </script>
