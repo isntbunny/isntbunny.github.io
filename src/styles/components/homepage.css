@@ -2,8 +2,14 @@
     @apply rounded-md px-3 py-2 transition;
 }
 
+.site-frame {
+    border: 2px solid #6f7f99;
+    background: rgba(220, 232, 248, 0.68);
+    padding: 0.55rem;
+}
+
 .win-card {
-    border: 1px solid #7e8faa;
+    border: 2px solid #7e8faa;
     background: #c9d7e8;
     border-radius: 0;
 }
@@ -44,22 +50,21 @@
     color: #2d3a4a;
 }
 
-.home-top-strip {
-    position: sticky;
-    top: 0;
-    z-index: 20;
+.global-hero-strip {
+    position: relative;
+    z-index: 10;
 }
 
 .home-top-image {
     width: 100%;
-    height: 110px;
+    height: 146px;
     object-fit: cover;
-    border: 1px solid #7e8faa;
+    border: 2px solid #7e8faa;
 }
 
 .home-marquee {
     overflow: hidden;
-    border: 1px solid #7e8faa;
+    border: 2px solid #7e8faa;
     border-top: none;
     background: #d5e8fa;
     white-space: nowrap;
@@ -79,6 +84,25 @@
 
 .home-welcome-jump {
     animation: jump 0.7s infinite alternate ease-in-out;
+}
+
+.home-main-grid {
+    gap: 0.8rem;
+}
+
+.home-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.home-column-filler {
+    border: 2px dashed #7e8faa;
+    background: rgba(235, 243, 255, 0.82);
+    color: #4a5b76;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.5rem;
 }
 
 .readme-cover-wrap { position: relative; display: block; }
@@ -137,7 +161,7 @@
 }
 
 .win-nav-wrap {
-    border: 1px solid #7e8faa;
+    border: 2px solid #7e8faa;
     background: #d5e8fa;
     padding: 0.25rem 0.5rem;
 }
