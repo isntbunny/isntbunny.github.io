@@ -33,34 +33,44 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 ---
 
 <PageLayout meta={meta}>
-	<div class="mb-12 flex items-center gap-3">
-		<h1 class="title">Posts</h1>
-		<a class="text-accent" href="/rss.xml" target="_blank">
-			<span class="sr-only">RSS feed</span>
-			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
-		</a>
-	</div>
+	<div class="posts-page">
+		<div class="mb-8 flex items-center gap-3">
+			<h1 class="title">Posts</h1>
+			<a class="text-accent" href="/rss.xml" target="_blank">
+				<span class="sr-only">RSS feed</span>
+				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
+			</a>
+		</div>
 
-	<div class="mb-8 flex flex-wrap gap-2">
-		<button class="glass-panel card-chip" data-tab="all" type="button">all</button>
-		{tags.map((tag) => <button class="glass-panel card-chip" data-tab={tag} type="button">{tag}</button>)}
-	</div>
+		<div class="mb-5 flex flex-wrap gap-2">
+			<button class="glass-panel card-chip" data-tab="all" type="button">all</button>
+			{
+				tags.map((tag) => (
+					<button class="glass-panel card-chip" data-tab={tag} type="button">
+						{tag}
+					</button>
+				))
+			}
+		</div>
 
-	{descYearKeys.map((yearKey) => (
-		<section class="mb-16" data-year={yearKey}>
-			<h2 id={`year-${yearKey}`} class="title text-lg">
-				<span class="sr-only">Posts in</span>
-				{yearKey}
-			</h2>
-			<ul class="mt-5 space-y-4 text-start">
-				{groupedByYear[yearKey]?.map((p) => (
-					<li class="space-y-1" data-tags={p.data.tags.join(" ")}>
-						<PostPreview post={p} />
-					</li>
-				))}
-			</ul>
-		</section>
-	))}
+		{
+			descYearKeys.map((yearKey) => (
+				<section class="mb-10" data-year={yearKey}>
+					<h2 id={`year-${yearKey}`} class="title text-lg">
+						<span class="sr-only">Posts in</span>
+						{yearKey}
+					</h2>
+					<ul class="mt-3 space-y-2 text-start">
+						{groupedByYear[yearKey]?.map((p) => (
+							<li class="space-y-1" data-tags={p.data.tags.join(" ")}>
+								<PostPreview post={p} />
+							</li>
+						))}
+					</ul>
+				</section>
+			))
+		}
+	</div>
 </PageLayout>
 
 <script is:inline>

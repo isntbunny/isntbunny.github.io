@@ -1,0 +1,22 @@
+.posts-page .card-chip {
+	font-size: 0.74rem;
+	padding: 0.15rem 0.45rem;
+}
+
+.posts-page section[data-year] {
+	margin-bottom: 2.2rem;
+}
+
+.posts-page ul {
+	margin-top: 0.55rem;
+}
+
+.posts-page li[data-tags] {
+	margin-top: 0.2rem;
+	font-size: 0.86rem;
+	line-height: 1.35;
+}
+
+.posts-page .post-preview-date {
+	font-size: 0.75rem;
+}
