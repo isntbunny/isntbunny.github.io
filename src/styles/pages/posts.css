@@ -1,3 +1,7 @@
+.posts-page {
+	letter-spacing: 0.05em;
+}
+
 .posts-page .card-chip {
 	font-size: 0.74rem;
 	padding: 0.15rem 0.45rem;
@@ -7,16 +11,21 @@
 	margin-bottom: 2.2rem;
 }
 
+.posts-page h2.title {
+	font-size: 1.7rem;
+	line-height: 1.2;
+}
+
 .posts-page ul {
 	margin-top: 0.55rem;
 }
 
 .posts-page li[data-tags] {
 	margin-top: 0.2rem;
-	font-size: 0.86rem;
-	line-height: 1.35;
+	font-size: 0.92rem;
+	line-height: 1.5;
 }
 
 .posts-page .post-preview-date {
-	font-size: 0.75rem;
+	font-size: 0.82rem;
 }

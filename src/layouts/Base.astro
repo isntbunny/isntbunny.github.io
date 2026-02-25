@@ -1,7 +1,7 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/layout/Footer.astro";
-import Header from "@/components/layout/Header.astro";
+import SharedLeftSidebar from "@/components/layout/SharedLeftSidebar.astro";
 import Search from "@/components/Search.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
@@ -18,6 +18,8 @@ const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 const isHome = Astro.url.pathname === "/";
+const isAbout = Astro.url.pathname === "/about/";
+const useSharedLeftSidebar = !isHome && !isAbout;
 const pageBackground = isHome
 	? siteSettings.backgrounds.home
 	: getPageBackground(Astro.url.pathname);
@@ -28,7 +30,7 @@ const pageBackground = isHome
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen w-full max-w-5xl flex-col bg-cover bg-scroll bg-center px-3 pt-6 text-base font-normal antialiased sm:bg-fixed sm:px-6 sm:pt-8"
+		class="bg-global-bg text-global-text mx-auto flex min-h-screen w-full max-w-6xl flex-col bg-cover bg-scroll bg-center px-3 pt-6 text-base font-normal antialiased sm:bg-fixed sm:px-6 sm:pt-8"
 		class:list={[isHome && "home-page-bg"]}
 		data-theme-bg
 		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
@@ -51,9 +53,19 @@ const pageBackground = isHome
 				<div class="site-hero-kaomoji" aria-hidden="true">❄️ (˶ᵔ ᵕ ᵔ˶) ✦</div>
 				<div class="site-marquee-track"><span>{homeConfig.marqueeText}</span></div>
 			</div>
-			{!isHome && <Header />}
 			<main id="main">
-				<slot />
+				{
+					useSharedLeftSidebar ? (
+						<section class="inner-page-shell">
+							<SharedLeftSidebar compact />
+							<div class="inner-page-content">
+								<slot />
+							</div>
+						</section>
+					) : (
+						<slot />
+					)
+				}
 			</main>
 		</div>
 		<Footer />
@@ -71,6 +83,14 @@ const pageBackground = isHome
 
 <script is:inline>
 	const clickFaces = ["❄(◕‿◕)❄", "(ﾉ*･ω･)ﾉ❄", "✧(｡•̀ᴗ-)", "(๑˃ᴗ˂)ﻭ雪", "˗ˏˋ ❄ ˎˊ˗"];
+	const quotes = [
+		"The only true wisdom is in knowing you know nothing. — Socrates",
+		"Simplicity is the ultimate sophistication. — Leonardo da Vinci",
+		"Stay hungry, stay foolish. — Steve Jobs",
+		"We are what we repeatedly do. — Aristotle",
+		"The future depends on what we do in the present. — Gandhi",
+	];
+	const quoteColors = ["#1d4ed8", "#1e40af", "#2563eb", "#3b82f6", "#0f52ba"];
 
 	const showClickKaomoji = (event) => {
 		const target = event.target;
@@ -121,6 +141,19 @@ const pageBackground = isHome
 			document.addEventListener("pointerdown", showClickKaomoji);
 		}
 	};
+
+	const initMarqueeQuote = () => {
+		const marquee = document.querySelector(".site-marquee-track span");
+		if (!(marquee instanceof HTMLElement)) return;
+		const quote = quotes[Math.floor(Math.random() * quotes.length)];
+		marquee.textContent = quote;
+		if (window.__quoteColorTimer) clearInterval(window.__quoteColorTimer);
+		window.__quoteColorTimer = setInterval(() => {
+			marquee.style.color = quoteColors[Math.floor(Math.random() * quoteColors.length)];
+		}, 1300);
+	};
 	document.addEventListener("astro:page-load", bindGlobalLightbox);
+	document.addEventListener("astro:page-load", initMarqueeQuote);
 	bindGlobalLightbox();
+	initMarqueeQuote();
 </script>
