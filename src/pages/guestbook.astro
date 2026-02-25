@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
+import Waline from "@/components/Waline.astro";
 import PageLayout from "@/layouts/Base.astro";
-import Twikoo from "./Twikoo.astro";
 
 const meta = {
 	description: "欢迎留言",
@@ -13,13 +13,10 @@ if (!guestbookEntry) throw new Error("Missing src/content/page/guestbook.md");
 const { Content } = await render(guestbookEntry);
 ---
 
-
 <PageLayout meta={meta}>
 	<h1 class="title mb-6">Guestbook</h1>
 	<div class="prose prose-sm prose-cactus mb-6 max-w-none">
 		<Content />
 	</div>
-	<div>
-
-	</div>
+	<Waline path={Astro.url.pathname} />
 </PageLayout>

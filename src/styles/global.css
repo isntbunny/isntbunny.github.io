@@ -77,6 +77,7 @@
 	@import "./components/admonition.css";
 	@import "./components/github-card.css";
 	@import "./components/homepage.css";
+	@import "./components/lightbox-custom.css";
 
 	.cactus-link {
 		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
