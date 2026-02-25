@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Note from "@/components/note/Note.astro";
+import Waline from "@/components/Waline.astro";
 import { getAllNotes } from "@/data/note";
 import PageLayout from "@/layouts/Base.astro";
 
@@ -19,5 +20,37 @@ const noteDescription = note.data.description ?? "短博客";
 ---
 
 <PageLayout meta={{ title: note.data.title, description: noteDescription }}>
-	<Note note={note} as="h1" />
+	<section class="memos-note-detail">
+		<Note note={note} as="h1" />
+		<section class="memos-note-comments">
+			<h2 class="memos-note-comments-title">COMMENTS</h2>
+			<Waline path={Astro.url.pathname} />
+		</section>
+	</section>
 </PageLayout>
+
+<style>
+	.memos-note-detail {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.memos-note-comments {
+		border: 2px solid #7e8faa;
+		padding: 0.8rem;
+		background: rgba(220, 232, 248, 0.6);
+	}
+
+	.memos-note-comments-title {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		margin-bottom: 0.6rem;
+	}
+
+	.dark .memos-note-comments,
+	[data-theme="dark"] .memos-note-comments {
+		background: rgba(46, 61, 89, 0.72);
+		border-color: #96abcf;
+	}
+</style>

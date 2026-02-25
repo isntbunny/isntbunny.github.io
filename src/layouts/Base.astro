@@ -2,9 +2,11 @@
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
+import Search from "@/components/Search.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
-import { getPageBackground, siteSettings } from "@/settings/site";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { getPageBackground, homeConfig, siteSettings } from "@/settings/site";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -24,17 +26,30 @@ const pageBackground = isHome ? siteSettings.backgrounds.home : getPageBackgroun
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body
-		class={`bg-global-bg text-global-text mx-auto flex min-h-screen max-w-4xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-16`}
+		class="bg-global-bg text-global-text mx-auto flex min-h-screen w-full max-w-6xl flex-col bg-cover bg-scroll bg-center px-4 pt-8 text-base font-normal antialiased sm:bg-fixed sm:px-8 sm:pt-10"
 		class:list={[isHome && "home-page-bg"]}
-		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
 		data-theme-bg
+		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
 	>
 		<ThemeProvider />
 		<SkipLink />
-		{!isHome && <Header />}
-		<main id="main">
-			<slot />
-		</main>
+		<div class="site-action-rail" role="group" aria-label="Search and theme controls">
+			<Search />
+			<ThemeToggle />
+		</div>
+		<div class="site-content-frame">
+			<div class="site-hero-strip mb-3">
+				<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="home-top-image-link" href="/">
+					<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
+				</a>
+				<div class="site-hero-kaomoji" aria-hidden="true">❄️ (˶ᵔ ᵕ ᵔ˶) ✦</div>
+				<div class="site-marquee-track"><span>{homeConfig.marqueeText}</span></div>
+			</div>
+			{!isHome && <Header />}
+			<main id="main">
+				<slot />
+			</main>
+		</div>
 		<Footer />
 		<div aria-hidden="true" id="global-lightbox">
 			<img alt="Enlarged image" id="global-lightbox-image" src="" />
@@ -49,6 +64,21 @@ const pageBackground = isHome ? siteSettings.backgrounds.home : getPageBackgroun
 </html>
 
 <script is:inline>
+	const clickFaces = ["❄(◕‿◕)❄", "(ﾉ*･ω･)ﾉ❄", "✧(｡•̀ᴗ-)", "(๑˃ᴗ˂)ﻭ雪", "˗ˏˋ ❄ ˎˊ˗"];
+
+	const showClickKaomoji = (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) return;
+		if (target.closest("a, button, input, textarea")) return;
+		const effect = document.createElement("span");
+		effect.className = "click-kaomoji-effect";
+		effect.textContent = clickFaces[Math.floor(Math.random() * clickFaces.length)];
+		effect.style.left = `${event.clientX}px`;
+		effect.style.top = `${event.clientY}px`;
+		document.body.append(effect);
+		setTimeout(() => effect.remove(), 900);
+	};
+
 	const bindGlobalLightbox = () => {
 		const lightbox = document.getElementById("global-lightbox");
 		const lightboxImage = document.getElementById("global-lightbox-image");
@@ -79,6 +109,10 @@ const pageBackground = isHome ? siteSettings.backgrounds.home : getPageBackgroun
 					lightbox.setAttribute("aria-hidden", "true");
 				}
 			});
+		}
+		if (document.body.dataset.kaomojiBound !== "1") {
+			document.body.dataset.kaomojiBound = "1";
+			document.addEventListener("pointerdown", showClickKaomoji);
 		}
 	};
 	document.addEventListener("astro:page-load", bindGlobalLightbox);
