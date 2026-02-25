@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "weekly-1-step away from the internet.md",
+                "file": "blog-starter.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "weekly-1-step away from the internet"
+              "title": "blog-starter"
             }
           }
         ]
@@ -185,9 +185,9 @@
   },
   "active": "6f6f3990f1ab3641",
   "lastOpenFiles": [
+    "platform.md",
+    "weekly_1_step-away from the internet.md",
     "blog-starter.md",
-    "国外前or后端托管平台比较.md",
-    "weekly-1-step away from the internet.md",
     "how-to-build-a-blog.md"
   ]
 }

@@ -83,7 +83,7 @@
 	@import "./pages/about.css";
 	@import "./pages/posts.css";
 
-	.cactus-link {
+	.textlink {
 		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
 	}
 

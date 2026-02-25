@@ -37,6 +37,7 @@ https://nodejs.org
 一个astro文件的结构大概是这样的，各种模板大同小异
 
 ```
+
 ```
 
 在content里面新建markdown文件来写文章。

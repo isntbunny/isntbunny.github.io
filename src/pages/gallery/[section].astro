@@ -16,7 +16,7 @@ const { sectionData } = Astro.props;
 ---
 
 <PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
-	<a class="cactus-link text-sm" href="/gallery/">← Back to Gallery</a>
+	<a class="textlink text-sm" href="/gallery/">← Back to Gallery</a>
 	<h1 class="title mb-2 mt-3">{sectionData.title}</h1>
 	{sectionData.description && <p class="mb-6 text-sm opacity-80">{sectionData.description}</p>}
 
