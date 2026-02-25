@@ -7,6 +7,7 @@ import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 import { getFormattedDate } from "@/utils/date";
 
+//这个函数尝试加载系统中的字体文件，如果找不到合适的字体，则抛出错误。
 
 const loadOgFont = () => {
 	const candidates = [
@@ -27,6 +28,8 @@ const loadOgFont = () => {
 
 const ogFont = loadOgFont();
 
+//这里配置了Satori的选项，包括字体和图像的尺寸。
+
 const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
@@ -46,6 +49,8 @@ const ogOptions: SatoriOptions = {
 	height: 630,
 	width: 1200,
 };
+
+//这个函数生成HTML标记，用于在图像中显示标题和发布日期。
 
 const markup = (title: string, pubDate: string) =>
 	html`<div tw="flex flex-col w-full h-full bg-[#1d1f21] text-[#c9cacc]">
@@ -77,6 +82,8 @@ const markup = (title: string, pubDate: string) =>
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
+//这个函数处理API请求，生成SVG图像，并将其转换为PNG格式。
+
 export async function GET(context: APIContext) {
 	const { pubDate, title } = context.props as Props;
 
@@ -94,6 +101,8 @@ export async function GET(context: APIContext) {
 		},
 	});
 }
+
+//这个函数生成静态路径，用于预生成OG图像。
 
 export async function getStaticPaths() {
 	const posts = await getAllPosts();

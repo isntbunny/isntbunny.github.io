@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "4d23e19028e97c7c",
+    "id": "fc994a940d691407",
     "type": "split",
     "children": [
       {
-        "id": "f10bbde1b4b20a74",
+        "id": "e6cc8556a4f29ba9",
         "type": "tabs",
         "children": [
           {
-            "id": "4b08324cad08caf0",
+            "id": "6f6f3990f1ab3641",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "markdown-elements/admonitions.md",
+                "file": "weekly-1-step away from the internet.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "admonitions"
+              "title": "weekly-1-step away from the internet"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "8240a6a44faa3978",
+    "id": "a3582d6470e1ae7e",
     "type": "split",
     "children": [
       {
-        "id": "0a276560ebe921d4",
+        "id": "829c9a3d128fc5fe",
         "type": "tabs",
         "children": [
           {
-            "id": "5b1b55f3deec24f9",
+            "id": "41c72480462b8613",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "3b8c9b478736c6a3",
+            "id": "d02df0bdb6ec71a7",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "73690f5627a1ef7a",
+            "id": "b5ed997e82983522",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "f7e60b8f75afbaa0",
+    "id": "70436a0c31e82832",
     "type": "split",
     "children": [
       {
-        "id": "6411e300b6ac2831",
+        "id": "610b86351e6566d6",
         "type": "tabs",
         "children": [
           {
-            "id": "7791d88a78070282",
+            "id": "7340c7eaa244f515",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "markdown-elements/admonitions.md",
+                "file": "暂时退网小记.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "admonitions 的反向链接列表"
+              "title": "暂时退网小记 的反向链接列表"
             }
           },
           {
-            "id": "dd4120e92f5dae61",
+            "id": "74d2ce3b89c68289",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "markdown-elements/admonitions.md",
+                "file": "暂时退网小记.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "admonitions 的出链列表"
+              "title": "暂时退网小记 的出链列表"
             }
           },
           {
-            "id": "79f031b9bbd46f53",
+            "id": "57f6a3d2fde2df73",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +137,7 @@
             }
           },
           {
-            "id": "a12f6d41fe8f6fb4",
+            "id": "331a3bf50ab2deb2",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,38 +151,25 @@
             }
           },
           {
-            "id": "a51fd41e6e81e0f6",
+            "id": "2718640d865059c2",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "markdown-elements/admonitions.md",
+                "file": "暂时退网小记.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "admonitions 的大纲"
-            }
-          },
-          {
-            "id": "0dcffdb1ca145217",
-            "type": "leaf",
-            "state": {
-              "type": "file-properties",
-              "state": {
-                "file": "markdown-elements/admonitions.md"
-              },
-              "icon": "lucide-info",
-              "title": "admonitions的笔记属性"
+              "title": "暂时退网小记 的大纲"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 250.5,
+    "width": 300,
     "collapsed": true
   },
   "left-ribbon": {
@@ -196,19 +183,11 @@
       "bases:新建数据库": false
     }
   },
-  "active": "4b08324cad08caf0",
+  "active": "6f6f3990f1ab3641",
   "lastOpenFiles": [
-    "toname.md",
-    "oc.md",
-    "how-to-read-a-book-effectively.md",
-    "markdown-elements/admonitions.md",
-    "markdown-elements/index.md",
-    "cover-image/index.md",
-    "cover-image/cover.png",
-    "markdown-elements/logo.png",
-    "draft/how-to-build-a-blog.md",
-    "draft/免费前端托管平台比较.md",
-    "draft/calender",
-    "draft"
+    "blog-starter.md",
+    "国外前or后端托管平台比较.md",
+    "weekly-1-step away from the internet.md",
+    "how-to-build-a-blog.md"
   ]
 }
