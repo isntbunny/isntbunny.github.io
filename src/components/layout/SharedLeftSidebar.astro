@@ -14,7 +14,7 @@ const { compact = false } = Astro.props;
 >
 	<section class="win-card">
 		<div class="win-title-bar">
-			<span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span>
+			<span>WELCOME.EXE</span><span class="win-title-controls"><i>-</i><i>x</i></span>
 		</div>
 		<div class="win-body">
 			<h1 class="title mb-3" id="home-typing"></h1>
@@ -26,21 +26,8 @@ const { compact = false } = Astro.props;
 	</section>
 	<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
 
-	<a class="home-plain-card block" href="/posts/">
-		<div class="card-enter-wrap text-sm">
-			<span>Read posts archive.</span><span class="win-enter-btn">ENTER</span>
-		</div>
-	</a>
-	<a class="home-plain-card block" href="/memos/">
-		<div class="card-enter-wrap text-sm">
-			<span>Open memos stream.</span><span class="win-enter-btn">ENTER</span>
-		</div>
-	</a>
-	<a class="home-plain-card block" href="/gallery/">
-		<div class="card-enter-wrap text-sm">
-			<span>Visit gallery zone.</span><span class="win-enter-btn">ENTER</span>
-		</div>
-		<img alt="gallery entry" class="home-card-image" src={homeConfig.galleryCardImage} />
-	</a>
+	<a class="win-enter-btn" href="/posts/">Posts</a>
+	<a class="win-enter-btn" href="/memos/">Memos</a>
+	<a class="win-enter-btn" href="/gallery/">gallery zone</a>
 	<iframe src="https://www3.cbox.ws/box/?boxid=3552712&boxtag=FGVbRe" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>	
 </aside>
