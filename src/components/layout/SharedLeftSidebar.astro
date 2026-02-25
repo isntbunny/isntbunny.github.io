@@ -1,0 +1,42 @@
+---
+import { homeConfig } from "@/settings/site";
+
+interface Props {
+	compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<aside
+	class="home-sidebar-frame home-layout-column shared-left-sidebar"
+	data-compact={compact ? "1" : "0"}
+>
+	<section class="win-card">
+		<div class="win-title-bar">
+			<span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span>
+		</div>
+		<div class="win-body">
+			<h2 class="title mb-2 text-xl">Eucaly's Blog</h2>
+			<p class="text-sm opacity-85">A tiny blue corner for posts, memos, and media.</p>
+		</div>
+	</section>
+	<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
+
+	<a class="home-plain-card block" href="/posts/">
+		<div class="card-enter-wrap text-sm">
+			<span>Read posts archive.</span><span class="win-enter-btn">ENTER</span>
+		</div>
+	</a>
+	<a class="home-plain-card block" href="/memos/">
+		<div class="card-enter-wrap text-sm">
+			<span>Open memos stream.</span><span class="win-enter-btn">ENTER</span>
+		</div>
+	</a>
+	<a class="home-plain-card block" href="/gallery/">
+		<div class="card-enter-wrap text-sm">
+			<span>Visit gallery zone.</span><span class="win-enter-btn">ENTER</span>
+		</div>
+		<img alt="gallery entry" class="home-card-image" src={homeConfig.galleryCardImage} />
+	</a>
+</aside>

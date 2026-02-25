@@ -1,5 +1,6 @@
 ---
 import { execSync } from "node:child_process";
+import SharedLeftSidebar from "@/components/layout/SharedLeftSidebar.astro";
 import { homeConfig } from "@/settings/site";
 import PageLayout from "@/layouts/Base.astro";
 
@@ -30,10 +31,12 @@ const daysSinceLastCommit = (() => {
 
 <PageLayout meta={{ title: "Home" }}>
 	<section class="home-main-grid">
-		<div class="home-sidebar-frame home-layout-column" id="home-left-column">
+		<SharedLeftSidebar />
+
+		<div class="home-middle-column">
 			<section class="win-card">
 				<div class="win-title-bar">
-					<span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span>
+					<span>README.MD</span><span class="win-title-controls"><i></i><i></i></span>
 				</div>
 				<div class="win-body">
 					<h1 class="title mb-3" id="home-typing"></h1>
@@ -41,86 +44,62 @@ const daysSinceLastCommit = (() => {
 					<p class="mt-1 text-xs opacity-80" id="home-distance">
 						You are ... km away from An-chan.
 					</p>
+					<p class="mt-4 text-sm opacity-85">
+						这里是主页主栏，已预留多图位置，方便你后续替换贴图。
+					</p>
 				</div>
 			</section>
-			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
 
-			<a class="home-plain-card block" href="/gallery/">
-				<div class="card-enter-wrap text-sm">
-					<span>Open gallery zone.</span><span class="win-enter-btn">ENTER</span>
-				</div>
-				<img alt="gallery entry" class="home-card-image" src={homeConfig.galleryCardImage} />
-			</a>
-			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
-
-			<a class="home-plain-card block" href="/notes/">
-				<div class="card-enter-wrap text-sm">
-					<span>Read notes.log.</span><span class="win-enter-btn">ENTER</span>
-				</div>
-			</a>
-			<div aria-hidden="true" class="home-column-filler hidden" id="home-left-filler">❄(◕‿◕)❄</div>
+			<section class="home-image-grid" aria-label="image placeholders">
+				<figure class="home-image-placeholder home-image-placeholder--wide">
+					<span>PLACEHOLDER IMAGE A · banner</span>
+				</figure>
+				<figure class="home-image-placeholder"><span>PLACEHOLDER IMAGE B</span></figure>
+				<figure class="home-image-placeholder"><span>PLACEHOLDER IMAGE C</span></figure>
+				<figure class="home-image-placeholder home-image-placeholder--wide">
+					<span>PLACEHOLDER IMAGE D · story strip</span>
+				</figure>
+			</section>
 		</div>
 
-		<div class="home-sidebar-frame home-layout-column" id="home-right-column">
-			<section class="win-card">
-				<div class="win-title-bar">
-					<span>README.MD</span><span class="win-title-controls"><i></i><i></i></span>
-				</div>
-				<div class="win-body">
-					<a href="/about/" class="readme-cover-wrap">
-						<img
-							alt="readme entry"
-							class="mb-3 w-full rounded-md object-contain"
-							src={homeConfig.profileCoverImage}
-						/>
-						<img
-							alt="corner sticker"
-							class="readme-corner-image"
-							src={homeConfig.readmeCornerImage}
-						/>
-					</a>
-					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
-					<ul class="mt-4 space-y-2 text-sm">
-						{
-							countdownItems.map((item) => (
-								<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70">
-									<span>{item.label}</span>
-									<strong>
-										{item.days}
-										{item.suffix}
-									</strong>
-								</li>
-							))
-						}
-					</ul>
+		<aside class="home-sidebar-frame home-layout-column home-right-rail">
+			<section class="home-right-card">
+				<h2>Last Update</h2>
+				<p class="text-sm">Updated {daysSinceLastCommit} days ago.</p>
+			</section>
+			<section class="home-right-card">
+				<h2>Countdown</h2>
+				<ul class="space-y-2 text-sm">
+					{
+						countdownItems.map((item) => (
+							<li>
+								{item.label}{" "}
+								<strong>
+									{item.days}
+									{item.suffix}
+								</strong>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+			<section class="home-right-card">
+				<h2>Status.cafe</h2>
+				<time class="text-xs opacity-70" id="home-status-date">Loading...</time>
+				<p class="mt-2 text-sm" id="home-status-content">Syncing status.cafe feed ...</p>
+			</section>
+			<section class="home-right-card">
+				<h2>Side Image</h2>
+				<img alt="status side" id="home-status-side-image" src={homeConfig.statusSideImages[0]} />
+			</section>
+			<section class="home-right-card">
+				<h2>Quick Entry</h2>
+				<div class="card-enter-wrap text-sm">
+					<a class="cactus-link" href="/about/">About</a>
+					<a class="cactus-link" href="/memos/">Memos</a>
 				</div>
 			</section>
-			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
-
-			<a
-				class="home-plain-card block"
-				href="https://status.cafe/users/isntbunny"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<div class="status-split">
-					<div>
-						<time class="text-xs opacity-70" id="home-status-date">Loading...</time>
-						<p class="mt-2 text-sm" id="home-status-content">Syncing status.cafe feed ...</p>
-					</div>
-					<div class="status-side-image-wrap">
-						<img
-							alt="status side"
-							id="home-status-side-image"
-							src={homeConfig.statusSideImages[0]}
-						/>
-					</div>
-				</div>
-			</a>
-			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">
-				(ﾉ*･ω･)ﾉ❄
-			</div>
-		</div>
+		</aside>
 	</section>
 </PageLayout>
 
@@ -163,33 +142,6 @@ const daysSinceLastCommit = (() => {
 		const viaProxy = await fetch(statusProxyUrl(feedUrl), { cache: "no-store" });
 		if (!viaProxy.ok) throw new Error("status feed unavailable");
 		return viaProxy.text();
-	};
-
-	const syncHomeColumnsBottom = () => {
-		const leftColumn = document.getElementById("home-left-column");
-		const rightColumn = document.getElementById("home-right-column");
-		const leftFiller = document.getElementById("home-left-filler");
-		const rightFiller = document.getElementById("home-right-filler");
-		if (!leftColumn || !rightColumn || !leftFiller || !rightFiller || window.innerWidth < 1024) {
-			leftFiller?.classList.add("hidden");
-			rightFiller?.classList.add("hidden");
-			return;
-		}
-		leftFiller.classList.add("hidden");
-		rightFiller.classList.add("hidden");
-		leftFiller.style.minHeight = "0px";
-		rightFiller.style.minHeight = "0px";
-		const leftHeight = leftColumn.offsetHeight;
-		const rightHeight = rightColumn.offsetHeight;
-		const gap = Math.abs(leftHeight - rightHeight);
-		if (gap < 6) return;
-		if (leftHeight < rightHeight) {
-			leftFiller.style.minHeight = `${gap}px`;
-			leftFiller.classList.remove("hidden");
-		} else {
-			rightFiller.style.minHeight = `${gap}px`;
-			rightFiller.classList.remove("hidden");
-		}
 	};
 
 	const initHomeHero = () => {
@@ -266,10 +218,7 @@ const daysSinceLastCommit = (() => {
 	document.addEventListener("astro:page-load", () => {
 		initHomeHero();
 		initHomeStatus();
-		syncHomeColumnsBottom();
-		window.addEventListener("resize", syncHomeColumnsBottom, { passive: true });
 	});
 	initHomeHero();
 	initHomeStatus();
-	setTimeout(syncHomeColumnsBottom, 120);
 </script>
