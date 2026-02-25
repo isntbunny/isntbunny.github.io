@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import PageLayout from "@/layouts/Base.astro";
+import { homeConfig } from "@/settings/site";
 
 const meta = {
 	description: "About me",
@@ -20,34 +21,33 @@ const { Content } = await render(aboutEntry);
 
 <PageLayout meta={meta}>
 	<h1 class="title mb-12">Readme.md</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
-		<Content />
-	</div>
-
-	<section class="mt-6">
-		<p class="mb-2 text-sm font-semibold">Tech badges</p>
-		<p class="readme-badges-row">
-			<img alt="C++" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" height="25px"/>
-			<img alt="Python" src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" height="25px"/>
-			<img alt="html5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" height="25px"/>
-			<img alt="Css3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" height="25px"/>
-			<img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"  height="25px"/>
-			<img alt="Nodejs" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white"  height="25px"/>
-			<img alt="Astro" src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE" height="25px"/>
-		</p>
+	<section class="about-readme-shell">
+		<div class="prose prose-sm prose-cactus max-w-none">
+			<Content />
+		</div>
+		<div class="about-avatar-wrap">
+			<img alt="profile photo" src={homeConfig.profileCoverImage} />
+		</div>
 	</section>
 
 	<section class="mt-10 rounded-md bg-sky-50/60 p-4 dark:bg-sky-950/40">
 		<p class="mb-3 font-semibold">Find me on</p>
 		<ul class="space-y-2">
-			{contacts.map((item) => (
-				<li>
-					<a class="inline-flex items-center gap-2 hover:underline" href={item.url} target="_blank" rel="noreferrer">
-						<Icon name={item.icon} class="h-5 w-5" />
-						<span>{item.label}</span>
-					</a>
-				</li>
-			))}
+			{
+				contacts.map((item) => (
+					<li>
+						<a
+							class="inline-flex items-center gap-2 hover:underline"
+							href={item.url}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<Icon name={item.icon} class="h-5 w-5" />
+							<span>{item.label}</span>
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</section>
 </PageLayout>

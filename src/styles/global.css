@@ -19,13 +19,14 @@
 @layer base {
 	@font-face {
 		font-family: "pixel";
-		src: url('https://example.com/path/to/font.woff2') format('woff2');
+		src: url("https://example.com/path/to/font.woff2") format("woff2");
 		font-weight: normal;
 		font-style: normal;
 	}
 
-	html, body {
-		font-family: 'pixel', monospace, sans-serif ;
+	html,
+	body {
+		font-family: "pixel", monospace, sans-serif;
 		line-height: 1.5;
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
@@ -79,6 +80,8 @@
 	@import "./components/github-card.css";
 	@import "./components/homepage.css";
 	@import "./components/lightbox-custom.css";
+	@import "./pages/about.css";
+	@import "./pages/posts.css";
 
 	.cactus-link {
 		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
@@ -91,10 +94,6 @@
 	.glass-panel {
 		background: var(--color-surface);
 		backdrop-filter: blur(6px);
-	}
-
-	.guestbook-card .win-body {
-		background: repeating-linear-gradient(180deg, #fff, #fff 24px, #dde7f8 24px, #dde7f8 25px);
 	}
 
 	.status-card {

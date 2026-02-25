@@ -7,9 +7,13 @@ const currentYear = new Date().getFullYear();
 const monthEnd = new Date(currentYear, new Date().getMonth() + 1, 0);
 const nextYear = new Date(currentYear + 1, 0, 1);
 const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
-const daysLeft = (targetDate: Date) => Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+const daysLeft = (targetDate: Date) =>
+	Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
 const countdownTargetMap = { monthEnd, nextYear, gaokao2027 } as const;
-const countdownItems = homeConfig.countdownTargets.map((item) => ({ ...item, days: daysLeft(countdownTargetMap[item.key]) }));
+const countdownItems = homeConfig.countdownTargets.map((item) => ({
+	...item,
+	days: daysLeft(countdownTargetMap[item.key]),
+}));
 const typingText = homeConfig.typingText;
 const statusCafeAtomUrl = homeConfig.statusCafeAtomUrl;
 const statusImages = homeConfig.statusSideImages;
@@ -25,72 +29,97 @@ const daysSinceLastCommit = (() => {
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="grid lg:grid-cols-[1fr_1.4fr] home-layout-grid">
-		<div class="home-layout-column" id="home-left-column">
+	<section class="home-main-grid">
+		<div class="home-sidebar-frame home-layout-column" id="home-left-column">
 			<section class="win-card">
-				<div class="win-title-bar"><span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-title-bar">
+					<span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span>
+				</div>
 				<div class="win-body">
 					<h1 class="title mb-3" id="home-typing"></h1>
 					<p class="home-welcome-jump" id="home-location">WELCOME FRIEND FROM FAR AWAY :P</p>
-					<p class="mt-1 text-xs opacity-80" id="home-distance">You are ... km away from An-chan.</p>
+					<p class="mt-1 text-xs opacity-80" id="home-distance">
+						You are ... km away from An-chan.
+					</p>
 				</div>
 			</section>
+			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
 
-			<a class="win-card block" href="/posts/">
-				<div class="win-title-bar"><span>ARCHIVE.HTML</span><span class="win-title-controls"><i></i><i></i></span></div>
-				<div class="win-body text-sm card-enter-wrap"><span>Go to blog archive.</span><span class="win-enter-btn">ENTER</span></div>
+			<a class="home-plain-card block" href="/gallery/">
+				<div class="card-enter-wrap text-sm">
+					<span>Open gallery zone.</span><span class="win-enter-btn">ENTER</span>
+				</div>
+				<img alt="gallery entry" class="home-card-image" src={homeConfig.galleryCardImage} />
 			</a>
+			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
 
-			<a class="win-card block" href="/memos/">
-				<div class="win-title-bar"><span>MEMOS.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
-				<div class="win-body text-sm card-enter-wrap"><span>Open memos board.</span><img alt="memo deco" class="memo-card-mini" src={homeConfig.memosMiniImage} /><span class="win-enter-btn">ENTER</span></div>
-			</a>
-
-			<a class="win-card block" href="/gallery/">
-				<div class="win-title-bar"><span>GALLERY</span><span class="win-title-controls"><i></i><i></i></span></div>
-				<div class="win-body"><img alt="gallery entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.galleryCardImage} /></div>
-			</a>
-
-			<a class="win-card guestbook-card block" href="/guestbook/">
-				<div class="win-title-bar"><span>GUESTBOOK.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
-				<div class="win-body text-sm card-enter-wrap"><span>Leave a footprint.</span><span class="win-enter-btn">ENTER</span></div>
+			<a class="home-plain-card block" href="/notes/">
+				<div class="card-enter-wrap text-sm">
+					<span>Read notes.log.</span><span class="win-enter-btn">ENTER</span>
+				</div>
 			</a>
 			<div aria-hidden="true" class="home-column-filler hidden" id="home-left-filler">❄(◕‿◕)❄</div>
 		</div>
 
-		<div class="home-layout-column" id="home-right-column">
+		<div class="home-sidebar-frame home-layout-column" id="home-right-column">
 			<section class="win-card">
-				<div class="win-title-bar"><span>README.MD</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-title-bar">
+					<span>README.MD</span><span class="win-title-controls"><i></i><i></i></span>
+				</div>
 				<div class="win-body">
 					<a href="/about/" class="readme-cover-wrap">
-						<img alt="readme entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.profileCoverImage} />
-						<img alt="corner sticker" class="readme-corner-image" src={homeConfig.readmeCornerImage} />
+						<img
+							alt="readme entry"
+							class="mb-3 w-full rounded-md object-contain"
+							src={homeConfig.profileCoverImage}
+						/>
+						<img
+							alt="corner sticker"
+							class="readme-corner-image"
+							src={homeConfig.readmeCornerImage}
+						/>
 					</a>
 					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
 					<ul class="mt-4 space-y-2 text-sm">
-						{countdownItems.map((item) => (
-							<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70">
-								<span>{item.label}</span>
-								<strong>{item.days}{item.suffix}</strong>
-							</li>
-						))}
+						{
+							countdownItems.map((item) => (
+								<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70">
+									<span>{item.label}</span>
+									<strong>
+										{item.days}
+										{item.suffix}
+									</strong>
+								</li>
+							))
+						}
 					</ul>
 				</div>
 			</section>
+			<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>
 
-			<a class="win-card block" href="https://status.cafe/users/isntbunny" target="_blank" rel="noreferrer">
-				<div class="win-title-bar"><span>STATUS</span><span class="win-title-controls"><i></i><i></i></span></div>
-				<div class="win-body status-split">
+			<a
+				class="home-plain-card block"
+				href="https://status.cafe/users/isntbunny"
+				target="_blank"
+				rel="noreferrer"
+			>
+				<div class="status-split">
 					<div>
 						<time class="text-xs opacity-70" id="home-status-date">Loading...</time>
 						<p class="mt-2 text-sm" id="home-status-content">Syncing status.cafe feed ...</p>
 					</div>
 					<div class="status-side-image-wrap">
-						<img alt="status side" id="home-status-side-image" src={homeConfig.statusSideImages[0]} />
+						<img
+							alt="status side"
+							id="home-status-side-image"
+							src={homeConfig.statusSideImages[0]}
+						/>
 					</div>
 				</div>
 			</a>
-			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">(ﾉ*･ω･)ﾉ❄</div>
+			<div aria-hidden="true" class="home-column-filler hidden" id="home-right-filler">
+				(ﾉ*･ω･)ﾉ❄
+			</div>
 		</div>
 	</section>
 </PageLayout>
@@ -103,16 +132,29 @@ const daysSinceLastCommit = (() => {
 		const earthRadiusKm = 6371;
 		const dLat = toRad(lat2 - lat1);
 		const dLon = toRad(lon2 - lon1);
-		const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+		const a =
+			Math.sin(dLat / 2) ** 2 +
+			Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
 		return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	};
-	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => {
-		const body = entry[1] ?? "";
-		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
-		const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? "";
-		if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
-		return { updated, content };
-	}).filter(Boolean);
+	const parseStatusFeed = (xmlText) =>
+		[...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
+			.map((entry) => {
+				const body = entry[1] ?? "";
+				const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+				const content =
+					body
+						.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]
+						?.replace(/&lt;/g, "<")
+						?.replace(/&gt;/g, ">")
+						?.replace(/&amp;/g, "&")
+						?.replace(/<[^>]*>/g, " ")
+						?.replace(/\s+/g, " ")
+						?.trim() ?? "";
+				if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
+				return { updated, content };
+			})
+			.filter(Boolean);
 
 	const fetchStatusFeedText = async () => {
 		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`;
@@ -175,16 +217,27 @@ const daysSinceLastCommit = (() => {
 
 		const locationTarget = document.getElementById("home-location");
 		const distanceTarget = document.getElementById("home-distance");
-		fetch("https://ipapi.co/json/").then((res) => res.json()).then((data) => {
-			const locationName = data?.country_name === "China" ? [data?.region, data?.city].filter(Boolean).join(" ") || "China" : data?.country_name || "somewhere";
-			if (locationTarget) locationTarget.textContent = `WELCOME FRIEND FROM ${locationName} :P`;
-			if (distanceTarget && Number.isFinite(data?.latitude) && Number.isFinite(data?.longitude)) {
-				const km = haversineKm(Number(data.latitude), Number(data.longitude), qinhuangdao.lat, qinhuangdao.lon);
-				distanceTarget.textContent = `You are about ${Math.round(km)} km away from Eucaly-chan——`;
-			}
-		}).catch(() => {
-			if (locationTarget) locationTarget.textContent = "WELCOME FRIEND FROM SOMEWHERE :P";
-		});
+		fetch("https://ipapi.co/json/")
+			.then((res) => res.json())
+			.then((data) => {
+				const locationName =
+					data?.country_name === "China"
+						? [data?.region, data?.city].filter(Boolean).join(" ") || "China"
+						: data?.country_name || "somewhere";
+				if (locationTarget) locationTarget.textContent = `WELCOME FRIEND FROM ${locationName} :P`;
+				if (distanceTarget && Number.isFinite(data?.latitude) && Number.isFinite(data?.longitude)) {
+					const km = haversineKm(
+						Number(data.latitude),
+						Number(data.longitude),
+						qinhuangdao.lat,
+						qinhuangdao.lon,
+					);
+					distanceTarget.textContent = `You are about ${Math.round(km)} km away from Eucaly-chan——`;
+				}
+			})
+			.catch(() => {
+				if (locationTarget) locationTarget.textContent = "WELCOME FRIEND FROM SOMEWHERE :P";
+			});
 	};
 
 	const initHomeStatus = async () => {
