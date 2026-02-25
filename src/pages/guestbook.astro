@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import PageLayout from "@/layouts/Base.astro";
+import Twikoo from "./Twikoo.astro";
 
 const meta = {
 	description: "欢迎留言",
@@ -11,6 +12,7 @@ const guestbookEntry = await getEntry("page", "guestbook");
 if (!guestbookEntry) throw new Error("Missing src/content/page/guestbook.md");
 const { Content } = await render(guestbookEntry);
 ---
+
 
 <PageLayout meta={meta}>
 	<h1 class="title mb-6">Guestbook</h1>

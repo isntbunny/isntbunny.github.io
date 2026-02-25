@@ -17,12 +17,14 @@
 
 @layer base {
 	@font-face {
-		font-family: "HomePixel";
-		src: url("/assets/fonts/pixel.ttf") format('truetype');
+		font-family: "pixel";
+		src: url('https://example.com/path/to/font.woff2') format('woff2');
+		font-weight: normal;
+		font-style: normal;
 	}
 
 	html, body {
-		font-family: 'HomePixel', monospace, sans-serif ;
+		font-family: 'pixel', monospace, sans-serif ;
 		line-height: 1.5;
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
