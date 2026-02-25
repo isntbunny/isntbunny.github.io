@@ -22,12 +22,17 @@ const daysSinceLastCommit = (() => {
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="grid gap-6 lg:grid-cols-[1fr_1.4fr] home-win-grid">
+	<section class="home-top-strip">
+		<a href="/" class="home-top-image-link">
+			<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
+		</a>
+		<div class="home-marquee"><span>{homeConfig.marqueeText}</span></div>
+	</section>
 
-		<div class="space-y-6">
-
+	<section class="grid gap-0 lg:grid-cols-[1fr_1.4fr] home-win-grid">
+		<div class="space-y-0">
 			<section class="win-card">
-				<div class="win-title-bar">WELCOME.EXE</div>
+				<div class="win-title-bar"><span>WELCOME.EXE</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
 					<h1 class="title mb-3" id="home-typing"></h1>
 					<p class="home-welcome-jump" id="home-location">WELCOME FRIEND FROM FAR AWAY :P</p>
@@ -36,41 +41,36 @@ const daysSinceLastCommit = (() => {
 			</section>
 
 			<a class="win-card block" href="/posts/">
-				<div class="win-title-bar">ARCHIVE.HTML</div>
-				<div class="win-body text-sm">Press to enter the blog archive.</div>
+				<div class="win-title-bar"><span>ARCHIVE.HTML</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-body text-sm card-enter-wrap"><span>Go to blog archive.</span><span class="win-enter-btn">ENTER</span></div>
 			</a>
 
 			<a class="win-card block" href="/memos/">
-				<div class="win-title-bar">MEMOS.TXT</div>
-				<div class="win-body text-sm">Open the diary.</div>
+				<div class="win-title-bar"><span>MEMOS.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-body text-sm card-enter-wrap"><span>Open memos board.</span><img alt="memo deco" class="memo-card-mini" src={homeConfig.memosMiniImage} /><span class="win-enter-btn">ENTER</span></div>
 			</a>
 
 			<a class="win-card block" href="/gallery/">
-				<div class="win-title-bar">GALLERY</div>
+				<div class="win-title-bar"><span>GALLERY</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body"><img alt="gallery entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.galleryCardImage} /></div>
 			</a>
 
 			<a class="win-card guestbook-card block" href="/guestbook/">
-				<div class="win-title-bar">GUESTBOOK.TXT</div>
-				<div class="win-body text-sm">Leave a footprint.</div>
+				<div class="win-title-bar"><span>GUESTBOOK.TXT</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-body text-sm card-enter-wrap"><span>Leave a footprint.</span><span class="win-enter-btn">ENTER</span></div>
 			</a>
 		</div>
 
-		<div class="space-y-6">
-
+		<div class="space-y-0">
 			<section class="win-card">
-				<div class="win-title-bar">STATUS</div>
+				<div class="win-title-bar"><span>README.MD</span><span class="win-title-controls"><i></i><i></i></span></div>
 				<div class="win-body">
-
-					<a href="/about/">
+					<a href="/about/" class="readme-cover-wrap">
 						<img alt="readme entry" class="mb-3 w-full rounded-md object-contain" src={homeConfig.profileCoverImage} />
+						<img alt="corner sticker" class="readme-corner-image" src={homeConfig.readmeCornerImage} />
 					</a>
-
 					<p class="text-xs opacity-80">Updated {daysSinceLastCommit} days ago.</p>
-
-					<a href="https://status.cafe/users/isntbunny"><img src="https://status.cafe/users/isntbunny/badge.png" alt="Status Cafe Profile"/></a>
-					
-					<p>
+					<p class="readme-badges-row">
 						<img alt="C++" src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" height="25px"/>
 						<img alt="Python" src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white" height="25px"/>
 						<img alt="html5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" height="25px"/>
@@ -78,36 +78,55 @@ const daysSinceLastCommit = (() => {
 						<img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"  height="25px"/>
 						<img alt="Nodejs" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white"  height="25px"/>
 						<img alt="Astro" src="https://img.shields.io/badge/Astro-0C1222?style=for-the-badge&logo=astro&logoColor=FDFDFE" height="25px"/>
-
 					</p>
-					
 					<ul class="mt-4 space-y-2 text-sm">
 						{countdownItems.map((item) => (
 							<li class="rounded-md border border-black/40 bg-white/70 px-3 py-2 dark:bg-zinc-900/70">
-								<span>{item.label}</span> 
+								<span>{item.label}</span>
 								<strong>{item.days}{item.suffix}</strong>
 							</li>
 						))}
 					</ul>
-
 				</div>
 			</section>
 
-
+			<a class="win-card block" href="https://status.cafe/users/isntbunny" target="_blank" rel="noreferrer">
+				<div class="win-title-bar"><span>STATUS</span><span class="win-title-controls"><i></i><i></i></span></div>
+				<div class="win-body status-split">
+					<div>
+						<time class="text-xs opacity-70" id="home-status-date">Loading...</time>
+						<p class="mt-2 text-sm" id="home-status-content">Syncing status.cafe feed ...</p>
+					</div>
+					<div class="status-side-image-wrap">
+						<img alt="status side" id="home-status-side-image" src={homeConfig.statusSideImages[0]} />
+					</div>
+				</div>
+			</a>
 		</div>
 	</section>
 </PageLayout>
 
-<script define:vars={{ typingText: homeConfig.typingText }} is:inline>
+<script define:vars={{ _typingText: homeConfig.typingText, _statusCafeAtomUrl: homeConfig.statusCafeAtomUrl, _statusImages: homeConfig.statusSideImages }} is:inline>
+	const typingText = _typingText;
+	const statusCafeAtomUrl = _statusCafeAtomUrl;
+	const statusImages = _statusImages;
 	const qinhuangdao = { lat: 39.9354, lon: 119.5996 };
 	const haversineKm = (lat1, lon1, lat2, lon2) => {
 		const toRad = (deg) => (deg * Math.PI) / 180;
 		const earthRadiusKm = 6371;
 		const dLat = toRad(lat2 - lat1);
-		const dLon = toRad(lat2 - lon1);
+		const dLon = toRad(lon2 - lon1);
 		const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
 		return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	};
+	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => {
+		const body = entry[1] ?? "";
+		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+		const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? "";
+		if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
+		return { updated, content };
+	}).filter(Boolean);
+
 	const initHomeHero = () => {
 		const typingTarget = document.getElementById("home-typing");
 		let idx = 0;
@@ -144,6 +163,35 @@ const daysSinceLastCommit = (() => {
 			if (locationTarget) locationTarget.textContent = "WELCOME FRIEND FROM SOMEWHERE :P";
 		});
 	};
-	document.addEventListener("astro:page-load", initHomeHero);
+
+	const initHomeStatus = async () => {
+		const dateEl = document.getElementById("home-status-date");
+		const textEl = document.getElementById("home-status-content");
+		if (!dateEl || !textEl) return;
+		try {
+			const res = await fetch(`${statusCafeAtomUrl}?t=${Date.now()}`, { cache: "no-store" });
+			if (!res.ok) return;
+			const latest = parseStatusFeed(await res.text())[0];
+			if (!latest) return;
+			dateEl.textContent = new Date(latest.updated).toLocaleString("zh-CN");
+			textEl.textContent = latest.content;
+		} catch {
+			textEl.textContent = "status.cafe feed unavailable right now.";
+		}
+		const sideImage = document.getElementById("home-status-side-image");
+		if (sideImage instanceof HTMLImageElement) {
+			let idx = 0;
+			sideImage.addEventListener("click", (event) => {
+				event.preventDefault();
+				idx = (idx + 1) % statusImages.length;
+				sideImage.src = statusImages[idx];
+			});
+		}
+	};
+	document.addEventListener("astro:page-load", () => {
+		initHomeHero();
+		initHomeStatus();
+	});
 	initHomeHero();
+	initHomeStatus();
 </script>

@@ -1,22 +1,22 @@
 ---
 import Search from "@/components/Search.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
+import { homeConfig } from "@/settings/site";
 import { menuLinks } from "@/site.config";
-import { siteConfig } from "@/site.config";
 ---
 
-<header class="mb-10 sm:mb-14" id="main-header">
-	<div class="mb-4 text-center">
-		<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="inline-flex items-center" href="/">
-			<span class="text-xl font-bold sm:text-2xl">{siteConfig.title}</span>
+<header class="mb-8" id="main-header">
+	<div class="home-top-strip mb-3">
+		<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="home-top-image-link" href="/">
+			<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
 		</a>
 	</div>
-	<div class="flex items-center justify-center gap-2">
-		<nav aria-label="Main menu" class="hidden flex-wrap items-center justify-center gap-2 sm:flex" id="navigation-menu">
+	<div class="win-nav-wrap flex items-center justify-between gap-2">
+		<nav aria-label="Main menu" class="win-nav hidden sm:flex" id="navigation-menu">
 			{menuLinks.map((link, index) =>
 				link.children?.length ? (
-					<div class="relative">
-						<button aria-expanded="false" class="glass-panel card-chip cursor-pointer" data-submenu-toggle={index} type="button">
+					<div class="relative nav-item-wrap">
+						<button aria-expanded="false" class="card-chip cursor-pointer" data-submenu-toggle={index} type="button">
 							{link.title} ▾
 						</button>
 						<div class="submenu glass-panel absolute left-1/2 top-full z-10 mt-2 hidden min-w-44 -translate-x-1/2 rounded-md p-2">
@@ -26,12 +26,14 @@ import { siteConfig } from "@/site.config";
 						</div>
 					</div>
 				) : (
-					<a aria-current={Astro.url.pathname === link.path ? "page" : false} class="glass-panel card-chip" href={link.path} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>{link.title}</a>
+					<a aria-current={Astro.url.pathname === link.path ? "page" : false} class="card-chip nav-item-wrap" href={link.path} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>{link.title}</a>
 				),
 			)}
 		</nav>
-		<Search />
-		<ThemeToggle />
+		<div class="flex items-center gap-2">
+			<Search />
+			<ThemeToggle />
+		</div>
 	</div>
 </header>
 

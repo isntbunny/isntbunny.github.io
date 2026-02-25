@@ -1,0 +1,21 @@
+.lightbox__container {
+  --lightbox-bg: rgba(0, 0, 0, 0.9);
+  --lightbox-thumbs-width: 64px;
+  --lightbox-thumbs-ratio: 1;
+  --lightbox-thumbs-border-radius: 4px;
+}
+
+.lightbox__toolbar {
+  background: linear-gradient(180deg, rgba(20, 30, 45, 0.95) 0%, rgba(20, 30, 45, 0.5) 100%);
+}
+
+.lightbox__caption {
+  color: #e8f5ff;
+}
+
+.lightbox__button {
+  border-radius: 2px;
+  border: 1px solid #7e8faa;
+  background: #d5e8fa;
+  color: #24384f;
+}

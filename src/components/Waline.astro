@@ -1,0 +1,29 @@
+---
+interface Props {
+	path: string;
+}
+
+const serverURL = "https://waline-comment.vercel.app";
+const { path } = Astro.props;
+---
+
+<div id="waline"></div>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<script is:inline type="module" define:vars={{ path, serverURL }}>
+	import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
+
+	const initWaline = () => {
+		const el = document.getElementById("waline");
+		if (!el) return;
+		el.innerHTML = "";
+		init({
+			el: "#waline",
+			lang: "zh-CN",
+			path,
+			serverURL,
+		});
+	};
+
+	document.addEventListener("astro:page-load", initWaline);
+	initWaline();
+</script>

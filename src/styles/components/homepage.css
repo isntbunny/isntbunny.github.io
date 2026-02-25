@@ -1,10 +1,11 @@
 .card-chip {
-    @apply rounded-md px-3 py-2 transition hover:bg-zinc-100/70 dark:hover:bg-zinc-800/70;
+    @apply rounded-md px-3 py-2 transition;
 }
 
 .win-card {
-    border: 1px solid #555555;
-    background: #c9c9c9;
+    border: 1px solid #7e8faa;
+    background: #c9d7e8;
+    border-radius: 0;
 }
 
 .win-title-bar {
@@ -13,6 +14,22 @@
     font-size: 0.75rem;
     letter-spacing: 0.06em;
     padding: 0.35rem 0.55rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.win-title-controls {
+    display: inline-flex;
+    gap: 0.25rem;
+}
+
+.win-title-controls i {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #dce5ff;
+    background: #8fa0bf;
+    display: inline-block;
 }
 
 .win-body {
@@ -20,6 +37,125 @@
     padding: 0.8rem;
 }
 
+.dark .win-body,
+[data-theme="dark"] .win-body,
+.dark .win-body a,
+[data-theme="dark"] .win-body a {
+    color: #2d3a4a;
+}
+
+.home-top-strip {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.home-top-image {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border: 1px solid #7e8faa;
+}
+
+.home-marquee {
+    overflow: hidden;
+    border: 1px solid #7e8faa;
+    border-top: none;
+    background: #d5e8fa;
+    white-space: nowrap;
+}
+
+.home-marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: home-marquee 20s linear infinite;
+    font-size: 0.75rem;
+}
+
+@keyframes home-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
 .home-welcome-jump {
     animation: jump 0.7s infinite alternate ease-in-out;
+}
+
+.readme-cover-wrap { position: relative; display: block; }
+.readme-corner-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    border: 1px solid #7e8faa;
+}
+
+.readme-badges-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.status-split {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 0.75rem;
+}
+
+.status-split > div:first-child {
+    border-right: 1px dashed #7e8faa;
+    padding-right: 0.75rem;
+}
+
+.status-side-image-wrap img {
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #7e8faa;
+}
+
+.win-enter-btn {
+    border: 1px solid #7e8faa;
+    background: #e8f2ff;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+.card-enter-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.memo-card-mini {
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+}
+
+.win-nav-wrap {
+    border: 1px solid #7e8faa;
+    background: #d5e8fa;
+    padding: 0.25rem 0.5rem;
+}
+
+.win-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 70%;
+}
+
+.nav-item-wrap {
+    position: relative;
+}
+
+.nav-item-wrap + .nav-item-wrap::before {
+    content: "";
+    border-left: 1px dashed #7e8faa;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
 }

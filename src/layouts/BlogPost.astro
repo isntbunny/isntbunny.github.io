@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-
+import Waline from "@/components/Waline.astro";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 
@@ -14,7 +14,7 @@ const { post } = Astro.props;
 const { ogImage, title, description, updatedDate, publishDate } = post.data;
 const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
-const { headings, remarkPluginFrontmatter } = await render(post);
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.readingTime;
 ---
 
@@ -31,9 +31,14 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 			{!!headings.length && <TOC headings={headings} />}
 			<div class="prose prose-sm prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-gray-600 prose-headings:hover:before:text-accent sm:prose-headings:before:content-['#'] sm:prose-th:before:content-none">
+				<Content />
 			</div>
 		</div>
 	</article>
+	<section class="mt-10">
+		<h2 class="mb-3 text-base font-semibold">Comments</h2>
+		<Waline path={Astro.url.pathname} />
+	</section>
 	<button
 		class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"
 		data-show="false"
@@ -61,7 +66,6 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 
 	function callback(entries: IntersectionObserverEntry[]) {
 		entries.forEach((entry) => {
-			// only show the scroll to top button when the heading is out of view
 			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
 		});
 	}
