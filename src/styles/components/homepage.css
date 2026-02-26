@@ -2,10 +2,6 @@
 	@apply rounded-sm px-2 py-1 transition;
 }
 
-.site-content-frame {
-	padding: 0.5rem;
-}
-
 .site-hero-strip {
 	position: relative;
 	z-index: 10;
