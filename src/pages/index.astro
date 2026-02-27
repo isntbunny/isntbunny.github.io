@@ -67,6 +67,7 @@ const daysSinceLastCommit = (() => {
 		if (!content || Number.isNaN(new Date(updated).valueOf())) return null; // 过滤无效数据。
 		return { updated, content }; // 返回有效状态。
 	}).filter(Boolean); // 过滤空值。
+
 	const fetchStatusFeedText = async () => { // 拉取状态流文本。
 		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`; // 拼接防缓存地址。
 		const direct = await fetch(feedUrl, { cache: "no-store" }).catch(() => null); // 先尝试直连。
@@ -75,6 +76,7 @@ const daysSinceLastCommit = (() => {
 		if (!viaProxy.ok) throw new Error("status feed unavailable"); // 代理失败抛错。
 		return viaProxy.text(); // 返回代理结果。
 	};
+
 	const updateDistance = async () => { // 更新访问者到秦皇岛距离。
 		const distanceTarget = document.getElementById("home-distance"); // 获取距离文本节点。
 		if (!distanceTarget) return; // 无节点则退出。
@@ -92,6 +94,7 @@ const daysSinceLastCommit = (() => {
 			distanceTarget.textContent = "You are ... km away from An-chan."; // 定位失败显示默认文案。
 		}
 	};
+	
 	const initHome = async () => { // 初始化首页动态内容。
 		const statusDate = document.getElementById("home-status-date"); // 获取状态日期节点。
 		const statusContent = document.getElementById("home-status-content"); // 获取状态内容节点。

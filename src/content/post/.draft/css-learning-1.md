@@ -99,3 +99,186 @@ hexadecimal：16进制计数系统
 header footer
 section article
 time
+
+在 CSS 中，选择器用于选择 HTML 元素以应用样式。选择器可以有多种类型，每种类型都有不同的用途和语法。以下是一些常见的选择器类型及其详细介绍：
+
+### 基本选择器
+
+1. **类选择器（Class Selector）**
+   - 语法：`.classname`
+   - 示例：`.button`
+   - 用途：选择具有特定类名的元素。
+
+2. **ID 选择器（ID Selector）**
+   - 语法：`#idname`
+   - 示例：`#header`
+   - 用途：选择具有特定 ID 的元素。每个 ID 在页面中应是唯一的。
+
+3. **元素选择器（Element Selector）**
+   - 语法：`elementname`
+   - 示例：`p`
+   - 用途：选择特定类型的所有元素。
+
+4. **通用选择器（Universal Selector）**
+   - 语法：`*`
+   - 示例：`*`
+   - 用途：选择所有元素。
+
+### 属性选择器
+
+1. **属性存在选择器**
+   - 语法：`[attribute]`
+   - 示例：`[type="text"]`
+   - 用途：选择具有特定属性的元素。
+
+2. **属性值选择器**
+   - 语法：`[attribute="value"]`
+   - 示例：`[type="text"]`
+   - 用途：选择具有特定属性值的元素。
+
+3. **属性值包含选择器**
+   - 语法：`[attribute*="value"]`
+   - 示例：`[class*="btn"]`
+   - 用途：选择属性值包含特定字符串的元素。
+
+### 伪类选择器
+
+1. **链接伪类**
+   - 语法：`:link`, `:visited`, `:hover`, `:active`, `:focus`
+   - 示例：`a:link`, `a:visited`
+   - 用途：选择链接的不同状态。
+
+2. **结构伪类**
+   - 语法：`:first-child`, `:last-child`, `:nth-child(n)`, `:nth-of-type(n)`
+   - 示例：`p:first-child`, `li:nth-child(2)`
+   - 用途：选择基于元素在父元素中的位置的元素。
+
+3. **用户界面伪类**
+   - 语法：`:enabled`, `:disabled`, `:checked`
+   - 示例：`input:enabled`, `input:checked`
+   - 用途：选择基于用户界面状态的元素。
+
+### 伪元素选择器
+
+1. **伪元素**
+   - 语法：`::before`, `::after`, `::first-line`, `::first-letter`
+   - 示例：`p::first-line`, `div::after`
+   - 用途：选择元素的特定部分或插入内容。
+
+### 组合选择器
+
+1. **后代选择器**
+   - 语法：`ancestor descendant`
+   - 示例：`div p`
+   - 用途：选择所有匹配后代的元素。
+
+2. **子选择器**
+   - 语法：`parent > child`
+   - 示例：`div > p`
+   - 用途：选择所有直接子元素。
+
+3. **相邻兄弟选择器**
+   - 语法：`element + element`
+   - 示例：`h1 + p`
+   - 用途：选择紧接在另一个元素后的元素。
+
+4. **通用兄弟选择器**
+   - 语法：`element ~ element`
+   - 示例：`h1 ~ p`
+   - 用途：选择在另一个元素之后的所有兄弟元素。
+
+### 组合选择器
+
+1. **组合选择器**
+   - 语法：`selector1, selector2`
+   - 示例：`h1, h2, h3`
+   - 用途：选择多个选择器匹配的元素。
+
+### 示例代码
+
+以下是一些示例代码，展示了不同类型的选择器：
+
+```css
+/* 类选择器 */
+.button {
+    background-color: blue;
+    color: white;
+}
+
+/* ID 选择器 */
+#header {
+    background-color: gray;
+    color: white;
+}
+
+/* 元素选择器 */
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* 通用选择器 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 属性选择器 */
+[type="text"] {
+    border: 1px solid #ccc;
+}
+
+/* 伪类选择器 */
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: red;
+}
+
+p:first-child {
+    font-weight: bold;
+}
+
+/* 伪元素选择器 */
+p::first-line {
+    font-variant: small-caps;
+}
+
+div::after {
+    content: " - End of content";
+    color: gray;
+}
+
+/* 后代选择器 */
+div p {
+    color: green;
+}
+
+/* 子选择器 */
+div > p {
+    color: blue;
+}
+
+/* 相邻兄弟选择器 */
+h1 + p {
+    margin-top: 0;
+}
+
+/* 通用兄弟选择器 */
+h1 ~ p {
+    color: orange;
+}
+
+/* 组合选择器 */
+h1, h2, h3 {
+    color: navy;
+}
+```
+
+这些选择器和组合选择器使得 CSS 具有强大的灵活性和精确性，能够精确地选择和样式化 HTML 元素。
