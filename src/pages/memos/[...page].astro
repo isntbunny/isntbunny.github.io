@@ -1,192 +1,59 @@
 ---
-import type { GetStaticPaths, Page } from "astro";
-import Pagination from "@/components/Paginator.astro";
-import Waline from "@/components/Waline.astro";
-import Note from "@/components/note/Note.astro";
-import { getAllNotes } from "@/data/note";
+import type { GetStaticPaths } from "astro";
 import PageLayout from "@/layouts/Base.astro";
-import { siteSettings } from "@/settings/site";
 
-export const getStaticPaths = (async ({ paginate }) => {
-	const notes = await getAllNotes();
-	return paginate(notes, { pageSize: 12 });
-}) satisfies GetStaticPaths;
-
-const { page } = Astro.props as { page: Page<Awaited<ReturnType<typeof getAllNotes>>[number]> };
-
-const groupedNotes = page.data.reduce(
-	(acc, note) => {
-		const date = new Date(note.data.publishDate);
-		const year = String(date.getFullYear());
-		const month = String(date.getMonth() + 1).padStart(2, "0");
-		const key = `${year}-${month}`;
-		if (!acc[key]) acc[key] = [];
-		acc[key].push(note);
-		return acc;
-	},
-	{} as Record<string, typeof page.data>,
-);
-
-const groupedKeys = Object.keys(groupedNotes).sort((a, b) => (a > b ? -1 : 1));
+export const getStaticPaths = (async ({ paginate }) => paginate([0], { pageSize: 1 })) satisfies GetStaticPaths;
+const statusCafeAtomUrl = "https://status.cafe/users/isntbunny.atom";
 ---
 
-<PageLayout meta={{ description: "status.cafe + notes stream", title: "Memos" }}>
+<PageLayout meta={{ description: "status.cafe stream", title: "Memos" }}>
 	<section class="memos-page-layout">
-		<header class="memos-page-header">
-			<h1 class="title">Memos</h1>
-			<p class="text-sm opacity-80">记录窝的无营养日常吐槽与想法</p>
-		</header>
-
+		<header class="memos-page-header"><h1 class="title">Memos</h1><p>这里只保留 status.cafe 内容。</p></header>
 		<section aria-labelledby="status-feed-title" class="memos-panel-section">
 			<h2 class="memos-panel-title" id="status-feed-title">STATUS CAFE STREAM</h2>
 			<div class="memos-status-stream-grid" id="statuscafe-stream" role="feed"></div>
 		</section>
-
-		<section aria-labelledby="note-waterfall-title" class="memos-panel-section">
-			<h2 class="memos-panel-title" id="note-waterfall-title">NOTE WATERFALL</h2>
-			{
-				groupedKeys.map((groupKey) => (
-					<section class="memos-group-section">
-						<h3 class="memos-group-heading">{groupKey}</h3>
-						<div class="memos-note-waterfall" role="feed">
-							{(groupedNotes[groupKey] ?? []).map((note, idx) => (
-								<article class:list={["memos-note-waterfall-item", idx % 2 === 1 && "is-offset"]}>
-									<Note note={note} as="h2" isPreview />
-								</article>
-							))}
-						</div>
-					</section>
-				))
-			}
-		</section>
-
-		<Pagination
-			{...page.url.prev && { prevUrl: { text: "← Previous Page", url: page.url.prev } }}
-			{...page.url.next && { nextUrl: { text: "Next Page →", url: page.url.next } }}
-		/>
-
-		<section class="memos-panel-section">
-			<h2 class="memos-panel-title">COMMENTS</h2>
-			<Waline path={Astro.url.pathname} />
-		</section>
 	</section>
 </PageLayout>
 
-<script define:vars={{ statusCafeAtomUrl: siteSettings.statusCafe.atomUrl }} is:inline>
-	const statusProxyUrl = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-	const decodeHtmlText = (text) => {
-		const doc = new DOMParser().parseFromString(text, "text/html");
-		return doc.documentElement.textContent ?? "";
+<script define:vars={{ statusCafeAtomUrl }} is:inline>
+	const statusProxyUrl = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`; // 定义代理地址。
+	const decodeHtmlText = (text) => { // 定义 HTML 解码函数。
+		const doc = new DOMParser().parseFromString(text, "text/html"); // 解析 HTML。
+		return doc.documentElement.textContent ?? ""; // 返回纯文本。
 	};
-	const parseStatusFeed = (xmlText) =>
-		[...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
-			.map((entry) => {
-				const body = entry[1] ?? "";
-				const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? "";
-				const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
-				const contentRaw = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ?? "";
-				const content = decodeHtmlText(contentRaw)
-					.replace(/<[^>]*>/g, " ")
-					.replace(/\s+/g, " ")
-					.trim();
-				if (!id || !content || Number.isNaN(new Date(updated).valueOf())) return null;
-				return { id, content, updated };
-			})
-			.filter(Boolean);
-
-	const fetchStatusFeedText = async () => {
-		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`;
-		const direct = await fetch(feedUrl, { cache: "no-store" }).catch(() => null);
-		if (direct?.ok) return direct.text();
-		const viaProxy = await fetch(statusProxyUrl(feedUrl), { cache: "no-store" });
-		if (!viaProxy.ok) throw new Error("status feed unavailable");
-		return viaProxy.text();
+	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => { // 解析状态条目。
+		const body = entry[1] ?? ""; // 提取条目主体。
+		const id = body.match(/<id>([\s\S]*?)<\/id>/i)?.[1]?.trim() ?? ""; // 提取条目 ID。
+		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? ""; // 提取更新时间。
+		const contentRaw = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ?? ""; // 提取原始内容。
+		const content = decodeHtmlText(contentRaw).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim(); // 转换为纯文本内容。
+		if (!id || !content || Number.isNaN(new Date(updated).valueOf())) return null; // 过滤非法条目。
+		return { id, content, updated }; // 返回合法条目。
+	}).filter(Boolean); // 去除空值。
+	const fetchStatusFeedText = async () => { // 拉取状态流 XML。
+		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`; // 添加时间戳防缓存。
+		const direct = await fetch(feedUrl, { cache: "no-store" }).catch(() => null); // 先尝试直连。
+		if (direct?.ok) return direct.text(); // 直连成功返回内容。
+		const viaProxy = await fetch(statusProxyUrl(feedUrl), { cache: "no-store" }); // 直连失败改用代理。
+		if (!viaProxy.ok) throw new Error("status feed unavailable"); // 代理失败抛错。
+		return viaProxy.text(); // 返回代理文本。
 	};
-
-	const renderStatusFeed = async () => {
-		const statusFeedContainer = document.getElementById("statuscafe-stream");
-		if (!statusFeedContainer) return;
+	const renderStatusFeed = async () => { // 渲染状态流到页面。
+		const statusFeedContainer = document.getElementById("statuscafe-stream"); // 获取容器节点。
+		if (!statusFeedContainer) return; // 缺失容器时退出。
 		try {
-			const items = parseStatusFeed(await fetchStatusFeedText());
-			statusFeedContainer.innerHTML = items
-				.map(
-					(item) =>
-						`<article class="status-card memos-status-stream-item"><time class="block text-xs opacity-70">${new Date(item.updated).toLocaleString("zh-CN")}</time><p class="mt-2 whitespace-pre-wrap text-sm">${item.content}</p></article>`,
-				)
-				.join("");
+			const items = parseStatusFeed(await fetchStatusFeedText()); // 拉取并解析条目。
+			statusFeedContainer.innerHTML = items.map((item) => `<article class="status-card memos-status-stream-item"><time>${new Date(item.updated).toLocaleString("zh-CN")}</time><p>${item.content}</p></article>`).join(""); // 渲染条目列表。
 		} catch {
-			statusFeedContainer.innerHTML = `<p class="status-card">Unable to load status.cafe stream right now.</p>`;
+			statusFeedContainer.innerHTML = `<p class="status-card">Unable to load status.cafe stream right now.</p>`; // 失败时渲染错误提示。
 		}
 	};
-
-	const initStatusStream = () => {
-		renderStatusFeed();
-		if (window.__statusStreamTimer) clearInterval(window.__statusStreamTimer);
-		window.__statusStreamTimer = setInterval(renderStatusFeed, 45000);
+	const initStatusStream = () => { // 初始化并轮询状态流。
+		renderStatusFeed(); // 首次执行渲染。
+		if (window.__statusStreamTimer) clearInterval(window.__statusStreamTimer); // 清除已有定时器。
+		window.__statusStreamTimer = setInterval(renderStatusFeed, 45000); // 建立 45 秒轮询。
 	};
-	document.addEventListener("astro:page-load", initStatusStream);
-	initStatusStream();
+	document.addEventListener("astro:page-load", initStatusStream); // 路由切换后重新初始化。
+	initStatusStream(); // 首屏立即初始化。
 </script>
-
-<style>
-	.memos-page-layout {
-		display: grid;
-		gap: 1rem;
-		letter-spacing: 0.05em;
-	}
-
-	.memos-page-header,
-	.memos-panel-section {
-		display: grid;
-		gap: 0.65rem;
-	}
-
-	.memos-panel-title {
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-	}
-
-	.memos-group-heading {
-		font-size: 1.6rem;
-		line-height: 1.2;
-		font-weight: 700;
-		margin: 0.25rem 0 0.75rem;
-	}
-
-	.memos-status-stream-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.8rem;
-	}
-
-	.memos-note-waterfall {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.8rem;
-	}
-
-	.memos-note-waterfall-item {
-		align-self: start;
-	}
-
-	.memos-note-waterfall-item.is-offset {
-		margin-top: 1rem;
-	}
-
-	.memos-status-stream-item,
-	.memos-note-waterfall-item :global(.status-card) {
-		border: 1px solid #7e8faa;
-	}
-
-	@media (max-width: 700px) {
-		.memos-note-waterfall,
-		.memos-status-stream-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.memos-note-waterfall-item.is-offset {
-			margin-top: 0;
-		}
-	}
-</style>

@@ -1,0 +1,33 @@
+.memos-page-layout {
+	display: grid;
+	gap: 1rem;
+	letter-spacing: 0.05em;
+}
+
+.memos-page-header,
+.memos-panel-section {
+	display: grid;
+	gap: 0.65rem;
+}
+
+.memos-panel-title {
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.memos-status-stream-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.8rem;
+}
+
+.memos-status-stream-item {
+	border: 1px solid #7e8faa;
+}
+
+@media (max-width: 700px) {
+	.memos-status-stream-grid {
+		grid-template-columns: 1fr;
+	}
+}

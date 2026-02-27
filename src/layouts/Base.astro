@@ -6,133 +6,84 @@ import Search from "@/components/Search.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
-import { getPageBackground, homeConfig, siteSettings } from "@/settings/site";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
-interface Props {
-	meta: SiteMeta;
-}
+interface Props { meta: SiteMeta; }
 
-const {
-	meta: { articleDate, description = siteConfig.description, ogImage, title },
-} = Astro.props;
+const { meta: { articleDate, description = siteConfig.description, ogImage, title } } = Astro.props;
 const isHome = Astro.url.pathname === "/";
 const isAbout = Astro.url.pathname === "/about/";
 const useSharedLeftSidebar = !isHome && !isAbout;
-const pageBackground = isHome
-	? siteSettings.backgrounds.home
-	: getPageBackground(Astro.url.pathname);
+const topBannerImage = "https://i.postimg.cc/43GZ382v/e2511.png";
+const pageBackground = "https://i.postimg.cc/Y2bwBpkP/26898018.jpg";
 ---
 
-<html class="scroll-smooth" lang={siteConfig.lang}>
-	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
-	</head>
-	<body
-		class="bg-global-bg text-global-text mx-auto flex min-h-screen w-full max-w-6xl flex-col bg-cover bg-scroll bg-center px-3 pt-6 text-base font-normal antialiased sm:bg-fixed sm:px-6 sm:pt-8"
-		class:list={[isHome && "home-page-bg"]}
-		data-theme-bg
-		style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}
-	>
+<html lang={siteConfig.lang}>
+	<head><BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} /></head>
+	<body class="site-shell" style={`background-image: linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)), url(${pageBackground});`}>
 		<ThemeProvider />
 		<SkipLink />
-		<div class="site-action-rail" role="group" aria-label="Search and theme controls">
-			<Search />
-			<ThemeToggle />
-		</div>
+		<div class="site-action-rail" role="group" aria-label="Search and theme controls"><Search /><ThemeToggle /></div>
 		<div>
-			<div class="site-hero-strip mb-3">
-				<a
-					aria-current={Astro.url.pathname === "/" ? "page" : false}
-					class="home-top-image-link"
-					href="/"
-				>
-					<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
-				</a>
-			</div>
+			<div class="site-hero-strip"><a aria-current={Astro.url.pathname === "/" ? "page" : false} class="home-top-image-link" href="/"><img alt="top banner" class="home-top-image" src={topBannerImage} /></a></div>
 			<main id="main">
-				{
-					useSharedLeftSidebar ? (
-						<section class="inner-page-shell">
-							<SharedLeftSidebar compact />
-							<div class="inner-page-content">
-								<slot />
-							</div>
-						</section>
-					) : (
-						<slot />
-					)
-				}
+				{useSharedLeftSidebar ? <section class="inner-page-shell"><SharedLeftSidebar compact /><div class="inner-page-content"><slot /></div></section> : <slot />}
 			</main>
 		</div>
 		<Footer />
-		<div aria-hidden="true" id="global-lightbox">
-			<img alt="Enlarged image" id="global-lightbox-image" src="" />
-		</div>
-		<script is:inline type="speculationrules">
-			{
-				"prefetch": [{ "where": { "href_matches": "/*" }, "eagerness": "immediate" }],
-				"prerender": [{ "where": { "href_matches": "/*" }, "eagerness": "moderate" }]
-			}
-		</script>
+		<div aria-hidden="true" id="global-lightbox"><img alt="Enlarged image" id="global-lightbox-image" src="" /></div>
 	</body>
 </html>
 
-
 <script is:inline>
-	const clickFaces = ["❄(◕‿◕)❄", "(ﾉ*･ω･)ﾉ❄", "✧(｡•̀ᴗ-)", "(๑˃ᴗ˂)ﻭ", "˗ˏˋ ❄ ˎˊ˗"];
-
-	const showClickKaomoji = (event) => {
-		const target = event.target;
-		if (!(target instanceof Element)) return;
-		if (target.closest("a, button, input, textarea")) return;
-		const effect = document.createElement("span");
-		effect.className = "click-kaomoji-effect";
-		effect.textContent = clickFaces[Math.floor(Math.random() * clickFaces.length)];
-		effect.style.left = `${event.clientX}px`;
-		effect.style.top = `${event.clientY}px`;
-		document.body.append(effect);
-		setTimeout(() => effect.remove(), 900);
+	const clickFaces = ["❄(◕‿◕)❄", "(ﾉ*･ω･)ﾉ❄", "✧(｡•̀ᴗ-)", "(๑˃ᴗ˂)ﻭ", "˗ˏˋ ❄ ˎˊ˗"]; // 定义点击特效文本。
+	const showClickKaomoji = (event) => { // 定义点击冒泡特效方法。
+		const target = event.target; // 获取事件源。
+		if (!(target instanceof Element)) return; // 过滤非元素节点。
+		if (target.closest("a, button, input, textarea")) return; // 避免影响可交互元素。
+		const effect = document.createElement("span"); // 创建特效节点。
+		effect.className = "click-kaomoji-effect"; // 设置特效样式类名。
+		effect.textContent = clickFaces[Math.floor(Math.random() * clickFaces.length)]; // 随机设置文本。
+		effect.style.left = `${event.clientX}px`; // 设置横坐标。
+		effect.style.top = `${event.clientY}px`; // 设置纵坐标。
+		document.body.append(effect); // 插入特效节点。
+		setTimeout(() => effect.remove(), 900); // 延时移除特效。
 	};
-
-	const bindGlobalLightbox = () => {
-		const lightbox = document.getElementById("global-lightbox");
-		const lightboxImage = document.getElementById("global-lightbox-image");
-		if (!lightbox || !(lightboxImage instanceof HTMLImageElement)) return;
-
-		document.querySelectorAll("article img, .prose img, .gallery-image").forEach((img) => {
-			if (!(img instanceof HTMLImageElement) || !img.src) return;
-			img.style.cursor = "zoom-in";
-			if (img.dataset.lightboxBound === "1") return;
-			img.dataset.lightboxBound = "1";
-			img.addEventListener("click", () => {
-				lightboxImage.src = img.currentSrc || img.src;
-				lightboxImage.alt = img.alt || "Image";
-				lightbox.dataset.open = "true";
-				lightbox.setAttribute("aria-hidden", "false");
+	const bindGlobalLightbox = () => { // 定义全局图片灯箱绑定。
+		const lightbox = document.getElementById("global-lightbox"); // 获取灯箱容器。
+		const lightboxImage = document.getElementById("global-lightbox-image"); // 获取灯箱图片。
+		if (!lightbox || !(lightboxImage instanceof HTMLImageElement)) return; // 节点不存在则退出。
+		document.querySelectorAll("article img, .prose img, .gallery-image").forEach((img) => { // 遍历可放大图片。
+			if (!(img instanceof HTMLImageElement) || !img.src) return; // 过滤无效图片。
+			img.style.cursor = "zoom-in"; // 设置鼠标样式。
+			if (img.dataset.lightboxBound === "1") return; // 已绑定则跳过。
+			img.dataset.lightboxBound = "1"; // 标记已绑定。
+			img.addEventListener("click", () => { // 点击时显示灯箱。
+				lightboxImage.src = img.currentSrc || img.src; // 同步图片地址。
+				lightboxImage.alt = img.alt || "Image"; // 同步图片文案。
+				lightbox.dataset.open = "true"; // 打开灯箱。
+				lightbox.setAttribute("aria-hidden", "false"); // 设置可访问状态。
 			});
 		});
-
-		if (lightbox.dataset.bound !== "1") {
-			lightbox.dataset.bound = "1";
-			lightbox.addEventListener("click", () => {
-				lightbox.dataset.open = "false";
-				lightbox.setAttribute("aria-hidden", "true");
+		if (lightbox.dataset.bound !== "1") { // 首次绑定关闭逻辑。
+			lightbox.dataset.bound = "1"; // 标记灯箱已绑定。
+			lightbox.addEventListener("click", () => { // 点击遮罩关闭灯箱。
+				lightbox.dataset.open = "false"; // 关闭灯箱。
+				lightbox.setAttribute("aria-hidden", "true"); // 更新可访问状态。
 			});
-			document.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					lightbox.dataset.open = "false";
-					lightbox.setAttribute("aria-hidden", "true");
+			document.addEventListener("keydown", (event) => { // 监听键盘关闭事件。
+				if (event.key === "Escape") { // 仅处理 Escape 键。
+					lightbox.dataset.open = "false"; // 关闭灯箱。
+					lightbox.setAttribute("aria-hidden", "true"); // 更新可访问状态。
 				}
 			});
 		}
-		if (document.body.dataset.kaomojiBound !== "1") {
-			document.body.dataset.kaomojiBound = "1";
-			document.addEventListener("pointerdown", showClickKaomoji);
+		if (document.body.dataset.kaomojiBound !== "1") { // 首次绑定点击特效。
+			document.body.dataset.kaomojiBound = "1"; // 标记已绑定。
+			document.addEventListener("pointerdown", showClickKaomoji); // 绑定指针事件。
 		}
 	};
-
-	document.addEventListener("astro:page-load", bindGlobalLightbox);
-	bindGlobalLightbox();
+	document.addEventListener("astro:page-load", bindGlobalLightbox); // Astro 页面切换时绑定。
+	bindGlobalLightbox(); // 首屏立即绑定。
 </script>
