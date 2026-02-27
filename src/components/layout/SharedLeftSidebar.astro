@@ -1,6 +1,4 @@
 ---
-import { homeConfig } from "@/settings/site";
-
 interface Props {
 	compact?: boolean;
 }
@@ -8,18 +6,13 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<aside
-	class="home-sidebar-frame home-layout-column shared-left-sidebar"
-	data-compact={compact ? "1" : "0"}
->
+<aside class="home-sidebar-frame home-layout-column shared-left-sidebar" data-compact={compact ? "1" : "0"}>
 	<section class="win-card">
 		<div class="win-title-bar">WELCOME.EXE</div>
 		<div class="win-body">
-			<h1 class="title mb-3" id="home-typing"></h1>
+			<h1 class="title" id="home-typing"></h1>
 			<p class="home-welcome-jump" id="home-location">WELCOME FRIEND FROM FAR AWAY :P</p>
-			<p class="mt-1 text-xs opacity-80" id="home-distance">
-				You are ... km away from An-chan.
-			</p>
+			<p id="home-distance">You are ... km away from An-chan.</p>
 		</div>
 	</section>
 	<div class="angel-divider" aria-hidden="true">°‧🪽₊⋆༺✧༻⋆₊🪽‧°</div>

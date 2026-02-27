@@ -1,112 +1,14 @@
-/* would like to ignore ./src/pages/og-image/[slug].png.ts */
-@import "tailwindcss";
-@config "../../tailwind.config.ts";
+@import "./base/theme.css";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@import "./components/admonition.css";
+@import "./components/github-card.css";
+@import "./components/homepage.css";
 
-@theme {
-	--color-global-bg: oklch(96% 0.018 220);
-	--color-global-text: oklch(30% 0.032 232);
-	--color-link: oklch(52% 0.085 220);
-	--color-accent: oklch(60% 0.09 218);
-	--color-accent-2: oklch(38% 0.045 232);
-	--color-quote: oklch(48% 0.055 220);
-	--color-bg-overlay: rgba(236, 245, 248, 0.78);
-	--color-surface: rgba(255, 255, 255, 0.7);
-	--color-surface-dark: rgba(33, 45, 66, 0.82);
-}
+@import "./layout/base.css";
 
-@layer base {
-	@font-face {
-		font-family: "pixel";
-		src: url("https://example.com/path/to/font.woff2") format("woff2");
-		font-weight: normal;
-		font-style: normal;
-	}
-
-	html,
-	body {
-		font-family: "pixel", 'Courier New', Courier, monospace;
-		line-height: 1.5;
-		color-scheme: light dark;
-		accent-color: var(--color-accent);
-		scrollbar-gutter: stable;
-
-		&[data-theme="light"] {
-			color-scheme: light;
-		}
-
-		&[data-theme="dark"] {
-			color-scheme: dark;
-		}
-	}
-
-	body {
-		background-color: var(--color-global-bg);
-	}
-
-	:where(*) {
-		border-style: none;
-	}
-
-	@media (max-width: 640px) {
-		body {
-			background-attachment: scroll;
-		}
-	}
-
-	:target {
-		scroll-margin-block: 5ex;
-	}
-
-	@view-transition {
-		navigation: auto;
-	}
-
-	:where([data-astro-image]) {
-		object-fit: var(--fit);
-		object-position: var(--pos);
-	}
-	[data-astro-image="full-width"] {
-		width: 100%;
-	}
-	[data-astro-image="constrained"] {
-		max-width: 100%;
-	}
-}
-
-@layer components {
-	@import "./components/admonition.css";
-	@import "./components/github-card.css";
-	@import "./components/homepage.css";
-	@import "./pages/about.css";
-	@import "./pages/posts.css";
-
-	.textlink {
-		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
-	}
-
-	.title {
-		@apply text-accent-2 text-2xl font-semibold;
-	}
-
-	.glass-panel {
-		background: var(--color-surface);
-		backdrop-filter: blur(6px);
-	}
-
-	.status-card {
-		@apply rounded-md px-4 py-3;
-		background: var(--color-surface);
-		backdrop-filter: blur(6px);
-	}
-
-	.dark .status-card,
-	[data-theme="dark"] .status-card {
-		background: var(--color-surface-dark);
-		color: #edf4ff;
-	}
-}
+@import "./pages/about.css";
+@import "./pages/posts.css";
+@import "./pages/memos.css";
 
 @keyframes jump {
 	from {
@@ -117,35 +19,16 @@
 	}
 }
 
-#global-lightbox {
-	position: fixed;
-	inset: 0;
-	z-index: 300;
-	display: none;
-	align-items: center;
-	justify-content: center;
-	background: rgba(0, 0, 0, 0.82);
-	padding: 1rem;
-}
-
-#global-lightbox[data-open="true"] {
-	display: flex;
-}
-
-#global-lightbox img {
-	max-height: 92vh;
-	max-width: 92vw;
-	object-fit: contain;
-}
-
-@utility prose {
-	--tw-prose-body: var(--color-global-text);
-	--tw-prose-bold: var(--color-global-text);
-	--tw-prose-bullets: var(--color-global-text);
-	--tw-prose-code: var(--color-global-text);
-	--tw-prose-headings: var(--color-accent-2);
-	--tw-prose-hr: 0.5px dashed #666;
-	--tw-prose-links: var(--color-global-text);
-	--tw-prose-quotes: var(--color-quote);
-	--tw-prose-th-borders: transparent;
+@keyframes kaomoji-pop {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.8);
+	}
+	20% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translate(-50%, -160%) scale(1.25);
+	}
 }

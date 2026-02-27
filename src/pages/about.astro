@@ -2,13 +2,9 @@
 import { getEntry, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import PageLayout from "@/layouts/Base.astro";
-import { homeConfig } from "@/settings/site";
 
-const meta = {
-	description: "About me",
-	title: "About",
-};
-
+const meta = { description: "About me", title: "About" };
+const profileCoverImage = "https://i.postimg.cc/4dLTBX4R/e250416.jpg";
 const contacts = [
 	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
 	{ icon: "mdi:email-outline", label: "Email", url: "mailto:isntbunny@outlook.com" },
@@ -20,34 +16,15 @@ const { Content } = await render(aboutEntry);
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-12">Readme.md</h1>
+	<h1 class="title">Readme.md</h1>
 	<section class="about-readme-shell">
-		<div class="prose prose-sm prose-cactus max-w-none">
-			<Content />
-		</div>
-		<div class="about-avatar-wrap">
-			<img alt="profile photo" src={homeConfig.profileCoverImage} />
-		</div>
+		<div class="prose prose-sm prose-cactus max-w-none"><Content /></div>
+		<div class="about-avatar-wrap"><img alt="profile photo" src={profileCoverImage} /></div>
 	</section>
-
-	<section class="mt-10 rounded-md bg-sky-50/60 p-4 dark:bg-sky-950/40">
-		<p class="mb-3 font-semibold">Find me on</p>
-		<ul class="space-y-2">
-			{
-				contacts.map((item) => (
-					<li>
-						<a
-							class="inline-flex items-center gap-2 hover:underline"
-							href={item.url}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<Icon name={item.icon} class="h-5 w-5" />
-							<span>{item.label}</span>
-						</a>
-					</li>
-				))
-			}
+	<section>
+		<p>Find me on</p>
+		<ul>
+			{contacts.map((item) => <li><a href={item.url} target="_blank" rel="noreferrer"><Icon name={item.icon} /> <span>{item.label}</span></a></li>)}
 		</ul>
 	</section>
 </PageLayout>

@@ -1,22 +1,7 @@
 .card-chip {
-	@apply rounded-sm px-2 py-1 transition;
-}
-
-.site-hero-strip {
-	position: relative;
-	z-index: 10;
-	display: grid;
-	gap: 0.5rem;
-}
-
-.site-hero-kaomoji {
-	position: absolute;
-	right: 0.6rem;
-	top: 0.55rem;
-	font-size: 0.75rem;
-	padding: 0.2rem 0.45rem;
-	background: rgba(255, 255, 255, 0.7);
-	border: 1px dashed #7e8faa;
+	border-radius: 0.125rem;
+	padding: 0.25rem 0.5rem;
+	transition: all 0.2s ease;
 }
 
 .home-top-image {
@@ -25,6 +10,7 @@
 	object-fit: cover;
 	border: 1px solid #4a78d0;
 }
+
 .win-card {
 	border: 1px solid #7e8faa;
 	background: #c9d7e8;
@@ -32,26 +18,13 @@
 
 .win-title-bar {
 	background: linear-gradient(90deg, #355ca5, #91b2ec);
-	color: #fff;
+	color: #ffffff;
 	font-size: 0.72rem;
 	letter-spacing: 0.06em;
 	padding: 0.3rem 0.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-.win-title-controls {
-	display: inline-flex;
-	gap: 0.2rem;
-}
-
-.win-title-controls i {
-	width: 9px;
-	height: 9px;
-	border: 1px solid #dce5ff;
-	background: #8fa0bf;
-	display: inline-block;
 }
 
 .win-body {
@@ -64,14 +37,23 @@
 }
 
 .home-main-grid {
-	display: grid;
-	gap: 0.85rem;
+	display: table;
+	width: 100%;
+	border-spacing: 0.85rem 0;
 }
 
-@media (min-width: 1024px) {
-	.home-main-grid {
-		grid-template-columns: 0.65fr 1.4fr 0.65fr;
-	}
+.home-main-grid > * {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.home-main-grid > .shared-left-sidebar,
+.home-main-grid > .home-right-rail {
+	width: 24%;
+}
+
+.home-main-grid > .home-middle-column {
+	width: 52%;
 }
 
 .home-sidebar-frame {
@@ -99,7 +81,7 @@
 .home-image-placeholder {
 	min-height: 150px;
 	border: 1px dashed #4a78d0;
-	background: rgba(239, 247, 255, 0.7);
+	background: #eff7ffb3;
 	display: grid;
 	place-items: center;
 	font-size: 0.74rem;
@@ -113,7 +95,7 @@
 	min-height: 180px;
 }
 
-.home-right-rail .home-right-card + .home-right-card {
+.home-right-card + .home-right-card {
 	border-top: 1px dashed #7e8faa;
 	padding-top: 0.6rem;
 }
@@ -131,111 +113,19 @@
 	border: 1px solid #7e8faa;
 }
 
-.angel-divider {
-	text-align: center;
-	font-size: 0.78rem;
-	color: #46608f;
-	line-height: 1;
-}
+.angel-divider { text-align: center; font-size: 0.78rem; color: #46608f; line-height: 1; }
+.win-enter-btn { border: 1px solid #7e8faa; background: #e8f2ff; padding: 0.15rem 0.5rem; font-size: 0.72rem; }
+.card-enter-wrap { display: flex; align-items: center; justify-content: space-between; gap: 0.65rem; }
 
-.readme-cover-wrap {
-	position: relative;
-	display: block;
-}
-
-.readme-corner-image {
-	width: 80px;
-	height: 80px;
-	object-fit: cover;
-	position: absolute;
-	right: 0.5rem;
-	bottom: 0.5rem;
-	border: 1px solid #7e8faa;
-}
-
-.win-enter-btn {
-	border: 1px solid #7e8faa;
-	background: #e8f2ff;
-	padding: 0.15rem 0.5rem;
-	font-size: 0.72rem;
-}
-
-.card-enter-wrap {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.65rem;
-}
-
-.home-plain-card {
-	background: rgba(247, 251, 255, 0.75);
-	padding: 0.65rem;
-}
-
-.home-card-image {
-	margin-top: 0.55rem;
-	width: 100%;
-	object-fit: contain;
-}
-
-.site-action-rail {
-	position: fixed;
-	top: 1rem;
-	right: max(0.75rem, calc((100vw - 88rem) / 2 + 0.75rem));
-	z-index: 80;
-	display: grid;
-	gap: 0.35rem;
-}
-
-.site-action-rail > * {
-	border: 1px solid #7e8faa;
-	background: rgba(220, 232, 248, 0.9);
-	padding: 0.22rem;
-}
-
-.inner-page-shell {
-	display: grid;
-	gap: 0.85rem;
-}
-
-.inner-page-content {
-	padding: 0.85rem 1rem;
-	border: 1px solid #4a78d0;
-	background: rgba(238, 246, 255, 0.58);
-}
-
-@media (min-width: 1024px) {
-	.inner-page-shell {
-		grid-template-columns: 0.65fr 2.05fr;
+@media (max-width: 1023px) {
+	.home-main-grid,
+	.home-main-grid > * {
+		display: block;
+		width: 100%;
 	}
-}
 
-.shared-left-sidebar[data-compact="1"] .title {
-	font-size: 1.15rem;
-}
-
-.click-kaomoji-effect {
-	position: fixed;
-	z-index: 999;
-	pointer-events: none;
-	font-size: 0.8rem;
-	color: #3a5066;
-	text-shadow: 0 0 4px #fff;
-	transform: translate(-50%, -50%);
-	animation: kaomoji-pop 0.9s ease-out forwards;
-}
-
-@keyframes kaomoji-pop {
-	0% {
-		opacity: 0;
-		transform: translate(-50%, -50%) scale(0.8);
-	}
-	20% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		transform: translate(-50%, -160%) scale(1.25);
+	.home-main-grid > * + * {
+		margin-top: 0.85rem;
 	}
 }
 
