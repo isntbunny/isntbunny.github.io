@@ -10,10 +10,9 @@ export const homeConfig = {
 	profileCoverImage: "https://i.postimg.cc/4dLTBX4R/e250416.jpg",
 	defaultColor: "#22C55E",
 	topBannerImage: "https://i.postimg.cc/43GZ382v/e2511.png",
-	marqueeText: "WELCOME TO Eucaly's README | CYBER ANGEL MILLENNIUM Y2K MODE | CLICK WINDOWS TO EXPLORE",
-	memosMiniImage: "https://i.postimg.cc/W4K7HfP8/80.png",
-	readmeCornerImage: "https://i.postimg.cc/W4K7HfP8/80.png",
-	statusSideImages: ["https://i.postimg.cc/43GZ382v/e2511.png", "https://i.postimg.cc/4dLTBX4R/e250416.jpg"],
+	memosMiniImage: "https://i.postimg.cc/8kxpW5nc/pixel-takopi.png",
+	readmeCornerImage: "https://i.postimg.cc/fytPDMcs/fufu-miku.png",
+	statusSideImages: ["https://i.postimg.cc/8kxpW5nc/pixel-takopi.png", "https://i.postimg.cc/mZPZtMjV/win-taskfailed.png"],
 	statusCafeAtomUrl: "https://status.cafe/users/isntbunny.atom",
 } as const;
 

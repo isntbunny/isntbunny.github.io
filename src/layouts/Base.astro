@@ -50,8 +50,6 @@ const pageBackground = isHome
 				>
 					<img alt="top banner" class="home-top-image" src={homeConfig.topBannerImage} />
 				</a>
-				<div class="site-hero-kaomoji" aria-hidden="true">❄️ (˶ᵔ ᵕ ᵔ˶) ✦</div>
-				<div class="site-marquee-track"><span>{homeConfig.marqueeText}</span></div>
 			</div>
 			<main id="main">
 				{
@@ -81,16 +79,9 @@ const pageBackground = isHome
 	</body>
 </html>
 
+
 <script is:inline>
 	const clickFaces = ["❄(◕‿◕)❄", "(ﾉ*･ω･)ﾉ❄", "✧(｡•̀ᴗ-)", "(๑˃ᴗ˂)ﻭ", "˗ˏˋ ❄ ˎˊ˗"];
-	const quotes = [
-		"The only true wisdom is in knowing you know nothing. — Socrates",
-		"Simplicity is the ultimate sophistication. — Leonardo da Vinci",
-		"Stay hungry, stay foolish. — Steve Jobs",
-		"We are what we repeatedly do. — Aristotle",
-		"The future depends on what we do in the present. — Gandhi",
-	];
-	const quoteColors = ["#1d4ed8", "#1e40af", "#2563eb", "#3b82f6", "#0f52ba"];
 
 	const showClickKaomoji = (event) => {
 		const target = event.target;
@@ -142,18 +133,6 @@ const pageBackground = isHome
 		}
 	};
 
-	const initMarqueeQuote = () => {
-		const marquee = document.querySelector(".site-marquee-track span");
-		if (!(marquee instanceof HTMLElement)) return;
-		const quote = quotes[Math.floor(Math.random() * quotes.length)];
-		marquee.textContent = quote;
-		if (window.__quoteColorTimer) clearInterval(window.__quoteColorTimer);
-		window.__quoteColorTimer = setInterval(() => {
-			marquee.style.color = quoteColors[Math.floor(Math.random() * quoteColors.length)];
-		}, 1300);
-	};
 	document.addEventListener("astro:page-load", bindGlobalLightbox);
-	document.addEventListener("astro:page-load", initMarqueeQuote);
 	bindGlobalLightbox();
-	initMarqueeQuote();
 </script>

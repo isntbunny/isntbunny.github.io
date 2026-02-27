@@ -25,30 +25,6 @@
 	object-fit: cover;
 	border: 1px solid #4a78d0;
 }
-
-.site-marquee-track {
-	overflow: hidden;
-	border: 1px solid #4a78d0;
-	background: #d5e8fa;
-	white-space: nowrap;
-}
-
-.site-marquee-track span {
-	display: inline-block;
-	padding-left: 100%;
-	animation: home-marquee 20s linear infinite;
-	font-size: 0.75rem;
-}
-
-@keyframes home-marquee {
-	from {
-		transform: translateX(0);
-	}
-	to {
-		transform: translateX(-100%);
-	}
-}
-
 .win-card {
 	border: 1px solid #7e8faa;
 	background: #c9d7e8;
