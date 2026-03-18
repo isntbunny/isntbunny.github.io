@@ -1,48 +1,26 @@
 ---
 import { menuLinks } from "@/site.config";
+
+const navItems = menuLinks.flatMap((link) =>
+	link.children?.length ? link.children : [link],
+).filter((item) => item.path);
 ---
 
-<header class="mb-6" id="main-header">
-	<nav aria-label="Main menu" class="site-nav-shell" id="navigation-menu">
-		{menuLinks.map((link, index) =>
-			link.children?.length ? (
-				<div class="site-nav-item site-nav-item--submenu">
-					<button aria-expanded="false" class="site-nav-button" data-submenu-toggle={index} type="button">
-						{link.title} ▾
-					</button>
-					<div class="submenu glass-panel site-nav-submenu hidden">
-						{link.children.map((item) => (
-							<a class="site-nav-link" href={item.path}>{item.title}</a>
-						))}
-					</div>
-				</div>
-			) : (
+<header id="main-header">
+	<nav aria-label="Main menu" class="site-nav-shell">
+		<a class="site-logo" href="/">Eucaly</a>
+		<div class="site-nav-links">
+			{navItems.map((link) => (
 				<a
 					aria-current={Astro.url.pathname === link.path ? "page" : false}
-					class="site-nav-link site-nav-item"
+					class="site-nav-link"
 					href={link.path}
 					target={link.external ? "_blank" : undefined}
 					rel={link.external ? "noreferrer" : undefined}
 				>
 					{link.title}
 				</a>
-			),
-		)}
+			))}
+		</div>
 	</nav>
 </header>
-
-<script>
-	const initSubmenus = () => {
-		document.querySelectorAll("[data-submenu-toggle]").forEach((btn) => {
-			if (!(btn instanceof HTMLElement)) return;
-			if (btn.dataset.bound === "1") return;
-			btn.dataset.bound = "1";
-			btn.addEventListener("click", () => {
-				const submenu = btn.parentElement?.querySelector(".submenu");
-				submenu?.classList.toggle("hidden");
-			});
-		});
-	};
-	document.addEventListener("astro:page-load", initSubmenus);
-	initSubmenus();
-</script>

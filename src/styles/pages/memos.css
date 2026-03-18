@@ -1,33 +1,11 @@
-.memos-page-layout {
-	display: grid;
-	gap: 1rem;
-	letter-spacing: 0.05em;
-}
-
-.memos-page-header,
-.memos-panel-section {
-	display: grid;
-	gap: 0.65rem;
-}
-
-.memos-panel-title {
-	font-size: 0.8rem;
-	font-weight: 700;
-	letter-spacing: 0.12em;
-}
-
-.memos-status-stream-grid {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.8rem;
-}
-
-.memos-status-stream-item {
-	border: 1px solid #7e8faa;
-}
-
-@media (max-width: 700px) {
-	.memos-status-stream-grid {
-		grid-template-columns: 1fr;
-	}
-}
+.memo-flow { max-width: 860px; margin: 0 auto; }
+.memo-item { display: grid; grid-template-columns: 40px 1fr; gap: 12px; margin-bottom: 16px; }
+.memo-time-line { position: relative; }
+.memo-time-line::before { content:""; position:absolute; left:18px; top:0; bottom:-16px; width:2px; background:#c7e9f0; }
+.memo-time-line::after { content:""; position:absolute; left:13px; top:8px; width:12px; height:12px; border-radius:999px; background:#c7e9f0; }
+.memo-time { font-size:12px; color:#a0aec0; }
+.memo-content { font-size:14px; color:#4a5568; }
+.memo-actions { margin-top:10px; display:flex; gap:14px; font-size:14px; color:#a0aec0; }
+.memo-actions button { border:0; background:transparent; cursor:pointer; color:inherit; }
+.memo-actions button:hover { color:#c7e9f0; }
+.memo-loadmore { display:block; margin: 8px auto 0; border:1px solid #e2e8f0; border-radius:20px; padding:8px 16px; background:#c7e9f0; color:#4a5568; }

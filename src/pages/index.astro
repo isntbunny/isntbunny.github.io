@@ -1,120 +1,143 @@
 ---
-import { execSync } from "node:child_process";
-import SharedLeftSidebar from "@/components/layout/SharedLeftSidebar.astro";
+import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base.astro";
 
-const currentYear = new Date().getFullYear();
-const monthEnd = new Date(currentYear, new Date().getMonth() + 1, 0);
-const nextYear = new Date(currentYear + 1, 0, 1);
-const gaokao2027 = new Date("2027-06-07T00:00:00+08:00");
-const daysLeft = (targetDate: Date) =>
-	Math.max(0, Math.ceil((targetDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+const posts = await getCollection("post", ({ data }) => !data.draft);
+const latestPost = posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())[0];
 const countdownTargets = [
-	{ key: "monthEnd", label: "Days until month end:", suffix: " days" },
-	{ key: "nextYear", label: "Days until next year:", suffix: " days" },
-	{ key: "gaokao2027", label: "Days until Gaokao 2027:", suffix: " days" },
-] as const;
-const countdownTargetMap = { monthEnd, nextYear, gaokao2027 } as const;
-const countdownItems = countdownTargets.map((item) => ({ ...item, days: daysLeft(countdownTargetMap[item.key]) }));
-const typingText = "幸せのカウントダウン";
-const statusCafeAtomUrl = "https://status.cafe/users/isntbunny.atom";
-const statusImages = ["https://i.postimg.cc/8kxpW5nc/pixel-takopi.png", "https://i.postimg.cc/mZPZtMjV/win-taskfailed.png"];
-const daysSinceLastCommit = (() => {
-	try {
-		const last = Number(execSync("git log -1 --format=%ct", { encoding: "utf-8" }).trim()) * 1000;
-		if (!Number.isFinite(last)) return 0;
-		return Math.max(0, Math.floor((Date.now() - last) / (1000 * 60 * 60 * 24)));
-	} catch {
-		return 0;
-	}
-})();
+	{ label: "Month End", target: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0) },
+	{ label: "Next Year", target: new Date(new Date().getFullYear() + 1, 0, 1) },
+	{ label: "Gaokao 2027", target: new Date("2027-06-07T00:00:00+08:00") },
+];
+const daysLeft = (target: Date) => Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86400000));
+
+const collections = [
+	{ name: "GitHub", icon: "🐙", url: "https://github.com/isntbunny" },
+	{ name: "Bangumi", icon: "📺", url: "https://bgm.tv/user/isntbunny" },
+	{ name: "Status Cafe", icon: "☕", url: "https://status.cafe/users/isntbunny" },
+];
+
+const apps = ["Notion", "VS Code", "Spotify"];
+const purchase = "A new pastel notebook";
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<section class="home-main-grid">
-		<SharedLeftSidebar />
-		<div class="home-middle-column">
-			<section class="win-card">
-				<div class="win-title-bar"><span>README.MD</span></div>
-				<div class="home-image-grid">
-					<script type="text/javascript">boatload_puzzles_format = 'Portrait';</script>
-					<p>Loading <a href="https://www.boatloadpuzzles.com/playcrossword">crossword puzzle</a>. One moment please.</p>
-					<script type="text/javascript" src="//www.boatloadpuzzles.com/Crossword.js"></script>
-				</div>
-			</section>
-		</div>
-		<aside class="home-sidebar-frame home-layout-column home-right-rail">
-			<section class="home-right-card"><h2>Last Update</h2><p>Updated {daysSinceLastCommit} days ago.</p></section>
-			<section class="home-right-card">
-				<h2>Countdown</h2>
+	<section class="home-grid">
+		<article class="site-card fade-stagger" style="animation-delay:0s">
+			<span class="home-card-label">Card 01</span>
+			<h2>今日状态</h2>
+			<div style="display:flex; gap:16px; align-items:center;">
+				<div class="thermometer"></div>
 				<ul>
-					{countdownItems.map((item) => <li>{item.label} <strong>{item.days}{item.suffix}</strong></li>)}
+					<li>Mood Temp: <strong>36.5°C</strong></li>
+					<li>Energy: <strong>82%</strong></li>
+					<li>Inspiration: <strong>74%</strong></li>
 				</ul>
-			</section>
-			<section class="home-right-card"><h2>Status.cafe</h2><time id="home-status-date">Loading...</time><p id="home-status-content">Syncing status.cafe feed ...</p></section>
-			<section class="home-right-card"><h2>Side Image</h2><img alt="status side" id="home-status-side-image" src={statusImages[0]} /></section>
-		</aside>
+			</div>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.1s">
+			<span class="home-card-label">Card 02</span>
+			<h2>我的待办</h2>
+			<div style="font-size:20px;">℞</div>
+			<ul>
+				<li>Finish today’s reading note.</li>
+				<li>Reply to important messages.</li>
+				<li>Update one tiny page detail.</li>
+			</ul>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.2s">
+			<span class="home-card-label">Card 03</span>
+			<h2>倒计时</h2>
+			<ul class="home-countdown-list">
+				{countdownTargets.map((item) => <li><span>{item.label}</span><strong>{daysLeft(item.target)} days</strong></li>)}
+			</ul>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.3s">
+			<span class="home-card-label">Card 04</span>
+			<h2>基本信息</h2>
+			<div style="display:grid;grid-template-columns:92px 1fr;row-gap:6px;">
+				<span>Name</span><strong>Eucaly</strong>
+				<span>Age</span><strong>16</strong>
+				<span>MBTI</span><strong>ENTP</strong>
+				<span>Hobby</span><strong>Drawing, Coding</strong>
+			</div>
+			<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+				<span class="site-chip">Dreamer</span><span class="site-chip">Student</span><span class="site-chip">Creator</span>
+			</div>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.4s">
+			<span class="home-card-label">Card 05</span>
+			<h2>正在输入</h2>
+			<div style="display:flex; gap:14px; align-items:center;">
+				<div class="iv-drop"></div>
+				<div>
+					<p><strong>Now Playing:</strong> Clancy - Twenty One Pilots</p>
+					<p><strong>Now Reading:</strong> The Midnight Library</p>
+				</div>
+			</div>
+		</article>
+
+		<a class="site-card fade-stagger" href="/memos/" style="animation-delay:.5s;background:#e6f0f5;">
+			<span class="home-card-label">Card 06</span>
+			<h2>最近状态</h2>
+			<p id="home-status-latest">Loading latest status...</p>
+		</a>
+
+		<article class="site-card fade-stagger" style="animation-delay:.6s">
+			<span class="home-card-label">Card 07</span>
+			<h2>最新动态</h2>
+			<p>📎 Last blog update: {latestPost?.data.publishDate.toLocaleDateString("en-US") ?? "N/A"}</p>
+			<p>📝 Updated posts: {posts.length}</p>
+			<p>💬 New comments: 0</p>
+			<p>🏅 Tiny achievements: 3</p>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.7s">
+			<span class="home-card-label">Card 08</span>
+			<h2>最近收藏</h2>
+			<ul>
+				{collections.map((item) => <li><a href={item.url} target="_blank" rel="noreferrer" title={item.url}>{item.icon} {item.name}</a></li>)}
+			</ul>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.8s">
+			<span class="home-card-label">Card 09</span>
+			<h2>随身小物</h2>
+			<div style="border:1px dashed #c7e9f0;border-radius:12px;padding:10px;">
+				<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+					{apps.map((app) => <div style="text-align:center;">📱<br />{app}</div>)}
+				</div>
+				<p style="margin-top:10px;">Recent purchase: {purchase}</p>
+			</div>
+		</article>
+
+		<article class="site-card fade-stagger" style="animation-delay:.9s">
+			<span class="home-card-label">Card 10</span>
+			<h2>想法</h2>
+			<p>Build softly, rest slowly, and keep creating one tiny joy each day.</p>
+			<div style="text-align:right;font-size:22px;">🪽</div>
+		</article>
 	</section>
 </PageLayout>
 
-<script define:vars={{ typingText, statusCafeAtomUrl, statusImages }} is:inline>
-	const qinhuangdao = { lat: 39.9354, lon: 119.5996 }; // 定义秦皇岛经纬度。
-	const statusProxyUrl = (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`; // 定义状态源代理地址。
-	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => { // 解析 Atom 条目。
-		const body = entry[1] ?? ""; // 提取条目主体。
-		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? ""; // 提取更新时间。
-		const content = body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1]?.replace(/&lt;/g, "<")?.replace(/&gt;/g, ">")?.replace(/&amp;/g, "&")?.replace(/<[^>]*>/g, " ")?.replace(/\s+/g, " ")?.trim() ?? ""; // 提取正文文本。
-		if (!content || Number.isNaN(new Date(updated).valueOf())) return null; // 过滤无效数据。
-		return { updated, content }; // 返回有效状态。
-	}).filter(Boolean); // 过滤空值。
-
-	const fetchStatusFeedText = async () => { // 拉取状态流文本。
-		const feedUrl = `${statusCafeAtomUrl}?t=${Date.now()}`; // 拼接防缓存地址。
-		const direct = await fetch(feedUrl, { cache: "no-store" }).catch(() => null); // 先尝试直连。
-		if (direct?.ok) return direct.text(); // 直连成功直接返回。
-		const viaProxy = await fetch(statusProxyUrl(feedUrl), { cache: "no-store" }); // 直连失败走代理。
-		if (!viaProxy.ok) throw new Error("status feed unavailable"); // 代理失败抛错。
-		return viaProxy.text(); // 返回代理结果。
-	};
-
-	const updateDistance = async () => { // 更新访问者到秦皇岛距离。
-		const distanceTarget = document.getElementById("home-distance"); // 获取距离文本节点。
-		if (!distanceTarget) return; // 无节点则退出。
-		try { // 尝试定位。
-			const position = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)); // 获取定位。
-			const lat = position.coords.latitude; // 读取纬度。
-			const lon = position.coords.longitude; // 读取经度。
-			const toRad = (deg) => (deg * Math.PI) / 180; // 定义角度转弧度。
-			const dLat = toRad(qinhuangdao.lat - lat); // 计算纬度差。
-			const dLon = toRad(qinhuangdao.lon - lon); // 计算经度差。
-			const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat)) * Math.cos(toRad(qinhuangdao.lat)) * Math.sin(dLon / 2) ** 2; // 套用 haversine 公式。
-			const distanceKm = 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); // 计算公里数。
-			distanceTarget.textContent = `You are ${Math.round(distanceKm)} km away from An-chan.`; // 渲染距离文本。
-		} catch {
-			distanceTarget.textContent = "You are ... km away from An-chan."; // 定位失败显示默认文案。
-		}
-	};
-	
-	const initHome = async () => { // 初始化首页动态内容。
-		const statusDate = document.getElementById("home-status-date"); // 获取状态日期节点。
-		const statusContent = document.getElementById("home-status-content"); // 获取状态内容节点。
-		const typingTarget = document.getElementById("home-typing"); // 获取打字节点。
-		// @ts-ignore define:vars 会注入 typingText。
-		if (typingTarget) typingTarget.textContent = typingText; // 设置打字标题。
-		await updateDistance(); // 更新地理距离。
+<script is:inline>
+	const initHomeStatus = async () => {
+		const target = document.getElementById("home-status-latest");
+		if (!target) return;
 		try {
-			const items = parseStatusFeed(await fetchStatusFeedText()); // 拉取并解析状态流。
-			const first = items[0]; // 读取第一条。
-			if (first && statusDate && statusContent) { // 只有节点存在才写入。
-				statusDate.textContent = new Date(first.updated).toLocaleString("zh-CN"); // 写入时间。
-				statusContent.textContent = first.content; // 写入内容。
-			}
+			const url = "https://status.cafe/users/isntbunny.atom";
+			const raw = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`).then((res) => res.text());
+			const entry = raw.match(/<entry>([\s\S]*?)<\/entry>/i)?.[1] ?? "";
+			const content = entry.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ?? "";
+			target.textContent = content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() || "No status yet.";
 		} catch {
-			if (statusContent) statusContent.textContent = "Unable to load status.cafe feed right now."; // 失败提示。
+			target.textContent = "Unable to load status for now.";
 		}
-		const sideImage = document.getElementById("home-status-side-image"); // 获取侧边图节点。
-		if (sideImage instanceof HTMLImageElement) sideImage.src = statusImages[Math.floor(Math.random() * statusImages.length)] ?? statusImages[0]; // 随机切换侧边图。
 	};
-	document.addEventListener("astro:page-load", initHome); // 页面切换后重跑初始化。
-	initHome(); // 首次进入立即初始化。
+	document.addEventListener("astro:page-load", initHomeStatus);
+	initHomeStatus();
 </script>

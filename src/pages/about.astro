@@ -1,30 +1,54 @@
 ---
-import { getEntry, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import PageLayout from "@/layouts/Base.astro";
 
-const meta = { description: "About me", title: "About" };
 const profileCoverImage = "https://i.postimg.cc/4dLTBX4R/e250416.jpg";
 const contacts = [
 	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
 	{ icon: "mdi:email-outline", label: "Email", url: "mailto:isntbunny@outlook.com" },
 ];
-
-const aboutEntry = await getEntry("page", "about");
-if (!aboutEntry) throw new Error("Missing src/content/page/about.md");
-const { Content } = await render(aboutEntry);
+const skills = [
+	{ name: "Illustration", value: 78 },
+	{ name: "Writing", value: 70 },
+	{ name: "Frontend", value: 64 },
+	{ name: "Language", value: 82 },
+];
 ---
 
-<PageLayout meta={meta}>
-	<h1 class="title">Readme.md</h1>
-	<section class="about-readme-shell">
-		<div class="prose prose-sm prose-cactus max-w-none"><Content /></div>
-		<div class="about-avatar-wrap"><img alt="profile photo" src={profileCoverImage} /></div>
+<PageLayout meta={{ description: "About me", title: "About" }}>
+	<section class="site-card">
+		<div class="about-grid">
+			<div><img alt="profile photo" class="about-avatar" id="about-avatar" src={profileCoverImage} /></div>
+			<div>
+				<h1 class="about-name">Eucaly</h1>
+				<p class="about-bio">A dreamy student creator who loves light blue palettes, sketching, and coding tiny features that feel soft and calm.</p>
+				<div class="about-social">
+					{contacts.map((item) => <a href={item.url} target="_blank" rel="noreferrer"><Icon name={item.icon} /> {item.label}</a>)}
+				</div>
+			</div>
+		</div>
 	</section>
-	<section>
-		<p>Find me on</p>
-		<ul>
-			{contacts.map((item) => <li><a href={item.url} target="_blank" rel="noreferrer"><Icon name={item.icon} /> <span>{item.label}</span></a></li>)}
-		</ul>
+
+	<section class="site-card skills">
+		<h2>Skills</h2>
+		{skills.map((skill) => (
+			<div class="skill-row">
+				<span>{skill.name}</span>
+				<div class="skill-bar"><span class="skill-fill" data-skill={skill.value}></span></div>
+				<span>{skill.value}%</span>
+			</div>
+		))}
 	</section>
 </PageLayout>
+
+<script is:inline>
+	const initAbout = () => {
+		document.getElementById("about-avatar")?.classList.add("about-avatar-spin");
+		document.querySelectorAll(".skill-fill").forEach((bar, index) => {
+			const target = bar.getAttribute("data-skill") || "0";
+			setTimeout(() => { bar.style.width = `${target}%`; }, 200 + index * 120);
+		});
+	};
+	document.addEventListener("astro:page-load", initAbout);
+	initAbout();
+</script>

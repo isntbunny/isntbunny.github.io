@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base.astro";
+
+const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+);
+
+const grouped = posts.reduce<Record<string, Record<string, typeof posts>>>((acc, post) => {
+	const date = post.data.publishDate;
+	const year = String(date.getFullYear());
+	const month = date.toLocaleString("en-US", { month: "long" });
+	acc[year] ??= {};
+	acc[year][month] ??= [];
+	acc[year][month].push(post);
+	return acc;
+}, {});
+---
+
+<PageLayout meta={{ title: "Archive", description: "Post archive by year and month" }}>
+	<h1>Archive</h1>
+	<div style="display:grid;gap:26px;">
+		{Object.entries(grouped).map(([year, months], yearIndex) => (
+			<section class="fade-stagger" style={`animation-delay:${yearIndex * 0.1}s`}>
+				<h2 style="font-size:32px;color:#c7e9f0;">{year}</h2>
+				<hr style="border:none;border-top:1px dashed #e2e8f0;margin:8px 0 14px;" />
+				<div style="display:grid;gap:14px;">
+					{Object.entries(months).map(([month, list], monthIndex) => (
+						<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
+							<span style="display:inline-block;background:rgba(199,233,240,.2);border-radius:999px;padding:4px 12px;">{month}</span>
+							<ul style="margin:10px 0 0 24px;padding-left:14px;border-left:2px solid #c7e9f0;display:grid;gap:8px;">
+								{list.map((post) => (
+									<li style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+										<a href={`/posts/${post.id}/`} style="font-size:16px;">{post.data.title}</a>
+										<div style="display:flex;align-items:center;gap:8px;">
+											<time class="small-muted" style="font-size:12px;">{post.data.publishDate.toLocaleDateString("en-US")}</time>
+											{post.data.tags?.[0] && <span class="site-chip">{post.data.tags[0]}</span>}
+										</div>
+									</li>
+								))}
+							</ul>
+						</section>
+					))}
+				</div>
+			</section>
+		))}
+	</div>
+</PageLayout>
