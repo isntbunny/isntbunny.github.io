@@ -24,7 +24,6 @@ const purchase = "A new pastel notebook";
 <PageLayout meta={{ title: "Home" }}>
 	<section class="home-grid">
 		<article class="site-card fade-stagger" style="animation-delay:0s">
-			<span class="home-card-label">Card 01</span>
 			<h2>今日状态</h2>
 			<div style="display:flex; gap:16px; align-items:center;">
 				<div class="thermometer"></div>
@@ -37,7 +36,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.1s">
-			<span class="home-card-label">Card 02</span>
 			<h2>我的待办</h2>
 			<div style="font-size:20px;">℞</div>
 			<ul>
@@ -48,7 +46,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.2s">
-			<span class="home-card-label">Card 03</span>
 			<h2>倒计时</h2>
 			<ul class="home-countdown-list">
 				{countdownTargets.map((item) => <li><span>{item.label}</span><strong>{daysLeft(item.target)} days</strong></li>)}
@@ -56,7 +53,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.3s">
-			<span class="home-card-label">Card 04</span>
 			<h2>基本信息</h2>
 			<div style="display:grid;grid-template-columns:92px 1fr;row-gap:6px;">
 				<span>Name</span><strong>Eucaly</strong>
@@ -70,7 +66,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.4s">
-			<span class="home-card-label">Card 05</span>
 			<h2>正在输入</h2>
 			<div style="display:flex; gap:14px; align-items:center;">
 				<div class="iv-drop"></div>
@@ -82,13 +77,11 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<a class="site-card fade-stagger" href="/memos/" style="animation-delay:.5s;background:#e6f0f5;">
-			<span class="home-card-label">Card 06</span>
 			<h2>最近状态</h2>
 			<p id="home-status-latest">Loading latest status...</p>
 		</a>
 
 		<article class="site-card fade-stagger" style="animation-delay:.6s">
-			<span class="home-card-label">Card 07</span>
 			<h2>最新动态</h2>
 			<p>📎 Last blog update: {latestPost?.data.publishDate.toLocaleDateString("en-US") ?? "N/A"}</p>
 			<p>📝 Updated posts: {posts.length}</p>
@@ -97,7 +90,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.7s">
-			<span class="home-card-label">Card 08</span>
 			<h2>最近收藏</h2>
 			<ul>
 				{collections.map((item) => <li><a href={item.url} target="_blank" rel="noreferrer" title={item.url}>{item.icon} {item.name}</a></li>)}
@@ -105,7 +97,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.8s">
-			<span class="home-card-label">Card 09</span>
 			<h2>随身小物</h2>
 			<div style="border:1px dashed #c7e9f0;border-radius:12px;padding:10px;">
 				<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
@@ -116,7 +107,6 @@ const purchase = "A new pastel notebook";
 		</article>
 
 		<article class="site-card fade-stagger" style="animation-delay:.9s">
-			<span class="home-card-label">Card 10</span>
 			<h2>想法</h2>
 			<p>Build softly, rest slowly, and keep creating one tiny joy each day.</p>
 			<div style="text-align:right;font-size:22px;">🪽</div>
