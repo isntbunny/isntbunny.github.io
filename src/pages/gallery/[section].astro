@@ -6,36 +6,69 @@ import PageLayout from "@/layouts/Base.astro";
 export const getStaticPaths = (async () => {
 	const [gallery] = await getCollection("gallery");
 	if (!gallery) return [];
-	return gallery.data.sections.map((section) => ({
-		params: { section: section.slug },
-		props: { sectionData: section },
-	}));
+	return gallery.data.sections.map((section) => ({ params: { section: section.slug }, props: { sectionData: section } }));
 }) satisfies GetStaticPaths;
 
 const { sectionData } = Astro.props;
+const allItems = sectionData.months.flatMap((group) => group.items.map((item) => ({ ...item, month: group.month })));
 ---
 
 <PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
-	<a class="textlink text-sm" href="/gallery/">← Back to Gallery</a>
-	<h1 class="title mb-2 mt-3">{sectionData.title}</h1>
-	{sectionData.description && <p class="mb-6 text-sm opacity-80">{sectionData.description}</p>}
-
-	<div class="space-y-8">
-		{sectionData.months.map((group) => (
-			<section>
-				<h2 class="mb-4 text-lg font-semibold">{group.month}</h2>
-				<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-					{group.items.map((item) => (
-						<article class="glass-panel overflow-hidden rounded-xl">
-							<img src={item.image} alt={item.title} class="gallery-image h-56 w-full object-cover" loading="lazy" />
-							<div class="p-4">
-								<h3 class="font-semibold">{item.title}</h3>
-								{item.description && <p class="mt-2 text-sm opacity-80">{item.description}</p>}
-							</div>
-						</article>
-					))}
-				</div>
-			</section>
+	<a href="/gallery/">← Back</a>
+	<h1>{sectionData.title}</h1>
+	<div class="gallery-grid">
+		{allItems.map((item, index) => (
+			<article class="site-card gallery-tile" data-index={index} data-src={item.image} data-title={item.title} data-desc={item.description ?? item.month}>
+				<div class="gallery-skeleton"></div>
+				<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
+				<h3>{item.title}</h3>
+				<p class="small-muted">{item.description ?? item.month}</p>
+			</article>
 		))}
 	</div>
+
+	<div class="gallery-lightbox" id="gallery-lightbox" hidden>
+		<button class="gallery-arrow" data-dir="prev" type="button">←</button>
+		<div>
+			<img id="gallery-lightbox-image" src="" alt="" />
+			<p id="gallery-lightbox-text"></p>
+		</div>
+		<button class="gallery-arrow" data-dir="next" type="button">→</button>
+	</div>
 </PageLayout>
+
+<script is:inline>
+	const initGallery = () => {
+		const tiles = [...document.querySelectorAll(".gallery-tile")];
+		tiles.forEach((tile) => {
+			const img = tile.querySelector("img");
+			const skeleton = tile.querySelector(".gallery-skeleton");
+			if (!img || !skeleton) return;
+			if (img.complete) skeleton.setAttribute("hidden", "hidden");
+			img.addEventListener("load", () => skeleton.setAttribute("hidden", "hidden"), { once: true });
+		});
+
+		const box = document.getElementById("gallery-lightbox");
+		const lightboxImage = document.getElementById("gallery-lightbox-image");
+		const text = document.getElementById("gallery-lightbox-text");
+		let current = 0;
+		const open = (index) => {
+			const item = tiles[index];
+			if (!item || !box || !lightboxImage || !text) return;
+			current = index;
+			lightboxImage.src = item.dataset.src || "";
+			lightboxImage.alt = item.dataset.title || "";
+			text.textContent = `${item.dataset.title || ""} — ${item.dataset.desc || ""}`;
+			box.removeAttribute("hidden");
+		};
+		tiles.forEach((tile, index) => tile.addEventListener("click", () => open(index)));
+		box?.addEventListener("click", (e) => { if (e.target === box) box.setAttribute("hidden", "hidden"); });
+		document.querySelectorAll(".gallery-arrow").forEach((btn) => btn.addEventListener("click", (e) => {
+			e.stopPropagation();
+			const dir = btn.getAttribute("data-dir");
+			open((current + (dir === "next" ? 1 : -1) + tiles.length) % tiles.length);
+		}));
+	};
+	document.addEventListener("astro:page-load", initGallery);
+	initGallery();
+</script>

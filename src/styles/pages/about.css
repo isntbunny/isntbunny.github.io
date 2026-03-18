@@ -1,28 +1,13 @@
-.about-readme-shell {
-	display: grid;
-	gap: 1rem;
-	align-items: start;
-}
-
-@media (min-width: 900px) {
-	.about-readme-shell {
-		grid-template-columns: 1.6fr 220px;
-	}
-}
-
-.about-avatar-wrap {
-	width: 220px;
-	height: 220px;
-	max-width: 100%;
-	margin-inline: auto;
-	border-radius: 999px;
-	overflow: hidden;
-	border: 1px solid #4a78d0;
-	background: #ffffffb3;
-}
-
-.about-avatar-wrap img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
+.about-grid { display:grid; grid-template-columns: 240px 1fr; gap:24px; align-items:center; }
+.about-avatar { width:120px; height:120px; border-radius:50%; object-fit:cover; }
+.about-name { font-size:24px; margin:0; }
+.about-bio { font-size:14px; color:#4a5568; line-height:1.8; }
+.about-social { display:flex; gap:12px; margin-top:12px; }
+.about-social a:hover { color:#c7e9f0; }
+.skills { margin-top:24px; display:grid; gap:14px; }
+.skill-row { display:grid; grid-template-columns: 120px 1fr 48px; gap:12px; align-items:center; }
+.skill-bar { height:6px; border-radius:30px; background:#e2e8f0; overflow:hidden; }
+.skill-fill { display:block; height:100%; background:#c7e9f0; width:0; transition:width 0.8s ease; }
+.about-avatar-spin { animation: avatarspin 3s linear; }
+@keyframes avatarspin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
+@media (max-width: 720px) { .about-grid { grid-template-columns:1fr; } }

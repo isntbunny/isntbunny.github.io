@@ -3,20 +3,12 @@ import PageLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
 
 const username = siteConfig.bangumiUsername;
-const statusMap: Record<number, string> = {
-	1: "想看",
-	2: "看过",
-	3: "在看",
-	4: "搁置",
-	5: "抛弃",
-};
+const statusMap: Record<number, string> = { 1: "Wish", 2: "Completed", 3: "Watching", 4: "On hold", 5: "Dropped" };
 
 async function fetchCollection(subjectType: number) {
 	try {
-		const endpoint = `https://api.bgm.tv/v0/users/${username}/collections?subject_type=${subjectType}&limit=24`;
-		const res = await fetch(endpoint, {
-			headers: { "user-agent": "isntbunny-blog/1.0" },
-		});
+		const endpoint = `https://api.bgm.tv/v0/users/${username}/collections?subject_type=${subjectType}&limit=30`;
+		const res = await fetch(endpoint, { headers: { "user-agent": "isntbunny-blog/1.0" } });
 		if (!res.ok) return [];
 		const data = await res.json();
 		return data?.data ?? [];
@@ -28,142 +20,65 @@ async function fetchCollection(subjectType: number) {
 const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCollection(1)]);
 ---
 
-<PageLayout meta={{ title: "番组计划", description: "Bangumi 动画与漫画列表" }}>
-	<h1 class="title mb-6">番组计划</h1>
-	<p class="mb-6 text-xs opacity-80">当前用户：<code>{username}</code></p>
-
-	<div class="mb-6 flex gap-2">
-		<button class="glass-panel card-chip" data-tab="anime" type="button">
-			动画
-		</button>
-		<button class="glass-panel card-chip" data-tab="manga" type="button">漫画</button>
+<PageLayout meta={{ title: "Bangumi", description: "Bangumi progress" }}>
+	<h1>Bangumi</h1>
+	<div class="bangumi-tabs">
+		<button class="bangumi-tab is-active" data-tab="anime" type="button">Anime</button>
+		<button class="bangumi-tab" data-tab="manga" type="button">Manga</button>
 	</div>
 
 	<section data-tab-panel="anime">
-		{animeItems.length ? (
-			<div class="grid gap-4" id="anime-grid">
-				{animeItems.map((entry: any) => {
-					const subject = entry?.subject;
-					const title = subject?.name_cn || subject?.name || "未命名条目";
-					const image = subject?.images?.common || subject?.images?.medium || "";
-					const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
-					const status = statusMap[entry?.type] || "未分类";
-					const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
-					return (
-						<article class="status-card">
-							<a href={url} target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
-								{image ? (
-									<img src={image} alt={title} class="h-24 w-[70px] rounded object-cover" loading="lazy" />
-								) : (
-									<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>
-								)}
-								<div>
-									<h3 class="font-semibold">{title}</h3>
-									<p class="mt-2 text-xs opacity-80">状态：{status}</p>
-									<p class="text-xs opacity-80">{score}</p>
-								</div>
-							</a>
-						</article>
-					);
-				})}
-			</div>
-		) : (
-			<p>还没有获取到动画数据捏</p>
-		)}
+		<div class="bangumi-grid">
+			{animeItems.map((entry: any, index: number) => {
+				const subject = entry?.subject;
+				const title = subject?.name_cn || subject?.name || "Untitled";
+				const image = subject?.images?.common || subject?.images?.medium || "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
+				const score = entry?.rate ? `Score ${entry.rate}` : "No score";
+				const status = statusMap[entry?.type] || "Unknown";
+				return (
+					<article class="site-card bangumi-item fade-stagger" style={`animation-delay:${index * 0.04}s`}>
+						<img src={image} alt={title} loading="lazy" />
+						<h3 title={title}>{title}</h3>
+						<p class="small-muted">{status} · {score}</p>
+					</article>
+				);
+			})}
+		</div>
 	</section>
 
-	<section class="hidden" data-tab-panel="manga">
-		{mangaItems.length ? (
-			<div class="grid gap-4" id="manga-grid">
-				{mangaItems.map((entry: any) => {
-					const subject = entry?.subject;
-					const title = subject?.name_cn || subject?.name || "未命名条目";
-					const image = subject?.images?.common || subject?.images?.medium || "";
-					const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
-					const status = statusMap[entry?.type] || "未分类";
-					const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
-					return (
-						<article class="status-card">
-							<a href={url} target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">
-								{image ? (
-									<img src={image} alt={title} class="h-24 w-[70px] rounded object-cover" loading="lazy" />
-								) : (
-									<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>
-								)}
-								<div>
-									<h3 class="font-semibold">{title}</h3>
-									<p class="mt-2 text-xs opacity-80">状态：{status}</p>
-									<p class="text-xs opacity-80">{score}</p>
-								</div>
-							</a>
-						</article>
-					);
-				})}
-			</div>
-		) : (
-			<p>还没有获取到漫画数据。</p>
-		)}
+	<section data-tab-panel="manga" hidden>
+		<div class="bangumi-grid">
+			{mangaItems.map((entry: any, index: number) => {
+				const subject = entry?.subject;
+				const title = subject?.name_cn || subject?.name || "Untitled";
+				const image = subject?.images?.common || subject?.images?.medium || "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
+				const score = entry?.rate ? `Score ${entry.rate}` : "No score";
+				const status = statusMap[entry?.type] || "Unknown";
+				return (
+					<article class="site-card bangumi-item fade-stagger" style={`animation-delay:${index * 0.04}s`}>
+						<img src={image} alt={title} loading="lazy" />
+						<h3 title={title}>{title}</h3>
+						<p class="small-muted">{status} · {score}</p>
+					</article>
+				);
+			})}
+		</div>
 	</section>
 </PageLayout>
 
-<script define:vars={{ username }} is:inline>
+<script is:inline>
 	const initBangumiTabs = () => {
-		const tabButtons = document.querySelectorAll("[data-tab]");
-		const tabPanels = document.querySelectorAll("[data-tab-panel]");
-		if (!tabButtons.length) return;
-		const activateTab = (tab) => {
-			tabButtons.forEach((btn) => {
-				const isActive = btn.getAttribute("data-tab") === tab;
-				btn.classList.toggle("font-semibold", isActive);
+		const tabs = [...document.querySelectorAll(".bangumi-tab")];
+		const panels = [...document.querySelectorAll("[data-tab-panel]")];
+		tabs.forEach((tab) => {
+			if (tab.dataset.bound === "1") return;
+			tab.dataset.bound = "1";
+			tab.addEventListener("click", () => {
+				const target = tab.getAttribute("data-tab");
+				tabs.forEach((item) => item.classList.toggle("is-active", item === tab));
+				panels.forEach((panel) => panel.toggleAttribute("hidden", panel.getAttribute("data-tab-panel") !== target));
 			});
-			tabPanels.forEach((panel) => {
-				panel.classList.toggle("hidden", panel.getAttribute("data-tab-panel") !== tab);
-			});
-		};
-		tabButtons.forEach((btn) => {
-			if (btn.dataset.bound === "1") return;
-			btn.dataset.bound = "1";
-			btn.addEventListener("click", () => activateTab(btn.getAttribute("data-tab")));
 		});
-		const loadClientFallback = async () => {
-			const animeGrid = document.getElementById("anime-grid");
-			const mangaGrid = document.getElementById("manga-grid");
-			const needAnime = animeGrid && animeGrid.children.length === 0;
-			const needManga = mangaGrid && mangaGrid.children.length === 0;
-			if (!needAnime && !needManga) return;
-
-			const fetchCollection = async (subjectType) => {
-				const endpoint = `https://api.bgm.tv/v0/users/${encodeURIComponent(username)}/collections?subject_type=${subjectType}&limit=24`;
-				const res = await fetch(endpoint);
-				if (!res.ok) return [];
-				const data = await res.json();
-				return data?.data ?? [];
-			};
-
-			const render = (root, items) => {
-				if (!root || !items.length) return;
-				root.innerHTML = items
-					.map((entry) => {
-						const subject = entry?.subject || {};
-						const title = subject?.name_cn || subject?.name || "未命名条目";
-						const image = subject?.images?.common || subject?.images?.medium || "";
-						const score = entry?.rate ? `我的评分：${entry.rate}` : "未评分";
-						const status = ({1:"想看",2:"看过",3:"在看",4:"搁置",5:"抛弃"})[entry?.type] || "未分类";
-						const url = subject?.id ? `https://bgm.tv/subject/${subject.id}` : "https://bgm.tv";
-						return `<article class="status-card"><a href="${url}" target="_blank" rel="noreferrer" class="grid grid-cols-[70px_1fr] gap-3">${image ? `<img src="${image}" alt="${title}" class="h-24 w-[70px] rounded object-cover" loading="lazy" />` : `<div class="h-24 w-[70px] rounded bg-zinc-200/60 dark:bg-zinc-800/70"></div>`}<div><h3 class="font-semibold">${title}</h3><p class="mt-2 text-xs opacity-80">状态：${status}</p><p class="text-xs opacity-80">${score}</p></div></a></article>`;
-					})
-					.join("");
-			};
-
-			try {
-				const [anime, manga] = await Promise.all([fetchCollection(2), fetchCollection(1)]);
-				if (needAnime) render(animeGrid, anime);
-				if (needManga) render(mangaGrid, manga);
-			} catch {}
-		};
-
-		loadClientFallback();
-
 	};
 	document.addEventListener("astro:page-load", initBangumiTabs);
 	initBangumiTabs();
