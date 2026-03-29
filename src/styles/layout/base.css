@@ -39,6 +39,16 @@ body.site-shell:has(.scene-home) main#main {
 	width: 100%;
 	margin-top: 112px;
 	padding-inline: 0;
+	padding-bottom: 0;
+	height: calc(100vh - 112px);
+}
+
+body.site-shell:has(.scene-home) {
+	overflow: hidden;
+}
+
+body.site-shell:has(.scene-home) .site-footer {
+	display: none;
 }
 
 h1, h2, h3, h4, h5, h6 { font-weight: 500; line-height: 1.4; color: var(--text-main); }
@@ -155,6 +165,17 @@ a { color: var(--text-main); text-decoration: none; }
 
 @media (max-width: 720px) {
 	main#main { width: calc(100% - 1.2rem); margin-top: 92px; }
+	body.site-shell:has(.scene-home) {
+		overflow: auto;
+	}
+
+	body.site-shell:has(.scene-home) main#main {
+		height: auto;
+	}
+
+	body.site-shell:has(.scene-home) .site-footer {
+		display: block;
+	}
 	#main-header { padding: 14px 12px; }
 	.site-nav-links { gap: 16px; }
 	.site-home-title { font-size: clamp(20px, 6vw, 28px); }

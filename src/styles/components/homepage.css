@@ -1,8 +1,12 @@
 .scene-home {
 	position: relative;
-	min-height: calc(100vh - 150px);
-	padding: 24px 24px 18vh;
+	height: 100%;
+	min-height: 0;
+	padding: 18px 24px 10px;
 	overflow: hidden;
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+	gap: 14px;
 }
 
 .scene-desktop {
@@ -39,15 +43,17 @@
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(220px, 20vw);
 	gap: 24px;
-	align-items: start;
+	align-items: stretch;
+	min-height: 0;
 }
 
 .wall-zone {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(220px, 20vw);
 	gap: 20px;
-	align-items: start;
+	align-items: stretch;
 	margin-right: 8px;
+	min-height: 0;
 }
 
 .wall-card {
@@ -57,7 +63,7 @@
 	background: rgba(255, 255, 255, 0.83);
 	box-shadow: 0 14px 36px rgba(72, 106, 152, 0.14);
 	padding: 20px;
-	min-height: 320px;
+	min-height: 260px;
 }
 
 .wall-card-left {
@@ -111,7 +117,7 @@
 
 .wall-card-right {
 	width: min(20vw, 320px);
-	min-height: 320px;
+	min-height: 260px;
 	justify-self: end;
 }
 
@@ -144,11 +150,11 @@
 
 .character-zone {
 	position: relative;
-	min-height: 360px;
+	min-height: 280px;
 }
 
 .character-placeholder {
-	height: 360px;
+	height: 280px;
 	border: 2px dashed #8fb1d6;
 	border-radius: 20px;
 	background: repeating-linear-gradient(135deg, #edf5ff 0 10px, #dfebfa 10px 20px);
@@ -187,7 +193,7 @@
 }
 
 .overlay-top {
-	top: 150px;
+	top: 120px;
 	right: -10px;
 	width: 58%;
 	padding: 12px;
@@ -195,7 +201,7 @@
 }
 
 .overlay-bottom {
-	top: 220px;
+	top: 178px;
 	left: -8px;
 	width: 56%;
 	padding: 12px;
@@ -205,7 +211,6 @@
 .desktop-gallery {
 	position: relative;
 	z-index: 4;
-	margin-top: 24px;
 	display: grid;
 	grid-template-columns: repeat(5, minmax(0, 1fr));
 	gap: 14px;
@@ -215,7 +220,7 @@
 	border: 1px solid #9ebde0;
 	background: #fafdff;
 	border-radius: 12px;
-	min-height: 110px;
+	min-height: 84px;
 	display: grid;
 	place-items: center;
 	box-shadow: 0 6px 12px rgba(43, 82, 130, 0.14);
@@ -228,6 +233,12 @@
 }
 
 @media (max-width: 1100px) {
+	.scene-home {
+		height: auto;
+		min-height: calc(100vh - 112px);
+		padding-bottom: 20vh;
+	}
+
 	.scene-layout,
 	.wall-zone {
 		grid-template-columns: 1fr;
