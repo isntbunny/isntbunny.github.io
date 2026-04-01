@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.10",
-		"@astrojs/mdx": "4.3.13",
+		"@astrojs/mdx": "5.0.3",
 		"@astrojs/rss": "4.0.15",
 		"@astrojs/sitemap": "3.7.0",
 		"@tailwindcss/vite": "4.2.1",
