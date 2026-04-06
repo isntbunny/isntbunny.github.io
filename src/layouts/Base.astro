@@ -13,31 +13,8 @@ const { meta: { articleDate, description = siteConfig.description, ogImage, titl
 <html lang={siteConfig.lang}>
 	<head><BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} /></head>
 	<body class="site-shell">
-		<div aria-hidden="true" class="initial-loader" id="initial-loader">
-			<div class="initial-loader__icon">🪽</div>
-		</div>
 		<Header />
 		<main class="page-fade" id="main"><slot /></main>
 		<Footer />
 	</body>
 </html>
-
-<script is:inline>
-	const initLayoutEffects = () => {
-		const loader = document.getElementById("initial-loader");
-		if (loader && !sessionStorage.getItem("site-loader-seen")) {
-			sessionStorage.setItem("site-loader-seen", "1");
-			setTimeout(() => loader.classList.add("initial-loader--hidden"), 2000);
-		} else {
-			loader?.classList.add("initial-loader--hidden");
-		}
-
-		const nav = document.getElementById("main-header");
-		const toggleNav = () => nav?.classList.toggle("is-scrolled", window.scrollY > 8);
-		toggleNav();
-		window.addEventListener("scroll", toggleNav, { passive: true });
-	};
-
-	document.addEventListener("astro:page-load", initLayoutEffects);
-	initLayoutEffects();
-</script>
