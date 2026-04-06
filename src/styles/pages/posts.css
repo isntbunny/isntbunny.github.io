@@ -8,24 +8,59 @@
 }
 
 .posts-page section[data-year] {
-	margin-bottom: 2.2rem;
+	display: grid;
+	gap: 14px;
+	margin-bottom: 26px;
 }
 
-.posts-page h2.title {
-	font-size: 1.7rem;
-	line-height: 1.2;
+.posts-page .posts-year {
+	font-size: 32px;
+	color: #c7e9f0;
 }
 
-.posts-page ul {
-	margin-top: 0.55rem;
+.posts-page .posts-year-divider {
+	border: none;
+	border-top: 1px dashed #e2e8f0;
+	margin: 2px 0 8px;
 }
 
-.posts-page li[data-tags] {
-	margin-top: 0.2rem;
-	font-size: 0.92rem;
-	line-height: 1.5;
+.posts-page .posts-month-grid {
+	display: grid;
+	gap: 14px;
 }
 
-.posts-page .post-preview-date {
-	font-size: 0.82rem;
+.posts-page .posts-month {
+	display: inline-block;
+	background: rgba(199, 233, 240, 0.2);
+	border-radius: 999px;
+	padding: 4px 12px;
+}
+
+.posts-page .posts-list {
+	margin: 10px 0 0 24px;
+	padding-left: 14px;
+	border-left: 2px solid #c7e9f0;
+	display: grid;
+	gap: 8px;
+}
+
+.posts-page .posts-list-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.posts-page .posts-list-link {
+	font-size: 16px;
+}
+
+.posts-page .posts-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.posts-page .posts-date {
+	font-size: 12px;
 }

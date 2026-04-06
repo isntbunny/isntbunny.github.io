@@ -2,6 +2,8 @@
 title: 有机物的命名
 description: 在这里添加文章描述
 publishDate: 2025-12-10
+tags:
+  - 学习
 ---
 
 # 有机物的命名

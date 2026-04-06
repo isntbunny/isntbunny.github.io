@@ -43,8 +43,11 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 // Used to generate links in both the Header & Footer.
 export const menuLinks: MenuLink[] = [
 	{ path: "/posts/", title: "Posts" },
-	{ path: "/archive/", title: "Archive" },
 	{ path: "/tags/", title: "Tags" },
+	{ path: "/memos/", title: "Memos" },
+	{ path: "/gallery/", title: "Gallery" },
+	{ path: "/bangumi/", title: "Bangumi" },
+	{ path: "/guestbook/", title: "Guestbook" },
 	{ path: "/about/", title: "About" },
 ];
 
