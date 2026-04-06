@@ -5,6 +5,10 @@ function removeDupsAndLowerCase(array: string[]) {
 	return [...new Set(array.map((str) => str.toLowerCase()))];
 }
 
+function removeDups(array: string[]) {
+	return [...new Set(array.map((str) => str.trim()).filter(Boolean))];
+}
+
 const titleSchema = z.string().max(60);
 
 const baseSchema = z.object({
@@ -25,6 +29,7 @@ const post = defineCollection({
 			draft: z.boolean().default(false),
 			ogImage: z.string().optional(),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+			categories: z.array(z.string()).default([]).transform(removeDups),
 			publishDate: z
 				.string()
 				.or(z.date())

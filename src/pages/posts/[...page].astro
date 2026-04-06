@@ -6,7 +6,7 @@ import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
-const TAG_CATEGORIES = ["周记", "随笔", "学习", "技术笔记"] as const;
+const POST_CATEGORIES = ["周记", "随笔", "学习", "技术笔记"] as const;
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allPosts = (await getAllPosts()).sort(collectionDateSort);
@@ -55,9 +55,9 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 		<div class="mb-5 flex flex-wrap gap-2">
 			<button class="glass-panel card-chip" data-tab="all" type="button">all</button>
 			{
-				TAG_CATEGORIES.map((tag) => (
-					<button class="glass-panel card-chip" data-tab={tag} type="button">
-						{tag}
+				POST_CATEGORIES.map((category) => (
+					<button class="glass-panel card-chip" data-tab={category} type="button">
+						{category}
 					</button>
 				))
 			}
@@ -65,7 +65,11 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 
 		{
 			yearKeys.map((year, yearIndex) => (
-				<section class="fade-stagger" style={`animation-delay:${yearIndex * 0.1}s`} data-year={year}>
+				<section
+					class="fade-stagger"
+					style={`animation-delay:${yearIndex * 0.1}s`}
+					data-year={year}
+				>
 					<h2 class="posts-year">{year}</h2>
 					<hr class="posts-year-divider" />
 					<div class="posts-month-grid">
@@ -74,18 +78,20 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 								<span class="posts-month">{month}</span>
 								<ul class="posts-list">
 									{list.map((post) => {
-										const primaryTag =
-											TAG_CATEGORIES.find((tag) => post.data.tags.includes(tag)) ??
-											post.data.tags[0] ??
+										const primaryCategory =
+											POST_CATEGORIES.find((category) => post.data.categories.includes(category)) ??
+											post.data.categories[0] ??
 											"未分类";
 										return (
-											<li data-tags={post.data.tags.join(" ")} class="posts-list-item">
-												<a href={`/posts/${post.id}/`} class="posts-list-link">{post.data.title}</a>
+											<li data-categories={post.data.categories.join(" ")} class="posts-list-item">
+												<a href={`/posts/${post.id}/`} class="posts-list-link">
+													{post.data.title}
+												</a>
 												<div class="posts-meta">
 													<time class="small-muted posts-date">
 														{post.data.publishDate.toLocaleDateString("zh-CN")}
 													</time>
-													<span class="site-chip">{primaryTag}</span>
+													<span class="site-chip">{primaryCategory}</span>
 												</div>
 											</li>
 										);
@@ -103,7 +109,7 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 <script is:inline>
 	const initPostTabs = () => {
 		const tabButtons = document.querySelectorAll("[data-tab]");
-		const rows = document.querySelectorAll("li[data-tags]");
+		const rows = document.querySelectorAll("li[data-categories]");
 		if (!tabButtons.length || !rows.length) return;
 
 		const activate = (tag) => {
@@ -113,13 +119,13 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 			});
 
 			rows.forEach((row) => {
-				const rowTags = (row.dataset.tags || "").split(" ").filter(Boolean);
-				const visible = tag === "all" || rowTags.includes(tag);
+				const rowCategories = (row.dataset.categories || "").split(" ").filter(Boolean);
+				const visible = tag === "all" || rowCategories.includes(tag);
 				row.classList.toggle("hidden", !visible);
 			});
 
 			document.querySelectorAll("section[data-year]").forEach((section) => {
-				const hasVisible = !!section.querySelector("li[data-tags]:not(.hidden)");
+				const hasVisible = !!section.querySelector("li[data-categories]:not(.hidden)");
 				section.classList.toggle("hidden", !hasVisible);
 			});
 		};
