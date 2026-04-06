@@ -1,58 +1,131 @@
-<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>Memos • 幸せのカウントダウン</title><link href="/icon.svg" rel="icon" type="image/svg+xml"><link rel="icon" href="/favicon-32x32.png" type="image/png"><link href="/icons/apple-touch-icon.png" rel="apple-touch-icon"><link href="/manifest.webmanifest" rel="manifest"><link href="https://isntbunny.github.io/memos/" rel="canonical"><meta content="Memos • 幸せのカウントダウン" name="title"><meta content="status.cafe stream" name="description"><meta content="Eucaly" name="author"><meta content="website" property="og:type"><meta content="Memos" property="og:title"><meta content="status.cafe stream" property="og:description"><meta content="https://isntbunny.github.io/memos/" property="og:url"><meta content="幸せのカウントダウン" property="og:site_name"><meta content="zh_CN" property="og:locale"><meta content="https://isntbunny.github.io/social-card.png" property="og:image"><meta content="1200" property="og:image:width"><meta content="630" property="og:image:height"><meta content="summary_large_image" property="twitter:card"><meta content="https://isntbunny.github.io/memos/" property="twitter:url"><meta content="Memos" property="twitter:title"><meta content="status.cafe stream" property="twitter:description"><meta content="https://isntbunny.github.io/social-card.png" property="twitter:image"><link href="/sitemap-index.xml" rel="sitemap"><link href="/rss.xml" title="Blog" rel="alternate" type="application/rss+xml"><link href="/notes/rss.xml" title="Notes" rel="alternate" type="application/rss+xml"><meta content="Astro v5.18.0" name="generator"><link rel="stylesheet" href="/_astro/_slug_.CWiG-IEv.css"></head> <body class="site-shell"> <header id="main-header"> <nav aria-label="Main menu" class="site-nav-shell"> <a class="site-logo" href="/">Eucaly's Blog</a> <div class="site-nav-links"> <a aria-current="false" class="site-nav-link" href="/">Home</a> <a aria-current="false" class="site-nav-link" href="/posts/"> Posts </a><a aria-current="false" class="site-nav-link" href="/tags/"> Tags </a><a aria-current="page" class="site-nav-link" href="/memos/"> Memos </a><a aria-current="false" class="site-nav-link" href="/gallery/"> Gallery </a><a aria-current="false" class="site-nav-link" href="/bangumi/"> Bangumi </a><a aria-current="false" class="site-nav-link" href="/guestbook/"> Guestbook </a><a aria-current="false" class="site-nav-link" href="/about/"> About </a> </div> </nav> </header> <main class="page-fade" id="main"> <section class="memo-flow"> <h1>Memos</h1> <div id="memo-list"></div> <button class="memo-loadmore" id="memo-loadmore" type="button">Load more</button> </section> </main> <footer class="site-footer"> <p>© 2026 Eucaly. Built with love and Astro.</p> </footer> </body></html> <script>
-	const PAGE_SIZE = 20;
-	let renderedCount = 0;
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>Memos • 幸せのカウントダウン</title><link href="/icon.svg" rel="icon" type="image/svg+xml"><link rel="icon" href="/favicon-32x32.png" type="image/png"><link href="/icons/apple-touch-icon.png" rel="apple-touch-icon"><link href="/manifest.webmanifest" rel="manifest"><link href="https://isntbunny.github.io/memos/" rel="canonical"><meta content="Memos • 幸せのカウントダウン" name="title"><meta content="status.cafe stream" name="description"><meta content="Eucaly" name="author"><meta content="website" property="og:type"><meta content="Memos" property="og:title"><meta content="status.cafe stream" property="og:description"><meta content="https://isntbunny.github.io/memos/" property="og:url"><meta content="幸せのカウントダウン" property="og:site_name"><meta content="zh_CN" property="og:locale"><meta content="https://isntbunny.github.io/social-card.png" property="og:image"><meta content="1200" property="og:image:width"><meta content="630" property="og:image:height"><meta content="summary_large_image" property="twitter:card"><meta content="https://isntbunny.github.io/memos/" property="twitter:url"><meta content="Memos" property="twitter:title"><meta content="status.cafe stream" property="twitter:description"><meta content="https://isntbunny.github.io/social-card.png" property="twitter:image"><link href="/sitemap-index.xml" rel="sitemap"><link href="/rss.xml" title="Blog" rel="alternate" type="application/rss+xml"><link href="/notes/rss.xml" title="Notes" rel="alternate" type="application/rss+xml"><meta content="Astro v5.18.0" name="generator"><link rel="stylesheet" href="/_astro/_slug_.CMEbetzt.css"></head> <body class="site-shell"> <header id="main-header"> <nav aria-label="Main menu" class="site-nav-shell"> <a class="site-logo" href="/">Eucaly's Blog</a> <div class="site-nav-links"> <a aria-current="false" class="site-nav-link" href="/">Home</a> <a aria-current="false" class="site-nav-link" href="/posts/"> Posts </a><a aria-current="false" class="site-nav-link" href="/tags/"> Tags </a><a aria-current="page" class="site-nav-link" href="/memos/"> Memos </a><a aria-current="false" class="site-nav-link" href="/gallery/"> Gallery </a><a aria-current="false" class="site-nav-link" href="/bangumi/"> Bangumi </a><a aria-current="false" class="site-nav-link" href="/guestbook/"> Guestbook </a><a aria-current="false" class="site-nav-link" href="/about/"> About </a> </div> </nav> </header> <main class="page-fade" id="main"> <section class="memo-flow"> <h1>Memos</h1> <div id="memo-list"></div> <button class="memo-loadmore" id="memo-loadmore" type="button">Load more</button> </section> </main> <footer class="site-footer"> <p>© 2026 Eucaly. Built with love and Astro.</p> </footer> </body></html> <script>
+	let currentPage = 1;
 	let memoItems = [];
+	let hasNextPage = true;
 
-	const parseStatusFeed = (xmlText) => [...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)].map((entry) => {
-		const body = entry[1] ?? "";
-		const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
-		const content = (body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ?? "")
-			.replace(/<[^>]*>/g, " ")
-			.replace(/\s+/g, " ")
-			.trim();
-		if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
-		return { updated, content };
-	}).filter(Boolean);
+	const parseStatusFeed = (xmlText) =>
+		[...xmlText.matchAll(/<entry>([\s\S]*?)<\/entry>/gi)]
+			.map((entry) => {
+				const body = entry[1] ?? "";
+				const updated = body.match(/<updated>([\s\S]*?)<\/updated>/i)?.[1]?.trim() ?? "";
+				const content = (body.match(/<content[^>]*>([\s\S]*?)<\/content>/i)?.[1] ?? "")
+					.replace(/<[^>]*>/g, " ")
+					.replace(/\s+/g, " ")
+					.trim();
+				if (!content || Number.isNaN(new Date(updated).valueOf())) return null;
+				return { updated, content };
+			})
+			.filter(Boolean);
 
-	const renderBatch = () => {
+	const parseStatusPage = (htmlText) => {
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(htmlText, "text/html");
+		const cards = [...doc.querySelectorAll(".status, .status-box, article")];
+		const parsed = cards
+			.map((node) => {
+				const content =
+					node.querySelector(".status-content, .status_text, p")?.textContent?.trim() ?? "";
+				const updated =
+					node.querySelector("time")?.getAttribute("datetime") ||
+					node.querySelector(".status-date, .status_time")?.textContent?.trim() ||
+					"";
+				if (!content) return null;
+				return { updated: updated || new Date().toISOString(), content };
+			})
+			.filter(Boolean);
+		const hasNext = !!doc.querySelector('a[rel="next"], .pagination a.next, a[aria-label*="Next"]');
+		return { items: parsed, hasNext };
+	};
+
+	const renderItems = (items) => {
 		const list = document.getElementById("memo-list");
-		const more = document.getElementById("memo-loadmore");
-		if (!list || !more) return;
-		const batch = memoItems.slice(renderedCount, renderedCount + PAGE_SIZE);
+		if (!list || !items.length) return;
 		list.insertAdjacentHTML(
 			"beforeend",
-			batch.map((item) => `
+			items
+				.map(
+					(item) => `
 				<article class="memo-item">
 					<div class="memo-time-line"></div>
 					<div class="site-card">
-						<time class="memo-time">${new Date(item.updated).toLocaleString("en-US")}</time>
+						<time class="memo-time">${new Date(item.updated).toLocaleString("zh-CN")}</time>
 						<p class="memo-content">${item.content}</p>
-						<div class="memo-actions"><button type="button">↩ Reply</button><button type="button">♡ Like</button></div>
 					</div>
 				</article>
-			`).join(""),
+			`,
+				)
+				.join(""),
 		);
-		renderedCount += batch.length;
-		if (renderedCount >= memoItems.length) more.setAttribute("hidden", "hidden");
+	};
+
+	const fetchMemoPage = async (page) => {
+		const atomUrl = `https://status.cafe/users/isntbunny.atom?page=${page}`;
+		try {
+			const raw = await fetch(
+				`https://api.allorigins.win/raw?url=${encodeURIComponent(atomUrl)}`,
+			).then((res) => res.text());
+			const entries = parseStatusFeed(raw);
+			if (entries.length) {
+				return { items: entries, hasNext: entries.length > 0 };
+			}
+		} catch {
+			// fallback to profile page parser
+		}
+
+		const profileUrl = `https://status.cafe/users/isntbunny?page=${page}`;
+		const raw = await fetch(
+			`https://api.allorigins.win/raw?url=${encodeURIComponent(profileUrl)}`,
+		).then((res) => res.text());
+		return parseStatusPage(raw);
+	};
+
+	const updateLoadMore = () => {
+		const more = document.getElementById("memo-loadmore");
+		if (!more) return;
+		more.toggleAttribute("hidden", !hasNextPage);
+		more.textContent = hasNextPage ? "Load more" : "No more memos";
+	};
+
+	const loadNextPage = async () => {
+		const more = document.getElementById("memo-loadmore");
+		if (!more || !hasNextPage) return;
+		more.textContent = "Loading...";
+		more.setAttribute("disabled", "disabled");
+		try {
+			const { items, hasNext } = await fetchMemoPage(currentPage);
+			if (!items.length && currentPage === 1) {
+				document.getElementById("memo-list").innerHTML =
+					`<p class="site-card">Unable to load status feed right now.</p>`;
+				hasNextPage = false;
+			} else {
+				memoItems = memoItems.concat(items);
+				renderItems(items);
+				currentPage += 1;
+				hasNextPage = hasNext && items.length > 0;
+			}
+		} catch {
+			hasNextPage = false;
+			if (currentPage === 1) {
+				document.getElementById("memo-list").innerHTML =
+					`<p class="site-card">Unable to load status feed right now.</p>`;
+			}
+		}
+		more.removeAttribute("disabled");
+		updateLoadMore();
 	};
 
 	const initMemos = async () => {
+		const list = document.getElementById("memo-list");
 		const more = document.getElementById("memo-loadmore");
-		if (!more) return;
-		try {
-			const url = "https://status.cafe/users/isntbunny.atom";
-			const raw = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`).then((res) => res.text());
-			memoItems = parseStatusFeed(raw);
-			renderedCount = 0;
-			document.getElementById("memo-list").innerHTML = "";
-			renderBatch();
-		} catch {
-			document.getElementById("memo-list").innerHTML = `<p class="site-card">Unable to load status feed right now.</p>`;
-			more.setAttribute("hidden", "hidden");
-		}
+		if (!list || !more) return;
+		list.innerHTML = "";
+		memoItems = [];
+		currentPage = 1;
+		hasNextPage = true;
+		await loadNextPage();
 		if (more.dataset.bound !== "1") {
 			more.dataset.bound = "1";
-			more.addEventListener("click", renderBatch);
+			more.addEventListener("click", loadNextPage);
 		}
 	};
 	document.addEventListener("astro:page-load", initMemos);
