@@ -2,34 +2,44 @@
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import { getAllPosts, groupPostsByYear } from "@/data/post";
+import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
+const TAG_CATEGORIES = ["周记", "随笔", "学习", "技术笔记"] as const;
+
 export const getStaticPaths = (async ({ paginate }) => {
 	const allPosts = (await getAllPosts()).sort(collectionDateSort);
-	const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
 	return paginate(allPosts, {
 		pageSize: allPosts.length || 1,
-		props: { tags },
 	});
 }) satisfies GetStaticPaths;
 
 interface Props {
 	page: Page<CollectionEntry<"post">>;
-	tags: string[];
 }
 
-const { page, tags } = Astro.props;
+const { page } = Astro.props;
 
 const meta = {
 	description: "Read my collection of posts and the things that interest me",
 	title: "Posts",
 };
 
-const groupedByYear = groupPostsByYear(page.data);
-const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
+const grouped = page.data.reduce<Record<string, Record<string, CollectionEntry<"post">[]>>>(
+	(acc, post) => {
+		const date = post.data.publishDate;
+		const year = String(date.getFullYear());
+		const month = date.toLocaleString("zh-CN", { month: "long" });
+		acc[year] ??= {};
+		acc[year][month] ??= [];
+		acc[year][month].push(post);
+		return acc;
+	},
+	{},
+);
+
+const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 ---
 
 <PageLayout meta={meta}>
@@ -45,7 +55,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		<div class="mb-5 flex flex-wrap gap-2">
 			<button class="glass-panel card-chip" data-tab="all" type="button">all</button>
 			{
-				tags.map((tag) => (
+				TAG_CATEGORIES.map((tag) => (
 					<button class="glass-panel card-chip" data-tab={tag} type="button">
 						{tag}
 					</button>
@@ -54,19 +64,36 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		</div>
 
 		{
-			descYearKeys.map((yearKey) => (
-				<section class="mb-10" data-year={yearKey}>
-					<h2 id={`year-${yearKey}`} class="title text-lg">
-						<span class="sr-only">Posts in</span>
-						{yearKey}
-					</h2>
-					<ul class="mt-3 space-y-2 text-start">
-						{groupedByYear[yearKey]?.map((p) => (
-							<li class="space-y-1" data-tags={p.data.tags.join(" ")}>
-								<PostPreview post={p} />
-							</li>
+			yearKeys.map((year, yearIndex) => (
+				<section class="fade-stagger" style={`animation-delay:${yearIndex * 0.1}s`} data-year={year}>
+					<h2 class="posts-year">{year}</h2>
+					<hr class="posts-year-divider" />
+					<div class="posts-month-grid">
+						{Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
+							<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
+								<span class="posts-month">{month}</span>
+								<ul class="posts-list">
+									{list.map((post) => {
+										const primaryTag =
+											TAG_CATEGORIES.find((tag) => post.data.tags.includes(tag)) ??
+											post.data.tags[0] ??
+											"未分类";
+										return (
+											<li data-tags={post.data.tags.join(" ")} class="posts-list-item">
+												<a href={`/posts/${post.id}/`} class="posts-list-link">{post.data.title}</a>
+												<div class="posts-meta">
+													<time class="small-muted posts-date">
+														{post.data.publishDate.toLocaleDateString("zh-CN")}
+													</time>
+													<span class="site-chip">{primaryTag}</span>
+												</div>
+											</li>
+										);
+									})}
+								</ul>
+							</section>
 						))}
-					</ul>
+					</div>
 				</section>
 			))
 		}

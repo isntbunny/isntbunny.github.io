@@ -2,6 +2,8 @@
 title: oc档案
 description: sdddd
 publishDate: 2025-07-15
+tags:
+  - 随笔
 ---
 ## 基本信息
 - 姓名：Bunny（前）/Eucaly（后）
@@ -63,4 +65,3 @@ publishDate: 2025-07-15
 （選修）星際小語種、繪畫、計算機、政治
 - 最喜歡/擅長的課程：星際小語種
 - 最不擅長的課程：科學
-

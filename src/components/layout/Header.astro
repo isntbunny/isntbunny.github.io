@@ -1,9 +1,5 @@
 ---
 import { menuLinks } from "@/site.config";
-
-const navItems = menuLinks.flatMap((link) =>
-	link.children?.length ? link.children : [link],
-).filter((item) => item.path);
 ---
 
 <header id="main-header">
@@ -11,7 +7,7 @@ const navItems = menuLinks.flatMap((link) =>
 		<a class="site-logo" href="/">Eucaly's Blog</a>
 		<div class="site-nav-links">
 			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/">Home</a>
-			{navItems.map((link) => (
+			{menuLinks.map((link) => (
 				<a
 					aria-current={Astro.url.pathname === link.path ? "page" : false}
 					class="site-nav-link"
