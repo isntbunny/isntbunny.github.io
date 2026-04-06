@@ -3,9 +3,15 @@ import PageLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
 
 const username = siteConfig.bangumiUsername;
-const statusMap: Record<number, string> = { 1: "Wish", 2: "Completed", 3: "Watching", 4: "On hold", 5: "Dropped" };
+const statusMap: Record<number, string> = {
+	1: "Wish",
+	2: "Completed",
+	3: "Watching",
+	4: "On hold",
+	5: "Dropped",
+};
 
-async function fetchCollection(subjectType: number) {
+async function fetchSubjectCollection(subjectType: number) {
 	try {
 		const endpoint = `https://api.bgm.tv/v0/users/${username}/collections?subject_type=${subjectType}&limit=30`;
 		const res = await fetch(endpoint, { headers: { "user-agent": "isntbunny-blog/1.0" } });
@@ -17,51 +23,127 @@ async function fetchCollection(subjectType: number) {
 	}
 }
 
-const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCollection(1)]);
+async function fetchCharacterCollection() {
+	const endpoints = [
+		`https://api.bgm.tv/v0/users/${username}/collections/-/characters?limit=30`,
+		`https://api.bgm.tv/v0/users/${username}/collections/characters?limit=30`,
+	];
+
+	for (const endpoint of endpoints) {
+		try {
+			const res = await fetch(endpoint, { headers: { "user-agent": "isntbunny-blog/1.0" } });
+			if (!res.ok) continue;
+			const data = await res.json();
+			const list = data?.data ?? data ?? [];
+			if (Array.isArray(list) && list.length) return list;
+		} catch {
+			// try next endpoint
+		}
+	}
+
+	return [];
+}
+
+const [animeItems, bookItems, characterItems] = await Promise.all([
+	fetchSubjectCollection(2),
+	fetchSubjectCollection(1),
+	fetchCharacterCollection(),
+]);
 ---
 
 <PageLayout meta={{ title: "Bangumi", description: "Bangumi progress" }}>
 	<h1>Bangumi</h1>
 	<div class="bangumi-tabs">
 		<button class="bangumi-tab is-active" data-tab="anime" type="button">Anime</button>
-		<button class="bangumi-tab" data-tab="manga" type="button">Manga</button>
+		<button class="bangumi-tab" data-tab="book" type="button">Book</button>
+		<button class="bangumi-tab" data-tab="character" type="button">Character</button>
 	</div>
 
 	<section data-tab-panel="anime">
 		<div class="bangumi-grid">
-			{animeItems.map((entry: any, index: number) => {
-				const subject = entry?.subject;
-				const title = subject?.name_cn || subject?.name || "Untitled";
-				const image = subject?.images?.common || subject?.images?.medium || "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
-				const score = entry?.rate ? `Score ${entry.rate}` : "No score";
-				const status = statusMap[entry?.type] || "Unknown";
-				return (
-					<article class="site-card bangumi-item fade-stagger" style={`animation-delay:${index * 0.04}s`}>
-						<img src={image} alt={title} loading="lazy" />
-						<h3 title={title}>{title}</h3>
-						<p class="small-muted">{status} · {score}</p>
-					</article>
-				);
-			})}
+			{
+				animeItems.map((entry: any, index: number) => {
+					const subject = entry?.subject;
+					const title = subject?.name_cn || subject?.name || "Untitled";
+					const image =
+						subject?.images?.common ||
+						subject?.images?.medium ||
+						"https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
+					const score = entry?.rate ? `Score ${entry.rate}` : "No score";
+					const status = statusMap[entry?.type] || "Unknown";
+					const comment = entry?.comment?.trim();
+					return (
+						<article
+							class="site-card bangumi-item fade-stagger"
+							style={`animation-delay:${index * 0.04}s`}
+						>
+							<img src={image} alt={title} loading="lazy" />
+							<h3 title={title}>{title}</h3>
+							<p class="small-muted">
+								{status} · {score}
+							</p>
+							{comment && <p class="small-muted">评价：{comment}</p>}
+						</article>
+					);
+				})
+			}
 		</div>
 	</section>
 
-	<section data-tab-panel="manga" hidden>
+	<section data-tab-panel="book" hidden>
 		<div class="bangumi-grid">
-			{mangaItems.map((entry: any, index: number) => {
-				const subject = entry?.subject;
-				const title = subject?.name_cn || subject?.name || "Untitled";
-				const image = subject?.images?.common || subject?.images?.medium || "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
-				const score = entry?.rate ? `Score ${entry.rate}` : "No score";
-				const status = statusMap[entry?.type] || "Unknown";
-				return (
-					<article class="site-card bangumi-item fade-stagger" style={`animation-delay:${index * 0.04}s`}>
-						<img src={image} alt={title} loading="lazy" />
-						<h3 title={title}>{title}</h3>
-						<p class="small-muted">{status} · {score}</p>
-					</article>
-				);
-			})}
+			{
+				bookItems.map((entry: any, index: number) => {
+					const subject = entry?.subject;
+					const title = subject?.name_cn || subject?.name || "Untitled";
+					const image =
+						subject?.images?.common ||
+						subject?.images?.medium ||
+						"https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
+					const score = entry?.rate ? `Score ${entry.rate}` : "No score";
+					const status = statusMap[entry?.type] || "Unknown";
+					const comment = entry?.comment?.trim();
+					return (
+						<article
+							class="site-card bangumi-item fade-stagger"
+							style={`animation-delay:${index * 0.04}s`}
+						>
+							<img src={image} alt={title} loading="lazy" />
+							<h3 title={title}>{title}</h3>
+							<p class="small-muted">
+								{status} · {score}
+							</p>
+							{comment && <p class="small-muted">评价：{comment}</p>}
+						</article>
+					);
+				})
+			}
+		</div>
+	</section>
+
+	<section data-tab-panel="character" hidden>
+		<div class="bangumi-grid">
+			{
+				characterItems.map((entry: any, index: number) => {
+					const character = entry?.character ?? entry?.subject ?? entry;
+					const title = character?.name_cn || character?.name || "Unknown character";
+					const image =
+						character?.images?.grid ||
+						character?.images?.medium ||
+						"https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=600&q=80";
+					const comment = entry?.comment?.trim();
+					return (
+						<article
+							class="site-card bangumi-item fade-stagger"
+							style={`animation-delay:${index * 0.04}s`}
+						>
+							<img src={image} alt={title} loading="lazy" />
+							<h3 title={title}>{title}</h3>
+							{comment && <p class="small-muted">评价：{comment}</p>}
+						</article>
+					);
+				})
+			}
 		</div>
 	</section>
 </PageLayout>
@@ -76,7 +158,9 @@ const [animeItems, mangaItems] = await Promise.all([fetchCollection(2), fetchCol
 			tab.addEventListener("click", () => {
 				const target = tab.getAttribute("data-tab");
 				tabs.forEach((item) => item.classList.toggle("is-active", item === tab));
-				panels.forEach((panel) => panel.toggleAttribute("hidden", panel.getAttribute("data-tab-panel") !== target));
+				panels.forEach((panel) =>
+					panel.toggleAttribute("hidden", panel.getAttribute("data-tab-panel") !== target),
+				);
 			});
 		});
 	};
