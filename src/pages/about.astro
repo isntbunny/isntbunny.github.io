@@ -7,12 +7,6 @@ const contacts = [
 	{ icon: "mdi:github", label: "GitHub", url: "https://github.com/isntbunny" },
 	{ icon: "mdi:email-outline", label: "Email", url: "mailto:isntbunny@outlook.com" },
 ];
-const skills = [
-	{ name: "Illustration", value: 78 },
-	{ name: "Writing", value: 70 },
-	{ name: "Frontend", value: 64 },
-	{ name: "Language", value: 82 },
-];
 ---
 
 <PageLayout meta={{ description: "About me", title: "About" }}>
@@ -31,13 +25,7 @@ const skills = [
 
 	<section class="site-card skills">
 		<h2>Skills</h2>
-		{skills.map((skill) => (
-			<div class="skill-row">
-				<span>{skill.name}</span>
-				<div class="skill-bar"><span class="skill-fill" data-skill={skill.value}></span></div>
-				<span>{skill.value}%</span>
-			</div>
-		))}
+
 	</section>
 </PageLayout>
 
