@@ -11,3 +11,9 @@
 .about-avatar-spin { animation: avatarspin 3s linear; }
 @keyframes avatarspin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
 @media (max-width: 720px) { .about-grid { grid-template-columns:1fr; } }
+
+.badges {
+  display: flex;       /* 开启弹性布局，默认就是横向排列 */
+  flex-wrap: wrap;    /* 如果按钮太多一行装不下，允许它们换到下一行 */
+  gap: 10px;          /* 设置按钮之间的间距（可选） */
+}
