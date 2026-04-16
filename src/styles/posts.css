@@ -1,0 +1,27 @@
+
+.post-prose :is(h1, h2, h3, h4, h5, h6) {
+	color: #374151;
+	position: relative;
+}
+.post-prose :is(h1, h2, h3, h4, h5, h6)::before {
+	color: #3b82f6;
+	margin-right: 0.35em;
+}
+.post-prose h1::before {
+	content: "#";
+}
+.post-prose h2::before {
+	content: "##";
+}
+.post-prose h3::before {
+	content: "###";
+}
+.post-prose h4::before {
+	content: "####";
+}
+.post-prose h5::before {
+	content: "#####";
+}
+.post-prose h6::before {
+	content: "######";
+}

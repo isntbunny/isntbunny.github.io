@@ -1,0 +1,71 @@
+.gallery-grid {
+	display: grid;
+	gap: 24px;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.sections-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.gallery-image {
+	width: 100%;
+	aspect-ratio: 16/9;
+	object-fit: cover;
+	border-radius: 12px;
+	display: block;
+	opacity: 0;
+	animation: imgFade 0.4s ease forwards;
+}
+@keyframes imgFade {
+	to {
+		opacity: 1;
+	}
+}
+.gallery-tile {
+	cursor: pointer;
+	position: relative;
+}
+.gallery-skeleton {
+	position: absolute;
+	inset: 20px;
+	border-radius: 12px;
+	background: linear-gradient(90deg, #d4f0f5, #e8f6fa, #d4f0f5);
+	background-size: 200% 100%;
+	animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+	from {
+		background-position: 200% 0;
+	}
+	to {
+		background-position: -200% 0;
+	}
+}
+.gallery-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 300;
+	background: rgba(0, 0, 0, 0.6);
+	display: grid;
+	grid-template-columns: 60px minmax(0, 1fr) 60px;
+	align-items: center;
+	gap: 10px;
+	padding: 24px;
+}
+.gallery-lightbox img {
+	max-width: min(920px, 100%);
+	max-height: 76vh;
+	margin: auto;
+	display: block;
+	border-radius: 12px;
+}
+.gallery-lightbox p {
+	color: #fff;
+	text-align: center;
+}
+.gallery-arrow {
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	border-radius: 20px;
+	padding: 10px;
+}

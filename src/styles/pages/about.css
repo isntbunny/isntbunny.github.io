@@ -7,7 +7,7 @@
 .skills { margin-top:24px; display:grid; gap:14px; }
 .skill-row { display:grid; grid-template-columns: 120px 1fr 48px; gap:12px; align-items:center; }
 .skill-bar { height:6px; border-radius:30px; background:#e2e8f0; overflow:hidden; }
-.skill-fill { display:block; height:100%; background:#c7e9f0; width:0; transition:width 0.8s ease; }
+.skill-fill { display:block; height:100%; background:#8dabb1; width:0; transition:width 0.8s ease; }
 .about-avatar-spin { animation: avatarspin 3s linear; }
 @keyframes avatarspin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
 @media (max-width: 720px) { .about-grid { grid-template-columns:1fr; } }
