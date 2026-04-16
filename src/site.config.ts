@@ -44,7 +44,7 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 export const menuLinks: MenuLink[] = [
 	{ path: "/posts/", title: "Posts" },
 	{ path: "/tags/", title: "Tags" },
-	{ path: "/memos/", title: "Memos" },
+	{ path: "https://status.cafe/users/isntbunny", title: "Memos" },
 	{ path: "/gallery/", title: "Gallery" },
 	{ path: "/bangumi/", title: "Bangumi" },
 	{ path: "/guestbook/", title: "Guestbook" },
