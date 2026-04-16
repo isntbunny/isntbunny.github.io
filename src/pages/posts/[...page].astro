@@ -41,13 +41,7 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 
 <PageLayout meta={meta}>
 	<div class="posts-page">
-		<div class="mb-8 flex items-center gap-3">
-			<h1 class="title">Posts</h1>
-			<a class="text-accent" href="/rss.xml" target="_blank">
-				<span class="sr-only">RSS feed</span>
-				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
-			</a>
-		</div>
+		<h1 class="title">Posts</h1>
 
 		{
 			yearKeys.map((year, yearIndex) => (
@@ -62,14 +56,8 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 						{Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
 							<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
 								<span class="posts-month">{month}</span>
-								<ul class="posts-list">
-									{list.map((post) => {
-										const primaryCategory =
-											POST_CATEGORIES.find((category) => post.data.categories.includes(category)) ??
-											post.data.categories[0] ??
-											"未分类";
-										return (
-											<li data-categories={post.data.categories.join(" ")} class="posts-list-item">
+								<ul class="posts-list">\
+											<li class="posts-list-item">
 												<a href={`/posts/${post.id}/`} class="posts-list-link">
 													{post.data.title}
 												</a>
@@ -77,11 +65,9 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 													<time class="small-muted posts-date">
 														{post.data.publishDate.toLocaleDateString("zh-CN")}
 													</time>
-													<span class="site-chip">{primaryCategory}</span>
 												</div>
 											</li>
-										);
-									})}
+
 								</ul>
 							</section>
 						))}
@@ -91,39 +77,3 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 		}
 	</div>
 </PageLayout>
-
-<script is:inline>
-	const initPostTabs = () => {
-		const tabButtons = document.querySelectorAll("[data-tab]");
-		const rows = document.querySelectorAll("li[data-categories]");
-		if (!tabButtons.length || !rows.length) return;
-
-		const activate = (tag) => {
-			tabButtons.forEach((btn) => {
-				const active = btn.dataset.tab === tag;
-				btn.classList.toggle("font-semibold", active);
-			});
-
-			rows.forEach((row) => {
-				const rowCategories = (row.dataset.categories || "").split(" ").filter(Boolean);
-				const visible = tag === "all" || rowCategories.includes(tag);
-				row.classList.toggle("hidden", !visible);
-			});
-
-			document.querySelectorAll("section[data-year]").forEach((section) => {
-				const hasVisible = !!section.querySelector("li[data-categories]:not(.hidden)");
-				section.classList.toggle("hidden", !hasVisible);
-			});
-		};
-
-		tabButtons.forEach((btn) => {
-			if (btn.dataset.bound === "1") return;
-			btn.dataset.bound = "1";
-			btn.addEventListener("click", () => activate(btn.dataset.tab || "all"));
-		});
-
-		activate("all");
-	};
-	document.addEventListener("astro:page-load", initPostTabs);
-	initPostTabs();
-</script>

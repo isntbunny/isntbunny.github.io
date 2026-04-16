@@ -5,8 +5,6 @@ publishDate: 2026-04-16
 tags:
   - Web
   - CSS
-categories:
-  - 技术笔记
 ---
 
 ### 基本选择器

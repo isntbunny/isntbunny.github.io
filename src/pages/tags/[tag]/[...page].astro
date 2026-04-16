@@ -9,17 +9,8 @@ import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const TAG_CATEGORIES = ["周记", "随笔", "学习", "技术笔记"] as const;
 	const allPosts = await getAllPosts();
 	const sortedPosts = allPosts.sort(collectionDateSort);
-
-	return TAG_CATEGORIES.flatMap((tag) => {
-		const postsWithTag = sortedPosts.filter((post) => post.data.tags.includes(tag));
-		return paginate(postsWithTag, {
-			pageSize: 10,
-			params: { tag },
-		});
-	});
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
