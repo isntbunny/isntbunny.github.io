@@ -11,7 +11,7 @@ const profileCoverImage = "https://i.postimg.cc/4dLTBX4R/e250416.jpg";
 			<div><img alt="profile photo" class="about-avatar" id="about-avatar" src={profileCoverImage} /></div>
 			<div>
 				<h1 class="about-name">Eucaly</h1>
-				<p class="about-bio">A dreamy student creator who loves light blue palettes, sketching, and coding tiny features that feel soft and calm.</p>
+				<p class="about-bio">一般路过高中生。</p>
 				<div class="about-social"></div>
 			</div>
 		</div>
@@ -19,7 +19,14 @@ const profileCoverImage = "https://i.postimg.cc/4dLTBX4R/e250416.jpg";
 
 	<section class="site-card skills">
 		<h2>Skills</h2>
-
+            <ul>
+				<li>HTML</li>
+				<li>CSS</li>
+				<li>一点点JavaScript</li>
+				<li>一点点TypeScript</li>
+				<li>一点点Python</li>
+			</ul>
+			<p>但是写的很烂。</p>
 	</section>
 
 	<section>
@@ -98,14 +105,17 @@ const profileCoverImage = "https://i.postimg.cc/4dLTBX4R/e250416.jpg";
 .about-social { display:flex; gap:12px; margin-top:12px; }
 .about-social a:hover { color:#c7e9f0; }
 .skills { margin-top:24px; display:grid; gap:14px; }
-.skill-row { display:grid; grid-template-columns: 120px 1fr 48px; gap:12px; align-items:center; }
-.skill-bar { height:6px; border-radius:30px; background:#e2e8f0; overflow:hidden; }
-.skill-fill { display:block; height:100%; background:#8dabb1; width:0; transition:width 0.8s ease; }
 @media (max-width: 720px) { .about-grid { grid-template-columns:1fr; } }
 
 .badges,.stamps {
-  display: flex;       /* 开启弹性布局，默认就是横向排列 */
-  flex-wrap: wrap;    /* 如果按钮太多一行装不下，允许它们换到下一行 */
-  gap: 10px;          /* 设置按钮之间的间距（可选） */
+	border-radius: 12px;
+	background: var(--white);
+	border: 1px solid var(--border);
+	box-shadow: var(--card-shadow);
+	padding: 20px;
+    display: flex;       /* 开启弹性布局，默认就是横向排列 */
+    flex-wrap: wrap;    /* 如果按钮太多一行装不下，允许它们换到下一行 */
+    gap: 10px;          /* 设置按钮之间的间距（可选） */
+    margin-top:12px;
 }
 </style>
