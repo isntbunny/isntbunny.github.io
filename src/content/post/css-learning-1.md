@@ -7,7 +7,7 @@ tags:
 publishDate: 2026-02-26
 ---
 
-[![选择器](www.w3school.com.cn/i/css/selector.gif)]
+[![选择器](https://www.w3school.com.cn/i/css/selector.gif)]
 
 ## 文本属性
 
