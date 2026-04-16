@@ -6,25 +6,40 @@ import PageLayout from "@/layouts/Base.astro";
 export const getStaticPaths = (async () => {
 	const [gallery] = await getCollection("gallery");
 	if (!gallery) return [];
-	return gallery.data.sections.map((section) => ({ params: { section: section.slug }, props: { sectionData: section } }));
+	return gallery.data.sections.map((section) => ({
+		params: { section: section.slug },
+		props: { sectionData: section },
+	}));
 }) satisfies GetStaticPaths;
 
 const { sectionData } = Astro.props;
-const allItems = sectionData.months.flatMap((group) => group.items.map((item) => ({ ...item, month: group.month })));
+const allItems = sectionData.months.flatMap((group) =>
+	group.items.map((item) => ({ ...item, month: group.month })),
+);
 ---
 
-<PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
+<PageLayout
+	meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}
+>
 	<a href="/gallery/">← Back</a>
 	<h1>{sectionData.title}</h1>
 	<div class="gallery-grid">
-		{allItems.map((item, index) => (
-			<article class="site-card gallery-tile" data-index={index} data-src={item.image} data-title={item.title} data-desc={item.description ?? item.month}>
-				<div class="gallery-skeleton"></div>
-				<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
-				<h3>{item.title}</h3>
-				<p class="small-muted">{item.description ?? item.month}</p>
-			</article>
-		))}
+		{
+			allItems.map((item, index) => (
+				<article
+					class="site-card gallery-tile"
+					data-index={index}
+					data-src={item.image}
+					data-title={item.title}
+					data-desc={item.description ?? item.month}
+				>
+					<div class="gallery-skeleton" />
+					<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
+					<h3>{item.title}</h3>
+					<p class="small-muted">{item.description ?? item.month}</p>
+				</article>
+			))
+		}
 	</div>
 
 	<div class="gallery-lightbox" id="gallery-lightbox" hidden>
@@ -51,6 +66,7 @@ const allItems = sectionData.months.flatMap((group) => group.items.map((item) =>
 		const box = document.getElementById("gallery-lightbox");
 		const lightboxImage = document.getElementById("gallery-lightbox-image");
 		const text = document.getElementById("gallery-lightbox-text");
+		box?.setAttribute("hidden", "hidden");
 		let current = 0;
 		const open = (index) => {
 			const item = tiles[index];
@@ -61,13 +77,25 @@ const allItems = sectionData.months.flatMap((group) => group.items.map((item) =>
 			text.textContent = `${item.dataset.title || ""} — ${item.dataset.desc || ""}`;
 			box.removeAttribute("hidden");
 		};
-		tiles.forEach((tile, index) => tile.addEventListener("click", () => open(index)));
-		box?.addEventListener("click", (e) => { if (e.target === box) box.setAttribute("hidden", "hidden"); });
-		document.querySelectorAll(".gallery-arrow").forEach((btn) => btn.addEventListener("click", (e) => {
-			e.stopPropagation();
-			const dir = btn.getAttribute("data-dir");
-			open((current + (dir === "next" ? 1 : -1) + tiles.length) % tiles.length);
-		}));
+		tiles.forEach((tile, index) => {
+			const image = tile.querySelector("img");
+			if (!image || image.dataset.bound === "1") return;
+			image.dataset.bound = "1";
+			image.addEventListener("click", () => open(index));
+		});
+		if (box?.dataset.bound !== "1") {
+			box.dataset.bound = "1";
+			box.addEventListener("click", (e) => {
+				if (e.target === box) box.setAttribute("hidden", "hidden");
+			});
+			document.querySelectorAll(".gallery-arrow").forEach((btn) =>
+				btn.addEventListener("click", (e) => {
+					e.stopPropagation();
+					const dir = btn.getAttribute("data-dir");
+					open((current + (dir === "next" ? 1 : -1) + tiles.length) % tiles.length);
+				}),
+			);
+		}
 	};
 	document.addEventListener("astro:page-load", initGallery);
 	initGallery();

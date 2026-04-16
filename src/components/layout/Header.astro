@@ -1,32 +1,23 @@
 ---
 import { menuLinks } from "@/site.config";
-
-const navItems = menuLinks.flatMap((link) =>
-	link.children?.length ? link.children : [link],
-).filter((item) => item.path);
-
-const isHome = Astro.url.pathname === "/";
 ---
 
 <header id="main-header">
 	<nav aria-label="Main menu" class="site-nav-shell">
 		<a class="site-logo" href="/">Eucaly's Blog</a>
-		{isHome ? (
-			<h1 class="site-home-title">Eucaly's Blog</h1>
-		) : (
-			<div class="site-nav-links">
-				{navItems.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="site-nav-link"
-						href={link.path}
-						target={link.external ? "_blank" : undefined}
-						rel={link.external ? "noreferrer" : undefined}
-					>
-						{link.title}
-					</a>
-				))}
-			</div>
-		)}
+		<div class="site-nav-links">
+			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/">Home</a>
+			{menuLinks.map((link) => (
+				<a
+					aria-current={Astro.url.pathname === link.path ? "page" : false}
+					class="site-nav-link"
+					href={link.path}
+					target={link.external ? "_blank" : undefined}
+					rel={link.external ? "noreferrer" : undefined}
+				>
+					{link.title}
+				</a>
+			))}
+		</div>
 	</nav>
 </header>
