@@ -1,9 +1,6 @@
 ---
 title: CSS学习笔记（1）CSS内置属性
 description: "这是一篇关于 CSS 基础知识的学习笔记。"
-tags:
-  - Web
-  - CSS
 publishDate: 2026-02-26
 ---
 

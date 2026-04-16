@@ -2,9 +2,6 @@
 title: "CSS学习笔记（2）——选择器"
 description: 杂乱自用笔记。
 publishDate: 2026-04-16
-tags:
-  - Web
-  - CSS
 ---
 
 ### 基本选择器

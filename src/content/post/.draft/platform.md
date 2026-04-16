@@ -3,9 +3,6 @@ title: 国外前or后端托管平台比较
 description: This post showcases using the markdown admonition feature in Astro Cactus
 publishDate: 25 Aug 2024
 updatedDate: 4 July 2025
-tags:
-  - markdown
-  - admonitions
 ---
 ## github-page
 

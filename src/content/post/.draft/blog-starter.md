@@ -2,8 +2,6 @@
 title: astro博客的搭建与编辑及手动提交脚本
 description: This post showcases using the markdown admonition feature in Astro Cactus
 publishDate: 2025-02-25
-tags:
-  - blog
 ---
 >注：博主目前并非专业技术人员，~~写这篇文章其实是为了防止以后想再次创建时忘了步骤，提醒一下自己~~，所以以下仅供参考，如有大佬发现不严谨的地方也请在评论区指出——
 

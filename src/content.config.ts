@@ -28,7 +28,6 @@ const post = defineCollection({
 				.optional(),
 			draft: z.boolean().default(false),
 			ogImage: z.string().optional(),
-			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
 			publishDate: z
 				.string()
 				.or(z.date())
@@ -41,14 +40,6 @@ const post = defineCollection({
 		}),
 });
 
-
-const tag = defineCollection({
-	loader: glob({ base: "./src/content/tag", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		title: titleSchema.optional(),
-		description: z.string().optional(),
-	}),
-});
 
 const gallery = defineCollection({
 	loader: glob({ base: "./src/content/gallery", pattern: "**/*.{md,mdx}" }),
@@ -83,4 +74,4 @@ const page = defineCollection({
 	schema: z.object({}),
 });
 
-export const collections = { post, tag, page, gallery };
+export const collections = { post, page, gallery };

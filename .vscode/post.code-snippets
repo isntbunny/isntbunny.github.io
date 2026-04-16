@@ -23,7 +23,6 @@
 			"title: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}",
 			"description: 'Please enter a description of your post here, between 50-160 chars!'",
 			"publishDate: $CURRENT_DATE $CURRENT_MONTH_NAME $CURRENT_YEAR",
-			"tags: []",
 			"draft: false",
 			"---",
 			"$2",

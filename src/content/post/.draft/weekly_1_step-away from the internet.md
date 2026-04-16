@@ -3,9 +3,6 @@ title: 周记-暂时退网
 description: This post showcases using the markdown admonition feature in Astro Cactus
 publishDate: 25 Aug 2024
 updatedDate: 4 July 2025
-tags:
-  - markdown
-  - admonitions
 ---
 大抵是没有正式写过一片自己原创的博文的，因为一直没有好的灵感，好的想法去书写，除了日记就是流水账留给自己看了。这几天寒假花了很长时间完善了自己的astro博客，感觉“浪费”了很多时间，是时候该收尾一下淡出网络生活了，于是就正好写一篇散散的杂谈水一篇好了。
 

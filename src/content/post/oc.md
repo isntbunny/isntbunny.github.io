@@ -1,9 +1,7 @@
 ---
 title: oc档案
-description: sdddd
+description: idk
 publishDate: 2025-07-15
-tags:
-  - 随笔
 ---
 
 ## 基本信息
