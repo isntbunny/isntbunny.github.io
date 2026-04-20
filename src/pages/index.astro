@@ -7,26 +7,462 @@ const contacts = [
 ];
 ---
 
-<PageLayout meta={{ title: "Home", description: "个人博客主页" }}>
-	<section class="home-simple site-card">
-		<h1>你好，我是 Eucaly。</h1>
-		<p>
-			这里是我的个人博客，主要记录日常想法、阅读心得和一些学习笔记。
-			如果你想联系我，可以通过下面的方式找到我。
-		</p>
-	</section>
-	
-	<section class="home-simple site-card">
-		<h2>联系方式</h2>
-		<ul class="home-contact-list">
-			{contacts.map((item) => (
-				<li>
-					<span>{item.label}</span>
-					<a href={item.href} rel="noreferrer" target={item.href.startsWith("http") ? "_blank" : undefined}>
-						{item.value}
-					</a>
-				</li>
-			))}
-		</ul>
-	</section>
-</PageLayout>
+<PageLayout meta={{ title: "Home", description: "主页" }}>
+
+<section class="stickers">
+<div class="stickers-mushroom">
+<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/bJvNn2ZY/Amanita-cokeri.png" alt="Amanita-cokeri"></a>
+<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/76LYzTfp/Coprinus-comatus.png" alt="Coprinus-comatus"></a>
+<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/3RwJGDkk/Mycena-interrupta.png" alt="Mycena-interrupta"></a>
+</div>
+</section>
+
+
+<section class="site-card">
+<h1>Welcome to Eucaly's corner.</h1>
+<p>
+<img src="https://i.postimg.cc/Y9YCZhDD/best-viewed-with-eyes.gif" alt="best-viewed-with-eyes">
+<img src="https://i.postimg.cc/J08zLM9x/made-with-windows.gif" alt="made-with-windows">
+<img src="https://i.postimg.cc/4y1N4jGZ/vscbutton.gif" alt="vscbutton">
+<img src="https://i.postimg.cc/1R80PFjq/Vsc.png" alt="Vsc">
+<img src="https://i.postimg.cc/rmxw3KYk/handcoded.gif" alt="handcoded">
+<img src="https://i.postimg.cc/ZnLKYXSX/thevoid.gif" alt="thevoid">
+<img src="https://i.postimg.cc/QCqxNv3g/neocities-button.gif" alt="neocities-button">
+</p>
+</section>
+
+<section class="sitecard">
+<div id="statuscafe">
+<div id="statuscafe-username"></div>
+<div id="statuscafe-content"></div>
+</div>
+<script src="https://status.cafe/current-status.js?name=isntbunny" defer></script>
+</section>
+
+<section class="sitecard">
+<h2>高考倒计时</h2>
+<div class="distance-label">距离<select id="yearSelect" class="year-select"></select>高考还有</div>
+<span class="days-number" id="countdownDays">--</span>天
+</section>
+
+<section class="sitecard calendar">
+Loading...... ( ╹▽╹ )
+</section>
+
+<section class="sitecard">
+<h2>RECENTLY LISTENING</h2>
+</section>
+
+<section class="sitecard">
+<h2>RECENTLY READING</h2>
+</section>
+
+</pagelayout>
+
+
+
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+
+<script>
+    GitHubCalendar(".calendar", "isntbunny");
+    // or enable responsive functionality
+    GitHubCalendar(".calendar", "isntbunny", { responsive: true });
+</script>
+            
+<script>
+        (function() {
+            // 高考日期：每年6月7日
+            const GAOKAO_MONTH = 6;
+            const GAOKAO_DAY = 7;
+
+            // 获取当前日期（基于北京时间日期，解决时区干扰，仅比较日期）
+            function getCurrentDate() {
+                const now = new Date();
+                // 返回本地日期的0时0分0秒对象（年,月,日）
+                return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            }
+
+            // 计算距离指定年份高考的天数（正数表示未来，负数或0表示已过或今天）
+            function getDaysToGaokao(targetYear) {
+                const today = getCurrentDate();
+                const gaokaoDate = new Date(targetYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
+                const diffTime = gaokaoDate - today;
+                // 使用ceil处理跨天边界，确保显示剩余完整天数
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays;
+            }
+
+            // 更新倒计时显示，并处理已过高考的情况（显示负数或显示“已过”风格，但原逻辑只显示数字，我们按照天数展示，可自然显示负数）
+            function updateCountdown(targetYear) {
+                const days = getDaysToGaokao(targetYear);
+                const daysSpan = document.getElementById('countdownDays');
+                if (daysSpan) {
+                    // 直接显示天数，可以为负数（代表高考已过多少天），保持信息明确
+                    daysSpan.textContent = days;
+                }
+            }
+
+            // 生成年份选项列表：起始年份逻辑 -> 
+            // 如果当前日期在当年高考（6月7日）之前，当年高考还未发生，则包含当年；
+            // 如果今天已经过了当年高考，则起始年份为明年；且确保列表连续至起始年份+5年
+            function generateYearOptions() {
+                const today = getCurrentDate();
+                const currentYear = today.getFullYear();
+                // 当年高考日期（6月7日）
+                const currentGaokaoDate = new Date(currentYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
+                
+                let startYear = currentYear;
+                // 如果今天日期 > 当年高考日期（即已经过了当年高考日），则从明年开始作为第一个可选年份
+                if (today > currentGaokaoDate) {
+                    startYear = currentYear + 1;
+                }
+                
+                // 向后取5年（包含起始年份，总共6个年份可选？原需求五年范围 startYear ~ startYear+5 是合理的）
+                // 但原代码：let endYear = startYear + 5; 包括首尾5个间隔，即共6年，保持和原逻辑一致，无样式改动，只是修复bug确保年份生成不冲突
+                const endYear = startYear + 5;
+                const years = [];
+                for (let y = startYear; y <= endYear; y++) {
+                    years.push(y);
+                }
+                return years;
+            }
+
+            // 初始化下拉选择框、默认年份、事件绑定以及初始倒计时展示
+            function initSelect() {
+                const select = document.getElementById('yearSelect');
+                if (!select) {
+                    console.error('未找到 id 为 yearSelect 的下拉框元素');
+                    return;
+                }
+                
+                const years = generateYearOptions();
+                if (years.length === 0) {
+                    // 极端情况，年份列表为空，填充占位符并返回
+                    const emptyOpt = document.createElement('option');
+                    emptyOpt.textContent = '无年份';
+                    select.appendChild(emptyOpt);
+                    document.getElementById('countdownDays').textContent = '--';
+                    return;
+                }
+                
+                // 默认选中年份逻辑：优先选择2027年，但如果2027不在列表中，则选取列表第一个年份
+                let defaultYear = 2027;
+                if (!years.includes(defaultYear)) {
+                    defaultYear = years[0];
+                }
+                
+                // 清空并填充选项
+                select.innerHTML = '';
+                years.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year + '年';
+                    if (year === defaultYear) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                // 根据当前选中的年份更新倒计时显示
+                const initialSelected = parseInt(select.value, 10);
+                if (!isNaN(initialSelected)) {
+                    updateCountdown(initialSelected);
+                } else {
+                    document.getElementById('countdownDays').textContent = '--';
+                }
+                
+                // 监听下拉框变化事件，更新倒计时
+                select.addEventListener('change', function(e) {
+                    const selectedYear = parseInt(e.target.value, 10);
+                    if (!isNaN(selectedYear)) {
+                        updateCountdown(selectedYear);
+                    } else {
+                        const daysSpan = document.getElementById('countdownDays');
+                        if (daysSpan) daysSpan.textContent = '--';
+                    }
+                });
+            }
+            
+            // 确保DOM加载完成后再执行，避免元素未就绪
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSelect);
+            } else {
+                initSelect();
+            }
+        })();
+</script>
+
+</body>
+</html>
+
+<style>
+* {
+margin:20px;
+padding:10px;
+}
+body {
+  font-family: monospace;
+background: linear-gradient(45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%) , linear-gradient(-45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%);
+background-size: 3em 3em;
+background-color: #eff6ff;
+opacity: 1;
+  padding: 10% 20%;
+  color: #4D657A;
+}
+
+#statuscafe {
+    padding: .5em;
+    background-color: #ffffffee;
+    border-radius:15px;
+}
+#statuscafe-username {
+}
+#statuscafe-content {
+}
+
+:root {
+  --color-calendar-graph-day-bg: #dddbdb;
+  --color-calendar-graph-day-L1-bg: #39dd34;
+  --color-calendar-graph-day-L2-bg: #45a045;
+  --color-calendar-graph-day-L3-bg: #047526;
+  --color-calendar-graph-day-L4-bg: #0a4208;
+}
+
+.ContributionCalendar-day[data-level='0'] {
+    background-color: var(--color-calendar-graph-day-bg);
+}
+
+.ContributionCalendar-day[data-level='1'] {
+    background-color: var(--color-calendar-graph-day-L1-bg);
+}
+
+.ContributionCalendar-day[data-level='2'] {
+    background-color: var(--color-calendar-graph-day-L2-bg);
+}
+
+.ContributionCalendar-day[data-level='3'] {
+    background-color: var(--color-calendar-graph-day-L3-bg);
+}
+
+.ContributionCalendar-day[data-level='4'] {
+    background-color: var(--color-calendar-graph-day-L4-bg);
+}
+
+table.ContributionCalendar-grid {
+    margin-bottom: 0pt;
+}
+
+table.ContributionCalendar-grid td {
+    padding: 4pt;
+}
+
+table.ContributionCalendar-grid td span.sr-only {
+    display: none;
+}
+
+td.ContributionCalendar-label span[aria-hidden='true'] {
+    font-size: 8pt;
+    left: -1pt;
+}
+
+tool-tip {
+    display: none;
+}
+.sr-only{
+font-size: 20px;
+text-align: center;
+position: relative;
+
+}
+.calendar .width-full > .float-left {
+    display: none;
+}
+
+.calendar {
+    border-radius: 15px;
+    min-height: 243px;
+    text-align: center;
+    margin:auto;
+    background: #ffffffdd;
+}
+.sitecard {
+    border-radius: 15px;
+    text-align: center;
+    background: #ffffffdd;
+   
+}
+
+.calendar-graph text.wday,
+.calendar-graph text.month {
+    font-size: 10px;
+    fill: #aaa;
+}
+
+div.px-md-5 {
+    height: 2rem;
+}
+
+div.float-right {
+    text-align: right;
+    padding: 0 14px 10px 0;
+    display: inline-block;
+    float: right;
+}
+
+div.float-right div {
+    display: inline-block;
+    list-style: none;
+    margin: 0 5px;
+    position: relative;
+    bottom: -1px;
+    padding: 0;
+}
+
+div.float-right span.sr-only {
+    display: none;
+}
+
+.contrib-legend .legend li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.text-small {
+    color: #767676;
+}
+
+.calendar-graph {
+    padding: 5px 0 0;
+    text-align: center;
+}
+
+.contrib-column {
+    padding: 15px 0;
+    text-align: center;
+    border-left: 1px dashed #ddd;
+    border-top: 1px dashed #ddd;
+    font-size: 11px;
+}
+
+.contrib-column-first {
+    border-left: 0;
+}
+
+.table-column {
+    box-sizing: border-box;
+    display: table-cell;
+    width: 1%;
+    padding-right: 10px;
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.contrib-number {
+    font-weight: 300;
+    line-height: 1.3em;
+    font-size: 24px;
+    display: block;
+    color: #333;
+}
+
+.calendar img.spinner {
+    width: 70px;
+    margin-top: 50px;
+    min-height: 70px;
+}
+
+.monospace {
+    text-align: center;
+    color: #000;
+    font-family: monospace;
+}
+
+.monospace a {
+    color: #1D75AB;
+    text-decoration: none;
+}
+
+.contrib-footer {
+    font-size: 11px;
+    padding: 0 10px 12px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    height: 26px;
+}
+
+.left.text-muted {
+    float: left;
+    margin-left: 9px;
+    color: #767676;
+}
+.left.text-muted a {
+    color: #4078c0;
+    text-decoration: none;
+}
+.left.text-muted a:hover,
+.monospace a:hover {
+    text-decoration: underline;
+}
+
+h2.f4.text-normal.mb-3 {
+    display: none;
+}
+
+.float-left.text-gray {
+    float: left;
+}
+#user-activity-overview{
+    display:none;
+}
+
+.day-tooltip {
+    white-space: nowrap;
+    position: absolute;
+    z-index: 99999;
+    padding: 10px;
+    font-size: 12px;
+    color: #959da5;
+    text-align: center;
+    background: rgba(0,0,0,.85);
+    border-radius: 3px;
+    display: none;
+    pointer-events: none;
+}
+.day-tooltip strong {
+    color: #dfe2e5;
+}
+.day-tooltip.is-visible {
+    display: block;
+}
+.day-tooltip:after {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    box-sizing: border-box;
+    margin: 0 0 0 -5px;
+    content: " ";
+    border: 5px solid transparent;
+    border-top-color: rgba(0,0,0,.85)
+}
+
+text.ContributionCalendar-label {
+    fill: #ccc;
+    font-size: 11px;
+}
+
+.calendar a{
+display:none;
+}
+
+@media screen and (max-width: 768px) {
+    .table-column {
+        display: block;
+        width: 100%;
+    }
+}
+
+</style>
