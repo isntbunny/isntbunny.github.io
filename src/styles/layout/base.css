@@ -14,19 +14,11 @@
 * { box-sizing: border-box; }
 
 body.site-shell {
-	margin: 0;
 	min-height: 100vh;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	font-weight: 400;
 	line-height: 1.8;
 	color: var(--text-main);
-	background: repeating-linear-gradient(
-		90deg,
-		var(--bg-main) 0,
-		var(--bg-main) 39px,
-		rgba(255, 255, 255, 0.03) 39px,
-		rgba(255, 255, 255, 0.03) 40px
-	);
 }
 
 main#main {
