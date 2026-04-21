@@ -1,13 +1,13 @@
 ---
 title: CSS学习笔记（1）CSS内置属性
-description: "css 基础知识"
+description: "是一些css 基础知识捏"
 publishDate: 2026-02-26
 ---
 
 [![选择器](https://www.w3school.com.cn/i/css/selector.gif)]
 
 ## 文本属性
-
+不知道
 ### 字体样式
 
 serif, sans-serif, monospace, cursive, fantasy
