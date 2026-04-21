@@ -1,12 +1,12 @@
 ---
 title: astro博客的搭建与编辑及手动提交脚本
-description: This post showcases using the markdown admonition feature in Astro Cactus
-publishDate: 2025-02-25
+description: 搭建博客的方法
+publishDate: 2026-02-25
 ---
->注：博主目前并非专业技术人员，~~写这篇文章其实是为了防止以后想再次创建时忘了步骤，提醒一下自己~~，所以以下仅供参考，如有大佬发现不严谨的地方也请在评论区指出——
+>注：博主目前并非专业技术人员，~~写这篇文章其实是为了防止以后想再次创建时忘了步骤，提醒一下自己~~，所以以下仅供参考，如有大佬发现不严谨的地方也请在评论区指出——（虽然目前评论区还没建好）btw以下均为Windows操作环境
 
 
-默认你已经有了一个以 `你的用户名.github.io` 为名称的空白Github仓库（或Netlify、Cloudflare page等托管平台），还有IDE工具（比如vs code）
+默认你已经有了一个以 `你的用户名.github.io` 为名称的空白Github仓库（或Netlify、Cloudflare page等托管平台），还有IDE（如vs code）
 
 首先你需要安装git和nodejs
 
@@ -21,21 +21,34 @@ https://nodejs.org
 
 不想从零写页面的话，可以直接用一个现成的 Astro 主题。Astro 的主题本质是已经写好的 Astro 项目。如果你已经有一个项目，又想换成某个主题，正确做法是新建一个想换的那个主题的项目，再把内容搬过去；而不是像hexo一样，在现有项目里换主题包来切主题
 
-从哪里找主题？
+## 从哪里找主题？
 官方主题库： [https://astro.build/themes](https://astro.build/themes)
-
 找好了主题`https://github.com/xxx/astro-theme-yyy`怎么安装？
-
 首先，在你想放项目的地方运行：`npm create astro@latest`
-当它问你：`How would you like to start your new project?`
+当它问你：`How would you like to start your new project?`的时候
 选 `Use a theme`
 然后它会让你粘贴主题地址，你就把刚才的 GitHub 地址贴进去就可以的
 等待装完后：`npm run dev`，浏览器打开上面提示你的localhost:4321，就能看到网站雏形了捏。
 
-一个astro文件的结构大概是这样的，各种模板大同小异
+## astro项目文件结构
+
+一个astro项目的结构大概是这样的（各种模板大同小异）
 
 ```
+.github
+node_modules
+src
+-components
+-content 用markdown写点东西吧
+-data
+-layouts
+-pages 放各种.astro页面
+-plugins 
+-styles 顾名思义就是css样式
+-utils
+.gitignore 里面的内容不会commit到仓库
 
+懒得写了以后再说
 ```
 
 在content里面新建markdown文件来写文章。
@@ -46,7 +59,7 @@ https://nodejs.org
 
 如果你在中国境内，那么push那一步大概率会卡好久，虽然解决方案有每当提交的时候开一下全局代理，但那太麻烦了。这时候你可以设置一个ssh key来一劳永逸地解决这个问题。
 
-每次git add . git commit太麻烦了怎么办？
+## 每次git add . git commit太麻烦了怎么办？
 打开vscode，在一个你喜欢的文件夹里新建一个bat文件（注意补药用记事本！大概率会乱码。以后记事本除了当桌面便签，其他操作尽量不要用它。）
 输入以下文本
 
