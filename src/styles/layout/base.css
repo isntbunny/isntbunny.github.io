@@ -22,9 +22,6 @@ body.site-shell {
 }
 
 main#main {
-	width: min(920px, calc(100% - 2rem));
-	margin: 90px auto 0;
-	padding-bottom: 40px;
 }
 
 h1, h2, h3, h4, h5, h6 { font-weight: 600; line-height: 1.4; color: var(--text-main); }
@@ -37,7 +34,8 @@ a { color: var(--text-main); text-decoration: none; }
 	background: var(--white);
 	border: 1px solid var(--border);
 	box-shadow: var(--card-shadow);
-	padding: 20px;
+	padding: 10px;
+	margin: 20px 0;
 }
 
 .site-chip {

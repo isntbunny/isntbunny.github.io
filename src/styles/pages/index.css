@@ -1,7 +1,4 @@
-* {
-margin:20px;
-padding:10px;
-}
+
 body {
   font-family: monospace;
 background: linear-gradient(45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%) , linear-gradient(-45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%);
