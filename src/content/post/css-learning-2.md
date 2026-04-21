@@ -59,7 +59,24 @@ publishDate: 2026-04-16
    - 语法：`:enabled`, `:disabled`, `:checked`
    - 示例：`input:enabled`, `input:checked`
    - 用途：选择基于用户界面状态的元素。
+```css
+a:link {
+    color: blue;
+}
 
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: red;
+}
+
+p:first-child {
+    font-weight: bold;
+}
+
+```
 ### 伪元素选择器
 
 1. **伪元素**
@@ -131,21 +148,6 @@ p {
 }
 
 /* 伪类选择器 */
-a:link {
-    color: blue;
-}
-
-a:visited {
-    color: purple;
-}
-
-a:hover {
-    color: red;
-}
-
-p:first-child {
-    font-weight: bold;
-}
 
 /* 伪元素选择器 */
 p::first-line {
