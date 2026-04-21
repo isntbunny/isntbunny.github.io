@@ -54,12 +54,18 @@ src
 在content里面新建markdown文件来写文章。
 
 写完之后提交到GitHub，page自动deploy。有几个方式：
-- 整个文件夹拖到GitHub（说实话挺麻烦的）
+- 整个文件夹拖到GitHub上传
 - git push
 
 如果你在中国境内，那么push那一步大概率会卡好久，虽然解决方案有每当提交的时候开一下全局代理，但那太麻烦了。这时候你可以设置一个ssh key来一劳永逸地解决这个问题。
 
-## 每次git add . git commit太麻烦了怎么办？
+## 设置sshkey
+ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh -T git@github.com
+cat ~/.ssh/id_ed25519.pub
+git remote set-url origin git@github.com:用户名/仓库名.git
+
+## 每次git add . git commit太麻烦怎么办？
 打开vscode，在一个你喜欢的文件夹里新建一个bat文件（注意补药用记事本！大概率会乱码。以后记事本除了当桌面便签，其他操作尽量不要用它。）
 输入以下文本
 
