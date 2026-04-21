@@ -1,5 +1,5 @@
 ---
-title: "CSS学习笔记（2）——选择器"
+title: "CSS学习笔记（2）选择器"
 description: 杂乱自用笔记。
 publishDate: 2026-04-16
 ---
@@ -11,7 +11,7 @@ publishDate: 2026-04-16
    - 示例：`.button`
    - 用途：选择具有特定类名的元素。
 
-2. **ID 选择器（ID Selector）**
+2. **ID 选择器（ID Selector）**   
    - 语法：`#idname`
    - 示例：`#header`
    - 用途：选择具有特定 ID 的元素。每个 ID 在页面中应是唯一的。
