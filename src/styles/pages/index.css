@@ -9,6 +9,13 @@ opacity: 1;
   color: #4D657A;
 }
 
+.mushroom{
+  position:absolute;
+  margin: 1.2rem;
+  
+}
+
+
 #statuscafe {
     padding: .5em;
     background-color: #ffffffee;

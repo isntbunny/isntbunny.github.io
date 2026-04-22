@@ -1,16 +1,11 @@
 ---
 import PageLayout from "@/layouts/Base.astro";
-
-const contacts = [
-	{ label: "邮箱", value: "isntbunny@outlook.com", href: "mailto:isntbunny@outlook.com" },
-	{ label: "GitHub", value: "github.com/isntbunny", href: "https://github.com/isntbunny" },
-];
 ---
 
 <PageLayout meta= {{ title: "Home", description: "主页" }}>
 
 <section class="stickers">
-<div class="absolute bottom-5 left-5">
+<div class="mushroom">
 <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/bJvNn2ZY/Amanita-cokeri.png" alt="Amanita-cokeri"></a>
 <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/76LYzTfp/Coprinus-comatus.png" alt="Coprinus-comatus"></a>
 <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/3RwJGDkk/Mycena-interrupta.png" alt="Mycena-interrupta"></a>
@@ -34,6 +29,7 @@ const contacts = [
 
 <section class="sitecard">
 <div id="statuscafe">
+    <h2>最新状态</h2>
 <div id="statuscafe-username"></div>
 <div id="statuscafe-content"></div>
 </div>
@@ -52,24 +48,26 @@ const contacts = [
 
 <section class="sitecard">
 <h2>RECENTLY LISTENING</h2>
+<h3>四月第一周</h3>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1486026320&auto=1&height=66"></iframe>
+<ul>dancing dancing all day and night</ul>
+<ul>mos thoser by food house</ul>
+<ul>FIXYOUU</ul>
+<ul>spy? by WHOKILLEDXIX</ul>
+<h3>四月第三周</h3>
+I wanna tell you something o o o o but i think I'm freaking out 
+这首歌不是ai生成的
+急性恋爱中毒
+
 </section>
 
 <section class="sitecard">
 <h2>RECENTLY READING</h2>
+<ul>红与黑</ul>
 </section>
 
 </pagelayout>
 
-
-
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-
-<script>
-    GitHubCalendar(".calendar", "isntbunny");
-    // or enable responsive functionality
-    GitHubCalendar(".calendar", "isntbunny", { responsive: true });
-</script>
-            
 <script>
         (function() {
             // 高考日期：每年6月7日
