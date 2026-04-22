@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>轻量！便携！在安卓平板上写代码 • 幸せのカウントダウン</title><link href="/icon.svg" rel="icon" type="image/svg+xml"><link rel="icon" href="/favicon-32x32.png" type="image/png"><link href="/icons/apple-touch-icon.png" rel="apple-touch-icon"><link href="/manifest.webmanifest" rel="manifest"><link href="https://isntbunny.github.io/posts/androidlinux/" rel="canonical"><meta content="轻量！便携！在安卓平板上写代码 • 幸せのカウントダウン" name="title"><meta content="今日折腾" name="description"><meta content="Eucaly" name="author"><meta content="article" property="og:type"><meta content="轻量！便携！在安卓平板上写代码" property="og:title"><meta content="今日折腾" property="og:description"><meta content="https://isntbunny.github.io/posts/androidlinux/" property="og:url"><meta content="幸せのカウントダウン" property="og:site_name"><meta content="zh_CN" property="og:locale"><meta content="https://isntbunny.github.io/og-image/androidlinux.png" property="og:image"><meta content="1200" property="og:image:width"><meta content="630" property="og:image:height"><meta content="Eucaly" property="article:author"><meta content="2026-04-22T00:00:00.000Z" property="article:published_time"><meta content="summary_large_image" property="twitter:card"><meta content="https://isntbunny.github.io/posts/androidlinux/" property="twitter:url"><meta content="轻量！便携！在安卓平板上写代码" property="twitter:title"><meta content="今日折腾" property="twitter:description"><meta content="https://isntbunny.github.io/og-image/androidlinux.png" property="twitter:image"><link href="/sitemap-index.xml" rel="sitemap"><link href="/rss.xml" title="Blog" rel="alternate" type="application/rss+xml"><meta content="Astro v5.18.0" name="generator"><link rel="stylesheet" href="/_astro/_slug_.BldJ-Eib.css"></head> <body class="site-shell"> <header id="main-header"> <nav aria-label="Main menu" class="site-nav-shell"> <a class="site-logo" href="/">Eucaly's Blog</a> <div class="site-nav-links"> <a aria-current="false" class="site-nav-link" href="/">Home</a> <a aria-current="false" class="site-nav-link" href="/posts/"> Archives </a><a aria-current="false" class="site-nav-link" href="https://status.cafe/users/isntbunny"> Memos </a><a aria-current="false" class="site-nav-link" href="/gallery/"> Gallery </a><a aria-current="false" class="site-nav-link" href="/bangumi/"> Bangumi </a><a aria-current="false" class="site-nav-link" href="/guestbook/"> Guestbook </a><a aria-current="false" class="site-nav-link" href="/about/"> About </a> </div> </nav> </header> <main class="page-fade" id="main"> <article class="grow break-words" data-pagefind-body> <div id="blog-hero" class="mb-12"><h1 class="title mb-3 text-center text-3xl sm:text-4xl">轻量！便携！在安卓平板上写代码</h1> <div class="flex items-center justify-between gap-3"> <p class="font-semibold"> <time datetime="2026-04-22T00:00:00.000Z" title="2026-04-22T00:00:00.000Z">2026-04-22</time> </p> <p class="font-semibold">2 min read</p> </div> </div> <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">  <div class="post-prose prose prose-sm prose-headings:font-semibold sm:prose-th:before:content-none"> <p>本文算不上技术博客，就是个人的一个小记录而已ww日记性质；P</p>
+<p>博主的平板配置：高通骁龙870，内存8gb，存储256gb</p>
+<p>前几天突发奇想，既然只是写写网站这种比较轻量的东西，是不是可以完全搬到平板上来（毕竟电脑太重了qwq）</p>
+<p>于是昨天上午就开始行动了！（humm在折腾这点，自己行动力还是比较强的，写作业反之ww）在网上搜索「安卓端IDE」。</p>
+<p>我以前用的是mt管理器自带的，还有quickedit，但是都不太好用，没有代码补全，而且还显示不了文件树什么的，平板的优势就完全没有发挥出来。</p>
+<p>所以就想，有没有类似vscode这种，界面漂亮功能强大的安卓端ide？</p>
+<p>起初是下载了spck editor，挺流畅的，也内置git能push到github，就是功能太少，最重要的一点是<strong>不能用sshkey去push</strong>！对中国的网络环境甚是不友好。于是另寻他法。</p>
+<p>正好有篇文章介绍了网页版vsc</p>
+<p>首先需要下载termux，然后安装Ubuntu（一个linux系统），你就有了完整的开发环境，下面就几乎可以把这玩意当正常电脑用了（humm只是写个Py写个网页，不搞什么大工程是没问题的（deepseek说的）</p>
+<p>先占着位，以后完善所有步骤。</p> </div> </div> </article> <section class="mt-10"> <h2 class="mb-3 text-base font-semibold">Comments</h2> <div id="waline"></div> <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css"> <script type="module">const path = "/posts/androidlinux/";
+const serverURL = "https://waline-comment.vercel.app";
+
+	import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
+
+	const initWaline = () => {
+		const el = document.getElementById("waline");
+		if (!el) return;
+		el.innerHTML = "";
+		init({
+			el: "#waline",
+			lang: "zh-CN",
+			path,
+			serverURL,
+		});
+	};
+
+	document.addEventListener("astro:page-load", initWaline);
+	initWaline();
+</script> </section> <button class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700" data-show="false" id="to-top-btn"> <span class="sr-only">Back to top</span> <svg aria-hidden="true" class="h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button> </main> <footer class="site-footer"> <p>© 2026 Eucaly * 2025-infinite</p> </footer> </body></html> <script type="module">const e=document.getElementById("to-top-btn"),n=document.getElementById("blog-hero");function c(t){t.forEach(o=>{e.dataset.show=(!o.isIntersecting).toString()})}e.addEventListener("click",()=>{document.documentElement.scrollTo({behavior:"smooth",top:0})});const r=new IntersectionObserver(c);r.observe(n);</script>
