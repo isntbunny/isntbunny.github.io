@@ -8,18 +8,3 @@
 @import "./pages/gallery.css";
 @import "./pages/bangumi.css";
 @import "./pages/index.css";
-
-
-
-#waline .wl-editor,
-#waline .wl-input,
-#waline .wl-card {
-	border-radius: 12px !important;
-	border: 1px solid #e2e8f0 !important;
-}
-#waline .wl-btn.primary {
-	border-radius: 20px !important;
-	background: #c7e9f0 !important;
-	color: #4a5568 !important;
-	border: 1px solid #e2e8f0 !important;
-}

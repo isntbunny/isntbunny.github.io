@@ -16,8 +16,8 @@
 }
 .bangumi-grid {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-	gap: 16px;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 15px;
 }
 .bangumi-item img {
 	width: 100%;
