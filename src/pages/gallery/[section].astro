@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base.astro";
+import "/src/styles/pages/gallery.css";
 
 export const getStaticPaths = (async () => {
 	const [gallery] = await getCollection("gallery");

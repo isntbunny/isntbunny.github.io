@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base.astro";
+import "/src/styles/pages/gallery.css";
 
 const [gallery] = await getCollection("gallery");
 if (!gallery) throw new Error("Missing src/content/gallery/index.md");
