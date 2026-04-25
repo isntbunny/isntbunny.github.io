@@ -2,10 +2,9 @@
 @import "./components/github-card.css";
 
 @import "./layout/base.css";
-@import "./pages/archives.css";
 @import "./pages/gallery.css";
 @import "./pages/bangumi.css";
-@import "./pages/index.css";
+
  
 :root {
     /* 文字的配色 */
