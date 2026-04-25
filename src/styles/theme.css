@@ -1,14 +1,4 @@
-:root {
-	--color-global-bg: #edf4f7;
-	--color-global-text: #384d5e;
-	--color-link: #4f7490;
-	--color-accent: #5791b6;
-	--color-accent-2: #2f4e62;
-	--color-quote: #4b687c;
-	--color-bg-overlay: #ecf5f8c7;
-	--color-surface: #ffffffb3;
-	--color-surface-dark: #212d42d1;
-}
+
 
 * {
 	box-sizing: border-box;

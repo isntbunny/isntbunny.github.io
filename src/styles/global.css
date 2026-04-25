@@ -8,3 +8,28 @@
 @import "./pages/gallery.css";
 @import "./pages/bangumi.css";
 @import "./pages/index.css";
+ 
+:root {
+    /* 文字的配色 */
+	--text-main: #468;
+	--text-muted: #aaa;
+	--color-global-text: #384d5e;
+	--color-link: #4f7490;
+	--color-accent: #5791b6;
+	--color-accent-2: #2f4e62;
+	--color-quote: #ccc;
+    /* 卡片的配色 */
+	--border: #e2e8f0;
+	--color-surface: #ffffffb3;
+	--color-surface-dark: #212d42d1;
+	--card-shadow: 0 4px 12px #59d;
+	--hover-shadow: 0 8px 20px #ddd;
+    /* 界面的配色 */
+	--color-global-bg: #edf4f7;
+	--bg-main: #f0f7fa;
+	--color-bg-overlay: #ecf5f8c7;
+	--primary-100: #e1f5f8;
+	--primary-200: #d4f0f5;
+	--primary-300: #c7e9f0;
+	--white: #fffd;
+}
