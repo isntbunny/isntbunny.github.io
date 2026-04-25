@@ -60,16 +60,12 @@ import "/src/styles/pages/index.css";
 	</div>
 
 	<script>
-	fetch('homepage/link.md')
+	fetch('homepage/links.md')
     .then(res => res.text())
     .then(md => {
       const html = marked.parse(md);
       document.getElementById('markdown-content').innerHTML = html;
     })
-    .catch(err => {
-      console.error('加载失败:', err);
-      document.getElementById('markdown-content').innerHTML = '<p>加载内容失败</p>';
-    });
 	</script>    
 
 
