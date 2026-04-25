@@ -8,13 +8,6 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,9 +18,3 @@ jobs:
         
       - name: Run Prettier fix
         run: npx prettier --write .
-        
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "style: apply prettier formatting"
-          branch: ${{ github.head_ref }}
