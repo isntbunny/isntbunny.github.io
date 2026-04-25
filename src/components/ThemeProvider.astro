@@ -5,7 +5,8 @@ const darkVars = `--color-global-bg: oklch(24% 0.02 232);\n--color-global-text: 
 
 <script define:vars={{ darkVars, lightVars }} is:inline>
 	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
-	const getStoredTheme = () => (typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null);
+	const getStoredTheme = () =>
+		typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
 	const getUserPref = () => getStoredTheme() || (lightModePref.matches ? "light" : "dark");
 	const applyThemeVars = (root, theme) => {
 		root.style.cssText += theme === "dark" ? darkVars : lightVars;

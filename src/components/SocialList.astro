@@ -25,12 +25,7 @@ const socialLinks: {
 		{
 			socialLinks.map(({ friendlyName, link, name }) => (
 				<li class="flex">
-					<a
-						class="hover:text-link inline-block"
-						href={link}
-						rel="noreferrer"
-						target="_blank"
-					>
+					<a class="hover:text-link inline-block" href={link} rel="noreferrer" target="_blank">
 						<Icon aria-hidden="true" class="h-8 w-8" focusable="false" name={name} />
 						<span class="sr-only">{friendlyName}</span>
 					</a>

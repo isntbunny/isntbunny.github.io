@@ -4,7 +4,7 @@ on:
   # 每次推送到 `master` 分支时触发这个"工作流程"
   # 如果你使用了别的分支名，请按需将 `master` 替换成你的分支名
   push:
-    branches: [ master ]
+    branches: [master]
   # 允许你在 GitHub 上的 Actions 标签中手动触发此"工作流程"
   workflow_dispatch:
 
@@ -18,27 +18,27 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
-          
+          node-version: "22"
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.14.4
           run_install: false
-          
+
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      
+
       - name: Build site
         run: pnpm run build
 
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
-      
+
       - name: Deploy to pages branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:

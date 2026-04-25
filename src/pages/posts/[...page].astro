@@ -6,75 +6,75 @@ import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
 export const getStaticPaths = (async ({ paginate }) => {
-    const allPosts = (await getAllPosts()).sort(collectionDateSort);
-    return paginate(allPosts, {
-        pageSize: allPosts.length || 1,
-    });
+	const allPosts = (await getAllPosts()).sort(collectionDateSort);
+	return paginate(allPosts, {
+		pageSize: allPosts.length || 1,
+	});
 }) satisfies GetStaticPaths;
 
 interface Props {
-    page: Page<CollectionEntry<"post">>;
+	page: Page<CollectionEntry<"post">>;
 }
 
 const { page } = Astro.props;
 
 const meta = {
-    description: "Read my collection of posts and the things that interest me",
-    title: "Posts",
+	description: "Read my collection of posts and the things that interest me",
+	title: "Posts",
 };
 
 const grouped = page.data.reduce<Record<string, Record<string, CollectionEntry<"post">[]>>>(
-    (acc, post) => {
-        const date = post.data.publishDate;
-        const year = String(date.getFullYear());
-        const month = date.toLocaleString("zh-CN", { month: "long" });
-        acc[year] ??= {};
-        acc[year][month] ??= [];
-        acc[year][month].push(post);
-        return acc;
-    },
-    {},
+	(acc, post) => {
+		const date = post.data.publishDate;
+		const year = String(date.getFullYear());
+		const month = date.toLocaleString("zh-CN", { month: "long" });
+		acc[year] ??= {};
+		acc[year][month] ??= [];
+		acc[year][month].push(post);
+		return acc;
+	},
+	{},
 );
 
 const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 ---
 
 <PageLayout meta={meta}>
-    <div class="posts-page">
-        <h1 class="title">Posts</h1>
+	<div class="posts-page">
+		<h1 class="title">Posts</h1>
 
-        {
-            yearKeys.map((year, yearIndex) => (
-                <section
-                    class="fade-stagger"
-                    style={`animation-delay:${yearIndex * 0.1}s`}
-                    data-year={year}
-                >
-                    <h2 class="posts-year">{year}</h2>
-                    <hr class="posts-year-divider" />
-                    <div class="posts-month-grid">
-                        {Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
-                            <section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
-                                <span class="posts-month">{month}</span>
-                                <ul class="posts-list">
-                                    {list.map((post) => (
-                                        <li class="posts-list-item">
-                                            <a href={`/posts/${post.id}/`} class="posts-list-link">
-                                                {post.data.title}
-                                            </a>
-                                            <div class="posts-meta">
-                                                <time class="small-muted posts-date">
-                                                    {post.data.publishDate.toLocaleDateString("zh-CN")}
-                                                </time>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
-                        ))}
-                    </div>
-                </section>
-            ))
-        }
-    </div>
+		{
+			yearKeys.map((year, yearIndex) => (
+				<section
+					class="fade-stagger"
+					style={`animation-delay:${yearIndex * 0.1}s`}
+					data-year={year}
+				>
+					<h2 class="posts-year">{year}</h2>
+					<hr class="posts-year-divider" />
+					<div class="posts-month-grid">
+						{Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
+							<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
+								<span class="posts-month">{month}</span>
+								<ul class="posts-list">
+									{list.map((post) => (
+										<li class="posts-list-item">
+											<a href={`/posts/${post.id}/`} class="posts-list-link">
+												{post.data.title}
+											</a>
+											<div class="posts-meta">
+												<time class="small-muted posts-date">
+													{post.data.publishDate.toLocaleDateString("zh-CN")}
+												</time>
+											</div>
+										</li>
+									))}
+								</ul>
+							</section>
+						))}
+					</div>
+				</section>
+			))
+		}
+	</div>
 </PageLayout>

@@ -5,13 +5,24 @@ import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
-interface Props { meta: SiteMeta; }
+interface Props {
+	meta: SiteMeta;
+}
 
-const { meta: { articleDate, description = siteConfig.description, ogImage, title } } = Astro.props;
+const {
+	meta: { articleDate, description = siteConfig.description, ogImage, title },
+} = Astro.props;
 ---
 
 <html lang={siteConfig.lang}>
-	<head><BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} /></head>
+	<head
+		><BaseHead
+			articleDate={articleDate}
+			description={description}
+			ogImage={ogImage}
+			title={title}
+		/></head
+	>
 	<body class="site-shell">
 		<Header />
 		<main class="page-fade" id="main"><slot /></main>

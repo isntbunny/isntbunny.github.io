@@ -1,0 +1,15 @@
+{
+	"plugins": ["stylelint-stylistic"],
+	"rules": {
+		"rule-empty-line-before": [
+			"always",
+			{
+				"except": ["first-nested"],
+				"ignore": ["after-comment"]
+			}
+		],
+		"stylistic/block-opening-brace-newline-after": "always",
+		"stylistic/block-closing-brace-newline-before": "always",
+		"stylistic/indentation": 2
+	}
+}

@@ -40,7 +40,6 @@ const post = defineCollection({
 		}),
 });
 
-
 const gallery = defineCollection({
 	loader: glob({ base: "./src/content/gallery", pattern: "**/*.{md,mdx}" }),
 	schema: z.object({

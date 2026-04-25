@@ -3,8 +3,8 @@ title: astro博客的搭建与编辑及手动提交脚本
 description: 搭建博客的方法
 publishDate: 2026-02-25
 ---
->注：博主目前并非专业技术人员，~~写这篇文章其实是为了防止以后想再次创建时忘了步骤，提醒一下自己~~，所以以下仅供参考，如有大佬发现不严谨的地方也请在评论区指出——（虽然目前评论区还没建好）btw以下均为Windows操作环境
 
+> 注：博主目前并非专业技术人员，~~写这篇文章其实是为了防止以后想再次创建时忘了步骤，提醒一下自己~~，所以以下仅供参考，如有大佬发现不严谨的地方也请在评论区指出——（虽然目前评论区还没建好）btw以下均为Windows操作环境
 
 默认你已经有了一个以 `你的用户名.github.io` 为名称的空白Github仓库（或Netlify、Cloudflare page等托管平台），还有IDE（如vs code）
 
@@ -18,10 +18,10 @@ https://nodejs.org
 `npm -v`查看npm版本
 如果能看到版本号，比如：`v20.x.x` `10.x.x`，就表明安装成功辣！
 
-
 不想从零写页面的话，可以直接用一个现成的 Astro 主题。Astro 的主题本质是已经写好的 Astro 项目。如果你已经有一个项目，又想换成某个主题，正确做法是新建一个想换的那个主题的项目，再把内容搬过去；而不是像hexo一样，在现有项目里换主题包来切主题
 
 ## 从哪里找主题？
+
 官方主题库： [https://astro.build/themes](https://astro.build/themes)
 找好了主题`https://github.com/xxx/astro-theme-yyy`怎么安装？
 首先，在你想放项目的地方运行：`npm create astro@latest`
@@ -43,7 +43,7 @@ src
 -data
 -layouts
 -pages 放各种.astro页面
--plugins 
+-plugins
 -styles 顾名思义就是css样式
 -utils
 .gitignore 里面的内容不会commit到仓库
@@ -54,18 +54,21 @@ src
 在content里面新建markdown文件来写文章。
 
 写完之后提交到GitHub，page自动deploy。有几个方式：
+
 - 整个文件夹拖到GitHub上传
 - git push
 
 如果你在中国境内，那么push那一步大概率会卡好久，虽然解决方案有每当提交的时候开一下全局代理，但那太麻烦了。这时候你可以设置一个ssh key来一劳永逸地解决这个问题。
 
 ## 设置sshkey
+
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ssh -T git@github.com
 cat ~/.ssh/id_ed25519.pub
 git remote set-url origin git@github.com:用户名/仓库名.git
 
 ## 每次git add . git commit太麻烦怎么办？
+
 打开vscode，在一个你喜欢的文件夹里新建一个bat文件（注意补药用记事本！大概率会乱码。以后记事本除了当桌面便签，其他操作尽量不要用它。）
 输入以下文本
 
@@ -153,4 +156,5 @@ echo   操作完成！
 echo ============================================
 pause
 ```
+
 保存，退出，再双击这个文件，按照指令继续即可。

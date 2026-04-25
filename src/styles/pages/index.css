@@ -1,25 +1,24 @@
-
 body {
-  font-family: monospace;
-background: linear-gradient(45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%) , linear-gradient(-45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%);
-background-size: 3em 3em;
-background-color: #eff6ff;
-opacity: 1;
-  padding: 10% 20%;
-  color: #4D657A;
+	font-family: monospace;
+	background:
+		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
+		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
+	background-size: 3em 3em;
+	background-color: #eff6ff;
+	opacity: 1;
+	padding: 10% 20%;
+	color: #4d657a;
 }
 
-.mushroom{
-  position:absolute;
-  margin: 1.2rem;
-  
+.mushroom {
+	position: absolute;
+	margin: 1.2rem;
 }
-
 
 #statuscafe {
-    padding: .5em;
-    background-color: #ffffffee;
-    border-radius:15px;
+	padding: 0.5em;
+	background-color: #ffffffee;
+	border-radius: 15px;
 }
 #statuscafe-username {
 }
@@ -27,9 +26,9 @@ opacity: 1;
 }
 
 :root {
-  --color-calendar-graph-day-bg: #dddbdb;
-  --color-calendar-graph-day-L1-bg: #39dd34;
-  --color-calendar-graph-day-L2-bg: #45a045;
-  --color-calendar-graph-day-L3-bg: #047526;
-  --color-calendar-graph-day-L4-bg: #0a4208;
+	--color-calendar-graph-day-bg: #dddbdb;
+	--color-calendar-graph-day-L1-bg: #39dd34;
+	--color-calendar-graph-day-L2-bg: #45a045;
+	--color-calendar-graph-day-L3-bg: #047526;
+	--color-calendar-graph-day-L4-bg: #0a4208;
 }

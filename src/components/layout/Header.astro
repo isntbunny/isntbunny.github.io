@@ -6,20 +6,22 @@ import { menuLinks } from "@/site.config";
 	<nav aria-label="Main menu" class="site-nav-shell">
 		<a class="site-logo" href="/">Eucaly's Blog</a>
 		<div class="site-nav-links">
-			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/">Home</a>
-			{menuLinks.map((link) => (
-				<a
-					aria-current={Astro.url.pathname === link.path ? "page" : false}
-					class="site-nav-link"
-					href={link.path}
-					target={link.external ? "_blank" : undefined}
-					rel={link.external ? "noreferrer" : undefined}
-				>
-					{link.title}
-				</a>
-			))}
+			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"
+				>Home</a
+			>
+			{
+				menuLinks.map((link) => (
+					<a
+						aria-current={Astro.url.pathname === link.path ? "page" : false}
+						class="site-nav-link"
+						href={link.path}
+						target={link.external ? "_blank" : undefined}
+						rel={link.external ? "noreferrer" : undefined}
+					>
+						{link.title}
+					</a>
+				))
+			}
 		</div>
 	</nav>
 </header>
-
-

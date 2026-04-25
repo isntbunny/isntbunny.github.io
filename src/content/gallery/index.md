@@ -218,7 +218,7 @@ sections:
         items:
           - title: Expression Sheet
             image: https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=1200&q=80
-  
+
   - slug: daily-life
     title: Daily Life
     description: Photos and mood snapshots.

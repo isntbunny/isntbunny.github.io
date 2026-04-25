@@ -32,8 +32,23 @@
 	margin-bottom: 0 !important;
 }
 
-.admonition[data-admonition-type="note"] { --admonition-color: #60a5fa; background: #60a5fa0d; }
-.admonition[data-admonition-type="tip"] { --admonition-color: #84cc16; background: #84cc160d; }
-.admonition[data-admonition-type="important"] { --admonition-color: #c084fc; background: #c084fc0d; }
-.admonition[data-admonition-type="caution"] { --admonition-color: #fb923c; background: #fb923c0d; }
-.admonition[data-admonition-type="warning"] { --admonition-color: #ef4444; background: #ef44440d; }
+.admonition[data-admonition-type="note"] {
+	--admonition-color: #60a5fa;
+	background: #60a5fa0d;
+}
+.admonition[data-admonition-type="tip"] {
+	--admonition-color: #84cc16;
+	background: #84cc160d;
+}
+.admonition[data-admonition-type="important"] {
+	--admonition-color: #c084fc;
+	background: #c084fc0d;
+}
+.admonition[data-admonition-type="caution"] {
+	--admonition-color: #fb923c;
+	background: #fb923c0d;
+}
+.admonition[data-admonition-type="warning"] {
+	--admonition-color: #ef4444;
+	background: #ef44440d;
+}

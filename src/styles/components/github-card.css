@@ -22,8 +22,19 @@
 	background-position: center;
 }
 
-.github-card .gh-description { margin-top: 1rem; line-height: 1.25; }
-.github-card .gh-chips { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.github-card .gh-description {
+	margin-top: 1rem;
+	line-height: 1.25;
+}
+.github-card .gh-chips {
+	margin-top: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: center;
+}
 .github-card.gh-error .gh-avatar,
 .github-card.gh-error .gh-description,
-.github-card.gh-error .gh-chips { display: none; }
+.github-card.gh-error .gh-chips {
+	display: none;
+}
