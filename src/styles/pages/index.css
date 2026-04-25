@@ -13,6 +13,17 @@ body {
 .mushroom {
 	position: absolute;
 	margin: 1.2rem;
+    bottom: 20px;      /* 距离底部20px */
+	left: 20px;        /* 距离左边20px */
+	display: flex;
+    gap: 10px;         /* 图片之间的间距 */
+    z-index: 999;      /* 确保在最上层 */
+}
+
+.mushroom img {
+	width: 50px;       /* 设置宽度 */
+	height: auto;      /* 高度自动 */
+	width: 50px; height: 50px;
 }
 
 #statuscafe {
@@ -20,8 +31,11 @@ body {
 	background-color: #ffffffee;
 	border-radius: 15px;
 }
+
 #statuscafe-username {
+
 }
+
 #statuscafe-content {
 }
 

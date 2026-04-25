@@ -18,14 +18,14 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <title>{siteTitle}</title>
 
 {/* Icons */}
-<link href="/icon.svg" rel="icon" type="image/svg+xml" />
+<link href="https://i.postimg.cc/HxG7bTwc/avatar250806.png" rel="icon" type="image" />
 {
 	import.meta.env.PROD && (
 		<>
-			{/* Favicon & Apple Icon */}
-			<link rel="icon" href="/favicon-32x32.png" type="image/png" />
+			{/* Favicon & 苹果主屏幕图标*/}
+			<link rel="icon" href="/favicon-32x32.png" type="image/png" /> 
 			<link href="/icons/apple-touch-icon.png" rel="apple-touch-icon" />
-			{/* Manifest */}
+			{/* pwa配置文件 */}
 			<link href="/manifest.webmanifest" rel="manifest" />
 		</>
 	)
@@ -34,12 +34,12 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 {/* Canonical URL */}
 <link href={canonicalURL} rel="canonical" />
 
-{/* Primary Meta Tags */}
+{/* Primary Meta Tags 链接标签 */}
 <meta content={siteTitle} name="title" />
 <meta content={description} name="description" />
 <meta content={siteConfig.author} name="author" />
 
-{/* Open Graph / Facebook */}
+{/* Open Graph / Facebook 分享到fb dc tg时的显示*/}
 <meta content={articleDate ? "article" : "website"} property="og:type" />
 <meta content={title} property="og:title" />
 <meta content={description} property="og:description" />
@@ -49,6 +49,8 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <meta content={socialImageURL} property="og:image" />
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
+
+{/*文章专属信息*/}
 {
 	articleDate && (
 		<>
@@ -58,7 +60,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 	)
 }
 
-{/* Twitter */}
+{/* Twitter 推特卡片*/}
 <meta content="summary_large_image" property="twitter:card" />
 <meta content={canonicalURL} property="twitter:url" />
 <meta content={title} property="twitter:title" />

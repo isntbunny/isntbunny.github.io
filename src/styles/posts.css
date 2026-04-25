@@ -1,7 +1,6 @@
 
 .post-prose :is(h1, h2, h3, h4, h5, h6)::before {
 	color: var(--color-accent);
-	margin-right: 0.35em;
 }
 .post-prose h1::before {
 	content: "#";
