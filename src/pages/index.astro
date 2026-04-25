@@ -1,8 +1,6 @@
 ---
 import PageLayout from "@/layouts/Base.astro";
 import "/src/styles/pages/index.css";
-import cardContent from "src/content/homepage/links.md";
-import marked from 'marked';  // 需要安装：npm install marked
 ---
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
@@ -58,8 +56,25 @@ import marked from 'marked';  // 需要安装：npm install marked
 	</section>
 
 	<div class="sitecard">
-	    <div set:html={marked.parse(cardContent)} />
+		  <div id="markdown-content"></div>
 	</div>
+
+	<script>
+	fetch('/card-content.md')
+    .then(res => res.text())
+    .then(md => {
+      const html = marked.parse(md);
+      document.getElementById('markdown-content').innerHTML = html;
+    })
+    .catch(err => {
+      console.error('加载失败:', err);
+      document.getElementById('markdown-content').innerHTML = '<p>加载内容失败</p>';
+    });
+	</script>    
+
+
+
+	<script is:inline src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 	<section class="sitecard">
 		<h2>RECENTLY LISTENING</h2>
