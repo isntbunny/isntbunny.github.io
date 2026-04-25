@@ -23,4 +23,13 @@ publishDate: 2026-04-22
 首先需要下载termux，然后安装Ubuntu（一个linux系统），你就有了完整的开发环境，下面就几乎可以把这玩意当正常电脑用了（humm只是写个Py写个网页，不搞什么大工程是没问题的（deepseek说的）
 唯一缺点是code server安装插件比较麻烦，这时可以考虑安装图形界面然后现在真正的vsclinux版。这一块我还没实践。
 
+
+nohup env NODE_OPTIONS="--require /root/android-as-linux.js" code-server --auth none &
+
+127.0.0.1:8080
+
+proot-distro login ubuntu
+cd ~/isntbunny.github.io
+pnpm run dev
+
 先占着位，以后完善所有步骤。
