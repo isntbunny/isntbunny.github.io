@@ -60,7 +60,7 @@ import "/src/styles/pages/index.css";
 	</div>
 
 	<script>
-	fetch('/card-content.md')
+	fetch('src/content/homepage/link.md')
     .then(res => res.text())
     .then(md => {
       const html = marked.parse(md);
