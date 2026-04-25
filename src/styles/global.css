@@ -1,5 +1,3 @@
-@import "./theme.css";
-
 @import "./components/admonition.css";
 @import "./components/github-card.css";
 
@@ -32,4 +30,17 @@
 	--primary-200: #d4f0f5;
 	--primary-300: #c7e9f0;
 	--white: #fffd;
+}
+
+@font-face {
+	font-family: "pixel";
+    src: url("https://example.com/path/to/font.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+    border-style: none;
+    font-family: "pixel", "Courier New", Courier, monospace;
 }

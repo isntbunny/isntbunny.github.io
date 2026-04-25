@@ -1,8 +1,3 @@
-
-* {
-	box-sizing: border-box;
-}
-
 body.site-shell {
 	min-height: 100vh;
 	font-family:
@@ -21,7 +16,6 @@ h5,
 h6 {
 	font-weight: 600;
 	line-height: 1.4;
-	color: var(--text-muted);
 }
 
 .small-muted {
