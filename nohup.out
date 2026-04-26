@@ -54,3 +54,108 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 
 [09:51:03] [127.0.0.1][0d7162b5][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
 [09:51:04] [127.0.0.1][f40c0925][ExtensionHostConnection] <10875> Extension Host Process exited with code: 0, signal: null.
+[10:02:55] [127.0.0.1][4996334e][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[10:38:21] [127.0.0.1][4996334e][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[10:38:21] [127.0.0.1][7ad6b972][ManagementConnection] New connection established.
+[10:38:22] [127.0.0.1][79ee2fd6][ExtensionHostConnection] New connection established.
+[10:38:22] [127.0.0.1][79ee2fd6][ExtensionHostConnection] <25654> Launched Extension Host Process.
+[10:38:25] [127.0.0.1][79ee2fd6][ExtensionHostConnection] <25654> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[10:38:28] #17: https://open-vsx.org/vscode/gallery/vscode/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #18: https://open-vsx.org/vscode/gallery/vscode/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #20: https://open-vsx.org/vscode/gallery/vscode/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #19: https://open-vsx.org/vscode/gallery/vscode/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #21: https://open-vsx.org/vscode/gallery/vscode/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #22: https://open-vsx.org/vscode/gallery/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #24: https://open-vsx.org/vscode/gallery/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #23: https://open-vsx.org/vscode/gallery/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #25: https://open-vsx.org/vscode/gallery/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:28] #26: https://open-vsx.org/vscode/gallery/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:38:29] #27: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[10:39:28] [127.0.0.1][7ad6b972][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[10:39:29] [127.0.0.1][79ee2fd6][ExtensionHostConnection] <25654> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[10:39:30] [127.0.0.1][81ff8f34][ManagementConnection] New connection established.
+[10:39:31] [127.0.0.1][72fabf7b][ExtensionHostConnection] New connection established.
+[10:39:31] [127.0.0.1][72fabf7b][ExtensionHostConnection] <5431> Launched Extension Host Process.
+[10:39:33] [127.0.0.1][72fabf7b][ExtensionHostConnection] <5431> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[10:39:36] #29: https://open-vsx.org/vscode/gallery/vscode/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:36] #28: https://open-vsx.org/vscode/gallery/vscode/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:36] #30: https://open-vsx.org/vscode/gallery/vscode/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:36] #31: https://open-vsx.org/vscode/gallery/vscode/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:36] #32: https://open-vsx.org/vscode/gallery/vscode/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:37] #33: https://open-vsx.org/vscode/gallery/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:37] #35: https://open-vsx.org/vscode/gallery/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:37] #34: https://open-vsx.org/vscode/gallery/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:37] #36: https://open-vsx.org/vscode/gallery/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:37] #37: https://open-vsx.org/vscode/gallery/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[10:39:38] #38: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[10:40:27] #39: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[10:42:40] #40: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[10:43:22] [127.0.0.1][91d9b26c][ExtensionHostConnection] <16312> Extension Host Process exited with code: 0, signal: null.
+[10:43:22] [127.0.0.1][4996334e][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[10:43:41] #51: https://open-vsx.org/vscode/gallery/extensionquery - error POST Canceled
+[10:45:19] [127.0.0.1][81ff8f34][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[10:45:19] #52: https://open-vsx.org/vscode/gallery/vscode/astro-build/astro-vscode/latest - error GET Canceled
+[10:45:19] #53: https://open-vsx.org/vscode/gallery/vscode/esbenp/prettier-vscode/latest - error GET Canceled
+[10:45:19] #54: https://open-vsx.org/vscode/gallery/vscode/pranaygp/vscode-css-peek/latest - error GET Canceled
+[10:45:19] #55: https://open-vsx.org/vscode/gallery/vscode/stylelint/vscode-stylelint/latest - error GET Canceled
+[10:45:19] #56: https://open-vsx.org/vscode/gallery/vscode/usernamehw/errorlens/latest - error GET Canceled
+[10:45:20] [127.0.0.1][72fabf7b][ExtensionHostConnection] <5431> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+[10:45:21] [127.0.0.1][5afa9dba][ManagementConnection] New connection established.
+[10:45:22] [127.0.0.1][e025ea80][ExtensionHostConnection] New connection established.
+[10:45:22] [127.0.0.1][e025ea80][ExtensionHostConnection] <24389> Launched Extension Host Process.
+[10:45:25] [127.0.0.1][e025ea80][ExtensionHostConnection] <24389> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[10:49:36] Getting Manifest... msnilshartmann.blue-light
+[10:49:39] Installing extension: msnilshartmann.blue-light {
+  isMachineScoped: false,
+  installPreReleaseVersion: false,
+  pinned: false,
+  isApplicationScoped: false,
+  profileLocation: Kr {
+    scheme: 'file',
+    authority: '',
+    path: '/root/.local/share/code-server/extensions/extensions.json',
+    query: '',
+    fragment: '',
+    _formatted: 'file:///root/.local/share/code-server/extensions/extensions.json',
+    _fsPath: '/root/.local/share/code-server/extensions/extensions.json'
+  },
+  productVersion: { version: '1.112.0', date: '2026-03-17T18:09:23+00:00' }
+}
+[10:54:29] [127.0.0.1][5afa9dba][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[10:55:35] Extracted extension to file:///root/.local/share/code-server/extensions/msnilshartmann.blue-light-0.6.3-universal: msnilshartmann.blue-light
+[10:55:35] Renamed to /root/.local/share/code-server/extensions/msnilshartmann.blue-light-0.6.3-universal
+[10:55:35] Extension installed successfully: msnilshartmann.blue-light file:///root/.local/share/code-server/extensions/extensions.json
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[10:56:27] [127.0.0.1][5afa9dba][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[10:56:27] [127.0.0.1][dcb55cbe][ManagementConnection] New connection established.
+[10:56:28] [127.0.0.1][df4594b5][ExtensionHostConnection] New connection established.
+[10:56:28] [127.0.0.1][df4594b5][ExtensionHostConnection] <9697> Launched Extension Host Process.
+[10:56:30] [127.0.0.1][df4594b5][ExtensionHostConnection] <9697> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:07:51] [127.0.0.1][da36f29b][ManagementConnection] New connection established.
+[11:07:53] [127.0.0.1][3b3bdfdf][ExtensionHostConnection] New connection established.
+[11:07:53] [127.0.0.1][3b3bdfdf][ExtensionHostConnection] <12989> Launched Extension Host Process.
+[11:07:55] [127.0.0.1][3b3bdfdf][ExtensionHostConnection] <12989> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:08:05] Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20) {
+  errno: -104,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[11:08:05] [127.0.0.1][dcb55cbe][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[11:08:31] [File Watcher ('parcel')] Inotify limit reached (ENOSPC) (path: /root/isntbunny.github.io)
+[11:08:49] [127.0.0.1][e025ea80][ExtensionHostConnection] <24389> Extension Host Process exited with code: 0, signal: null.
+[11:08:49] [127.0.0.1][5afa9dba][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
