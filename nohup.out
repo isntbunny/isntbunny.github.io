@@ -52,3 +52,5 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 [09:46:04] [127.0.0.1][91d9b26c][ExtensionHostConnection] <16312> Launched Extension Host Process.
 [09:46:06] [127.0.0.1][91d9b26c][ExtensionHostConnection] <16312> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
 
+[09:51:03] [127.0.0.1][0d7162b5][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[09:51:04] [127.0.0.1][f40c0925][ExtensionHostConnection] <10875> Extension Host Process exited with code: 0, signal: null.

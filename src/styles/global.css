@@ -1,7 +1,7 @@
 @import "./components/admonition.css";
 @import "./components/github-card.css";
 
-@import "./layout/base.css";
+@import "./base.css";
 
  
 :root {
