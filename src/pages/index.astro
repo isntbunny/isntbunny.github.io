@@ -56,19 +56,17 @@ import "/src/styles/pages/index.css";
 	</section>
 
 	<div class="sitecard">
-		  <p id="markdown-content"></p>
+		  <p id="links"></p>
 	</div>
 
 	<script>
 	fetch('homepage/links.md')
     .then(res => res.text())
-    .then(md => {
-      const html = marked.parse(md);
-      document.getElementById('markdown-content').innerHTML = html;
+    .then(md => { 
+		const html = marked.parse(md);
+        document.getElementById('links').innerHTML = html;
     })
 	</script>    
-
-
 
 	<script is:inline src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 

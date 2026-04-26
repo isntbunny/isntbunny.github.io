@@ -1,0 +1,54 @@
+[2026-04-26T00:17:23.855Z] info  code-server 4.112.0 d7599ae360900ad55b503e3c840b417a1eae4798
+[2026-04-26T00:17:23.887Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-04-26T00:17:23.934Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-04-26T00:17:23.934Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-04-26T00:17:23.935Z] info    - Authentication is disabled
+[2026-04-26T00:17:23.935Z] info    - Not serving HTTPS
+[2026-04-26T00:17:23.935Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+
+> astro-cactus@6.11.0 dev /root/isntbunny.github.io
+> astro dev
+
+24:18:12 [types] Generated 6ms
+ ELIFECYCLE  Command failed.
+[08:18:28] 
+
+
+
+
+[08:18:28] Error: Unable to retrieve mac address (unexpected format)
+    at bH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20289)
+    at SH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20666)
+    at async file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20583
+    at async Promise.all (index 2)
+    at async bq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:197:413)
+    at async Aq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:198:1392)
+[reconnection-grace-time] No CLI argument provided, using default: 10800000ms (10800s)
+[08:18:28] Extension host agent started.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[08:18:30] [127.0.0.1][0d7162b5][ManagementConnection] New connection established.
+[08:18:31] [127.0.0.1][f40c0925][ExtensionHostConnection] New connection established.
+[08:18:32] [127.0.0.1][f40c0925][ExtensionHostConnection] <10875> Launched Extension Host Process.
+[08:18:35] [127.0.0.1][f40c0925][ExtensionHostConnection] <10875> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[08:18:37] #1: https://open-vsx.org/vscode/gallery/vscode/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:37] #2: https://open-vsx.org/vscode/gallery/vscode/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:37] #3: https://open-vsx.org/vscode/gallery/vscode/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:37] #4: https://open-vsx.org/vscode/gallery/vscode/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:37] #5: https://open-vsx.org/vscode/gallery/vscode/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:38] #6: https://open-vsx.org/vscode/gallery/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:38] #7: https://open-vsx.org/vscode/gallery/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:38] #8: https://open-vsx.org/vscode/gallery/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:38] #9: https://open-vsx.org/vscode/gallery/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:38] #10: https://open-vsx.org/vscode/gallery/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[08:18:39] #11: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[08:35:26] [127.0.0.1][0d7162b5][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[09:46:03] [127.0.0.1][0d7162b5][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[09:46:03] [127.0.0.1][4996334e][ManagementConnection] New connection established.
+[09:46:04] [127.0.0.1][91d9b26c][ExtensionHostConnection] New connection established.
+[09:46:04] [127.0.0.1][91d9b26c][ExtensionHostConnection] <16312> Launched Extension Host Process.
+[09:46:06] [127.0.0.1][91d9b26c][ExtensionHostConnection] <16312> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
