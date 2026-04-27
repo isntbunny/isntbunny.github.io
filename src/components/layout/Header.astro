@@ -6,6 +6,7 @@ import HamburgerMenu from "@/components/layout/HamburgerMenu.astro";
 <header id="main-header">
 	<nav aria-label="Main menu" class="site-nav-shell">
 		<a class="site-logo" href="/">Eucaly's Blog</a>
+        <HamburgerMenu /> 
 		<div class="site-nav-links">
 			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"
 				>Home</a
@@ -25,6 +26,5 @@ import HamburgerMenu from "@/components/layout/HamburgerMenu.astro";
 			}
 		</div>
 
-        <HamburgerMenu /> 
 	</nav>
 </header>

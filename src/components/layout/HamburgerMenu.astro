@@ -1,100 +1,50 @@
 ---
-// 汉堡菜单导航组件 (HamburgerMenu.astro)
 import { menuLinks } from "@/site.config";
-// 一个响应式的移动端友好导航栏
 ---
 
 <div class="navbar">
-    <!-- 汉堡菜单按钮（移动端可见） -->
-    <button class="hamburger" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
+  <button class="hamburger" id="hmbg">菜单</button>
 
-    <!-- 导航链接列表 -->
-    <nav class="nav-menu" id="navMenu">
-      <ul class="nav-list">
-			{
-				menuLinks.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="site-nav-link"
-						href={link.path}
-						target={link.external ? "_blank" : undefined}
-						rel={link.external ? "noreferrer" : undefined}
-					>
-						{link.title}
-					</a>
-				))
-			}
-      </ul>
-    </nav>
+  <nav class="nav-menu" id="navMenu">
+    <ul>
+      {menuLinks.map((link) => (
+        <li>
+          <a href={link.path}>{link.title}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </div>
 
-
 <script>
-  // 客户端脚本：处理汉堡菜单的点击交互
-  document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-    const body = document.body;
+  const btn = document.getElementById("hmbg");
+  const menu = document.getElementById("navMenu");
 
-    if (!hamburgerBtn || !navMenu) return;
+  function closeMenu() {
+    menu.style.display = "none";
+    btn.setAttribute("aria-expanded", "false");
+  }
 
-    const toggleMenu = () => {
-      const isActive = navMenu.classList.contains('active');
-      
-      // 切换导航菜单的 active 类
-      navMenu.classList.toggle('active');
-      // 切换汉堡菜单按钮的 active 类（用于动画）
-      hamburgerBtn.classList.toggle('active');
-      
-      // 更新 aria-expanded 属性以增强可访问性
-      const expanded = !isActive;
-      hamburgerBtn.setAttribute('aria-expanded', expanded);
-      
-      // 控制 body 滚动
-      if (!isActive) {
-        body.classList.add('menu-open');
-      } else {
-        body.classList.remove('menu-open');
-      }
-    };
+  function openMenu() {
+    menu.style.display = "block";
+    btn.setAttribute("aria-expanded", "true");
+  }
 
-    // 点击汉堡按钮切换菜单
-    hamburgerBtn.addEventListener('click', toggleMenu);
+  btn.addEventListener("click", () => {
+    const isOpen = menu.style.display === "block";
+    if (isOpen) closeMenu();
+    else openMenu();
+  });
 
-    // 点击导航链接后自动关闭菜单（提升移动端体验）
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navMenu.classList.contains('active')) {
-          toggleMenu();
-        }
-      });
-    });
+  // 点链接关闭
+  document.querySelectorAll("#navMenu a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
 
-    // 可选：点击菜单外部区域关闭菜单（提升用户体验）
-    document.addEventListener('click', (event) => {
-      const isClickInsideNav = navMenu.contains(event.target);
-      const isClickOnHamburger = hamburgerBtn.contains(event.target);
-      
-      if (navMenu.classList.contains('active') && !isClickInsideNav && !isClickOnHamburger) {
-        toggleMenu();
-      }
-    });
-
-    // 窗口大小改变时，如果从移动端切换到桌面端，确保菜单状态重置
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        if (navMenu.classList.contains('active')) {
-          navMenu.classList.remove('active');
-          hamburgerBtn.classList.remove('active');
-          hamburgerBtn.setAttribute('aria-expanded', 'false');
-          body.classList.remove('menu-open');
-        }
-      }
-    });
+  // 点外面关闭
+  document.addEventListener("click", (e) => {
+    if (menu.style.display === "block" && !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
+    }
   });
 </script>
