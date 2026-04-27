@@ -1,6 +1,6 @@
 ---
-title: CSS学习笔记（1）CSS内置属性
-description: 是一些css 基础知识捏
+title: CSS学习笔记（1）基础知识
+description: 是一些css基础知识捏
 publishDate: 2026-02-26
 ---
 ## 选择器
