@@ -3,18 +3,32 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
+  // 获取所有 journals 条目
   const journalsEntries = await getCollection('journals');
-  return journalsEntries.map(entry => ({
-    params: { slug: entry.id.replace('.md', '') },
+  
+  // 为每个条目生成路径
+  return journalsEntries.map((entry) => ({
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
+// 从 props 中获取当前条目
 const { entry } = Astro.props;
+
+// 确保 entry 存在
+if (!entry) {
+  throw new Error('未找到对应的日志条目');
+}
+
+// 渲染内容
 const { Content } = await entry.render();
 ---
 
 <Base meta={{ title: entry.data.title }}>
-  <h1>{entry.data.title}</h1>
-  <Content />
+  <article>
+    <h1>{entry.data.title}</h1>
+    {entry.data.date && <time>{entry.data.date.toLocaleDateString()}</time>}
+    <Content />
+  </article>
 </Base>

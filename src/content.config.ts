@@ -73,13 +73,14 @@ const page = defineCollection({
 	schema: z.object({}),
 });
 
-// 在 export 之前加上 journal 的定义
+
 const journals = defineCollection({
-	loader: glob({ base: "./src/content/journals", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		title: z.string(),
-		date: z.date().optional(),
-	}),
-});
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date().optional(),
+  }),
+})
+
 
 export const collections = { post, page, gallery, journals };
