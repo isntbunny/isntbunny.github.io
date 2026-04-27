@@ -1,22 +1,52 @@
+.content h1::before,
+.content h2::before,
+.content h3::before,
+.content h4::before,
+.content h5::before,
+.content h6::before {
+	color: var(--blue);
+	display: inline-block;
+	margin-right: 0.5em;  /* 可选：让井号和文字之间有间距 */
+}
 
-.post-prose :is(h1, h2, h3, h4, h5, h6)::before {
+.content h1::before { content: "#"; }
+.content h2::before { content: "##"; }
+.content h3::before { content: "###"; }
+.content h4::before { content: "####"; }
+.content h5::before { content: "#####"; }
+.content h6::before { content: "######"; }
 
+@media (max-width: 768px) {
+.content img {
+width:50%;
 }
-.post-prose h1::before {
-	content: "#";
+/* 让包裹代码块和按钮的容器左对齐并限制宽度 */
+.expressive-code {
+  width: 70%;
+  margin-left: 0 !important;
 }
-.post-prose h2::before {
-	content: "##";
+/* 让复制按钮保持在右上角 */
+.expressive-code .copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
-.post-prose h3::before {
-	content: "###";
 }
-.post-prose h4::before {
-	content: "####";
-}
-.post-prose h5::before {
-	content: "#####";
-}
-.post-prose h6::before {
-	content: "######";
+/* 在移动端改为垂直排列 */
+@media (max-width: 768px) {
+  .blogpost > div {
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  /* 目录在移动端可以隐藏或缩小 */
+  .toc {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .content {
+    width: 100%;
+  }
 }

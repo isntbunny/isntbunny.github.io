@@ -13,7 +13,24 @@ const { ogImage, title, description, updatedDate, publishDate } = post.data;
 const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { Content, headings, remarkPluginFrontmatter } = await render(post);
-const readingTime: string = remarkPluginFrontmatter.readingTime;
+
+const readingTime = remarkPluginFrontmatter.readingTime || "未知";
+
+// 手动计算字数（从文章原始内容中计算）
+const rawContent = post.body || "";
+// 移除 markdown 标记，只保留纯文本
+const plainText = rawContent
+  .replace(/```[\s\S]*?```/g, "") // 移除代码块
+  .replace(/!\[[^\]]*\]\([^)]+\)/g, "") // 移除图片
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // 保留链接文字
+  .replace(/[#*`~>_\-+=![\]]/g, "") // 移除 markdown 符号
+  .replace(/\s+/g, " ") // 多个空白合并为一个
+  .trim();
+
+// 计算中文字符 + 英文单词
+const chineseChars = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
+const englishWords = (plainText.match(/[a-zA-Z]+/g) || []).length;
+const wordCount = chineseChars + englishWords;
 ---
 
 <BaseLayout
@@ -24,21 +41,18 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 		title,
 	}}
 >
-
 	<article class="blogpost" data-pagefind-body>
 		<div id="blog-hero">
-        <h1>{title}</h1>
-            Masthead content={post} readingTime={readingTime}
-        </div>
+			<Masthead content={post} readingTime={readingTime} wordCount={wordCount} />
+		</div>
 		<div style="display:flex; gap:2em;">
-            <div class="toc">
-			{!!headings.length && <TOC headings={headings} />}
-            </div>
+			<div class="toc">
+				{!!headings.length && <TOC headings={headings} />}
+			</div>
 			<div class="content">
-                
 				<Content />
 			</div>
-        </div>
+		</div>
 	</article>
 
 </BaseLayout>

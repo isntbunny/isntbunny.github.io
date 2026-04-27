@@ -27,6 +27,7 @@
 	--primary-200: #d4f0f5;
 	--primary-300: #c7e9f0;
 	--white: #fffd;
+    --blue: #9cf;
 }
 
 @font-face {
@@ -39,4 +40,21 @@
 * {
 	box-sizing:border-box;
     font-family: "pixel", monospace;
+}
+h1 { font-size: xx-large; }
+h2 { font-size: x-large; }
+h3 { font-size: larger; }
+h4 { font-size: large; }
+h5 { font-size: medium; }
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+blockquote,
+address,
+figcaption {
+  font-size: small;
 }
