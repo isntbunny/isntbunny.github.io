@@ -127,9 +127,15 @@ body{
     /*🍔*/
 
     .hamburger {
+		background-color: #acbccc;
+		border: 1px solid #acbccc;
         display:block;
-        border-left: 1px dashed #becfe8;
 		padding: 0em 1em;
+		margin: 0;
+		color:#ffffff;
+		border-radius:15px;
+		font-weight: 800;
+		font-family: "smalle";
     }
 
 	.ham-nav-menu {
@@ -137,18 +143,25 @@ body{
 		border-top: none;
         display: none;
         position: fixed;
-        top: 3em;
-        right:0%;
-        width: auto;
+        top: 3.14em;
+        width: 100%;
+		left:0;
         height: auto;
 	    background: rgb(255 255 255 / 0.73);
-        padding: 0.5em ;
+        padding: 0;
         z-index: 100;
     }
 
-	.ham-nav-menu li{
-		list-style:none;
-		font-size:large;
+	.ham-nav-menu p{
+		text-align: center;
+		font-size:medium;
+	}
+	.ham-nav-menu p ::before {
+		content: "- ";
+	}
+	
+	.ham-nav-menu p ::after {
+		content: " -";
 	}
 
 	.ham-nav-menu a{

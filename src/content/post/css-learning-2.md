@@ -4,34 +4,59 @@ description: 杂乱自用笔记
 publishDate: 2026-04-16
 ---
 
-### 基本选择器
+## 基本选择器
 
 1. **类选择器（Class Selector）**
    - 语法：`.classname`
-   - 示例：`.button`
-   - 用途：选择具有特定类名的元素。
+   - 用途：选择class
+
+```css
+.button {
+    background-color: blue;
+    color: white;
+}
+```
 
 2. **ID 选择器（ID Selector）**
    - 语法：`#idname`
-   - 示例：`#header`
    - 用途：选择具有特定 ID 的元素。每个 ID 在页面中应是唯一的。
-
+```css
+#header {
+	background-color: gray;
+	color: white;
+}
+```
 3. **元素选择器（Element Selector）**
    - 语法：`elementname`
    - 示例：`p`
    - 用途：选择特定类型的所有元素。
+```css
+p {
+	font-size: 16px;
+	line-height: 1.5;
+}
 
+```
 4. **通用选择器（Universal Selector）**
    - 语法：`*`
-   - 示例：`*`
    - 用途：选择所有元素。
-
-### 属性选择器
+```css
+* {
+   	margin: 0;
+	padding: 0;
+}
+```
+## 属性选择器
 
 1. **属性存在选择器**
    - 语法：`[attribute]`
    - 示例：`[type="text"]`
    - 用途：选择具有特定属性的元素。
+```css
+[type="text"] {
+	border: 1px solid #ccc;
+}
+```
 
 2. **属性值选择器**
    - 语法：`[attribute="value"]`
@@ -43,7 +68,7 @@ publishDate: 2026-04-16
    - 示例：`[class*="btn"]`
    - 用途：选择属性值包含特定字符串的元素。
 
-### 伪类选择器
+## 伪类选择器
 
 1. **链接伪类**
    - 语法：`:link`, `:visited`, `:hover`, `:active`, `:focus`
@@ -78,109 +103,74 @@ p:first-child {
 }
 ```
 
-### 伪元素选择器
-
-1. **伪元素**
-   - 语法：`::before`, `::after`, `::first-line`, `::first-letter`
-   - 示例：`p::first-line`, `div::after`
-   - 用途：选择元素的特定部分或插入内容。
-
-### 组合选择器
-
-1. **后代选择器**
-   - 语法：`ancestor descendant`
-   - 示例：`div p`
-   - 用途：选择所有匹配后代的元素。
-
-2. **子选择器**
-   - 语法：`parent > child`
-   - 示例：`div > p`
-   - 用途：选择所有直接子元素。
-
-3. **相邻兄弟选择器**
-   - 语法：`element + element`
-   - 示例：`h1 + p`
-   - 用途：选择紧接在另一个元素后的元素。
-
-4. **通用兄弟选择器**
-   - 语法：`element ~ element`
-   - 示例：`h1 ~ p`
-   - 用途：选择在另一个元素之后的所有兄弟元素。
-
-### 组合选择器
-
-1. **组合选择器**
-   - 语法：`selector1, selector2`
-   - 示例：`h1, h2, h3`
-   - 用途：选择多个选择器匹配的元素。
-
-### 示例代码
-
-以下是一些示例代码，展示了不同类型的选择器：
-
+## 伪元素选择器
+- 语法：`::before`, `::after`, `::first-line`, `::first-letter`
+- 示例：`p::first-line`, `div::after`
+- 用途：选择元素的特定部分或插入内容。
 ```css
-/* 类选择器 */
-.button {
-	background-color: blue;
-	color: white;
-}
-
-/* ID 选择器 */
-#header {
-	background-color: gray;
-	color: white;
-}
-
-/* 元素选择器 */
-p {
-	font-size: 16px;
-	line-height: 1.5;
-}
-
-/* 通用选择器 */
-* {
-	margin: 0;
-	padding: 0;
-}
-
-/* 属性选择器 */
-[type="text"] {
-	border: 1px solid #ccc;
-}
-
-/* 伪类选择器 */
-
-/* 伪元素选择器 */
 p::first-line {
 	font-variant: small-caps;
 }
 
 div::after {
 	content: " - End of content";
-	color: gray;
-}
+			color: gray;
+			}
+```
 
-/* 后代选择器 */
+## 组合选择器
+
+1. **后代选择器**
+   - 语法：`ancestor descendant`
+   - 示例：`div p`
+   - 用途：选择所有匹配后代的元素。
+
+```css
 div p {
 	color: green;
 }
+```
 
-/* 子选择器 */
+2. **子选择器**
+   - 语法：`parent > child`
+   - 示例：`div > p`
+   - 用途：选择所有直接子元素。
+
+```css
 div > p {
-	color: blue;
-}
+		color: blue;
+		}
+```
+3. **相邻兄弟选择器**
+   - 语法：`element + element`
+   - 示例：`h1 + p`
+   - 用途：选择紧接在另一个元素后的元素。
 
-/* 相邻兄弟选择器 */
+```css
 h1 + p {
 	margin-top: 0;
 }
+```
 
-/* 通用兄弟选择器 */
+4. **通用兄弟选择器**
+   - 语法：`element ~ element`
+   - 示例：`h1 ~ p`
+   - 用途：选择在另一个元素之后的所有兄弟元素。
+
+```css
 h1 ~ p {
-	color: orange;
-}
+		color: orange;
+		}
+```
 
-/* 组合选择器 */
+## 组合选择器
+
+1. **组合选择器**
+   - 语法：`selector1, selector2`
+   - 示例：`h1, h2, h3`
+   - 用途：选择多个选择器匹配的元素。
+
+```css
 h1,
 h2,
 h3 {
@@ -188,17 +178,17 @@ h3 {
 }
 ```
 
-### 1. `@import`
+## @import
 
-用于导入外部样式表。
+导入外部样式表
 
 ```css
 @import url("styles.css");
 ```
 
-### 2. `@media`
+## @media
 
-用于定义媒体查询，根据不同的媒体类型或设备特性应用样式。
+定义媒体查询，根据不同的媒体类型或设备特性应用样式
 
 ```css
 @media (max-width: 600px) {
@@ -208,9 +198,9 @@ h3 {
 }
 ```
 
-### 3. `@font-face`
+## @font-face
 
-用于定义自定义字体。
+定义自定义字体。
 
 ```css
 @font-face {
@@ -223,9 +213,9 @@ h3 {
 }
 ```
 
-### 4. `@keyframes`
+## @keyframes
 
-用于定义动画序列。
+用于定义动画序列
 
 ```css
 @keyframes slidein {
@@ -241,7 +231,7 @@ h3 {
 }
 ```
 
-### 5. `@layer`
+## @layer
 
 用于定义 CSS 层，以便更好地组织和管理样式。
 
@@ -260,7 +250,7 @@ h3 {
 }
 ```
 
-### 6. `@custom-variant`
+## @custom-variant
 
 用于定义自定义变体，通常与 Tailwind CSS 一起使用。
 
@@ -268,7 +258,7 @@ h3 {
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 ```
 
-### 7. `@theme`
+## @theme
 
 用于定义主题变量，通常与 Tailwind CSS 一起使用。
 
@@ -279,7 +269,7 @@ h3 {
 }
 ```
 
-### 8. `@view-transition`
+## @view-transition
 
 用于定义视图过渡效果。
 
@@ -289,7 +279,7 @@ h3 {
 }
 ```
 
-### 9. `@utility`
+## 9@utility`
 
 用于定义实用工具类，通常与 Tailwind CSS 一起使用。
 
@@ -300,7 +290,7 @@ h3 {
 }
 ```
 
-### 10. `@apply`
+## 10. `@apply`
 
 用于应用 Tailwind CSS 类。
 
@@ -310,7 +300,7 @@ h3 {
 }
 ```
 
-### 11. `@layer`
+## 11. `@layer`
 
 用于定义 CSS 层，以便更好地组织和管理样式。
 
@@ -329,7 +319,7 @@ h3 {
 }
 ```
 
-### 12. `@custom-media`
+## 12. `@custom-media`
 
 用于定义自定义媒体查询。
 
@@ -343,7 +333,7 @@ h3 {
 }
 ```
 
-### 13. `@supports`
+## 13. `@supports`
 
 用于定义基于特性查询的样式。
 
@@ -356,7 +346,7 @@ h3 {
 }
 ```
 
-### 14. `@document`
+## 14. `@document`
 
 用于定义基于文档 URL 的样式。
 
@@ -369,7 +359,7 @@ h3 {
 }
 ```
 
-### 15. `@namespace`
+## 15. `@namespace`
 
 用于定义 XML 命名空间。
 
@@ -381,7 +371,7 @@ svg|rect {
 }
 ```
 
-### 16. `@page`
+## 16. `@page`
 
 用于定义打印页面的样式。
 
@@ -391,7 +381,7 @@ svg|rect {
 }
 ```
 
-### 17. `@counter-style`
+## 17. `@counter-style`
 
 用于定义自定义计数器样式。
 
@@ -403,7 +393,7 @@ svg|rect {
 }
 ```
 
-### 18. `@font-feature-values`
+## 18. `@font-feature-values`
 
 用于定义字体特性值。
 
@@ -415,7 +405,7 @@ svg|rect {
 }
 ```
 
-### 19. `@property`
+## 19. `@property`
 
 用于定义自定义属性。
 
@@ -427,7 +417,7 @@ svg|rect {
 }
 ```
 
-### 20. `@container`
+## 20. `@container`
 
 用于定义容器查询。
 

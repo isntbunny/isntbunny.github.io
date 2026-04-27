@@ -1,20 +1,24 @@
-.content h1::before,
-.content h2::before,
-.content h3::before,
-.content h4::before,
-.content h5::before,
-.content h6::before {
+
+.content h1,h2,h3,h4,h5{
+  text-indent: 0;
+  white-space: inherit;
+}
+
+.content h1::before,.content h1::after,
+.content h2::before,.content h2::after,
+.content h3::before,.content h3::after,
+.content h4::before,.content h4::after,
+.content h5::before,.content h5::after {
 	color: var(--blue);
 	display: inline-block;
 	margin-right: 0.5em;  /* 可选：让井号和文字之间有间距 */
 }
 
-.content h1::before { content: "#"; }
-.content h2::before { content: "##"; }
-.content h3::before { content: "###"; }
-.content h4::before { content: "####"; }
-.content h5::before { content: "#####"; }
-.content h6::before { content: "######"; }
+.content h1::before,.content h1::after { content: " # "; }
+.content h2::before,.content h2::after { content: " ## "; }
+.content h3::before,.content h3::after { content: " ### "; }
+.content h4::before,.content h4::after { content: " #### "; }
+.content h5::before,.content h5::after { content: " ##### "; }
 
 @media (max-width: 768px) {
 .content img {

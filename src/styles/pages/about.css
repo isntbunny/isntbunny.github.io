@@ -264,27 +264,30 @@ overflow-x: auto;
 @media (max-width: 768px) {
 
 .profile-header h1{
-font-size: xx-large;
+    font-size: xx-large;
 }
 
 .profile-header{
-display:grid;
-
+    display:grid;
 }
 
+.profile-photo img{
+    width: 100px;
+    border-radius: 0;
+}
 .left-col{
-width:50%;
+    width:50%;
 }
 .right-col{
-width:50%;
+    width:50%;
 }
 
 .stamppic, .blinkpic {
-  display:grid;
-  grid-template-columns: repeat(1, 80px);  /* 固定两列 */
-  gap: 1px;
-  overflow-y: auto;
-  align-content: flex-start;  /* 内容从顶部开始排列 */
+    display:grid;
+    grid-template-columns: repeat(1, 80px);  /* 固定两列 */
+    gap: 1px;
+    overflow-y: auto;
+    align-content: flex-start;  /* 内容从顶部开始排列 */
 }
 
 }

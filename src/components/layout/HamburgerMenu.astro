@@ -2,13 +2,13 @@
 import { menuLinks } from "@/site.config";
 ---
 
-  <div class="hamburger" id="hmbg">菜单</div>
+  <div class="hamburger" id="hmbg">Menu</div>
   <nav class="ham-nav-menu" id="hamnavMenu">
     <ul>
       {menuLinks.map((link) => (
-        <li>
+        <p>
           <a href={link.path}>{link.title}</a>
-        </li>
+        </p>
       ))}
     </ul>
   </nav>

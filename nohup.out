@@ -302,3 +302,10 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 [23:36:58] #17: https://open-vsx.org/vscode/gallery/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
 [23:36:58] #16: https://open-vsx.org/vscode/gallery/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
 [23:36:59] #18: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org
+[23:53:22] [127.0.0.1][74ebb382][ExtensionHostConnection] The client has reconnected.
+[23:53:22] [127.0.0.1][78ac383c][ManagementConnection] The client has reconnected.
+[00:22:21] [127.0.0.1][78ac383c][ManagementConnection] The client has reconnected.
+[00:23:53] [127.0.0.1][74ebb382][ExtensionHostConnection] The client has reconnected.
+[00:23:53] [127.0.0.1][78ac383c][ManagementConnection] The client has reconnected.
+[00:30:03] [127.0.0.1][74ebb382][ExtensionHostConnection] The client has reconnected.
+[00:30:03] [127.0.0.1][78ac383c][ManagementConnection] The client has reconnected.
