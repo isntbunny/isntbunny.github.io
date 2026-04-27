@@ -42,14 +42,14 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: MenuLink[] = [
-	{ path: "/posts/", title: "Archives" },
-    { path: "/journals/", title: "journalss"}
-	{ path: "https://status.cafe/users/isntbunny", title: "Memos" },
-	{ path: "/gallery/", title: "Gallery" },
-	{ path: "/bangumi/", title: "Bangumi" },
-	{ path: "/guestbook/", title: "Guestbook" },
-	{ path: "/about/", title: "About" },
-];
+  { path: '/posts/', title: 'Posts' },
+  { path: '/journals/', title: 'journalss' },
+  { path: 'https://status.cafe/users/isntbunny', title: 'Memos' },
+  { path: '/gallery/', title: 'Gallery' },
+  { path: '/bangumi/', title: 'Bangumi' },
+  { path: '/guestbook/', title: 'Guestbook' },
+  { path: '/about/', title: 'About' },
+]
 
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
@@ -65,6 +65,7 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		},
 		uiLineHeight: "inherit",
 	},
+
 	themeCssSelector(theme, { styleVariants }) {
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
