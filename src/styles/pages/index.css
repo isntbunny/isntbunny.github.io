@@ -7,13 +7,12 @@ body {
 	opacity: 1;
 	padding: 10% 20%;
 	color: #4d657a;
-	
 }
 
 .mushroom {
 	position: fixed;
 	margin: 1rem;
-    bottom: 1px;      /* 距离底部20px */
+    bottom: 1px;      
 	left: 10px;        /* 距离左边20px */
 	display: flex;
     gap: 10px;         /* 图片之间的间距 */
