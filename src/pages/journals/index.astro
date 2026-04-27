@@ -2,16 +2,16 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const allJournals = await getCollection('journal');
+const alljournalss = await getCollection('journals');
 ---
 
 <Base meta={{ title: '日记列表' }}>
   <h1>日记列表</h1>
   <ul>
-    {allJournals.map(journal => (
+    {alljournalss.map(journals => (
       <li>
-        <a href={`/journal/${journal.id.replace('.md', '')}`}>
-          {journal.data.title}
+        <a href={`/journals/${journals.id.replace('.md', '')}`}>
+          {journals.data.title}
         </a>
       </li>
     ))}
