@@ -1,4 +1,5 @@
 body.site-shell {
+    margin-top: 20px;
 	min-height: 100vh;
 	font-weight: 400;
 	line-height: 1.5;
@@ -6,6 +7,16 @@ body.site-shell {
 	animation: pageFade 0.55s ease both;
 }
 
+body {
+	background:
+		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
+		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
+	background-size: 3em 3em;
+	background-color: #eff6ff;
+	opacity: 1;
+	padding: 10% 20%;
+	color: #4d657a;
+}
 
 h1,h2,h3,h4,h5,h6 {
 	font-weight: 700;
@@ -27,14 +38,18 @@ a {
 
 
 /*卡片*/
+/* About Me 卡片 */
 .sitecard {
-	border-radius: 15px;
-	background: var(--white);
-	border: 1px solid var(--border);
-	box-shadow: var(--card-shadow);
-	padding: 10px;
-	margin: 2em 0;
-    overflow: auto;
+    background: rgb(255 255 255 / 0.73);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+    border-radius: 25px;
+    border: 1px solid rgb(184 234 255 / 0);
+    box-shadow: rgb(77 143 214 / 0.34) 0px 8px 32px 0px;  
+    position: relative;
+    padding: 1.5rem;
+    margin: 2rem 0;
+
 }
 
 #main-header { 
@@ -97,7 +112,7 @@ a {
 	}
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
     .sitecard {
         box-shadow: none;
     }
@@ -111,34 +126,26 @@ a {
 	.site-nav-links {
 		display:none;
 	}
-}
 
-  .nav-list {
+    .nav-list {
     display: flex;
     gap: 2rem;
     list-style: none;
-  }
+    }
 
-  .nav-link {
+    .nav-link {
     text-decoration: none;
     padding: 0.5rem 0;
     display: inline-block;
-  }
+    }
 
-  .nav-link:hover {
+    .nav-link:hover {
     color: #007bff;
-  }
-
-  .hamburger {
-display:block;
-
-}
-
-  /* 响应式布局 - 移动端 */
-  @media (max-width: 768px) {
+    }
 
     .hamburger {
-      display: flex; /* 移动端显示汉堡菜单 */
+        display:block;
+
     }
 
     .nav-menu {
@@ -165,9 +172,12 @@ display:block;
       display: block;
       padding: 0.5rem 0;
     }
+    body{
+        margin-top: 20px;
+       padding: 9% 4%;
+    }
+}
 
-
-  }
 
   /* 桌面端简单样式优化 */
   @media (min-width: 769px) {

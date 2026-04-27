@@ -1,14 +1,4 @@
 
-body {
-  font-family: monospace;
-background: linear-gradient(45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%) , linear-gradient(-45deg, transparent 49%, #BECFE8 49% 51%, transparent 51%);
-background-size: 3em 3em;
-background-color: #eff6ff;
-opacity: 1;
-  padding: 10% 20%;
-  color: #4D657A;
-}
-
 .profile-header {
   display: flex;
   align-items: flex-start;
@@ -56,22 +46,6 @@ opacity: 1;
   width: auto;
 }
 
-/* About Me 卡片 */
-.aboutcard {
-  background: rgb(255 255 255 / 0.73);
-  backdrop-filter: blur(13px);
-  -webkit-backdrop-filter: blur(13px);
-  border-radius: 25px;
-  border: 1px solid rgb(184 234 255 / 0);
-  box-shadow: rgb(77 143 214 / 0.34) 0px 8px 32px 0px;  
-    position: relative;
-  padding: 1.5rem
- /* border: 1px  #7EA1B3;
-  background: #F6FBFF;
-  margin: 2rem 0;
-;*/
-
-}
 
 .aboutme-card h2 {
   top: 0;
