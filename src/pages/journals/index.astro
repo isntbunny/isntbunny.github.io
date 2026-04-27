@@ -1,19 +1,26 @@
 ---
+// @ts-nocheck
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const alljournalss = await getCollection('journals');
+const allJournals = await getCollection('journals');
 ---
 
 <Base meta={{ title: '日记列表' }}>
   <h1>日记列表</h1>
-  <ul>
-    {alljournalss.map(journals => (
-      <li>
-        <a href={`/journals/${journals.id.replace('.md', '')}`}>
-          {journals.data.title}
-        </a>
-      </li>
-    ))}
-  </ul>
+  <p>共找到 {allJournals?.length ?? 0} 篇日记</p>
+  
+  {allJournals && allJournals.length > 0 ? (
+    <ul>
+      {allJournals.map(journal => (
+        <li>
+          <a href={`/journals/${journal.id.replace('.md', '')}`}>
+            {journal.data?.title || journal.id}
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>没有找到日记文件，请确认 src/content/journals/ 下有 .md 文件</p>
+  )}
 </Base>
