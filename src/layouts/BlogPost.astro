@@ -25,14 +25,18 @@ const readingTime: string = remarkPluginFrontmatter.readingTime;
 	}}
 >
 
-	<article class="grow break-words" data-pagefind-body>
-		<div id="blog-hero" class="n">Masthead content={post} readingTime={readingTime} /></div>
+	<article class="blogpost" data-pagefind-body>
+		<div id="blog-hero">
+            Masthead content={post} readingTime={readingTime}
+        </div>
 		<div style="display:flex; gap:2em;">
+            <div class="toc">
 			{!!headings.length && <TOC headings={headings} />}
-			<div class="">
+            </div>
+			<div class="content">
 				<Content />
 			</div>
-		</div>
+        </div>
 	</article>
 
 </BaseLayout>

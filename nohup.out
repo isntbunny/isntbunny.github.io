@@ -159,3 +159,62 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 [11:08:31] [File Watcher ('parcel')] Inotify limit reached (ENOSPC) (path: /root/isntbunny.github.io)
 [11:08:49] [127.0.0.1][e025ea80][ExtensionHostConnection] <24389> Extension Host Process exited with code: 0, signal: null.
 [11:08:49] [127.0.0.1][5afa9dba][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[11:32:02] [127.0.0.1][da36f29b][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:32:03] [127.0.0.1][3b3bdfdf][ExtensionHostConnection] <12989> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:32:04] [127.0.0.1][dcb55cbe][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[11:32:04] [127.0.0.1][858a2085][ManagementConnection] New connection established.
+[11:32:05] [127.0.0.1][7abfffa4][ExtensionHostConnection] New connection established.
+[11:32:05] [127.0.0.1][7abfffa4][ExtensionHostConnection] <20566> Launched Extension Host Process.
+[11:32:08] [127.0.0.1][7abfffa4][ExtensionHostConnection] <20566> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:36:11] [127.0.0.1][858a2085][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:36:12] [127.0.0.1][7abfffa4][ExtensionHostConnection] <20566> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:36:13] [127.0.0.1][21452f5f][ManagementConnection] New connection established.
+[11:36:14] [127.0.0.1][ef4ec9ab][ExtensionHostConnection] New connection established.
+[11:36:14] [127.0.0.1][ef4ec9ab][ExtensionHostConnection] <27943> Launched Extension Host Process.
+[11:36:17] [127.0.0.1][ef4ec9ab][ExtensionHostConnection] <27943> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:37:05] [127.0.0.1][df4594b5][ExtensionHostConnection] <9697> Extension Host Process exited with code: 0, signal: null.
+[11:37:06] [127.0.0.1][dcb55cbe][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[11:45:32] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:32] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:33] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:33] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:33] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:34] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:34] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:34] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:45:34] [File Watcher (node.js)] Watcher shutdown because watched path got deleted
+[11:46:36] [127.0.0.1][21452f5f][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:46:37] [127.0.0.1][ef4ec9ab][ExtensionHostConnection] <27943> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:46:38] [127.0.0.1][69051106][ManagementConnection] New connection established.
+[11:46:39] [127.0.0.1][1d558092][ExtensionHostConnection] New connection established.
+[11:46:39] [127.0.0.1][1d558092][ExtensionHostConnection] <32456> Launched Extension Host Process.
+[11:46:43] [127.0.0.1][1d558092][ExtensionHostConnection] <32456> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:51:03] [127.0.0.1][69051106][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:51:04] [127.0.0.1][1d558092][ExtensionHostConnection] <32456> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:51:05] [127.0.0.1][f71852e6][ManagementConnection] New connection established.
+[11:51:07] [127.0.0.1][36f8b6d1][ExtensionHostConnection] New connection established.
+[11:51:07] [127.0.0.1][36f8b6d1][ExtensionHostConnection] <11044> Launched Extension Host Process.
+[11:51:10] [127.0.0.1][36f8b6d1][ExtensionHostConnection] <11044> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:51:23] [File Watcher (node.js)] Failed to watch /system/bin for changes using fs.watch() (Error: EACCES: permission denied, watch '/system/bin')
+[11:53:01] [127.0.0.1][f71852e6][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[11:53:01] [127.0.0.1][36f8b6d1][ExtensionHostConnection] <11044> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[11:53:02] [127.0.0.1][fd9bac86][ManagementConnection] New connection established.
+[11:53:04] [127.0.0.1][b9a9476c][ExtensionHostConnection] New connection established.
+[11:53:04] [127.0.0.1][b9a9476c][ExtensionHostConnection] <28178> Launched Extension Host Process.
+[11:53:07] [127.0.0.1][b9a9476c][ExtensionHostConnection] <28178> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[11:53:19] [File Watcher (node.js)] Failed to watch /system/bin for changes using fs.watch() (Error: EACCES: permission denied, watch '/system/bin')
