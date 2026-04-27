@@ -1,3 +1,7 @@
+/*******************/
+/*这里存放的是布局样式*/
+/*******************/
+
 body.site-shell {
     margin-top: 20px;
 	min-height: 100vh;
@@ -8,19 +12,17 @@ body.site-shell {
 }
 
 body {
+}
+
+html{
 	background:
 		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
 		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
 	background-size: 3em 3em;
 	background-color: #eff6ff;
 	opacity: 1;
-	padding: 10% 20%;
+	padding: 3em 15%;
 	color: #4d657a;
-}
-
-h1,h2,h3,h4,h5,h6 {
-	font-weight: 700;
-	line-height: 1.4;
 }
 
 .small-muted {
@@ -28,17 +30,9 @@ h1,h2,h3,h4,h5,h6 {
 	color: var(--text-muted);
 }
 
-a {
-	color: var(--text-main);
-	text-decoration: underline;
-	text-decoration-style: dashed;
-	text-decoration-color: #acbccc;
-	text-underline-offset: 5px;
-}
 
+/* 卡片 */
 
-/*卡片*/
-/* About Me 卡片 */
 .sitecard {
     background: rgb(255 255 255 / 0.73);
     backdrop-filter: blur(13px);
@@ -47,13 +41,13 @@ a {
     border: 1px solid rgb(184 234 255 / 0);
     box-shadow: rgb(77 143 214 / 0.34) 0px 8px 32px 0px;  
     position: relative;
-    padding: 1.5rem;
-    margin: 2rem 0;
+    padding: 2rem;
+    margin-bottom: 2rem;
 
 }
 
+/* 标题导航栏 */
 #main-header { 
-	/* 标题导航栏 */
 	position: fixed;
 	inset: 0 0 auto 0;
 	z-index: 100;
@@ -96,6 +90,7 @@ a {
 .site-nav-link[aria-current="page"] {
 	color: #acbccc;
 }
+
 .site-footer {
 	text-align: center;
 	font-size: 14px;
@@ -112,6 +107,8 @@ a {
 	}
 }
 
+/* 手机端📱 */
+
 @media (max-width: 768px) {
     .sitecard {
         box-shadow: none;
@@ -127,28 +124,15 @@ a {
 		display:none;
 	}
 
-    .nav-list {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    }
 
-    .nav-link {
-    text-decoration: none;
-    padding: 0.5rem 0;
-    display: inline-block;
-    }
-
-    .nav-link:hover {
-    color: #007bff;
-    }
+    /*🍔*/
 
     .hamburger {
         display:block;
 
     }
 
-    .nav-menu {
+	.ham-nav-menu {
       display: none;
       position: fixed;
       top: 0;
@@ -162,16 +146,6 @@ a {
       z-index: 100;
     }
 
-    .nav-list {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .nav-link {
-      font-size: 1.2rem;
-      display: block;
-      padding: 0.5rem 0;
-    }
     body{
         margin-top: 20px;
        padding: 9% 4%;
@@ -179,9 +153,13 @@ a {
 }
 
 
-  /* 桌面端简单样式优化 */
-  @media (min-width: 769px) {
-    .navbar {
-      display: none;
+/* 桌面端💻 */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
     }
-  }
+
+	.ham-nav-menu {
+		display:none;
+	}
+}

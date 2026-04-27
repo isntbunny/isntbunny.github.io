@@ -2,10 +2,8 @@
 import { menuLinks } from "@/site.config";
 ---
 
-<div class="navbar">
   <div class="hamburger" id="hmbg">菜单</div>
-
-  <nav class="nav-menu" id="navMenu">
+  <nav class="ham-nav-menu" id="hamnavMenu">
     <ul>
       {menuLinks.map((link) => (
         <li>
@@ -14,7 +12,7 @@ import { menuLinks } from "@/site.config";
       ))}
     </ul>
   </nav>
-</div>
+
 <script>
   class MobileMenu {
     constructor(btnId, menuId) {
@@ -37,7 +35,7 @@ import { menuLinks } from "@/site.config";
       document.addEventListener("click", this.boundOutsideClick);
       
       // 链接点击关闭
-      document.querySelectorAll("#navMenu a").forEach(link => {
+      document.querySelectorAll("#hamnavMenu a").forEach(link => {
         link.addEventListener("click", this.boundClose);
       });
     }
@@ -78,7 +76,7 @@ import { menuLinks } from "@/site.config";
     if (menuInstance) {
       menuInstance.destroy();
     }
-    menuInstance = new MobileMenu("hmbg", "navMenu");
+    menuInstance = new MobileMenu("hmbg", "hamnavMenu");
   }
   
   setupMenu();

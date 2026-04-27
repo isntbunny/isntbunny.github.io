@@ -14,8 +14,6 @@
   src: url(https://file.garden/ZkRD3wbiZDsBIZnn/basiic.ttf);
 }
 
-
-
 @font-face {
 font-family: 'smalle'; 
 src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');} 
@@ -55,25 +53,30 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 	box-sizing:border-box;
     font-family: "basiic", "Decima Mono Pro","Yomogi","Ark Pixel 12px P zh_tw", monospace;
 }
+
+
 h1 { font-size: xx-large; }
 h2 { font-size: x-large; }
 h3 { font-size: larger; }
 h4 { font-size: large; }
 h5 { font-size: medium; }
-p,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-blockquote,
-address,
-figcaption {
-  font-size: small;
-}
+
 h1,h2,h3,h4,h5{
     font-family: "smalle","Ark Pixel 12px P zh_tw" ;
     font-weight: bold;
     text-align: center;
+	line-height: 1.5;
+}
+
+p,ul,ol,li,dl,dt,dd,blockquote,address,figcaption {
+  font-size: small;
+}
+
+
+a {
+	color: var(--text-main);
+	text-decoration: underline;
+    text-decoration-style: dashed;
+	text-decoration-color: #acbccc;
+	text-underline-offset: 5px;
 }
