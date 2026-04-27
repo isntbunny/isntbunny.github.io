@@ -2,6 +2,8 @@
 @import "./components/github-card.css";
 
 @import "./base.css";
+@import url("https://cdn.jsdelivr.net/gh/isntbunny/web-fonts@main/ark/result.css");
+
 
  
 :root {
@@ -28,18 +30,13 @@
 	--primary-300: #c7e9f0;
 	--white: #fffd;
     --blue: #9cf;
+
 }
 
-@font-face {
-	font-family: "pixel";
-    src: url("https://example.com/path/to/font.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-}
 
 * {
 	box-sizing:border-box;
-    font-family: "pixel", monospace;
+    font-family: 'smalle',"Ark Pixel 12px P zh_tw", monospace;
 }
 h1 { font-size: xx-large; }
 h2 { font-size: x-large; }

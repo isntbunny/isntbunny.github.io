@@ -18,12 +18,12 @@
 
 @media (max-width: 768px) {
 .content img {
-width:50%;
+width:100%;
 }
 /* 让包裹代码块和按钮的容器左对齐并限制宽度 */
 .expressive-code {
-  width: 70%;
-  margin-left: 0 !important;
+  width: 100%;
+  margin-left: 0;
 }
 /* 让复制按钮保持在右上角 */
 .expressive-code .copy {

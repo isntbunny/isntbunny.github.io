@@ -218,3 +218,63 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 [11:53:07] [127.0.0.1][b9a9476c][ExtensionHostConnection] <28178> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
 
 [11:53:19] [File Watcher (node.js)] Failed to watch /system/bin for changes using fs.watch() (Error: EACCES: permission denied, watch '/system/bin')
+[2026-04-27T13:25:23.863Z] info  code-server 4.112.0 d7599ae360900ad55b503e3c840b417a1eae4798
+[2026-04-27T13:25:23.869Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-04-27T13:25:23.916Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-04-27T13:25:23.916Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-04-27T13:25:23.916Z] info    - Authentication is disabled
+[2026-04-27T13:25:23.917Z] info    - Not serving HTTPS
+[2026-04-27T13:25:23.917Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+[21:26:01] 
+
+
+
+
+[21:26:01] Error: Unable to retrieve mac address (unexpected format)
+    at bH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20289)
+    at SH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20666)
+    at async file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20583
+    at async Promise.all (index 2)
+    at async bq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:197:413)
+    at async Aq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:198:1392)
+[reconnection-grace-time] No CLI argument provided, using default: 10800000ms (10800s)
+[21:26:01] Extension host agent started.
+[21:26:01] [127.0.0.1][1d9594e3][ExtensionHostConnection] Unknown reconnection token (never seen).
+[21:26:02] [127.0.0.1][60dc3cc6][ManagementConnection] Unknown reconnection token (never seen).
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[21:26:05] [127.0.0.1][d44e5fe5][ManagementConnection] New connection established.
+[21:26:07] [127.0.0.1][89caeeec][ExtensionHostConnection] New connection established.
+[21:26:08] [127.0.0.1][89caeeec][ExtensionHostConnection] <12232> Launched Extension Host Process.
+[21:26:11] [127.0.0.1][89caeeec][ExtensionHostConnection] <12232> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[2026-04-27T13:49:27.280Z] info  code-server 4.112.0 d7599ae360900ad55b503e3c840b417a1eae4798
+[2026-04-27T13:49:27.286Z] info  Using user-data-dir /root/.local/share/code-server
+[2026-04-27T13:49:27.332Z] info  Using config file /root/.config/code-server/config.yaml
+[2026-04-27T13:49:27.332Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2026-04-27T13:49:27.332Z] info    - Authentication is disabled
+[2026-04-27T13:49:27.333Z] info    - Not serving HTTPS
+[2026-04-27T13:49:27.333Z] info  Session server listening on /root/.local/share/code-server/code-server-ipc.sock
+[21:49:28] 
+
+
+
+
+[21:49:28] Error: Unable to retrieve mac address (unexpected format)
+    at bH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20289)
+    at SH (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20666)
+    at async file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:78:20583
+    at async Promise.all (index 2)
+    at async bq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:197:413)
+    at async Aq (file:///data/data/com.termux/files/usr/lib/code-server/lib/vscode/out/server-main.js:198:1392)
+[reconnection-grace-time] No CLI argument provided, using default: 10800000ms (10800s)
+[21:49:28] Extension host agent started.
+[21:49:29] [127.0.0.1][d44e5fe5][ManagementConnection] Unknown reconnection token (never seen).
+[21:49:29] [127.0.0.1][89caeeec][ExtensionHostConnection] Unknown reconnection token (never seen).
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[21:49:33] [127.0.0.1][b4531359][ManagementConnection] New connection established.
+[21:49:34] [127.0.0.1][49a25a1a][ExtensionHostConnection] New connection established.
+[21:49:36] [127.0.0.1][49a25a1a][ExtensionHostConnection] <32549> Launched Extension Host Process.
+[21:49:39] [127.0.0.1][49a25a1a][ExtensionHostConnection] <32549> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
