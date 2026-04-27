@@ -11,10 +11,8 @@ body.site-shell {
 	animation: pageFade 0.55s ease both;
 }
 
-body {
-}
 
-html{
+body{
 	background:
 		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
 		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
