@@ -12,9 +12,9 @@ body {
 
 .mushroom {
 	position: fixed;
-	margin: 1.2rem;
-    bottom: 20px;      /* 距离底部20px */
-	left: 20px;        /* 距离左边20px */
+	margin: 1rem;
+    bottom: 1px;      /* 距离底部20px */
+	left: 10px;        /* 距离左边20px */
 	display: flex;
     gap: 10px;         /* 图片之间的间距 */
     z-index: 999;      /* 确保在最上层 */
@@ -39,11 +39,9 @@ body {
 #statuscafe-content {
 }
 
-:root {
-	--color-calendar-graph-day-bg: #dddbdb;
-	--color-calendar-graph-day-L1-bg: #39dd34;
-	--color-calendar-graph-day-L2-bg: #45a045;
-	--color-calendar-graph-day-L3-bg: #047526;
-	--color-calendar-graph-day-L4-bg: #0a4208;
+@media (max-width:720px)  {
+    body{
+padding:0% 0%;
+	
 }
-
+}

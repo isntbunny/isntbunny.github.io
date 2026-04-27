@@ -37,7 +37,6 @@
 }
 
 * {
-	box-sizing: border-box;
-    border-style: none;
+	box-sizing:border-box;
     font-family: "pixel", monospace;
 }

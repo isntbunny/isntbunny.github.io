@@ -2,6 +2,7 @@
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
+import { ViewTransitions } from 'astro:transitions';  // 新增
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
@@ -15,17 +16,30 @@ const {
 ---
 
 <html lang={siteConfig.lang}>
-	<head
-		><BaseHead
+	<head>
+        <BaseHead
 			articleDate={articleDate}
 			description={description}
 			ogImage={ogImage}
 			title={title}
-		/></head
-	>
+		/>
+		<ViewTransitions />  <!-- 新增这行 -->
+  	</head>
 	<body class="site-shell">
 		<Header />
 		<main class="page-fade" id="main"><slot /></main>
 		<Footer />
 	</body>
 </html>
+
+<script>
+	// 确保页面切换时只替换 main 区域，避免重复渲染 header/footer
+	document.addEventListener('astro:before-swap', (e) => {
+		const newMain = e.newDocument.querySelector('#main');
+		const oldMain = document.querySelector('#main');
+		if (newMain && oldMain) {
+			oldMain.innerHTML = newMain.innerHTML;
+			e.preventDefault(); // 阻止默认的全量替换
+		}
+	});
+</script>
