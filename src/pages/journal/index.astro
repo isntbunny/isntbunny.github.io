@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const allJournals = await getCollection('journal');
+---
+
+<Base meta={{ title: '日记列表' }}>
+  <h1>日记列表</h1>
+  <ul>
+    {allJournals.map(journal => (
+      <li>
+        <a href={`/journal/${journal.id.replace('.md', '')}`}>
+          {journal.data.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>
