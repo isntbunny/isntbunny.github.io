@@ -3,14 +3,11 @@ title: CSS学习笔记（1）CSS内置属性
 description: 是一些css 基础知识捏
 publishDate: 2026-02-26
 ---
+## 选择器
 
-[![选择器](https://www.w3school.com.cn/i/css/selector.gif)]
+![选择器](https://www.w3school.com.cn/i/css/selector.gif)
 
 ## 文本属性
-
-不知道
-
-ceshi
 
 ### 字体样式
 
@@ -90,20 +87,36 @@ oblique：倾斜文本
 
 ## 布局
 
-### 流
+### float（浮动）目标是让元素属于半脱离文档流的状态
+浮动布局 float
+凝胶布局
+```css
+.container {
+    max-width: 1200px;
+    margin: 0 auto;  /* 水平居中 */
+    width: 90%;      /* 小屏时占满90% */
+}
+```
+绝对布局
+`position: absolute`
+表格显示布局
+```css
+.table {
+    display: table;
+    width: 100%;
+}
+.row {
+    display: table-row;
+}
+.cell {
+    display: table-cell;
+    vertical-align: middle;  /* 垂直居中 */
+}
+```
 
-### 浮动布局
-
-适合浮动图片
-
-### 凝胶布局
-
-### 绝对布局
-
-### 表格显示布局
-
-## HTML 5
-
-header footer
-section article
-time
+### position 
+static
+relative 
+absolute 
+fixed
+sticky 
