@@ -106,21 +106,10 @@ a {
 	#main-header {
 		padding: 12px;
 	}
-	.site-nav-shell {
-
-
-	}
 	.site-nav-links {
 		display:none;
 	}
 }
-
-
-
-
-
-
-
 
   .nav-list {
     display: flex;
@@ -130,8 +119,6 @@ a {
 
   .nav-link {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
     display: inline-block;
@@ -148,6 +135,7 @@ display:block;
 
   /* 响应式布局 - 移动端 */
   @media (max-width: 768px) {
+
     .hamburger {
       display: flex; /* 移动端显示汉堡菜单 */
     }
@@ -157,18 +145,13 @@ display:block;
       position: fixed;
       top: 0;
       right:0%;
-      width: 70%;
+      width: 100%;
       max-width: 300px;
-      height: 100vh;
+      height: 300px;
       background-color: white;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-      padding: 5rem 2rem 2rem;
+      padding: 2rem 2rem 2rem;
       transition: right 0.3s ease-in-out;
-      z-index: 9;
-    }
-
-    .nav-menu.active {
-      right: 0;
+      z-index: 100;
     }
 
     .nav-list {
@@ -182,15 +165,12 @@ display:block;
       padding: 0.5rem 0;
     }
 
-    /* 当菜单打开时，防止背景滚动 */
-    body.menu-open {
-      overflow: hidden;
-    }
+
   }
 
   /* 桌面端简单样式优化 */
   @media (min-width: 769px) {
     .navbar {
-      display: none !important;
+      display: none;
     }
   }
