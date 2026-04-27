@@ -278,3 +278,5 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 [21:49:36] [127.0.0.1][49a25a1a][ExtensionHostConnection] <32549> Launched Extension Host Process.
 [21:49:39] [127.0.0.1][49a25a1a][ExtensionHostConnection] <32549> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
 
+[22:37:50] [127.0.0.1][49a25a1a][ExtensionHostConnection] The client has reconnected.
+[22:37:50] [127.0.0.1][b4531359][ManagementConnection] The client has reconnected.
