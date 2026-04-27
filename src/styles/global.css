@@ -4,8 +4,25 @@
 @import "./base.css";
 @import url("https://cdn.jsdelivr.net/gh/isntbunny/web-fonts@main/ark/result.css");
 
+@font-face {
+  font-family: "Decima Mono Pro";
+  src: url(https://file.garden/ZkRD3wbiZDsBIZnn/DecimaMonoPro.ttf);
+}
 
- 
+@font-face {
+  font-family: "basiic";
+  src: url(https://file.garden/ZkRD3wbiZDsBIZnn/basiic.ttf);
+}
+
+
+
+@font-face {
+font-family: 'smalle'; 
+src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');} 
+@font-face {
+                font-family: Pixel Operator;
+                src: url('https://ghostingpen.net/fonts/PixelOperator.ttf');}
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Yomogi&display=swap');
 :root {
     /* 文字的配色 */
 	--text-main: #468;
@@ -36,7 +53,7 @@
 
 * {
 	box-sizing:border-box;
-    font-family: 'smalle',"Ark Pixel 12px P zh_tw", monospace;
+    font-family: "basiic", "Decima Mono Pro","Yomogi","Ark Pixel 12px P zh_tw", monospace;
 }
 h1 { font-size: xx-large; }
 h2 { font-size: x-large; }
@@ -54,4 +71,7 @@ blockquote,
 address,
 figcaption {
   font-size: small;
+}
+h1,h2,h3,h4,h5{
+    font-family: "smalle","Ark Pixel 12px P zh_tw" ;
 }
