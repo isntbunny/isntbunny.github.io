@@ -280,3 +280,25 @@ File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_
 
 [22:37:50] [127.0.0.1][49a25a1a][ExtensionHostConnection] The client has reconnected.
 [22:37:50] [127.0.0.1][b4531359][ManagementConnection] The client has reconnected.
+[23:36:45] [127.0.0.1][b4531359][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[23:36:45] [127.0.0.1][49a25a1a][ExtensionHostConnection] <32549> Extension Host Process exited with code: 0, signal: null.
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda_bg.wasm
+File not found: /data/data/com.termux/files/usr/lib/code-server/lib/vscode/node_modules/vsda/rust/web/vsda.js
+[23:36:47] [127.0.0.1][78ac383c][ManagementConnection] New connection established.
+[23:36:48] [127.0.0.1][74ebb382][ExtensionHostConnection] New connection established.
+[23:36:48] [127.0.0.1][74ebb382][ExtensionHostConnection] <27724> Launched Extension Host Process.
+[23:36:52] [127.0.0.1][74ebb382][ExtensionHostConnection] <27724> [reconnection-grace-time] Extension host: read VSCODE_RECONNECTION_GRACE_TIME=10800000ms (10800s)
+
+[23:36:56] #6: https://open-vsx.org/vscode/gallery/vscode/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:56] #7: https://open-vsx.org/vscode/gallery/vscode/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:56] #8: https://open-vsx.org/vscode/gallery/vscode/msnilshartmann/blue-light/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:56] #9: https://open-vsx.org/vscode/gallery/vscode/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:56] #10: https://open-vsx.org/vscode/gallery/vscode/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:56] #11: https://open-vsx.org/vscode/gallery/vscode/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #12: https://open-vsx.org/vscode/gallery/astro-build/astro-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #13: https://open-vsx.org/vscode/gallery/esbenp/prettier-vscode/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #14: https://open-vsx.org/vscode/gallery/msnilshartmann/blue-light/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #15: https://open-vsx.org/vscode/gallery/pranaygp/vscode-css-peek/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #17: https://open-vsx.org/vscode/gallery/usernamehw/errorlens/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:58] #16: https://open-vsx.org/vscode/gallery/stylelint/vscode-stylelint/latest - error GET getaddrinfo ENOTFOUND open-vsx.org
+[23:36:59] #18: https://open-vsx.org/vscode/gallery/extensionquery - error POST getaddrinfo ENOTFOUND open-vsx.org

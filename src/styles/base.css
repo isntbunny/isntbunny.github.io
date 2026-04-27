@@ -66,11 +66,13 @@ body{
 }
 
 .site-logo {
+    font-family: "smalle";
     text-decoration: none;
 	font-weight: 600;
 }
 
 .site-nav-links {
+	font-family: "smalle";
 	display: flex;
 	flex-wrap: wrap;
 	gap: 16px;
@@ -109,7 +111,6 @@ body{
 
 @media (max-width: 768px) {
     .sitecard {
-        box-shadow: none;
     }
 	main#main {
 		width: calc(100%);
@@ -127,22 +128,32 @@ body{
 
     .hamburger {
         display:block;
-
+        border-left: 1px dashed #becfe8;
+		padding: 0em 1em;
     }
 
 	.ham-nav-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      right:0%;
-      width: 100%;
-      max-width: 300px;
-      height: 300px;
-      background-color: white;
-      padding: 2rem 2rem 2rem;
-      transition: right 0.3s ease-in-out;
-      z-index: 100;
+		border:1px dashed #becfe8;
+		border-top: none;
+        display: none;
+        position: fixed;
+        top: 3em;
+        right:0%;
+        width: auto;
+        height: auto;
+	    background: rgb(255 255 255 / 0.73);
+        padding: 0.5em ;
+        z-index: 100;
     }
+
+	.ham-nav-menu li{
+		list-style:none;
+		font-size:large;
+	}
+
+	.ham-nav-menu a{
+        text-decoration: none !important;
+	}
 
     body{
         margin-top: 20px;
