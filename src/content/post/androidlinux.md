@@ -1,12 +1,10 @@
 ---
-title: 在安卓平板上写代码
+title: 今日折腾 - termux真好用
 description: 今日折腾
 publishDate: 2026-04-22
 ---
 
-本文算不上技术博客，就是个人的一个小记录而已ww日记性质；P
-
-博主的平板配置：高通骁龙870，内存8gb，存储256gb
+博主的平板配置：处理器高通骁龙870，内存8gb，存储256gb
 
 前几天突发奇想，既然只是写写网站这种比较简单的东西，是不是可以完全搬到平板上来（毕竟电脑太重了qwq）
 
@@ -24,11 +22,16 @@ publishDate: 2026-04-22
 唯一缺点是code server安装插件比较麻烦，这时可以考虑安装图形界面然后现在真正的vsclinux版。这一块我还没实践。
 
 
+输入这个可以伪装成linux桌面版，解决code server无法下载插件的问题。（不过还需要准备一个文件...但是我懒得找了）
+nohup是后台运行，这样就可以不终止code server的情况下，继续输入别的指令
+```bash
 nohup env NODE_OPTIONS="--require /root/android-as-linux.js" code-server --auth none &
+```
+启动好后在浏览器地址栏输入127.0.0.1:8080
 
-127.0.0.1:8080
+安装好Ubuntu，`proot-distro login ubuntu`进入Ubuntu
 
-proot-distro login ubuntu
+
 cd ~/isntbunny.github.io
 pnpm run dev
 

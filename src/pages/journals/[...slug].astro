@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import "/src/styles/pages/blogpost.css";
+
 
 export async function getStaticPaths() {
   // 获取所有 journals 条目
@@ -26,9 +28,7 @@ const { Content } = await entry.render();
 ---
 
 <Base meta={{ title: entry.data.title }}>
-  <article>
     <h1>{entry.data.title}</h1>
     {entry.data.date && <time>{entry.data.date.toLocaleDateString()}</time>}
     <Content />
-  </article>
 </Base>
