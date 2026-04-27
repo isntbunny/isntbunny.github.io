@@ -3,7 +3,7 @@ import { menuLinks } from "@/site.config";
 ---
 
 <div class="navbar">
-  <button class="hamburger" id="hmbg">菜单</button>
+  <div class="hamburger" id="hmbg">菜单</div>
 
   <nav class="nav-menu" id="navMenu">
     <ul>
@@ -15,36 +15,72 @@ import { menuLinks } from "@/site.config";
     </ul>
   </nav>
 </div>
-
 <script>
-  const btn = document.getElementById("hmbg");
-  const menu = document.getElementById("navMenu");
-
-  function closeMenu() {
-    menu.style.display = "none";
-    btn.setAttribute("aria-expanded", "false");
-  }
-
-  function openMenu() {
-    menu.style.display = "block";
-    btn.setAttribute("aria-expanded", "true");
-  }
-
-  btn.addEventListener("click", () => {
-    const isOpen = menu.style.display === "block";
-    if (isOpen) closeMenu();
-    else openMenu();
-  });
-
-  // 点链接关闭
-  document.querySelectorAll("#navMenu a").forEach(link => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  // 点外面关闭
-  document.addEventListener("click", (e) => {
-    if (menu.style.display === "block" && !menu.contains(e.target) && !btn.contains(e.target)) {
-      closeMenu();
+  class MobileMenu {
+    constructor(btnId, menuId) {
+      this.btn = document.getElementById(btnId);
+      this.menu = document.getElementById(menuId);
+      if (!this.btn || !this.menu) return;
+      
+      this.isOpen = false;
+      this.init();
     }
-  });
+    
+    init() {
+      // 绑定事件
+      this.boundClose = this.close.bind(this);
+      this.boundOpen = this.open.bind(this);
+      this.boundHandleClick = this.handleClick.bind(this);
+      this.boundOutsideClick = this.outsideClick.bind(this);
+      
+      this.btn.addEventListener("click", this.boundHandleClick);
+      document.addEventListener("click", this.boundOutsideClick);
+      
+      // 链接点击关闭
+      document.querySelectorAll("#navMenu a").forEach(link => {
+        link.addEventListener("click", this.boundClose);
+      });
+    }
+    
+    close() {
+      this.menu.style.display = "none";
+      this.btn.setAttribute("aria-expanded", "false");
+      this.isOpen = false;
+    }
+    
+    open() {
+      this.menu.style.display = "block";
+      this.btn.setAttribute("aria-expanded", "true");
+      this.isOpen = true;
+    }
+    
+    handleClick(e) {
+      e.stopPropagation();
+      this.isOpen ? this.close() : this.open();
+    }
+    
+    outsideClick(e) {
+      if (this.isOpen && !this.menu.contains(e.target) && !this.btn.contains(e.target)) {
+        this.close();
+      }
+    }
+    
+    destroy() {
+      // 清理事件（导航时调用）
+      this.btn.removeEventListener("click", this.boundHandleClick);
+      document.removeEventListener("click", this.boundOutsideClick);
+    }
+  }
+  
+  let menuInstance = null;
+  
+  function setupMenu() {
+    if (menuInstance) {
+      menuInstance.destroy();
+    }
+    menuInstance = new MobileMenu("hmbg", "navMenu");
+  }
+  
+  setupMenu();
+  document.addEventListener("astro:after-swap", setupMenu);
 </script>
