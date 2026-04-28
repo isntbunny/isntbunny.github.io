@@ -55,7 +55,9 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 }
 
 
-h1 { font-size: xx-large; }
+h1 { 
+	margin-top: 3em;
+	font-size: xx-large; }
 h2 { font-size: x-large; }
 h3 { font-size: larger; }
 h4 { font-size: large; }
