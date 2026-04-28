@@ -2,6 +2,21 @@
 /*这里存放的是布局样式*/
 /*******************/
 
+
+
+h1::after, h1::before {
+    content: ""; 
+	color: #ffffff00;                    /* 伪元素不需要文字内容 */
+    display: block;                  /* 块级元素，让图片另起一行 */
+    width: auto;                     /* 图片显示宽度 */
+    height: 0.6em;                   /* 图片显示高度 */
+    margin: 3px;                /* 与标题文字的间距 */
+    background-image: url("https://i.postimg.cc/hG2snCVk/snowflk.gif");
+    background-size: contain;        /* 按比例缩放以适应宽或高 */
+    background-repeat:repeat-x;
+    background-position: center;
+}
+
 body.site-shell {
 	min-height: 100vh;
 	font-weight: 400;
@@ -168,6 +183,52 @@ body {
 	.ham-nav-menu a{
         text-decoration: none !important;
 	}
+	/* 基础样式 */
+	.ham-nav-menu {
+	  display: none;
+	  overflow: hidden;
+	  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+	  max-height: 0;
+	  opacity: 0;
+	}
+	
+	/* 展开状态 */
+	.ham-nav-menu.ham-open {
+	  display: block;
+	  max-height: 500px;  /* 足够大的值，根据你的菜单项数量调整 */
+	  opacity: 1;
+	}
+	
+	/* 或者用 transform 动画（更流畅） */
+	.ham-nav-menu {
+	  display: none;
+	  transform-origin: top;
+	  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	  transform: scaleY(0);
+	  opacity: 0;
+	}
+	
+	.ham-nav-menu.ham-open {
+	  display: block;
+	  transform: scaleY(1);
+	  opacity: 1;
+	}
+
+	.ham-nav-menu ul {
+  padding-left: 0;
+  text-align: center;
+}
+
+.ham-nav-menu p {
+  margin: 0;
+  text-align: center;
+}
+
+.ham-nav-menu a {
+  display: inline-block;    /* 或者用 block */
+  text-align: center;
+}
+
 
     body{
         margin-top: 20px;
