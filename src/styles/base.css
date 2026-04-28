@@ -11,7 +11,7 @@ h1::after, h1::before {
     width: auto;                     /* 图片显示宽度 */
     height: 0.6em;                   /* 图片显示高度 */
     margin: 3px;                /* 与标题文字的间距 */
-    background-image: url("https://i.postimg.cc/hG2snCVk/snk.gif");
+    background-image: url("");
     background-size: contain;        /* 按比例缩放以适应宽或高 */
     background-repeat:repeat-x;
     background-position: center;
