@@ -3,23 +3,22 @@
 /*******************/
 
 body.site-shell {
-    margin-top: 20px;
 	min-height: 100vh;
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--text-main);
 	animation: pageFade 0.55s ease both;
+	margin-top: 3em;
 }
 
-
-body{
+body {
 	background:
 		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
 		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
 	background-size: 3em 3em;
 	background-color: #eff6ff;
 	opacity: 1;
-	padding: 3em 15%;
+	padding: 0px 15%;
 	color: #4d657a;
 }
 
@@ -49,7 +48,7 @@ body{
 	position: fixed;
 	inset: 0 0 auto 0;
 	z-index: 100;
-	padding: 5px 25px;
+	padding: 1em;
 	background: rgba(255, 255, 255, 0.8);
 	backdrop-filter: blur(8px);
 	border-bottom: 1px solid rgba(226, 232, 240, 0.85);
@@ -111,7 +110,9 @@ body{
 
 @media (max-width: 768px) {
     .sitecard {
+
     }
+
 	main#main {
 		width: calc(100%);
 		margin-top: 12px;
@@ -170,7 +171,7 @@ body{
 
     body{
         margin-top: 20px;
-       padding: 9% 4%;
+       padding: 0% 4%;
     }
 }
 

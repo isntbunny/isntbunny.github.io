@@ -21,9 +21,63 @@
 
 #statuscafe-username {
 	
-
 }
 
 #statuscafe-content {
 }
 
+.welcome-card {
+    background-color: white;
+    padding-top: 6em;
+	padding-bottom: 2em;
+	padding-inline: 4em;
+    margin: 0;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    left: 0;
+    right: 0;
+	z-index:10;
+	margin-bottom: 2em;
+}
+
+/* 竖条纹背景层 */
+.welcome-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5em;
+    background: repeating-linear-gradient(
+        90deg,
+        #c2dfff,
+        #c2dfff 20px,
+        white 20px,
+        white 40px
+    );
+    z-index: 0;
+}
+
+/* 心形图片层 - 增加高度让图片完整显示 */
+.welcome-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6em;  /* 从 3em 改为 6em，留出空间 */
+    background: url('https://i.postimg.cc/HnMVM6q3/3blueheart.png') repeat-x top;
+    background-size: 3em;
+    background-position: 0 4.4em;
+    background-repeat: repeat-x;
+    z-index: 1;
+    pointer-events: none;
+	opacity:0.7;
+}
+
+/* 内容区域 */
+.welcome-card > * {
+    position: relative;
+    z-index: 2;
+}
