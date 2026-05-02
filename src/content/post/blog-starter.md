@@ -49,14 +49,14 @@ https://nodejs.org
 .github
 node_modules
 src
--components 可以重复使用的组件
+-components 可以重复使用的.astro组件
 -content 用markdown写点东西吧
 -data 一些配置
 -layouts 布局
 -pages 放各种.astro页面
 -plugins 插件
 -styles 顾名思义就是css样式
--utils 也是配置
+-utils js/ts代码
 .gitignore 里面声明的内容不会commit到仓库
 
 懒得写了以后再说

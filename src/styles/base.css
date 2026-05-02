@@ -183,14 +183,7 @@ body {
 	.ham-nav-menu a{
         text-decoration: none !important;
 	}
-	/* 基础样式 */
-	.ham-nav-menu {
-	  display: none;
-	  overflow: hidden;
-	  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-	  max-height: 0;
-	  opacity: 0;
-	}
+
 	
 	/* 展开状态 */
 	.ham-nav-menu.ham-open {
@@ -203,7 +196,7 @@ body {
 	.ham-nav-menu {
 	  display: none;
 	  transform-origin: top;
-	  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	  transition:transform 0.2s ease-out transform  0.2s ease-out;
 	  transform: scaleY(0);
 	  opacity: 0;
 	}
