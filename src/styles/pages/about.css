@@ -9,6 +9,9 @@
 	border-bottom: 1px solid rgba(226, 232, 240, 0.85);
 }
 
+h2{
+  display: block;
+}
 
 .profile-header {
   display: flex;
@@ -153,17 +156,15 @@
   text-align: center;
 }
 
+
 .poid {
-  flex: 1;
   padding: 1rem;
-  display: flex;
   justify-content: center;
   align-items: left;
 }
 
 .poid img {
-  max-width: 60%;
-  height: auto;
+  max-width: 100%;
 }
 
 .scroll-container{
@@ -300,10 +301,15 @@
 
 .stamppic, .blinkpic {
     display:grid;
-    grid-template-columns: repeat(1, 80px);  /* 固定两列 */
-    gap: 1px;
+    grid-template-columns: repeat(1, 110px);  /* 固定两列 */
+    gap: 1em;
     overflow-y: auto;
     align-content: flex-start;  /* 内容从顶部开始排列 */
 }
 
+.poid {
+  padding: 1rem;
+  justify-content: center;
+  align-items: left;
+}
 }
