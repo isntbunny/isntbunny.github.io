@@ -31,8 +31,14 @@ nohup env NODE_OPTIONS="--require /root/android-as-linux.js" code-server --auth 
 
 安装好Ubuntu，`proot-distro login ubuntu`进入Ubuntu
 
-
+```bash
 cd ~/isntbunny.github.io
 pnpm run dev
+```
+
+```bash
+proot-distro login debian --user user
+```
 
 先占着位，以后完善所有步骤。
+
