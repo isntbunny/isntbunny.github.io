@@ -54,50 +54,128 @@ const allItems = sectionData.months.flatMap((group) =>
 </PageLayout>
 
 <script is:inline>
-	const initGallery = () => {
-		const tiles = [...document.querySelectorAll(".gallery-tile")];
-		tiles.forEach((tile) => {
-			const img = tile.querySelector("img");
-			const skeleton = tile.querySelector(".gallery-skeleton");
-			if (!img || !skeleton) return;
-			if (img.complete) skeleton.setAttribute("hidden", "hidden");
-			img.addEventListener("load", () => skeleton.setAttribute("hidden", "hidden"), { once: true });
-		});
-
-		const box = document.getElementById("gallery-lightbox");
-		const lightboxImage = document.getElementById("gallery-lightbox-image");
-		const text = document.getElementById("gallery-lightbox-text");
-		box?.setAttribute("hidden", "hidden");
-		let current = 0;
-		const open = (index) => {
-			const item = tiles[index];
-			if (!item || !box || !lightboxImage || !text) return;
-			current = index;
-			lightboxImage.src = item.dataset.src || "";
-			lightboxImage.alt = item.dataset.title || "";
-			text.textContent = `${item.dataset.title || ""} — ${item.dataset.desc || ""}`;
-			box.removeAttribute("hidden");
-		};
-		tiles.forEach((tile, index) => {
-			const image = tile.querySelector("img");
-			if (!image || image.dataset.bound === "1") return;
-			image.dataset.bound = "1";
-			image.addEventListener("click", () => open(index));
-		});
-		if (box?.dataset.bound !== "1") {
-			box.dataset.bound = "1";
-			box.addEventListener("click", (e) => {
-				if (e.target === box) box.setAttribute("hidden", "hidden");
-			});
-			document.querySelectorAll(".gallery-arrow").forEach((btn) =>
-				btn.addEventListener("click", (e) => {
-					e.stopPropagation();
-					const dir = btn.getAttribute("data-dir");
-					open((current + (dir === "next" ? 1 : -1) + tiles.length) % tiles.length);
-				}),
-			);
+	(function() {
+	  // 等待 DOM 就绪
+	  if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	  } else {
+		init();
+	  }
+	
+	  function init() {
+		console.log('Gallery init started');
+		
+		// 获取元素
+		const box = document.getElementById('gallery-lightbox');
+		const lightboxImage = document.getElementById('gallery-lightbox-image');
+		const text = document.getElementById('gallery-lightbox-text');
+		
+		// 关键：强制确保弹窗是隐藏的
+		if (box) {
+		  box.setAttribute('hidden', 'hidden');
+		  box.style.display = ''; // 确保不是被其他样式覆盖
+		  console.log('Lightbox hidden');
+		} else {
+		  console.error('Lightbox element not found');
+		  return;
 		}
-	};
-	document.addEventListener("astro:page-load", initGallery);
-	initGallery();
-</script>
+		
+		// 获取所有卡片
+		const tiles = document.querySelectorAll('.gallery-tile');
+		console.log('Found tiles:', tiles.length);
+		
+		// 骨架屏处理
+		tiles.forEach(tile => {
+		  const img = tile.querySelector('img');
+		  const skeleton = tile.querySelector('.gallery-skeleton');
+		  if (img && skeleton) {
+			if (img.complete) {
+			  skeleton.setAttribute('hidden', 'hidden');
+			} else {
+			  img.addEventListener('load', () => {
+				skeleton.setAttribute('hidden', 'hidden');
+			  });
+			}
+		  }
+		});
+		
+		// 当前索引
+		let currentIndex = 0;
+		
+		// 打开弹窗函数
+		function openLightbox(index) {
+		  console.log('Opening lightbox at index:', index);
+		  const tile = tiles[index];
+		  if (!tile) return;
+		  
+		  const src = tile.getAttribute('data-src');
+		  const title = tile.getAttribute('data-title');
+		  const desc = tile.getAttribute('data-desc');
+		  
+		  if (!src) return;
+		  
+		  lightboxImage.src = src;
+		  lightboxImage.alt = title || '';
+		  text.textContent = `${title || ''} — ${desc || ''}`;
+		  box.removeAttribute('hidden');
+		  currentIndex = index;
+		}
+		
+		// 关闭弹窗函数
+		function closeLightbox() {
+		  console.log('Closing lightbox');
+		  box.setAttribute('hidden', 'hidden');
+		}
+		
+		// 绑定图片点击事件
+		tiles.forEach((tile, index) => {
+		  const img = tile.querySelector('img');
+		  if (!img) return;
+		  if (img.hasAttribute('data-bound')) return;
+		  
+		  img.setAttribute('data-bound', 'true');
+		  img.style.cursor = 'pointer';
+		  img.addEventListener('click', (e) => {
+			e.stopPropagation();
+			openLightbox(index);
+		  });
+		});
+		
+		// 绑定弹窗背景点击关闭
+		box.addEventListener('click', (e) => {
+		  if (e.target === box) {
+			closeLightbox();
+		  }
+		});
+		
+		// 绑定左右箭头
+		const prevBtn = document.querySelector('.gallery-arrow[data-dir="prev"]');
+		const nextBtn = document.querySelector('.gallery-arrow[data-dir="next"]');
+		
+		if (prevBtn) {
+		  prevBtn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const newIndex = (currentIndex - 1 + tiles.length) % tiles.length;
+			openLightbox(newIndex);
+		  });
+		}
+		
+		if (nextBtn) {
+		  nextBtn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const newIndex = (currentIndex + 1) % tiles.length;
+			openLightbox(newIndex);
+		  });
+		}
+		
+		// ESC 键关闭
+		document.addEventListener('keydown', (e) => {
+		  if (e.key === 'Escape' && box && !box.hasAttribute('hidden')) {
+			closeLightbox();
+		  }
+		});
+		
+		console.log('Gallery init complete');
+	  }
+	})();
+	</script>
