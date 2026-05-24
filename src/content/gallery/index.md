@@ -205,21 +205,8 @@ sections:
             image: https://i.postimg.cc/MpcCTrt3/b251223.png
             description: "Bunny 2025-12-23"
 
-  - slug: oc-design
-    title: OC Design
-    description: Character drafts and final sheets.
-    cover: https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1200&q=80
-    months:
-      - month: 2023-01
-        items:
-          - title: Outfit Iteration A
-            image: https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80
-      - month: 2023-03
-        items:
-          - title: Expression Sheet
-            image: https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=1200&q=80
 
-  - slug: daily-life
+- slug: daily-life
     title: Daily Life
     description: Photos and mood snapshots.
     cover: https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80
