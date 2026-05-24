@@ -24,6 +24,7 @@ publishDate: 2026-04-22
 
 输入这个可以伪装成linux桌面版，解决code server无法下载插件的问题。（不过还需要准备一个文件...但是我懒得找了）
 nohup是后台运行，这样就可以不终止code server的情况下，继续输入别的指令
+
 ```bash
 nohup env NODE_OPTIONS="--require /root/android-as-linux.js" code-server --auth none &
 ```
