@@ -205,18 +205,17 @@ sections:
             image: https://i.postimg.cc/MpcCTrt3/b251223.png
             description: "Bunny 2025-12-23"
 
-
 - slug: daily-life
-    title: Daily Life
-    description: Photos and mood snapshots.
-    cover: https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80
-    months:
-      - month: 2023-01
-        items:
-          - title: Window Rain
-            image: https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1200&q=80
-      - month: 2023-02
-        items:
-          - title: Weekend Desk
-            image: https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1200&q=80
+  title: Daily Life
+  description: Photos and mood snapshots.
+  cover: https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80
+  months:
+    - month: 2023-01
+      items:
+        - title: Window Rain
+          image: https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1200&q=80
+    - month: 2023-02
+      items:
+        - title: Weekend Desk
+          image: https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1200&q=80
 ---
