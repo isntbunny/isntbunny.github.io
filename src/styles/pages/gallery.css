@@ -8,7 +8,7 @@
 }
 .gallery-image {
 	width: 100%;
-	aspect-ratio: 16/9;
+	aspect-ratio: 1/1;
 	object-fit: cover;
 	border-radius: 12px;
 	display: block;
@@ -24,12 +24,21 @@
 	cursor: pointer;
 	position: relative;
 }
+
+.gallery-image-wrapper {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;  /* 正方形比例放在包裹层 */
+	border-radius: 12px;
+	overflow: hidden;      /* 让圆角裁剪图片边缘 */
+}
+
 .gallery-skeleton {
 	position: absolute;
-	inset: 20px;
+	inset: 0;
 	border-radius: 12px;
 	background: linear-gradient(90deg, #d4f0f5, #e8f6fa, #d4f0f5);
-	background-size: 200% 100%;
+	background-size: 200% 200%;
 	animation: shimmer 1.2s infinite;
 }
 @keyframes shimmer {

@@ -34,8 +34,10 @@ const allItems = sectionData.months.flatMap((group) =>
 					data-title={item.title}
 					data-desc={item.description ?? item.month}
 				>
+				<div class="gallery-image-wrapper">
 					<div class="gallery-skeleton" />
 					<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
+				</div>
 					<h3>{item.title}</h3>
 					<p class="small-muted">{item.description ?? item.month}</p>
 				</article>
