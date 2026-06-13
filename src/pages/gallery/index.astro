@@ -14,7 +14,7 @@ if (!gallery) throw new Error("Missing src/content/gallery/index.md");
 			gallery.data.sections.map((section) => (
 				<a class="site-card" href={`/gallery/${section.slug}/`}>
 					<img src={section.cover} alt={section.title} class="gallery-image" loading="lazy" />
-					<h2 style="margin-top:10px;">{section.title}</h2>
+					<h2>{section.title}</h2>
 					{section.description && <p class="small-muted">{section.description}</p>}
 				</a>
 			))

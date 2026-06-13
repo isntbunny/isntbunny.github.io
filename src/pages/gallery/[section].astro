@@ -17,33 +17,57 @@ const { sectionData } = Astro.props;
 const allItems = sectionData.months.flatMap((group) =>
 	group.items.map((item) => ({ ...item, month: group.month })),
 );
+const groupedByYearMonth = allItems.reduce((acc, item, idx) => {
+	const year = item.date ? new Date(item.date).getFullYear() : item.month?.slice(0, 4);
+	const monthFull = item.month; // "2025-12"
+	const monthNum = monthFull?.slice(5, 7); // 提取 "12"
+	
+	if (!acc[year]) acc[year] = {};
+	if (!acc[year][monthNum]) acc[year][monthNum] = [];
+	acc[year][monthNum].push({ ...item, globalIndex: idx });
+	return acc;
+}, {});
+
+const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompare(a));
 ---
 
 <PageLayout
 	meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}
 >
-	<a href="/gallery/">← Back</a>
+	<a href="/gallery/" class="gallery-back">← Back</a>
 	<h1>{sectionData.title}</h1>
-	<div class="gallery-grid">
-		{
-			allItems.map((item, index) => (
-				<article
-					class="site-card gallery-tile"
-					data-index={index}
-					data-src={item.image}
-					data-title={item.title}
-					data-desc={item.description ?? item.month}
-				>
-				<div class="gallery-image-wrapper">
-					<div class="gallery-skeleton" />
-					<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
-				</div>
-					<h3>{item.title}</h3>
-					<p class="small-muted">{item.description ?? item.month}</p>
-				</article>
-			))
-		}
-	</div>
+	{
+		sortedYears.map(year => (
+			<section class="gallery-year-section">
+				<h2 class="gallery-year-title">{year}</h2>
+				{Object.entries(groupedByYearMonth[year])
+					.sort((a, b) => b[0].localeCompare(a[0])) // 月份倒序
+					.map(([month, items]) => (
+						<div class="gallery-month-group">
+							<h3 class="gallery-month-title">{month}</h3>
+							<div class="gallery-grid">
+								{items.map((item) => (
+									<article
+										class="site-card gallery-tile"
+										data-index={item.globalIndex}
+										data-src={item.image}
+										data-title={item.title}
+										data-desc={item.description ?? item.month}
+									>
+										<div style="position: relative;">
+											<div class="gallery-skeleton" />
+											<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
+										</div>
+										<h3>{item.title}</h3>
+										<p class="small-muted">{item.description ?? item.month}</p>
+									</article>
+								))}
+							</div>
+						</div>
+					))}
+			</section>
+		))
+	}
 
 	<div class="gallery-lightbox" id="gallery-lightbox" hidden>
 		<button class="gallery-arrow" data-dir="prev" type="button">←</button>
