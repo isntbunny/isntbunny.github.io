@@ -1,89 +1,92 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, z } from 'astro:content'
+import { glob } from 'astro/loaders'
 
 function removeDupsAndLowerCase(array: string[]) {
-	return [...new Set(array.map((str) => str.toLowerCase()))];
+  return [...new Set(array.map((str) => str.toLowerCase()))]
 }
 
 function removeDups(array: string[]) {
-	return [...new Set(array.map((str) => str.trim()).filter(Boolean))];
+  return [...new Set(array.map((str) => str.trim()).filter(Boolean))]
 }
 
-const titleSchema = z.string().max(60);
+const titleSchema = z.string().max(60)
 
 const baseSchema = z.object({
-	title: titleSchema,
-});
+  title: titleSchema,
+})
 
+// 博客文章集合
 const post = defineCollection({
-	loader: glob({ base: "./src/content/post", pattern: "**/*.{md,mdx}" }),
-	schema: ({ image }) =>
-		baseSchema.extend({
-			description: z.string(),
-			coverImage: z
-				.object({
-					alt: z.string(),
-					src: image(),
-				})
-				.optional(),
-			draft: z.boolean().default(false),
-			ogImage: z.string().optional(),
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
-			pinned: z.boolean().default(false),
-		}),
-});
+  loader: glob({ base: './src/content/post', pattern: '**/*.{md,mdx}' }),
+  schema: ({ image }) =>
+    baseSchema.extend({
+      description: z.string(),
+      coverImage: z
+        .object({
+          alt: z.string(),
+          src: image(),
+        })
+        .optional(),
+      draft: z.boolean().default(false),
+      ogImage: z.string().optional(),
+      publishDate: z
+        .string()
+        .or(z.date())
+        .transform((val) => new Date(val)),
+      updatedDate: z
+        .string()
+        .optional()
+        .transform((str) => (str ? new Date(str) : undefined)),
+      pinned: z.boolean().default(false),
+    }),
+})
 
+// 画廊集合
 const gallery = defineCollection({
-	loader: glob({ base: "./src/content/gallery", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string().optional(),
-		sections: z.array(
-			z.object({
-				slug: z.string(),
-				title: z.string(),
-				description: z.string().optional(),
-				cover: z.string().url(),
-				months: z.array(
-					z.object({
-						month: z.string(),
-						items: z.array(
-							z.object({
-								title: z.string(),
-								image: z.string().url(),
-								description: z.string().optional(),
-							}),
-						),
-					}),
-				),
-			}),
-		),
-	}),
-});
+  loader: glob({ base: './src/content/gallery', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    sections: z.array(
+      z.object({
+        slug: z.string(),
+        title: z.string(),
+        description: z.string().optional(),
+        cover: z.string().url(),
+        months: z.array(
+          z.object({
+            month: z.string(),
+            items: z.array(
+              z.object({
+                title: z.string(),
+                image: z.string().url(),
+                description: z.string().optional(),
+              })
+            ),
+          })
+        ),
+      })
+    ),
+  }),
+})
 
+// 普通页面集合
 const page = defineCollection({
-	loader: glob({ base: "./src/content/page", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({}),
-});
+  loader: glob({ base: './src/content/page', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({}),
+})
 
-
+// 日记集合（添加 loader，如果你不需要可以注释掉）
 const journals = defineCollection({
-  type: 'content',
+  loader: glob({ base: './src/content/journals', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
     date: z.date().optional(),
   }),
 })
 
+// 歌曲集合（去掉 type: 'content'）
 const uta = defineCollection({
-  type: 'content',
   loader: glob({ base: './src/content/uta', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
@@ -111,15 +114,22 @@ const uta = defineCollection({
   }),
 })
 
-
+// 导航集合（去掉 type: 'content'）
 const nav = defineCollection({
-  type: 'content',
-  loader: glob({base: './src/content/nav',pattern: '**/*.{md,mdx}'}),
+  loader: glob({ base: './src/content/nav', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
-    title: z.string(), // 分类标题，比如"编程网站"
-    icon: z.string().optional(), // 可选：emoji 图标，比如"💻"
-    order: z.number().default(0), // 排序，数字越小越靠前
+    title: z.string(),
+    icon: z.string().optional(),
+    order: z.number().default(0),
   }),
 })
 
-export const collections = { post, page, gallery, journals, bangumi, uta, nav};
+// 导出所有集合（注意：bangumi 被移除了，因为你没有定义它）
+export const collections = {
+  post,
+  page,
+  gallery,
+  journals,
+  uta,
+  nav,
+}
