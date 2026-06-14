@@ -1,3 +1,15 @@
+
+.gallery-album{
+	display: grid; 
+	grid-template-columns: 2fr 1fr;
+	grid-column-gap: 1em ;
+}
+
+.gallery-albumdesc{
+	position:relative;
+}
+
+
 .gallery-grid {
 	display: flex;
 	gap: 2em;

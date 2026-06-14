@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import "/src/styles/pages/blogpost.css";
+
+
+export async function getStaticPaths() {
+  const utaEntries = await getCollection('uta');
+  
+  // 为每个条目生成路径
+  return utaEntries.map((entry) => ({
+    params: { slug: uta.slug },
+    props: { uta },
+  }));
+}
+
+// 从 props 中获取当前条目
+const { uta } = Astro.props;
+
+// 确保 entry 存在
+if (!uta) {
+  throw new Error('未找到对应的日志条目');
+}
+
+// 渲染内容
+const { Content } = await uta.render();
+---
+
+<Base meta={{ title: uta.data.title }}>
+    <h1>{uta.data.title}</h1>
+    {uta.data.date && <time>{uta.data.date.toLocaleDateString()}</time>}
+    <Content />
+</Base>

@@ -18,19 +18,15 @@ h1::after, h1::before {
 }
 
 body.site-shell {
-	position: relative;
 	min-height: 100vh;
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--text-main);
-	animation: pageFade 0.55s ease both;
-	margin-top: 0em;
+	animation: pageFade 0.55s ease both
 }
 
+
 body {
-	background:
-		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
-		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
 	background-size: 3em 3em;
 	background-color: #eff6ff;
 	opacity: 1;

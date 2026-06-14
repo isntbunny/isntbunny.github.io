@@ -82,5 +82,37 @@ const journals = defineCollection({
   }),
 })
 
+const uta = defineCollection({
+  type: 'content',
+  loader: glob({ base: './src/content/uta', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    sections: z.array(
+      z.object({
+        slug: z.string(),
+        title: z.string(),
+        description: z.string().optional(),
+        cover: z.string().url(),
+        months: z.array(
+          z.object({
+            month: z.string(),
+            items: z.array(
+              z.object({
+                title: z.string(),
+                image: z.string().url(),
+                description: z.string().optional(),
+              })
+            ),
+          })
+        ),
+      })
+    ),
+  }),
+})
 
-export const collections = { post, page, gallery, journals };
+const bangumi = defineCollection({
+  type: 'content',
+})
+
+export const collections = { post, page, gallery, journals, bangumi, uta };
