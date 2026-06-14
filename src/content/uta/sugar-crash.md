@@ -1,5 +1,5 @@
 ---
-title: 占位符测试"
+title: "Sugar Crash"
 artist: "idk"
 date: "2005-06-06"
 tags: ["English", "hyperpop"]
