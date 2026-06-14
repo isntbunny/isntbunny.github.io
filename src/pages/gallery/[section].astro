@@ -35,6 +35,7 @@ const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompa
 	meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}
 >
 	<a href="/gallery/" class="gallery-back">← Back</a>
+	
 	<h1>{sectionData.title}</h1>
 	{
 		sortedYears.map(year => (
@@ -58,7 +59,7 @@ const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompa
 											<div class="gallery-skeleton" />
 											<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
 										</div>
-										<h3>{item.title}</h3>
+										<p>{item.title}</p>
 										<p class="small-muted">{item.description ?? item.month}</p>
 									</article>
 								))}

@@ -1,33 +1,64 @@
 .gallery-grid {
-	display: grid;
-	gap: 24px;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.sections-grid {
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	display: flex;
+	gap: 2em;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding: 0em;
 }
 
+.gallery-tile {
+	text-align:center;
+	background-color: white;
+	border-radius: 12px;
+	flex-shrink: 0;
+	width:10em;  /* 固定宽度，或者用 min-width */
+	scroll-snap-align: start;
+}
+
+/* 隐藏滚动条（可选） */
+.gallery-grid::-webkit-scrollbar {
+	height: 6px;
+}
+
+.gallery-grid::-webkit-scrollbar-track {
+	background: #e2e8f0;
+	border-radius: 3px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb {
+	background: #94a3b8;
+	border-radius: 3px;
+}
+
+
 .gallery-year-section {
-	margin-bottom: 48px;
+	background: #ffffff99;
+	padding: 2em;
+	border-radius: 10px;
 }
 
 .gallery-back{
+	background-color: white;
+	width: 5em;
+	padding:4px;
+	text-align: center;
+	border-radius: 10px;
 	display:block;
-	margin-top: 5em;
-	margin-bottom: 0;
 }
 
 .gallery-year-title {
+	background-color: #c5c5c5;
+	color: #fff;
 	font-size: 1.75rem;
-	margin-bottom: 24px;
-	padding-bottom: 12px;
+	padding:1em;
 	border-bottom: 2px solid #e2e8f0;
 }
 
 .gallery-month-group {
 	display: flex;
-	gap: 24px;
-	margin-bottom: 48px;
+	gap: 2em;
+	margin-bottom: 2em;
+	padding:0em;
 }
 
 .gallery-month-title {
@@ -36,7 +67,8 @@
 	font-size: 1.125rem;
 	font-weight: 600;
 	color: #4a5568;
-	padding-top: 4px;
+	padding: 1em;
+	background-color:gainsboro;
 }
 
 .gallery-month-group .gallery-grid {
@@ -47,16 +79,18 @@
 	width: 100%;
 	aspect-ratio: 1/1;
 	object-fit: cover;
-	border-radius: 12px;
+	border-radius: 12px 12px 0px 0px;
 	display: block;
 	opacity: 0;
 	animation: imgFade 0.4s ease forwards;
 }
+
 @keyframes imgFade {
 	to {
 		opacity: 1;
 	}
 }
+
 .gallery-tile {
 	cursor: pointer;
 	position: relative;
@@ -86,6 +120,7 @@
 		background-position: -200% 0;
 	}
 }
+
 .gallery-lightbox {
 	position: fixed;
 	inset: 0;

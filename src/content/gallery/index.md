@@ -185,25 +185,53 @@ sections:
             description: "2025-09-30"
       - month: 2025-10
         items:
-          - title: b251003
+          - title: bunny的校服搭配
             image: https://i.postimg.cc/4xSVk98R/b251003.jpg
             description: "2025-10-03"
       - month: 2025-11
         items:
-          - title: ak251117
+          - title: ak酱的一个pc
             image: https://i.postimg.cc/Y05zHm2F/ak251117.png
             description: "2025-11-17"
-          - title: e2511
+          - title: meme
             image: https://i.postimg.cc/43GZ382v/e2511.png
             description: "2025-11-01"
       - month: 2025-12
         items:
-          - title: ak251212
-            image: https://i.postimg.cc/T1gX5XJ8/ak251212.jpg
-            description: "2025-12-12"
-          - title: b251223
+          - title: 摸鱼251223
             image: https://i.postimg.cc/MpcCTrt3/b251223.png
             description: "2025-12-23"
+      - month: 2026-03
+        items:
+          - title: 性转版盐
+            image: https://i.postimg.cc/50vwpQ1q/we260302.png
+            description: "2026-03-02"
+      - month: 2026-04
+        items:
+          - title: eucaly
+            image: https://i.postimg.cc/XqJ74YcB/e260407.jpg
+            description: "2026-04-07"
+          - title: bunny
+            image: https://i.postimg.cc/Sx8Qy58g/b260410.jpg
+            description: "2026-04-10"
+          - title: ak 21
+            image: https://i.postimg.cc/c1TYXhZn/ak260412.png
+            description: "2026-04-12"
+          - title: ak
+            image: https://i.postimg.cc/59KTxjQ4/ak260428.jpg
+            description: "2026-04-28"
+          - title: bunny
+            image: https://i.postimg.cc/tRvwX7nj/b260429.jpg
+            description: "2026-04-29"
+      - month: 2026-05
+        items:
+          - title: 双人
+            image: https://i.postimg.cc/dVSjhb0H/eb2605.jpg
+            description: "2026-05"
+          - title: 摸鱼
+            image: https://i.postimg.cc/N0D4Q5k0/e260527.jpg
+            description: "2026-05-27"
+
   - slug: daily-life
     title: Daily Life
     description: Photos and mood snapshots.
