@@ -1,0 +1,105 @@
+---
+import Layout from "@/layouts/Base.astro";
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const navDir = path.join(process.cwd(), 'src/content/nav');
+let sections = [];
+
+try {
+  const files = await fs.readdir(navDir);
+  const mdFiles = files.filter(f => f.endsWith('.md'));
+
+  for (const file of mdFiles) {
+    const fullPath = path.join(navDir, file);
+    const content = await fs.readFile(fullPath, 'utf-8');
+    
+    // 解析 frontmatter
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    let frontmatter = {};
+    if (frontmatterMatch) {
+      const yaml = frontmatterMatch[1];
+      const titleMatch = yaml.match(/title:\s*"([^"]+)"/);
+      const iconMatch = yaml.match(/icon:\s*"([^"]+)"/);
+      const orderMatch = yaml.match(/order:\s*(\d+)/);
+      frontmatter = {
+        title: titleMatch ? titleMatch[1] : '未命名',
+        icon: iconMatch ? iconMatch[1] : '📁',
+        order: orderMatch ? parseInt(orderMatch[1]) : 0
+      };
+    }
+    
+    // 解析正文中的链接
+    const body = content.replace(/^---\n[\s\S]*?\n---\n/, ''); // 移除 frontmatter
+    const lines = body.split('\n');
+    const links = [];
+    for (const line of lines) {
+      const match = line.match(/-\s*\[([^\]]+)\]\(([^)]+)\)\s*-?\s*(.*)/);
+      if (match) {
+        links.push({
+          name: match[1],
+          url: match[2],
+          desc: match[3] || ''
+        });
+      }
+    }
+    
+    sections.push({
+      ...frontmatter,
+      links
+    });
+  }
+  
+  sections.sort((a, b) => a.order - b.order);
+} catch (err) {
+  console.error('读取导航文件失败:', err);
+}
+---
+
+<Layout meta={{ title: "网址导航", description: "精选实用网站" }}>
+  <div class="container">
+    <h1>🔗 网址导航</h1>
+    {sections.length === 0 ? (
+      <p>暂无导航链接，请添加 md 文件到 src/content/nav/</p>
+    ) : (
+      sections.map(section => (
+        <div class="section">
+          <h2>{section.icon} {section.title}</h2>
+          <div class="cards-grid">
+            {section.links.map(link => (
+              <a href={link.url} class="card" target="_blank" rel="noopener noreferrer">
+                <strong>{link.name}</strong>
+                <span class="url">{new URL(link.url).hostname}</span>
+                {link.desc && <span class="desc">{link.desc}</span>}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</Layout>
+
+<style>
+  .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+  h1 { text-align: center; margin-bottom: 2rem; }
+  .section { margin-bottom: 2.5rem; }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: #1e1e2e;
+    padding: 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #cdd6f4;
+    display: block;
+    transition: all 0.2s;
+  }
+  .card:hover { background: #313244; transform: translateY(-2px); }
+  .card strong { display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .url { font-size: 0.75rem; color: #89b4fa; word-break: break-all; }
+  .desc { font-size: 0.8rem; color: #a6adc8; display: block; margin-top: 0.5rem; }
+</style>

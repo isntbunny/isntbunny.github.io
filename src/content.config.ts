@@ -111,8 +111,15 @@ const uta = defineCollection({
   }),
 })
 
-const bangumi = defineCollection({
+
+const nav = defineCollection({
   type: 'content',
+  loader: glob({base: './src/content/nav',pattern: '**/*.{md,mdx}'}),
+  schema: z.object({
+    title: z.string(), // 分类标题，比如"编程网站"
+    icon: z.string().optional(), // 可选：emoji 图标，比如"💻"
+    order: z.number().default(0), // 排序，数字越小越靠前
+  }),
 })
 
-export const collections = { post, page, gallery, journals, bangumi, uta };
+export const collections = { post, page, gallery, journals, bangumi, uta, nav};

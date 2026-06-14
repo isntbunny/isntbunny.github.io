@@ -48,6 +48,7 @@ export const menuLinks: MenuLink[] = [
   { path: '/uta/', title:'uta'},
   { path: '/gallery/', title: 'Gallery' },
   { path: '/bangumi/', title: 'Bangumi' },
+  { path: '/nav/', title: 'Links'},
   { path: '/guestbook/', title: 'Guestbook' },
   { path: '/about/', title: 'About' },
 ]
