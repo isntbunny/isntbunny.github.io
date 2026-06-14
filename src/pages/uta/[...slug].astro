@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const utaEntries = await getCollection('uta');
   
   // 为每个条目生成路径
-  return utaEntries.map((entry) => ({
+  return utaEntries.map((uta) => ({
     params: { slug: uta.slug },
     props: { uta },
   }));
