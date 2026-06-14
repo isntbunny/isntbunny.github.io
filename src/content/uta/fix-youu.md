@@ -1,7 +1,8 @@
 ---
-title: fixyouu🔨🔨🔨歌词翻译
-description: 歌词
-publishDate: 2026-04-27
+title: "Fix You"
+artist: "idk"
+date: "2005-06-06"
+tags: ["English", "hyperpop"]
 ---
 
 

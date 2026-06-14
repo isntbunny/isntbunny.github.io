@@ -1,7 +1,8 @@
 ---
-title: sugar crash
-description: 歌词
-publishDate: 2026-04-27
+title: 占位符测试"
+artist: "idk"
+date: "2005-06-06"
+tags: ["English", "hyperpop"]
 ---
 
 I'm on a sugar crash, I ain't got no fu*king cash

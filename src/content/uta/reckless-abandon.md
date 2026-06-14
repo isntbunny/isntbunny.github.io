@@ -1,7 +1,8 @@
 ---
-title: reckless abandon (feat.kasane teto)
-description: 歌词
-publishDate: 2026-04-27
+title: "占位符测试"
+artist: "idk"
+date: "2005-06-06"
+tags: ["English", "hyperpop"]
 ---
 
 I just did something that I’m gonna regret and

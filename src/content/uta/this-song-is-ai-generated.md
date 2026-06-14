@@ -1,7 +1,8 @@
 ---
-title: THIS SONG IS AI GENERATED (feat.gumi sv)
-description: 歌词
-publishDate: 2026-04-27
+title: "占位符测试"
+artist: "idk"
+date: "2005-06-06"
+tags: ["English", "hyperpop"]
 ---
 
 Caught in crossroads, where to turn (Turn to you)

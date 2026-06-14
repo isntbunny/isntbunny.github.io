@@ -85,32 +85,15 @@ const journals = defineCollection({
   }),
 })
 
-// 歌曲集合（去掉 type: 'content'）
 const uta = defineCollection({
   loader: glob({ base: './src/content/uta', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string(),
+    artist: z.string().optional(),
+    date: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    // 如果某些文件有 description，可以加上
     description: z.string().optional(),
-    sections: z.array(
-      z.object({
-        slug: z.string(),
-        title: z.string(),
-        description: z.string().optional(),
-        cover: z.string().url(),
-        months: z.array(
-          z.object({
-            month: z.string(),
-            items: z.array(
-              z.object({
-                title: z.string(),
-                image: z.string().url(),
-                description: z.string().optional(),
-              })
-            ),
-          })
-        ),
-      })
-    ),
   }),
 })
 
