@@ -76,14 +76,6 @@ const page = defineCollection({
   schema: z.object({}),
 })
 
-// 日记集合（添加 loader，如果你不需要可以注释掉）
-const journals = defineCollection({
-  loader: glob({ base: './src/content/journals', pattern: '**/*.{md,mdx}' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.date().optional(),
-  }),
-})
 
 const uta = defineCollection({
   loader: glob({ base: './src/content/uta', pattern: '**/*.{md,mdx}' }),
@@ -112,7 +104,6 @@ export const collections = {
   post,
   page,
   gallery,
-  journals,
   uta,
   nav,
 }
