@@ -1,0 +1,111 @@
+---
+// src/components/GithubCommits.astro
+
+// 配置区：改成你的 GitHub 用户名和仓库名
+const owner = 'isntbunny';
+const repo = 'isntbunny.github.io'; 
+// 注意：如果是 username.github.io 仓库，repo 就是 'username.github.io'
+
+// 获取最新 5 条提交（公开仓库无需 Token，但有每小时 60 次的频率限制）
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
+
+let commits = [];
+let errorMsg = '';
+
+try {
+  const response = await fetch(apiUrl);
+  if (response.ok) {
+    commits = await response.json();
+  } else {
+    errorMsg = `GitHub API 请求失败（状态码：${response.status}）`;
+  }
+} catch (err) {
+  errorMsg = '网络错误，无法获取提交记录';
+}
+---
+
+{errorMsg && <p style="color: #888; font-size: 0.9rem;">⚠️ {errorMsg}</p>}
+
+{commits.length > 0 && (
+  <div class="commit-list">
+    <h3>最近更新</h3>
+    <ul>
+      {commits.map((commit) => {
+        const { message, author } = commit.commit;
+        const firstLine = message.split('\n')[0] || message; // 取标题行
+        const date = new Date(author.date).toLocaleDateString('zh-CN', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        });
+
+        return (
+          <li key={commit.sha}>
+            <a 
+              href={commit.html_url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title={message}
+            >
+              <span class="msg">{firstLine}</span>
+              <span class="meta">
+                <span class="author">{author.name}</span>
+                <span class="date">{date}</span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <style>
+  .commit-list h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .commit-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .commit-list li {
+    border-bottom: 1px solid #eee;
+    padding: 0.6rem 0;
+  }
+  .commit-list li:last-child {
+    border-bottom: none;
+  }
+  .commit-list a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .commit-list a:hover .msg {
+    color: #0366d6;
+    text-decoration: underline;
+  }
+  .msg {
+    font-weight: 500;
+    flex: 1;
+    min-width: 150px;
+  }
+  .meta {
+    font-size: 0.8rem;
+    color: #586069;
+    white-space: nowrap;
+  }
+  .author {
+    background: #f0f0f0;
+    padding: 0.1rem 0.5rem;
+    border-radius: 12px;
+    margin-right: 0.5rem;
+  }
+  .date {
+    color: #888;
+  }
+</style>
+  </div>
+)}

@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/layouts/Base.astro";
 import "/src/styles/pages/index.css";
+import GithubCommits from "@/components/GithubCommits.astro";
 ---
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
@@ -44,7 +45,8 @@ import "/src/styles/pages/index.css";
 		</div>
 		<script src="https://status.cafe/current-status.js?name=isntbunny" defer></script>
 	</section>
-
+	<div class="sitecard">
+<GithubCommits/></div>
 	<section class="sitecard">
 		<h2>Countdown</h2>
 		<div class="distance-label">
