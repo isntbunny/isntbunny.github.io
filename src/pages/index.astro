@@ -69,126 +69,107 @@ import GithubCommits from "@/components/GithubCommits.astro";
 
 	
 </PageLayout>
-
 <script>
-	(function () {
-		// 高考日期：每年6月7日
-		const GAOKAO_MONTH = 6;
-		const GAOKAO_DAY = 7;
-
-		// 获取当前日期（基于北京时间日期，解决时区干扰，仅比较日期）
-		function getCurrentDate() {
-			const now = new Date();
-			// 返回本地日期的0时0分0秒对象（年,月,日）
-			return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	document.addEventListener('astro:page-load', () => {
+	  // 高考倒计时逻辑写在这里
+	  const GAOKAO_MONTH = 6;
+	  const GAOKAO_DAY = 7;
+  
+	  function getCurrentDate() {
+		const now = new Date();
+		return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	  }
+  
+	  function getDaysToGaokao(targetYear) {
+		const today = getCurrentDate();
+		const gaokaoDate = new Date(targetYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
+		const diffTime = gaokaoDate - today;
+		return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+	  }
+  
+	  function updateCountdown(targetYear) {
+		const days = getDaysToGaokao(targetYear);
+		const daysSpan = document.getElementById("countdownDays");
+		if (daysSpan) {
+		  daysSpan.textContent = days;
 		}
-
-		// 计算距离指定年份高考的天数（正数表示未来，负数或0表示已过或今天）
-		function getDaysToGaokao(targetYear) {
-			const today = getCurrentDate();
-			const gaokaoDate = new Date(targetYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
-			const diffTime = gaokaoDate - today;
-			// 使用ceil处理跨天边界，确保显示剩余完整天数
-			const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-			return diffDays;
+	  }
+  
+	  function generateYearOptions() {
+		const today = getCurrentDate();
+		const currentYear = today.getFullYear();
+		const currentGaokaoDate = new Date(currentYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
+  
+		let startYear = currentYear;
+		if (today > currentGaokaoDate) {
+		  startYear = currentYear + 1;
 		}
-
-		// 更新倒计时显示，并处理已过高考的情况（显示负数或显示“已过”风格，但原逻辑只显示数字，我们按照天数展示，可自然显示负数）
-		function updateCountdown(targetYear) {
-			const days = getDaysToGaokao(targetYear);
-			const daysSpan = document.getElementById("countdownDays");
-			if (daysSpan) {
-				// 直接显示天数，可以为负数（代表高考已过多少天），保持信息明确
-				daysSpan.textContent = days;
-			}
+  
+		const endYear = startYear + 5;
+		const years = [];
+		for (let y = startYear; y <= endYear; y++) {
+		  years.push(y);
 		}
-
-		// 生成年份选项列表：起始年份逻辑 ->
-		// 如果当前日期在当年高考（6月7日）之前，当年高考还未发生，则包含当年；
-		// 如果今天已经过了当年高考，则起始年份为明年；且确保列表连续至起始年份+5年
-		function generateYearOptions() {
-			const today = getCurrentDate();
-			const currentYear = today.getFullYear();
-			// 当年高考日期（6月7日）
-			const currentGaokaoDate = new Date(currentYear, GAOKAO_MONTH - 1, GAOKAO_DAY);
-
-			let startYear = currentYear;
-			// 如果今天日期 > 当年高考日期（即已经过了当年高考日），则从明年开始作为第一个可选年份
-			if (today > currentGaokaoDate) {
-				startYear = currentYear + 1;
-			}
-
-			// 向后取5年（包含起始年份，总共6个年份可选？原需求五年范围 startYear ~ startYear+5 是合理的）
-			// 但原代码：let endYear = startYear + 5; 包括首尾5个间隔，即共6年，保持和原逻辑一致，无样式改动，只是修复bug确保年份生成不冲突
-			const endYear = startYear + 5;
-			const years = [];
-			for (let y = startYear; y <= endYear; y++) {
-				years.push(y);
-			}
-			return years;
+		return years;
+	  }
+  
+	  function initSelect() {
+		const select = document.getElementById("yearSelect");
+		if (!select) {
+		  console.error("未找到 id 为 yearSelect 的下拉框元素");
+		  return;
 		}
-
-		// 初始化下拉选择框、默认年份、事件绑定以及初始倒计时展示
-		function initSelect() {
-			const select = document.getElementById("yearSelect");
-			if (!select) {
-				console.error("未找到 id 为 yearSelect 的下拉框元素");
-				return;
-			}
-
-			const years = generateYearOptions();
-			if (years.length === 0) {
-				// 极端情况，年份列表为空，填充占位符并返回
-				const emptyOpt = document.createElement("option");
-				emptyOpt.textContent = "无年份";
-				select.appendChild(emptyOpt);
-				document.getElementById("countdownDays").textContent = "--";
-				return;
-			}
-
-			// 默认选中年份逻辑：优先选择2027年，但如果2027不在列表中，则选取列表第一个年份
-			let defaultYear = 2027;
-			if (!years.includes(defaultYear)) {
-				defaultYear = years[0];
-			}
-
-			// 清空并填充选项
-			select.innerHTML = "";
-			years.forEach((year) => {
-				const option = document.createElement("option");
-				option.value = year;
-				option.textContent = year + "年";
-				if (year === defaultYear) {
-					option.selected = true;
-				}
-				select.appendChild(option);
-			});
-
-			// 根据当前选中的年份更新倒计时显示
-			const initialSelected = parseInt(select.value, 10);
-			if (!isNaN(initialSelected)) {
-				updateCountdown(initialSelected);
-			} else {
-				document.getElementById("countdownDays").textContent = "--";
-			}
-
-			// 监听下拉框变化事件，更新倒计时
-			select.addEventListener("change", function (e) {
-				const selectedYear = parseInt(e.target.value, 10);
-				if (!isNaN(selectedYear)) {
-					updateCountdown(selectedYear);
-				} else {
-					const daysSpan = document.getElementById("countdownDays");
-					if (daysSpan) daysSpan.textContent = "--";
-				}
-			});
+  
+		const years = generateYearOptions();
+		if (years.length === 0) {
+		  const emptyOpt = document.createElement("option");
+		  emptyOpt.textContent = "无年份";
+		  select.appendChild(emptyOpt);
+		  const daysSpan = document.getElementById("countdownDays");
+		  if (daysSpan) daysSpan.textContent = "--";
+		  return;
 		}
-
-		// 确保DOM加载完成后再执行，避免元素未就绪
-		if (document.readyState === "loading") {
-			document.addEventListener("DOMContentLoaded", initSelect);
+  
+		let defaultYear = 2027;
+		if (!years.includes(defaultYear)) {
+		  defaultYear = years[0];
+		}
+  
+		select.innerHTML = "";
+		years.forEach((year) => {
+		  const option = document.createElement("option");
+		  option.value = year;
+		  option.textContent = year + "年";
+		  if (year === defaultYear) {
+			option.selected = true;
+		  }
+		  select.appendChild(option);
+		});
+  
+		const initialSelected = parseInt(select.value, 10);
+		if (!isNaN(initialSelected)) {
+		  updateCountdown(initialSelected);
 		} else {
-			initSelect();
+		  const daysSpan = document.getElementById("countdownDays");
+		  if (daysSpan) daysSpan.textContent = "--";
 		}
-	})();
-</script>
+  
+		// 移除旧监听，避免重复绑定
+		const newSelect = select.cloneNode(true);
+		select.parentNode.replaceChild(newSelect, select);
+		
+		newSelect.addEventListener("change", function (e) {
+		  const selectedYear = parseInt(e.target.value, 10);
+		  if (!isNaN(selectedYear)) {
+			updateCountdown(selectedYear);
+		  } else {
+			const daysSpan = document.getElementById("countdownDays");
+			if (daysSpan) daysSpan.textContent = "--";
+		  }
+		});
+	  }
+  
+	  // 每次页面切换后重新初始化
+	  initSelect();
+	});
+  </script>
