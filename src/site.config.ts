@@ -46,7 +46,6 @@ export const menuLinks: MenuLink[] = [
   { path: 'https://status.cafe/users/isntbunny', title: 'Memos' },
   { path: '/uta/', title:'uta'},
   { path: '/gallery/', title: 'Gallery' },
-  { path: '/bangumi/', title: 'Bangumi' },
   { path: '/nav/', title: 'Links'},
   { path: '/guestbook/', title: 'Guestbook' },
   { path: '/about/', title: 'About' },
