@@ -78,7 +78,7 @@ const page = defineCollection({
 
 
 const uta = defineCollection({
-  loader: glob({ base: './src/content/uta', pattern: '**/*.{md,mdx}' }),
+  type: 'content',
   schema: z.object({
     title: z.string(),
     artist: z.string().optional(),
