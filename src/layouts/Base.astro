@@ -41,4 +41,34 @@ const {
 			e.preventDefault(); // 阻止默认的全量替换
 		}
 	});
+
+	document.addEventListener('astro:page-load', () => {
+    const cards = document.querySelectorAll('.sitecard');
+    
+    // 1. 先用 IntersectionObserver 监听滚动触发
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(card);
+    });
+
+    // 2. 页面加载后立即手动检查：已经在视口内的卡片马上浮现
+    requestAnimationFrame(() => {
+      const windowHeight = window.innerHeight;
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        // 只要卡片顶部在视口内（或卡片底部已经进入视口）
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          card.classList.add('visible');
+        }
+      });
+    });
+  });  
 </script>

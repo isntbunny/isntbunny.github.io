@@ -52,7 +52,15 @@ body {
     position: relative;
     padding: 2rem;
     margin-bottom: 2rem;
+    opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 
+}
+
+.sitecard.visible {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 /* 标题导航栏 */
