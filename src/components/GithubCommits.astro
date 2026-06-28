@@ -1,13 +1,9 @@
 ---
 // src/components/GithubCommits.astro
 
-// 配置区：改成你的 GitHub 用户名和仓库名
 const owner = 'isntbunny';
 const repo = 'isntbunny.github.io'; 
-// 注意：如果是 username.github.io 仓库，repo 就是 'username.github.io'
-
-// 获取最新 5 条提交（公开仓库无需 Token，但有每小时 60 次的频率限制）
-const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=5`;
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=10`;
 
 let commits = [];
 let errorMsg = '';
@@ -22,6 +18,35 @@ try {
 } catch (err) {
   errorMsg = '网络错误，无法获取提交记录';
 }
+
+// 按日期分组
+function groupCommitsByDate(commits) {
+  const groups = {};
+  
+  commits.forEach(commit => {
+    const date = new Date(commit.commit.author.date);
+    const dateKey = date.toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    
+    if (!groups[dateKey]) {
+      groups[dateKey] = [];
+    }
+    groups[dateKey].push(commit);
+  });
+  
+  return groups;
+}
+
+const groupedCommits = commits.length > 0 ? groupCommitsByDate(commits) : {};
+const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
+  // 将日期字符串转回日期对象进行比较
+  const dateA = new Date(a.replace(/年|月/g, '/').replace(/日/g, ''));
+  const dateB = new Date(b.replace(/年|月/g, '/').replace(/日/g, ''));
+  return dateB - dateA;
+});
 ---
 
 {errorMsg && <p style="color: #888; font-size: 0.9rem;">⚠️ {errorMsg}</p>}
@@ -29,83 +54,146 @@ try {
 {commits.length > 0 && (
   <div class="commit-list">
     <h3>最近更新</h3>
-    <ul>
-      {commits.map((commit) => {
-        const { message, author } = commit.commit;
-        const firstLine = message.split('\n')[0] || message; // 取标题行
-        const date = new Date(author.date).toLocaleDateString('zh-CN', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        });
+    {sortedDates.map((dateKey) => {
+      const dayCommits = groupedCommits[dateKey];
+      
+      return (
+        <div class="date-group" key={dateKey}>
+          <div class="date-header">
+            <span class="date-label">{dateKey}</span>
+            <span class="commit-count">{dayCommits.length} 次提交</span>
+          </div>
+          <ul>
+            {dayCommits.map((commit) => {
+              const { message, author } = commit.commit;
+              const firstLine = message.split('\n')[0] || message;
+              const time = new Date(author.date).toLocaleTimeString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
 
-        return (
-          <li key={commit.sha}>
-            <a 
-              href={commit.html_url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              title={message}
-            >
-              <span class="msg">{firstLine}</span>
-              <span class="meta">
-                <span class="author">{author.name}</span>
-                <span class="date">{date}</span>
-              </span>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+              return (
+                <li key={commit.sha}>
+                  <div class="commit-item">
+                    <span class="msg">{firstLine}</span>
+                    <span class="meta">
+                      <span class="author">{author.name}</span>
+                      <span class="time">{time}</span>
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    })}
+    
     <style>
-  .commit-list h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  .commit-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .commit-list li {
-    border-bottom: 1px solid #eee;
-    padding: 0.6rem 0;
-  }
-  .commit-list li:last-child {
-    border-bottom: none;
-  }
-  .commit-list a {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .commit-list a:hover .msg {
-    color: #0366d6;
-    text-decoration: underline;
-  }
-  .msg {
-    font-weight: 500;
-    flex: 1;
-    min-width: 150px;
-  }
-  .meta {
-    font-size: 0.8rem;
-    color: #586069;
-    white-space: nowrap;
-  }
-  .author {
-    background: #f0f0f0;
-    padding: 0.1rem 0.5rem;
-    border-radius: 12px;
-    margin-right: 0.5rem;
-  }
-  .date {
-    color: #888;
-  }
-</style>
+      .commit-list h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .date-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .date-group:last-child {
+        margin-bottom: 0;
+      }
+      
+      .date-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.4rem 0;
+        border-bottom: 2px solid #e1e4e8;
+        margin-bottom: 0.5rem;
+      }
+      
+      .date-label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #24292e;
+      }
+      
+      .commit-count {
+        font-size: 0.8rem;
+        color: #586069;
+        background: #f0f0f0;
+        padding: 0.1rem 0.7rem;
+        border-radius: 12px;
+      }
+      
+      .commit-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .commit-list li {
+        padding: 0.4rem 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      
+      .commit-list li:last-child {
+        border-bottom: none;
+      }
+      
+      .commit-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      
+      .msg {
+        font-weight: 500;
+        flex: 1;
+        min-width: 150px;
+        color: #24292e;
+      }
+      
+      .meta {
+        font-size: 0.8rem;
+        color: #586069;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      
+      .author {
+        background: #f0f0f0;
+        padding: 0.1rem 0.5rem;
+        border-radius: 12px;
+        color: #24292e;
+      }
+      
+      .time {
+        color: #888;
+        font-size: 0.75rem;
+      }
+      
+      @media (max-width: 600px) {
+        .commit-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.2rem;
+        }
+        
+        .meta {
+          white-space: normal;
+        }
+        
+        .date-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.2rem;
+        }
+      }
+    </style>
   </div>
 )}
