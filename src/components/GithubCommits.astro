@@ -63,28 +63,16 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
             <span class="date-label">{dateKey}</span>
             <span class="commit-count">{dayCommits.length} 次提交</span>
           </div>
-          <ul>
+          <p>
             {dayCommits.map((commit) => {
-              const { message, author } = commit.commit;
+              const { message} = commit.commit;
               const firstLine = message.split('\n')[0] || message;
-              const time = new Date(author.date).toLocaleTimeString('zh-CN', {
-                hour: '2-digit',
-                minute: '2-digit',
-              });
 
               return (
-                <li key={commit.sha}>
-                  <div class="commit-item">
-                    <span class="msg">{firstLine}</span>
-                    <span class="meta">
-                      <span class="author">{author.name}</span>
-                      <span class="time">{time}</span>
-                    </span>
-                  </div>
-                </li>
+                <p key={commit.sha} class="msg">{firstLine}</p>
               );
             })}
-          </ul>
+          </p>
         </div>
       );
     })}
@@ -126,34 +114,23 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
         border-radius: 12px;
       }
       
-      .commit-list ul {
-        list-style: none;
+      .commit-list  {
+        display:inline;
         padding: 0;
         margin: 0;
       }
-      
-      .commit-list li {
-        padding: 0.4rem 0;
-        border-bottom: 1px solid #f0f0f0;
-      }
-      
-      .commit-list li:last-child {
-        border-bottom: none;
-      }
-      
-      .commit-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
+
       
       .msg {
+        display: inline;
         font-weight: 500;
-        flex: 1;
         min-width: 150px;
         color: #24292e;
+      }
+
+      .commit-list p::after{
+          content: ' ';
+          color: #c0c0c0;
       }
       
       .meta {
@@ -164,36 +141,7 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
         align-items: center;
         gap: 0.5rem;
       }
-      
-      .author {
-        background: #f0f0f0;
-        padding: 0.1rem 0.5rem;
-        border-radius: 12px;
-        color: #24292e;
-      }
-      
-      .time {
-        color: #888;
-        font-size: 0.75rem;
-      }
-      
-      @media (max-width: 600px) {
-        .commit-item {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.2rem;
-        }
-        
-        .meta {
-          white-space: normal;
-        }
-        
-        .date-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.2rem;
-        }
-      }
+
     </style>
   </div>
 )}

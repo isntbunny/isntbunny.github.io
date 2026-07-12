@@ -1,14 +1,4 @@
 
-#main-header { 
-	position: fixed;
-	inset: 0 0 auto 0;
-	z-index: 100;
-	padding: 5px 25px;
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(50px);
-	border-bottom: 1px solid rgba(226, 232, 240, 0.85);
-}
-
 h2{
   display: block;
 }
@@ -85,6 +75,7 @@ h2{
   height: 300px;
   gap: 1rem;
   width: 250px;
+  margin:2em;
 }
 
 .sociallinks h3 {
@@ -124,6 +115,7 @@ h2{
   position: sticky;
   top: 0;
   grid-column: span 2;  /* 标题占满两列 */
+
 }
 
 .stamps img, .blinkies img {
