@@ -56,11 +56,11 @@ try {
 }
 ---
 
-<Layout meta={{ title: "网址导航", description: "精选实用网站" }}>
+<Layout meta={{ title: "网址导航", description: "网址导航" }}>
   <div class="container">
     <h1>🔗 网址导航</h1>
     {sections.length === 0 ? (
-      <p>暂无导航链接，请添加 md 文件到 src/content/nav/</p>
+      <p>暂无导航链接，添加 md 文件到 src/content/nav/ 以开始！</p>
     ) : (
       sections.map(section => (
         <div class="section">
