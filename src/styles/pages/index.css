@@ -1,107 +1,316 @@
-
-.mushroom {
-	position: fixed;
-	margin: 1rem;
-    bottom: 1px;      
-	left: 0px;        /* 距离左边20px */
-	display: flex;
-    gap: 10px;         /* 图片之间的间距 */
-    z-index: 99;      /* 确保在最上层 */
+/* ===== 全局手帐配色 ===== */
+:root {
+  --angel-blue: #b8d4e8;
+  --angel-blue-light: #d6e8f5;
+  --angel-blue-pale: #eaf2f9;
+  --angel-gray: #d8dfe6;
+  --angel-text: #4a5d6e;
+  --angel-shadow: rgba(160, 190, 215, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.65);
 }
 
-.mushroom img {
-	width: 65px;       /* 设置宽度 */
-	height: auto;      /* 高度自动 */
+/* ===== 主体背景 ===== */
+body {
+  background: #eef4f8;
 }
 
-#statuscafe {
-	padding: 0.5em;
-	border-radius: 15px;
+/* ===== 贴纸墙 ===== */
+.sticker-wall {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(3px);
+  border-radius: 28px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(210, 225, 240, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  position: relative;
+}
+
+.sticker-wall::after {
+  position: absolute;
+  top: -12px;
+  left: 28px;
+  background: #eaf2f9;
+  padding: 0 16px;
+  font-size: 13px;
+  color: #7a92a8;
+  letter-spacing: 3px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.sticker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sticker {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
+  padding: 8px 12px;
+  border-radius: 20px 8px 20px 8px;
+  box-shadow: 0 2px 10px var(--angel-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.25s;
+  position: relative;
+}
+
+.sticker:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  box-shadow: 0 6px 20px rgba(160, 190, 215, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.sticker::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 25%;
+  width: 30%;
+  height: 10px;
+  background: rgba(210, 225, 240, 0.4);
+  border-radius: 20px 20px 0 0;
+  filter: blur(1px);
+  opacity: 0.5;
+}
+
+.mushroom-sticker img {
+  height: 60px;
+  width: auto;
+  display: block;
+  border-radius: 12px 4px 12px 4px;
+}
+
+/* 每个蘑菇不同的旋转偏移 */
+.mushroom-sticker:nth-child(1) { transform: rotate(-2deg) translateY(-2px); }
+.mushroom-sticker:nth-child(2) { transform: rotate(3deg) translateY(4px); }
+.mushroom-sticker:nth-child(3) { transform: rotate(-1deg) translateY(-3px); }
+.mushroom-sticker:nth-child(4) { transform: rotate(4deg) translateY(2px); }
+
+/* ===== 主网格双栏 ===== */
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.left-col,
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== 卡片 ===== */
+.sitecard {
+  background: var(--card-bg);
+  backdrop-filter: blur(3px);
+  border-radius: 24px;
+  padding: 20px 24px;
+  border: 1px solid rgba(210, 225, 240, 0.5);
+  box-shadow: 0 2px 14px var(--angel-shadow);
+  transition: 0.25s;
+}
+
+.sitecard:hover {
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 4px 20px rgba(160, 190, 215, 0.25);
+}
+
+.sitecard h1 {
+  font-weight: 400;
+  color: var(--angel-text);
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.sitecard h2 {
+  font-weight: 400;
+  color: var(--angel-text);
+  font-size: 15px;
+  letter-spacing: 2px;
+  border-bottom: 1px dotted var(--angel-blue-light);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.sitecard p {
+  color: #5d7388;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 4px 0;
+}
+
+/* ===== Welcome 卡片特殊样式 ===== */
+.welcome-card {
+  border-left: 4px solid var(--angel-blue);
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.badge-row img {
+  height: 32px;
+  width: auto;
+  border-radius: 4px;
+}
+
+/* ===== Status 样式 ===== */
+#statuscafe-content {
+  color: #5d7388;
+  font-size: 14px;
+  padding: 4px 0;
+  font-style: italic;
 }
 
 #statuscafe-username {
-	
+  color: #8aa3b9;
+  font-size: 13px;
 }
 
-#statuscafe-content {
+/* ===== Countdown ===== */
+.distance-label {
+  color: #5d7388;
+  font-size: 15px;
+  margin-bottom: 6px;
 }
 
-.welcome-card {
-    background-color: white;
-    padding-top: 6em;
-	padding-bottom: 2em;
-	padding-inline: 4em;
-    margin: 0;
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    left: 0;
-    right: 0;
-	z-index:10;
-	margin-bottom: 3em;
-	    box-shadow:  20px 20px 42px rgb(200, 220, 244),
-		                 -20px -20px 42px rgb(255, 255, 255);
-
+.year-select {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--angel-blue-light);
+  border-radius: 30px;
+  padding: 2px 12px;
+  font-size: 14px;
+  color: var(--angel-text);
+  margin: 0 6px;
+  outline: none;
+  cursor: pointer;
 }
 
-.welcome-card h1{
-	margin-top: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    animation: neon-pulse 1.5s infinite;
-	background: linear-gradient(to right, #a0c6ff 0%, #dddddd 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+.year-select:focus {
+  border-color: var(--angel-blue);
+  box-shadow: 0 0 0 3px rgba(184, 212, 232, 0.2);
 }
 
-@keyframes neon-pulse {
-    0%, 100% { 
-        opacity: 1;
-        filter: brightness(1.1);
-    }
-    50% { 
-        opacity: 7;
-        filter: brightness(0.9);
-    }
-}
-/* 竖条纹背景层 */
-.welcome-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5em;
-    background: repeating-linear-gradient(
-        90deg,
-        #c2dfff,
-        #c2dfff 20px,
-        white 20px,
-        white 40px
-    );
-    z-index: 0;
+.days-number {
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--angel-text);
+  letter-spacing: 4px;
+  display: inline-block;
+  margin-top: 2px;
 }
 
-/* 心形图片层 - 增加高度让图片完整显示 */
-.welcome-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6em;  /* 从 3em 改为 6em，留出空间 */
-    background: url('https://i.postimg.cc/7LCJmwdZ/bluebow.png') repeat-x top;
-    background-size: 12em;
-    background-position: 0 4.3em;
-    background-repeat: repeat-x;
-    z-index: 1;
-    pointer-events: none;
-	opacity:0.7;
+/* ===== Reading List ===== */
+.reading-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* 内容区域 */
-.welcome-card > * {
-    position: relative;
-    z-index: 2;
+.reading-list li {
+  color: #5d7388;
+  font-size: 15px;
+  padding: 4px 0 4px 20px;
+  position: relative;
+}
+
+.reading-list li::before {
+  content: '⊹';
+  position: absolute;
+  left: 0;
+  color: var(--angel-blue);
+}
+
+/* ===== ToDo 占位 ===== */
+.todo-placeholder {
+  min-height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  border: 1px dashed var(--angel-blue-light);
+  position: relative;
+}
+
+.todo-placeholder::after {
+  content: '+ 添加待办';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #b0c4d6;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* ===== 页脚印章 ===== */
+.footer-stamp {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: #b0c4d6;
+  letter-spacing: 3px;
+  border-top: 1px dashed rgba(180, 200, 220, 0.3);
+  padding-top: 20px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 820px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .sticker-wall {
+    padding: 16px 18px;
+  }
+
+  .sticker-grid {
+    gap: 12px 16px;
+  }
+
+  .mushroom-sticker img {
+    height: 50px;
+  }
+
+  .sitecard {
+    padding: 16px 18px;
+  }
+
+  .days-number {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticker-wall::after {
+    font-size: 11px;
+    left: 16px;
+    top: -10px;
+  }
+
+  .mushroom-sticker img {
+    height: 40px;
+  }
+
+  .sitecard h1 {
+    font-size: 18px;
+  }
+
+  .days-number {
+    font-size: 28px;
+  }
+
+  .footer-stamp {
+    font-size: 11px;
+  }
 }

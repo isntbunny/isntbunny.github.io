@@ -5,70 +5,103 @@ import GithubCommits from "@/components/GithubCommits.astro";
 ---
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
-	<section class="stickers">
-		<div class="mushroom">
-			<a href="https://postimages.org/" target="_blank"
-				><img src="https://i.postimg.cc/Pq05dWKQ/Amanita-cokeri.png" alt="Amanita-cokeri" /></a
-			>
-			<a href="https://postimages.org/" target="_blank"
-				><img src="https://i.postimg.cc/C1DL5RQT/Coprinus-comatus.png" alt="Coprinus-comatus" /></a
-			>
-			<a href="https://postimages.org/" target="_blank">
-				<img
-					src="https://i.postimg.cc/RhLS1jmh/Mycena-interrupta.png"
-					alt="Mycena-interrupta"
-				/>
+	<!-- ===== 贴纸墙 ===== -->
+	<section class="sticker-wall">
+		<div class="sticker-grid">
+			<div class="sticker mushroom-sticker">
+				<a href="https://postimages.org/" target="_blank">
+					<img src="https://i.postimg.cc/Pq05dWKQ/Amanita-cokeri.png" alt="Amanita-cokeri" />
 				</a>
-			<img src="https://i.postimg.cc/Jz4nx4tS/sumikko-seedling.png">
+			</div>
+			<div class="sticker mushroom-sticker">
+				<a href="https://postimages.org/" target="_blank">
+					<img src="https://i.postimg.cc/C1DL5RQT/Coprinus-comatus.png" alt="Coprinus-comatus" />
+				</a>
+			</div>
+			<div class="sticker mushroom-sticker">
+				<a href="https://postimages.org/" target="_blank">
+					<img src="https://i.postimg.cc/RhLS1jmh/Mycena-interrupta.png" alt="Mycena-interrupta" />
+				</a>
+			</div>
+			<div class="sticker mushroom-sticker">
+				<img src="https://i.postimg.cc/Jz4nx4tS/sumikko-seedling.png" />
+			</div>
 		</div>
 	</section>
 
-	<section class="welcome-card">
-		<h1>Welcome to my corner.</h1>
-		<p>
-			退网中，乱七八糟的布局就先搁置不改了。
-		</p>
-		<p>
-			now I'm <a href="https://www.imood.com/users/isntbunny"><img src="https://moods.imood.com/display/uname-isntbunny/fg-000000/bg-ffffff/imood.gif" alt="The current mood of isntbunny at www.imood.com" border="0"></a>
-		</p>
-		<p></p>
-			<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows"></a>
-			<a href="https://postimg.cc/JsNvVCP5" target="_blank"><img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton"></a>
-		</p>
-	</section>
+	<!-- ===== 主网格 ===== -->
+	<div class="main-grid">
 
-	<section class="sitecard">
-		<div id="statuscafe">
-			<h2>Latest Status</h2>
-			<div id="statuscafe-username"></div>
-			<div id="statuscafe-content"></div>
-		</div>
-		<script src="https://status.cafe/current-status.js?name=isntbunny" defer></script>
-	</section>
-	<div class="sitecard">
-<GithubCommits/></div>
-	<section class="sitecard">
-		<h2>Countdown</h2>
-		<div class="distance-label">
-			距离<select id="yearSelect" class="year-select"></select>高考还有
-		</div>
-		<span class="days-number" id="countdownDays">--</span>天
-	</section>
+		<!-- ===== 左栏 ===== -->
+		<div class="left-col">
 
-	<section class="sitecard">
-		<h2>RECENTLY READING</h2>
-		<ul>红与黑</ul>
-	</section>
+			<!-- 欢迎卡片 -->
+			<section class="sitecard welcome-card">
+				<h1>Welcome to my corner.</h1>
+				<p>退网中，乱七八糟的布局就先搁置不改了。</p>
+				<p>
+					now I'm 
+					<a href="https://www.imood.com/users/isntbunny">
+						<img src="https://moods.imood.com/display/uname-isntbunny/fg-000000/bg-ffffff/imood.gif" alt="The current mood of isntbunny at www.imood.com" border="0" />
+					</a>
+				</p>
+				<p class="badge-row">
+					<a href="https://postimages.org/" target="_blank">
+						<img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
+					</a>
+					<a href="https://postimg.cc/JsNvVCP5" target="_blank">
+						<img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
+					</a>
+				</p>
+			</section>
 
-	<section class="sitecard">
-		<h2>My garden</h2>
-	    <div class="">
+			<!-- Latest Status -->
+			<section class="sitecard">
+				<h2>✦ Latest Status</h2>
+				<div id="statuscafe-username"></div>
+				<div id="statuscafe-content"></div>
+				<script src="https://status.cafe/current-status.js?name=isntbunny" defer></script>
+			</section>
+
+			<!-- Github Commits -->
+			<section class="sitecard">
+				<GithubCommits />
+			</section>
 
 		</div>
-	</section>
 
-	
+		<!-- ===== 右栏 ===== -->
+		<div class="right-col">
+
+			<!-- Countdown -->
+			<section class="sitecard">
+				<h2>✦ Countdown</h2>
+				<div class="distance-label">
+					距离<select id="yearSelect" class="year-select"></select>高考还有
+				</div>
+				<span class="days-number" id="countdownDays">--</span>天
+			</section>
+
+			<!-- RECENTLY READING -->
+			<section class="sitecard">
+				<h2>✦ RECENTLY READING</h2>
+				<ul class="reading-list">
+					<li>红与黑</li>
+				</ul>
+			</section>
+
+			<!-- ToDo -->
+			<section class="sitecard">
+				<h2>✦ ToDo</h2>
+				<div class="todo-placeholder"></div>
+			</section>
+
+		</div>
+
+	</div>
+
 </PageLayout>
+
 <script>
 	document.addEventListener('astro:page-load', () => {
 	  // 高考倒计时逻辑写在这里
@@ -154,7 +187,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  if (daysSpan) daysSpan.textContent = "--";
 		}
   
-		// 移除旧监听，避免重复绑定
 		const newSelect = select.cloneNode(true);
 		select.parentNode.replaceChild(newSelect, select);
 		
@@ -169,7 +201,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		});
 	  }
   
-	  // 每次页面切换后重新初始化
 	  initSelect();
 	});
-  </script>
+</script>
