@@ -28,7 +28,7 @@ h2{
 }
 
 .mybio {
-  color: #6c6c6c;
+  color: var(--ink-soft);
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
 }
@@ -38,11 +38,11 @@ h2{
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  border-top: 1px solid #BECFE8;
-  border-bottom: 1px solid #BECFE8;
+  border-top: 1px solid var(--angel-blue-light);
+  border-bottom: 1px solid var(--angel-blue-light);
   padding: 0.2rem 0;
   justify-content: center;
-  background: rgb(255 255 255 / 0.73);
+  background: var(--card-bg);
 }
 
 .attribar img {
@@ -144,7 +144,7 @@ h2{
 .skills-section h3 {
   font-size: 1.2rem;
   margin-top: 0.5rem;
-  color: #555;
+  color: var(--angel-text);
   text-align: center;
 }
 
@@ -257,7 +257,7 @@ h2{
 
 @media (max-width: 768px) {
   .ham-nav-menu {
-    border:1px dashed #becfe8;
+    border:1px dashed var(--angel-blue-light);
     border-top: none;
     display: none;
     position: fixed;
@@ -265,7 +265,7 @@ h2{
     width: 100%;
     left:0;
     height: auto;
-    background: rgb(255 255 255 / 0.4);
+    background: var(--glass-bg);
     backdrop-filter: 50px;
     padding: 0;
     z-index: 100;

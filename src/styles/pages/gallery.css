@@ -33,18 +33,18 @@
 }
 
 .gallery-grid::-webkit-scrollbar-track {
-	background: #e2e8f0;
+	background: var(--angel-blue-light);
 	border-radius: 3px;
 }
 
 .gallery-grid::-webkit-scrollbar-thumb {
-	background: #94a3b8;
+	background: var(--ink-faint);
 	border-radius: 3px;
 }
 
 
 .gallery-year-section {
-	background: #ffffff99;
+	background: var(--card-bg);
 	padding: 2em;
 	border-radius: 10px;
 }
@@ -59,11 +59,11 @@
 }
 
 .gallery-year-title {
-	background-color: #c5c5c5;
-	color: #fff;
+	background-color: var(--angel-gray);
+	color: var(--white);
 	font-size: 1.75rem;
 	padding:1em;
-	border-bottom: 2px solid #e2e8f0;
+	border-bottom: 2px solid var(--angel-blue-light);
 }
 
 .gallery-month-group {
@@ -78,7 +78,7 @@
 	width: 100px;
 	font-size: 1.125rem;
 	font-weight: 600;
-	color: #4a5568;
+	color: var(--angel-text);
 	padding: 1em;
 	background-color:gainsboro;
 }
@@ -120,7 +120,7 @@
 	position: absolute;
 	inset: 0;
 	border-radius: 12px;
-	background: linear-gradient(90deg, #d4f0f5, #e8f6fa, #d4f0f5);
+	background: linear-gradient(90deg, var(--angel-blue-light), var(--angel-blue-pale), var(--angel-blue-light));
 	background-size: 200% 200%;
 	animation: shimmer 1.2s infinite;
 }
@@ -157,13 +157,13 @@
 	border-radius: 12px;
 }
 .gallery-lightbox p {
-	color: #fff;
+	color: var(--white);
 	text-align: center;
 }
 .gallery-arrow {
 	border: 1px solid rgba(255, 255, 255, 0.4);
 	background: rgba(255, 255, 255, 0.1);
-	color: #fff;
+	color: var(--white);
 	border-radius: 20px;
 	padding: 10px;
 }

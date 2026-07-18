@@ -49,7 +49,7 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
 });
 ---
 
-{errorMsg && <p style="color: #888; font-size: 0.9rem;">⚠️ {errorMsg}</p>}
+{errorMsg && <p style="color: var(--ink-faint); font-size: 0.9rem;">⚠️ {errorMsg}</p>}
 
 {commits.length > 0 && (
   <div class="commit-list">
@@ -96,20 +96,20 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
         justify-content: space-between;
         align-items: center;
         padding: 0.4rem 0;
-        border-bottom: 2px solid #e1e4e8;
+        border-bottom: 2px solid var(--angel-blue-light);
         margin-bottom: 0.5rem;
       }
       
       .date-label {
         font-weight: 600;
         font-size: 1rem;
-        color: #24292e;
+        color: var(--angel-text);
       }
       
       .commit-count {
         font-size: 0.8rem;
-        color: #586069;
-        background: #f0f0f0;
+        color: var(--ink-soft);
+        background: var(--angel-blue-pale);
         padding: 0.1rem 0.7rem;
         border-radius: 12px;
       }
@@ -125,17 +125,17 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
         display: inline;
         font-weight: 500;
         min-width: 150px;
-        color: #24292e;
+        color: var(--angel-text);
       }
 
       .commit-list p::after{
           content: ' ';
-          color: #c0c0c0;
+          color: var(--angel-gray);
       }
       
       .meta {
         font-size: 0.8rem;
-        color: #586069;
+        color: var(--ink-soft);
         white-space: nowrap;
         display: flex;
         align-items: center;

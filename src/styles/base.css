@@ -2,18 +2,20 @@
 /*这里存放的是布局样式*/
 /*******************/
 
-
+html {
+	scroll-padding-top: calc(var(--header-height) + 1rem);
+}
 
 h1::after, h1::before {
     content: ""; 
-	color: #ffffff00;                    /* 伪元素不需要文字内容 */
-    display: block;                  /* 块级元素，让图片另起一行 */
-    width: auto;                     /* 图片显示宽度 */
-    height: 0.6em;                   /* 图片显示高度 */
-    margin: 3px;                /* 与标题文字的间距 */
+	color: transparent;
+    display: block;
+    width: auto;
+    height: 0.6em;
+    margin: 3px;
     background-image: url("");
-    background-size: contain;        /* 按比例缩放以适应宽或高 */
-    background-repeat:repeat-x;
+    background-size: contain;
+    background-repeat: repeat-x;
     background-position: center;
 }
 
@@ -22,16 +24,21 @@ body.site-shell {
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--text-main);
-	animation: pageFade 0.55s ease both
+	animation: pageFade 0.55s ease both;
 }
-
 
 body {
 	background-size: 3em 3em;
-	background-color: #eff6ff;
+	background-color: var(--paper-bg);
+	background-image:
+		radial-gradient(circle at 1px 1px, rgba(184, 212, 232, 0.22) 1px, transparent 0);
 	opacity: 1;
-	padding: 0px 15%;
-	color: #4d657a;
+	padding: var(--header-height) 15% 0;
+	color: var(--angel-text);
+}
+
+main#main {
+	padding-top: 1rem;
 }
 
 .small-muted {
@@ -39,23 +46,19 @@ body {
 	color: var(--text-muted);
 }
 
-
-/* 卡片 */
-
 .sitecard {
-    background: rgb(255 255 255 / 0.73);
-    backdrop-filter: blur(13px);
-    -webkit-backdrop-filter: blur(13px);
-    border-radius: 25px;
-    border: 1px solid rgb(184 234 255 / 0);
-    box-shadow: rgb(77 143 214 / 0.34) 0px 8px 32px 0px;  
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
     position: relative;
     padding: 2rem;
     margin-bottom: 2rem;
     opacity: 0;
 	transform: translateY(30px);
-	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .sitecard.visible {
@@ -63,16 +66,22 @@ body {
 	transform: translateY(0);
 }
 
-/* 标题导航栏 */
+.sitecard:hover {
+	background: var(--card-bg-hover);
+	box-shadow: var(--hover-shadow);
+}
 
 #main-header { 
 	position: fixed;
 	inset: 0 0 auto 0;
 	z-index: 100;
-	padding: 5px 25px;
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(50px);
-	border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+	min-height: var(--header-height);
+	padding: 0.85rem 25px;
+	background: rgba(255, 255, 255, 0.58);
+	backdrop-filter: blur(28px);
+	-webkit-backdrop-filter: blur(28px);
+	border-bottom: 1px solid var(--glass-border);
+	box-shadow: 0 8px 24px rgba(160, 190, 215, 0.16);
 }
 
 .site-nav-shell {
@@ -89,6 +98,7 @@ body {
     font-family: "smalle";
     text-decoration: none;
 	font-weight: 600;
+	color: var(--angel-text);
 }
 
 .site-nav-links {
@@ -102,13 +112,15 @@ body {
     text-decoration: none;
 	position: relative;
 	color: var(--text-main);
+	transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .site-nav-link:hover {
-	color: var(--primary-300);
+	color: var(--ink-faint);
+	transform: translateY(-1px);
 }
 .site-nav-link[aria-current="page"] {
-	color: #acbccc;
+	color: var(--ink-faint);
 }
 
 .site-footer {
@@ -116,26 +128,55 @@ body {
 	font-size: 14px;
 	color: var(--text-muted);
 	border-top: 1px solid var(--border);
+	padding: 1rem 0;
+}
+
+ .hamburger {
+	display: none;
+}
+
+a, button, img, .card, .gallery-tile, .bangumi-item, .sticker, .year-select {
+	transition-timing-function: ease;
+}
+
+main#main > *, .page-fade > * {
+	animation: contentFloat 0.55s ease both;
 }
 
 @keyframes pageFade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes contentFloat {
 	from {
 		opacity: 0;
+		transform: translateY(10px);
 	}
 	to {
 		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
-/* 手机端📱 */
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
 
 @media (max-width: 768px) {
-    .sitecard {
-
-    }
-
+	:root {
+		--header-height: 3.75rem;
+	}
+	body {
+		padding: var(--header-height) 1rem 0;
+	}
 	main#main {
-		width: calc(100%);
+		width: 100%;
 		margin-top: 12px;
 	}
 	#main-header {
@@ -145,104 +186,51 @@ body {
 		display:none;
 	}
 
-
-    /*🍔*/
-
     .hamburger {
-		background-color: #acbccc;
-		border: 1px solid #acbccc;
+		background-color: var(--angel-blue);
+		border: 1px solid var(--angel-blue-light);
         display:block;
 		padding: 0em 1em;
 		margin: 0;
-		color:#ffffff;
+		color: var(--angel-text);
 		border-radius:15px;
 		font-weight: 800;
 		font-family: "smalle";
     }
 
 	.ham-nav-menu {
-		border:1px dashed #becfe8;
+		border:1px dashed var(--angel-blue-light);
 		border-top: none;
         display: none;
         position: fixed;
-        top: 3.14em;
+        top: var(--header-height);
         width: 100%;
 		left:0;
         height: auto;
-	    background: rgb(255 255 255 / 0.73);
+	    background: var(--card-bg);
+		backdrop-filter: blur(18px);
         padding: 0;
         z-index: 100;
+		transform-origin: top;
+		transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+		transform: scaleY(0);
+		opacity: 0;
     }
 
 	.ham-nav-menu p{
 		text-align: center;
 		font-size:medium;
 	}
-	.ham-nav-menu p ::before {
-		content: "- ";
-	}
-	
-	.ham-nav-menu p ::after {
-		content: " -";
-	}
-
-	.ham-nav-menu a{
-        text-decoration: none !important;
-	}
-
-	
-	/* 展开状态 */
-	.ham-nav-menu.ham-open {
-	  display: block;
-	  max-height: 500px;  /* 足够大的值，根据你的菜单项数量调整 */
-	  opacity: 1;
-	}
-	
-	/* 或者用 transform 动画（更流畅） */
-	.ham-nav-menu {
-	  display: none;
-	  transform-origin: top;
-	  transition:transform 0.2s ease-out transform  0.2s ease-out;
-	  transform: scaleY(0);
-	  opacity: 0;
-	}
-	
+	.ham-nav-menu p ::before { content: "- "; }
+	.ham-nav-menu p ::after { content: " -"; }
+	.ham-nav-menu a{ text-decoration: none !important; }
 	.ham-nav-menu.ham-open {
 	  display: block;
 	  transform: scaleY(1);
 	  opacity: 1;
 	}
-
 	.ham-nav-menu ul {
-  padding-left: 0;
-  text-align: center;
-}
-
-.ham-nav-menu p {
-  margin: 0;
-  text-align: center;
-}
-
-.ham-nav-menu a {
-  display: inline-block;    /* 或者用 block */
-  text-align: center;
-}
-
-
-    body{
-        margin-top: 20px;
-       padding: 0% 4%;
-    }
-}
-
-
-/* 桌面端💻 */
-@media (min-width: 769px) {
-    .hamburger {
-        display: none;
-    }
-
-	.ham-nav-menu {
-		display:none;
+		padding-left: 0;
+		text-align: center;
 	}
 }

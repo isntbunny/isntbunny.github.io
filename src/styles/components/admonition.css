@@ -33,22 +33,22 @@
 }
 
 .admonition[data-admonition-type="note"] {
-	--admonition-color: #60a5fa;
-	background: #60a5fa0d;
+	--admonition-color: var(--angel-blue);
+	background: rgba(184, 212, 232, 0.16);
 }
 .admonition[data-admonition-type="tip"] {
-	--admonition-color: #84cc16;
-	background: #84cc160d;
+	--admonition-color: var(--ink-faint);
+	background: rgba(138, 163, 185, 0.12);
 }
 .admonition[data-admonition-type="important"] {
-	--admonition-color: #c084fc;
-	background: #c084fc0d;
+	--admonition-color: var(--ink-soft);
+	background: rgba(93, 115, 136, 0.12);
 }
 .admonition[data-admonition-type="caution"] {
-	--admonition-color: #fb923c;
-	background: #fb923c0d;
+	--admonition-color: var(--angel-gray);
+	background: rgba(216, 223, 230, 0.16);
 }
 .admonition[data-admonition-type="warning"] {
-	--admonition-color: #ef4444;
-	background: #ef44440d;
+	--admonition-color: var(--angel-text);
+	background: rgba(74, 93, 110, 0.10);
 }
