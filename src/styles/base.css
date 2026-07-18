@@ -3,11 +3,11 @@
 /*******************/
 
 html {
-	scroll-padding-top: calc(var(--header-height) + 1rem);
+	scroll-padding-top: calc(var(--header-height));
 }
 
 h1::after, h1::before {
-    content: ""; 
+    content: "#"; 
 	color: transparent;
     display: block;
     width: auto;

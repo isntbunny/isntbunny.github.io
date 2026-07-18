@@ -4,7 +4,6 @@
 @import "./base.css";
 @import url("https://cdn.jsdelivr.net/gh/isntbunny/web-fonts@main/ark/result.css");
 
-@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Yomogi&display=swap');
 @font-face {
   font-family: "Decima Mono Pro";
   src: url(https://file.garden/ZkRD3wbiZDsBIZnn/DecimaMonoPro.ttf);
@@ -60,7 +59,7 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 	--primary-300: var(--angel-blue);
 	--white: rgba(255, 255, 255, 0.87);
 	--blue: var(--angel-blue);
-	--header-height: 4.25rem;
+	--header-height: 1em;
 }
 
 
