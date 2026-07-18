@@ -4,6 +4,7 @@
 @import "./base.css";
 @import url("https://cdn.jsdelivr.net/gh/isntbunny/web-fonts@main/ark/result.css");
 
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Yomogi&display=swap');
 @font-face {
   font-family: "Decima Mono Pro";
   src: url(https://file.garden/ZkRD3wbiZDsBIZnn/DecimaMonoPro.ttf);
@@ -20,32 +21,46 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 @font-face {
                 font-family: Pixel Operator;
                 src: url('https://ghostingpen.net/fonts/PixelOperator.ttf');}
-@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Yomogi&display=swap');
 :root {
-    /* 文字的配色 */
-	--text-main: #468;
-	--text-muted: #aaa;
-	--color-global-text: #384d5e;
-	--color-link: #4f7490;
-	--color-accent: #5791b6;
-	--color-accent-2: #2f4e62;
-	--color-quote: #ccc;
-    /* 卡片的配色 */
-	--border: #e2e8f0;
-	--color-surface: #ffffffb3;
-	--color-surface-dark: #212d42d1;
-	--card-shadow: 0 4px 12px #59d;
-	--hover-shadow: 0 8px 20px #ddd;
-    /* 界面的配色 */
-	--color-global-bg: #edf4f7;
-	--bg-main: #f0f7fa;
-	--color-bg-overlay: #ecf5f8c7;
-	--primary-100: #e1f5f8;
-	--primary-200: #d4f0f5;
-	--primary-300: #c7e9f0;
-	--white: #fffd;
-    --blue: #9cf;
+	/* 主页同款雾蓝手帐配色：所有页面请优先使用这些变量 */
+	--angel-blue: #b8d4e8;
+	--angel-blue-light: #d6e8f5;
+	--angel-blue-pale: #eaf2f9;
+	--angel-gray: #d8dfe6;
+	--angel-text: #4a5d6e;
+	--angel-shadow: rgba(160, 190, 215, 0.2);
+	--angel-shadow-strong: rgba(160, 190, 215, 0.35);
+	--card-bg: rgba(255, 255, 255, 0.65);
+	--card-bg-hover: rgba(255, 255, 255, 0.78);
+	--glass-bg: rgba(255, 255, 255, 0.4);
+	--glass-border: rgba(210, 225, 240, 0.5);
+	--paper-bg: #eef4f8;
+	--paper-bg-soft: #f6fbfd;
+	--ink-soft: #5d7388;
+	--ink-faint: #8aa3b9;
 
+	/* 旧变量映射到全局主页配色，便于各页面统一 */
+	--text-main: var(--angel-text);
+	--text-muted: var(--ink-faint);
+	--color-global-text: var(--angel-text);
+	--color-link: var(--ink-soft);
+	--color-accent: var(--angel-blue);
+	--color-accent-2: var(--ink-soft);
+	--color-quote: var(--ink-faint);
+	--border: var(--glass-border);
+	--color-surface: var(--card-bg);
+	--color-surface-dark: rgba(74, 93, 110, 0.82);
+	--card-shadow: 0 2px 14px var(--angel-shadow);
+	--hover-shadow: 0 6px 20px var(--angel-shadow-strong);
+	--color-global-bg: var(--paper-bg);
+	--bg-main: var(--paper-bg);
+	--color-bg-overlay: rgba(234, 242, 249, 0.78);
+	--primary-100: var(--angel-blue-pale);
+	--primary-200: var(--angel-blue-light);
+	--primary-300: var(--angel-blue);
+	--white: rgba(255, 255, 255, 0.87);
+	--blue: var(--angel-blue);
+	--header-height: 4.25rem;
 }
 
 
@@ -79,6 +94,6 @@ a {
 	color: var(--text-main);
 	text-decoration: underline;
     text-decoration-style: dashed;
-	text-decoration-color: #acbccc;
+	text-decoration-color: var(--angel-blue);
 	text-underline-offset: 5px;
 }

@@ -19,7 +19,7 @@
 }
 
 .posts-page .posts-year-divider {
-	border-top: 2px dashed #e2e8f0;
+	border-top: 2px dashed var(--angel-blue-light);
 	margin: 0%;
 }
 
@@ -30,7 +30,7 @@
 
 .posts-page .posts-month {
 	display: inline-block;
-	background: #bbdeff79;
+	background: var(--angel-blue-pale);
 	border-radius: 999px;
 	padding: 4px 12px;
 }
@@ -38,7 +38,7 @@
 .posts-page .posts-list {
 	margin: 10px 0 0 24px;
 	padding-left: 14px;
-	border-left: 2px solid #c7e9f0;
+	border-left: 2px solid var(--angel-blue);
 	display: grid;
 	gap: 8px;
 }

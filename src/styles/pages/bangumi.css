@@ -7,12 +7,12 @@
 .bangumi-tab {
 	background: transparent;
 	border: 0;
-	color: #a0aec0;
+	color: var(--ink-faint);
 	padding: 2px 0;
 }
 .bangumi-tab.is-active {
-	color: #c7e9f0;
-	border-bottom: 2px solid #c7e9f0;
+	color: var(--angel-blue);
+	border-bottom: 2px solid var(--angel-blue);
 }
 .bangumi-grid {
 	display: grid;
@@ -35,5 +35,5 @@
 }
 .bangumi-item:hover img {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(199, 233, 240, 0.3);
+	box-shadow: 0 8px 20px var(--angel-shadow-strong);
 }
