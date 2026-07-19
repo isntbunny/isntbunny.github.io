@@ -124,7 +124,7 @@ import GithubCommits from "@/components/GithubCommits.astro";
 	  async function getVisitorLocation() {
 		try {
 		  // 使用 ip-api.com 获取访客信息
-		  const response = await fetch('https://ip-api.com/json/', {
+		  const response = await fetch('https://api.ipdatacloud.com/v2/query?ip=', {
 			signal: AbortSignal.timeout(5000) // 5秒超时
 		  });
 		  
@@ -229,16 +229,10 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		if (fromBrowser) {
 		  return {
 			greeting: `你好呀，来自${location.country}的朋友。`,
-			extra: `🌐 你使用的是 ${getBrowserInfo().language} 系统，时区为 ${location.timezone}。由于未能获取到你的真实IP，这个欢迎词是基于你的浏览器语言推测的~`,
+			extra: `你使用的是 ${getBrowserInfo().language} 系统，时区为 ${location.timezone}。海内存知己，天涯若比邻。世界很大，互联网让我们相遇，很高兴遇见你。`,
 		  };
 		}
 
-		if (!location) {
-		  return {
-			greeting: '你好呀，来自远方的朋友。',
-			extra: '海内存知己，天涯若比邻。世界很大，互联网让我们相遇，很高兴，遇见你。',
-		  };
-		}
 
 		const { country, countryCode, region, city } = location;
 		
@@ -332,7 +326,7 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  }
 
 		  if (!matched) {
-			extra = '欢迎来到bunny的小角落！';
+			extra = '海内存知己，天涯若比邻。世界很大，互联网让我们相遇，很高兴遇见你。';
 		  }
 
 		} else {
@@ -370,7 +364,7 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  }
 
 		  if (!matched) {
-			extra = '🌍 Welcome from across the globe!';
+			extra = 'Welcome from across the globe!';
 		  }
 		}
 
@@ -427,13 +421,13 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		// 更新 IP 信息
 		if (ipElement) {
 		  if (fromBrowser) {
-			ipElement.textContent = `🖥️ 基于浏览器信息: 语言 ${getBrowserInfo().language} · 时区 ${location.timezone}`;
+			ipElement.textContent = ``;
 		  } else {
 			const ipInfo = getIPInfo(location);
 			if (ipInfo) {
-			  ipElement.textContent = `📡 IP: ${ipInfo.ip} (${ipInfo.ipType}) · ${ipInfo.isp}`;
+			  ipElement.textContent = `IP: ${ipInfo.ip} (${ipInfo.ipType}) · ${ipInfo.isp}`;
 			} else {
-			  ipElement.textContent = '📡 IP信息获取失败';
+			  ipElement.textContent = 'IP信息获取失败';
 			}
 		  }
 		  ipElement.style.fontSize = '0.75rem';
