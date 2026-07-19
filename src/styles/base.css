@@ -23,6 +23,7 @@ h1::after, h1::before {
 }
 
 body.site-shell {
+	margin-top: 0;
 	animation: pageFade 0.55s ease both;
 }
 

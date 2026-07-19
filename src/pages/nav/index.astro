@@ -14,23 +14,23 @@ try {
     const fullPath = path.join(navDir, file);
     const content = await fs.readFile(fullPath, 'utf-8');
     
-    // 解析 frontmatter
     const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    let frontmatter = {};
+    let sectionTitle = '未命名';
+    let sectionIcon = '📁';
+    let sectionOrder = 0;
+    
     if (frontmatterMatch) {
       const yaml = frontmatterMatch[1];
       const titleMatch = yaml.match(/title:\s*"([^"]+)"/);
       const iconMatch = yaml.match(/icon:\s*"([^"]+)"/);
       const orderMatch = yaml.match(/order:\s*(\d+)/);
-      frontmatter = {
-        title: titleMatch ? titleMatch[1] : '未命名',
-        icon: iconMatch ? iconMatch[1] : '📁',
-        order: orderMatch ? parseInt(orderMatch[1]) : 0
-      };
+      
+      sectionTitle = titleMatch ? titleMatch[1] : '未命名';
+      sectionIcon = iconMatch ? iconMatch[1] : '📁';
+      sectionOrder = orderMatch ? parseInt(orderMatch[1]) : 0;
     }
     
-    // 解析正文中的链接
-    const body = content.replace(/^---\n[\s\S]*?\n---\n/, ''); // 移除 frontmatter
+    const body = content.replace(/^---\n[\s\S]*?\n---\n/, '');
     const lines = body.split('\n');
     const links = [];
     for (const line of lines) {
@@ -44,8 +44,13 @@ try {
       }
     }
     
+    const id = sectionTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    
     sections.push({
-      ...frontmatter,
+      title: sectionTitle,
+      icon: sectionIcon,
+      order: sectionOrder,
+      id: id || 'section-' + sections.length,
       links
     });
   }
@@ -57,48 +62,466 @@ try {
 ---
 
 <Layout meta={{ title: "网址导航", description: "网址导航" }}>
-  <div class="container">
-    <h1>🔗 网址导航</h1>
-    {sections.length === 0 ? (
-      <p>暂无导航链接，添加 md 文件到 src/content/nav/ 以开始！</p>
-    ) : (
-      sections.map(section => (
-        <div class="section">
-          <h2>{section.icon} {section.title}</h2>
-          <div class="cards-grid">
-            {section.links.map(link => (
-              <a href={link.url} class="card" target="_blank" rel="noopener noreferrer">
-                <strong>{link.name}</strong>
-                <span class="url">{new URL(link.url).hostname}</span>
-                {link.desc && <span class="desc">{link.desc}</span>}
-              </a>
+  <nav class="floating-toc" id="floatingToc">
+    <div class="toc-header">
+      <span>📑 目录</span>
+    </div>
+    <ul class="toc-list">
+      {sections.map(section => (
+        <li>
+          <a href={`#${section.id}`} class="toc-link">
+            <span class="toc-icon">{section.icon}</span>
+            <span class="toc-title">{section.title}</span>
+            <span class="toc-count">{section.links.length}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="nav-page">
+    <main class="main-content">
+      <div class="container">
+        <h1 class="page-title">🔗 网址导航</h1>
+        {sections.length === 0 ? (
+          <p>暂无导航链接，添加 md 文件到 src/content/nav/ 以开始！</p>
+        ) : (
+          <div class="sections-grid">
+            {sections.map(section => (
+              <div class="section-card" id={section.id}>
+                <div class="section-header">
+                  <h2>{section.icon} {section.title}</h2>
+                  <span class="link-count">{section.links.length} 个链接</span>
+                </div>
+                <div class="links-grid">
+                  {section.links.map(link => {
+                    let hostname = '';
+                    try {
+                      hostname = new URL(link.url).hostname;
+                    } catch {
+                      hostname = link.url;
+                    }
+                    return (
+                      <a href={link.url} class="link-card" target="_blank" rel="noopener noreferrer">
+                        <span class="link-name">{link.name}</span>
+                        <span class="link-url">{hostname}</span>
+                        {link.desc && <span class="link-desc">{link.desc}</span>}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      ))
-    )}
+        )}
+      </div>
+    </main>
   </div>
 </Layout>
 
-<style>
-  .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-  h1 { text-align: center; margin-bottom: 2rem; }
-  .section { margin-bottom: 2.5rem; }
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+<style is:global>
+  * {
+    box-sizing: border-box;
   }
-  .card {
-    background: var(--card-bg);
-    padding: 1rem;
-    border-radius: 12px;
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .floating-toc {
+    position: fixed;
+    left: 0 !important;
+    top: 30%;
+    transform: translateY(-50%);
+    width: 12em;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0 16px 16px 0;
+    padding: 1.5rem 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 24px rgba(0,0,0,0.08);
+    z-index: 999;
+    border-right: 1px solid rgba(229, 231, 235, 0.3);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .toc-header {
+    padding: 0 1.2rem 0.8rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .toc-header:hover {
+    opacity: 0.7;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .toc-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.2rem;
     text-decoration: none;
-    display: block;
+    color: #4b5563;
     transition: all 0.2s;
+    font-size: 0.85rem;
+    border-left: 3px solid transparent;
   }
-  .card:hover {transform: translateY(-2px); }
-  .card strong { display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
-  .url { font-size: 0.75rem; color: var(--ink-faint); word-break: break-all; }
-  .desc { font-size: 0.8rem; color: var(--ink-soft); display: block; margin-top: 0.5rem; }
+
+  .toc-link:hover {
+    background: rgba(243, 244, 246, 0.8);
+    color: #111827;
+    border-left-color: #3b82f6;
+  }
+
+  .toc-icon {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .toc-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toc-count {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    color: #6b7280;
+    background: rgba(243, 244, 246, 0.8);
+    padding: 0.05rem 0.4rem;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .nav-page {
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .main-content {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .container {
+    margin: 0 auto;
+    padding: 0em;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 0em;
+    color: #1a1a1a;
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+    max-width: 100%;
+  }
+
+  .section-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    padding: 1.5em;
+    border: 1px solid rgba(229, 231, 235, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .section-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(229, 231, 235, 0.4);
+  }
+
+  .section-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link-count {
+    font-size: 0.75rem;
+    color: #6b7280;
+    background: rgba(243, 244, 246, 0.8);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+  }
+
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    background: rgba(249, 250, 251, 0.6);
+    border: 1px solid rgba(229, 231, 235, 0.2);
+    transition: all 0.2s;
+    min-height: 60px;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .link-card:hover {
+    background: rgba(243, 244, 246, 0.9);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .link-name {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link-url {
+    font-size: 0.65rem;
+    color: #6b7280;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.05rem;
+  }
+
+  .link-desc {
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-top: 0.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .floating-toc::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .floating-toc::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .floating-toc::-webkit-scrollbar-thumb {
+    background: rgba(209, 213, 219, 0.5);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .container {
+      padding: 0 1rem;
+    }
+
+    .sections-grid {
+      gap: 1rem;
+    }
+
+    .links-grid {
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .floating-toc {
+      position: fixed;
+      left: 0 !important;
+      top: 0 !important;
+      transform: none !important;
+      width: 100%;
+      max-height: none;
+      height: auto;
+      border-radius: 0;
+      padding: 0.5rem 1rem;?
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: none;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+      background: rgba(255, 255, 255, 0.98);
+      overflow-y: visible;
+      transition: none;
+    }
+
+    .floating-toc.collapsed {
+      transform: none !important;
+    }
+
+    .toc-header {
+      padding: 0.25rem 0;
+      border-bottom: none;
+      font-size: 0.9rem;
+    }
+
+    .toc-toggle {
+      display: none;
+    }
+
+    .toc-list {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.25rem;
+      padding: 0.25rem 0;
+      margin: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .toc-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .toc-list li {
+      flex: 0 0 auto;
+    }
+
+    .toc-link {
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      border-left: none;
+      border-radius: 6px;
+      background: rgba(243, 244, 246, 0.6);
+      white-space: nowrap;
+      gap: 0.3rem;
+    }
+
+    .toc-link:hover {
+      background: rgba(229, 231, 235, 0.6);
+      border-left-color: transparent;
+    }
+
+    .toc-icon {
+      font-size: 0.8rem;
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+    }
+
+    .toc-count {
+      display: none;
+    }
+
+    .nav-page {
+      padding: 0.5rem;
+    }
+
+    .container {
+    }
+
+    .sections-grid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .section-card {
+      padding: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1rem;
+    }
+
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+    }
+
+    .link-card {
+      padding: 1em 1em;
+      min-height: 50px;
+    }
+
+    .link-name {
+      font-size: 0.8rem;
+    }
+
+    .link-url {
+      font-size: 0.6rem;
+    }
+
+    .link-desc {
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .links-grid {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+
+    .link-card {
+      padding: 0.3rem 0.5rem;
+      min-height: 44px;
+    }
+
+    .link-name {
+      font-size: 0.75rem;
+    }
+
+    .link-url {
+      font-size: 0.55rem;
+    }
+
+    .link-desc {
+      font-size: 0.6rem;
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+    }
+  }
 </style>
