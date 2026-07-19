@@ -71,64 +71,6 @@ main#main {
 	box-shadow: var(--hover-shadow);
 }
 
-.headpic {
-  max-width: 100%;
-  }
-#main-header { 
-	position: relative;
-	inset: 0px 0 0 0;
-	z-index: 100;
-	min-height: var(--header-height);
-	padding: 0;
-	background: rgba(255, 255, 255, 0.58);
-	backdrop-filter: blur(28px);
-	-webkit-backdrop-filter: blur(28px);
-	border-bottom: 1px solid var(--glass-border);
-	box-shadow: 0 8px 24px rgba(160, 190, 215, 0.16);
-}
-
-.site-nav-shell {
-    text-decoration: none;
-	display: flex;
-	align-items: center;
-	justify-content: center; 
-	margin: 0 auto;
-}
-
-.site-nav-links {
-	font-family: "smalle";
-	display: flex;
-	flex-wrap: wrap;
-	gap: 16px;
-}
-
-.site-nav-link {
-    text-decoration: none;
-	text-align:center;
-	position: relative;
-	color: var(--text-main);
-	transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.site-nav-link:hover {
-	color: var(--ink-faint);
-	transform: translateY(-1px);
-}
-.site-nav-link[aria-current="page"] {
-	color: var(--ink-faint);
-}
-
-.site-footer {
-	text-align: center;
-	font-size: 14px;
-	color: var(--text-muted);
-	border-top: 1px solid var(--border);
-	padding: 1rem 0;
-}
-
- .hamburger {
-	display: none;
-}
 
 a, button, img, .card, .gallery-tile, .bangumi-item, .sticker, .year-select {
 	transition-timing-function: ease;
@@ -174,58 +116,7 @@ main#main > *, .page-fade > * {
 		width: 100%;
 		margin-top: 12px;
 	}
-	#main-header {
-		padding: 12px;
-	}
 	.site-nav-links {
 		display:none;
-	}
-
-    .hamburger {
-		background-color: var(--angel-blue);
-		border: 1px solid var(--angel-blue-light);
-        display:block;
-		padding: 0em 1em;
-		margin: 0;
-		color: var(--angel-text);
-		border-radius:15px;
-		font-weight: 800;
-		font-family: "smalle";
-    }
-
-	.ham-nav-menu {
-		border:1px dashed var(--angel-blue-light);
-		border-top: none;
-        display: none;
-        position: fixed;
-        top: var(--header-height);
-        width: 100%;
-		left:0;
-        height: auto;
-	    background: var(--card-bg);
-		backdrop-filter: blur(18px);
-        padding: 0;
-        z-index: 100;
-		transform-origin: top;
-		transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-		transform: scaleY(0);
-		opacity: 0;
-    }
-
-	.ham-nav-menu p{
-		text-align: center;
-		font-size:medium;
-	}
-	.ham-nav-menu p ::before { content: "- "; }
-	.ham-nav-menu p ::after { content: " -"; }
-	.ham-nav-menu a{ text-decoration: none !important; }
-	.ham-nav-menu.ham-open {
-	  display: block;
-	  transform: scaleY(1);
-	  opacity: 1;
-	}
-	.ham-nav-menu ul {
-		padding-left: 0;
-		text-align: center;
 	}
 }
