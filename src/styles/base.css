@@ -3,9 +3,9 @@
 /*******************/
 
 html {
-	  background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
-	    background-size: 3em 3em;
-		background-color: var(--paper-bg);
+	background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
+	background-size: 3em 3em;
+	background-color: var(--paper-bg);
 	scroll-padding-top: calc(var(--header-height));
 }
 
@@ -23,9 +23,6 @@ h1::after, h1::before {
 }
 
 body.site-shell {
-	font-weight: 400;
-	line-height: 1.5;
-	color: var(--text-main);
 	animation: pageFade 0.55s ease both;
 }
 
@@ -36,12 +33,11 @@ body {
 	background-color: #ffffff;
 	opacity: 1;
 	margin: 0em 8em ;
-	padding: 0em 2em ;
 	color: var(--angel-text);
 }
 
-main#main {
-	padding-top: 1rem;
+main{
+	padding: 3em ;
 }
 
 .small-muted {
@@ -109,17 +105,11 @@ main#main > *, .page-fade > * {
 }
 
 @media (max-width: 768px) {
-	:root {
-		--header-height: 3.75rem;
-	}
 	body {
-		padding: var(--header-height) 1rem 0;
+		padding:0em;
+		margin: 0;
 	}
-	main#main {
-		width: 100%;
-		margin-top: 12px;
-	}
-	.site-nav-links {
-		display:none;
+	main {
+		padding: 1em;
 	}
 }

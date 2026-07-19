@@ -291,7 +291,7 @@
 @media (max-width: 820px) {
   .main-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap:1em;
   }
 
   .sticker-wall {
@@ -306,35 +306,8 @@
     height: 50px;
   }
 
-  .sitecard {
-    padding: 16px 18px;
-  }
 
   .days-number {
     font-size: 34px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sticker-wall::after {
-    font-size: 11px;
-    left: 16px;
-    top: -10px;
-  }
-
-  .mushroom-sticker img {
-    height: 40px;
-  }
-
-  .sitecard h1 {
-    font-size: 18px;
-  }
-
-  .days-number {
-    font-size: 28px;
-  }
-
-  .footer-stamp {
-    font-size: 11px;
   }
 }

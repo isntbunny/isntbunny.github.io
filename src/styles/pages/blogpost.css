@@ -20,6 +20,15 @@ h3::before,h3::after { content: " ### "; }
 h4::before,h4::after { content: " #### "; }
 h5::before,h5::after { content: " ##### "; }
 
+.content{
+  width: 100%;
+}
+
+code{
+  padding: 1em;
+  margin: 1em;
+}
+
 @media (max-width: 768px) {
 img {
 width:100%;
@@ -50,7 +59,4 @@ width:100%;
     overflow-y: auto;
   }
   
-  .content{
-    width: 100%;
-  }
 }
