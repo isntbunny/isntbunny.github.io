@@ -4,8 +4,11 @@ import HamburgerMenu from "@/components/layout/HamburgerMenu.astro";
 ---
 
 <header id="main-header">
+		<section> 
+			        <img class="headpic" src="/public/1.png">
+						</section>
 	<nav aria-label="Main menu" class="site-nav-shell">
-		<a class="site-logo" href="/">Eucaly's Blog</a>
+		<!--<a class="site-logo" href="/">Eucaly's Blog</a> -->
         <HamburgerMenu /> 
 		<div class="site-nav-links">
 			<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"

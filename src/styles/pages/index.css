@@ -5,6 +5,7 @@ body {
   background: var(--paper-bg);
 }
 
+
 /* ===== 贴纸墙 ===== */
 .sticker-wall {
   background: var(--glass-bg);

@@ -71,12 +71,15 @@ main#main {
 	box-shadow: var(--hover-shadow);
 }
 
+.headpic {
+  max-width: 100%;
+  }
 #main-header { 
-	position: fixed;
-	inset: 0 0 auto 0;
+	position: relative;
+	inset: 0px 0 0 0;
 	z-index: 100;
 	min-height: var(--header-height);
-	padding: 0.85rem 25px;
+	padding: 0;
 	background: rgba(255, 255, 255, 0.58);
 	backdrop-filter: blur(28px);
 	-webkit-backdrop-filter: blur(28px);
@@ -88,17 +91,8 @@ main#main {
     text-decoration: none;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	max-width: 920px;
+	justify-content: center; 
 	margin: 0 auto;
-}
-
-.site-logo {
-    font-family: "smalle";
-    text-decoration: none;
-	font-weight: 600;
-	color: var(--angel-text);
 }
 
 .site-nav-links {
@@ -110,6 +104,7 @@ main#main {
 
 .site-nav-link {
     text-decoration: none;
+	text-align:center;
 	position: relative;
 	color: var(--text-main);
 	transition: color 0.2s ease, transform 0.2s ease;

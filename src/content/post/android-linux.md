@@ -41,5 +41,11 @@ pnpm run dev
 proot-distro login debian --user user
 ```
 
+```bash
+ls ~/          # 查看家目录下有哪些文件夹
+proot-distro login ubuntu --bind ~/storage/shared:/mnt/phone 查看文件
+proot-distro login ubuntu --bind ~/storage/shared:/mnt/phone -- bash -c "mv /mnt/phone/Pictures/Downloads/1.png ~/isntbunny.github.io/public" #移动文件
+```
+
 先占着位，以后完善所有步骤。
 
