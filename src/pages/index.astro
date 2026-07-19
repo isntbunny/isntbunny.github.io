@@ -124,7 +124,7 @@ import GithubCommits from "@/components/GithubCommits.astro";
 	  async function getVisitorLocation() {
 		try {
 		  // 使用 ip-api.com 获取访客信息
-		  const response = await fetch('https://api.ipdatacloud.com/v2/query?ip=', {
+		  const response = await fetch('https://api.iping.cc/v1/query?ip=XX.XX.XX.XX&language=zh', {
 			signal: AbortSignal.timeout(5000) // 5秒超时
 		  });
 		  
