@@ -123,9 +123,8 @@ import GithubCommits from "@/components/GithubCommits.astro";
 	  // ===== 访客地理位置 =====
 	  async function getVisitorLocation() {
 		try {
-		  // 使用 ip-api.com 获取访客信息
-		  const response = await fetch('https://api.iping.cc/v1/query?ip=XX.XX.XX.XX&language=zh', {
-			signal: AbortSignal.timeout(5000) // 5秒超时
+		  const response = await fetch('https://ip-api.com/json/?fields=status,country,countryCode,regionName,city,isp,timezone,query', {
+			signal: AbortSignal.timeout(5000)
 		  });
 		  
 		  if (!response.ok) {
@@ -169,11 +168,9 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		const browserInfo = getBrowserInfo();
 		const lang = browserInfo.language;
 		
-		// 根据浏览器语言判断大致地区
 		let countryCode = 'UNKNOWN';
 		let country = '未知地区';
 		
-		// 常见语言代码映射
 		const langMap = {
 		  'zh-CN': { code: 'CN', name: '中国' },
 		  'zh-TW': { code: 'TW', name: '台湾' },
@@ -194,20 +191,11 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  'hi': { code: 'IN', name: '印度' }
 		};
 
-		// 尝试匹配语言
 		for (const [key, value] of Object.entries(langMap)) {
 		  if (lang.startsWith(key)) {
 			countryCode = value.code;
 			country = value.name;
 			break;
-		  }
-		}
-
-		// 如果是中文，尝试从时区获取更详细的信息
-		if (countryCode === 'CN' || countryCode === 'TW' || countryCode === 'HK') {
-		  const timezone = browserInfo.timezone;
-		  if (timezone.includes('Shanghai') || timezone.includes('Beijing')) {
-			// 可以添加更多细节
 		  }
 		}
 
@@ -219,13 +207,12 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  isp: '未知运营商',
 		  timezone: browserInfo.timezone,
 		  ip: '无法获取',
-		  fromBrowser: true // 标记来自浏览器
+		  fromBrowser: true
 		};
 	  }
 
 	  // ===== 根据地区生成欢迎语 =====
 	  function getWelcomeMessage(location, fromBrowser = false) {
-		// 如果是浏览器备用方案，使用特殊的欢迎语
 		if (fromBrowser) {
 		  return {
 			greeting: `你好呀，来自${location.country}的朋友。`,
@@ -233,21 +220,16 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  };
 		}
 
-
 		const { country, countryCode, region, city } = location;
-		
-		// 判断是否在中国
 		const isChina = countryCode === 'CN';
 		
 		let greeting = '';
 		let extra = '';
 
 		if (isChina) {
-		  // ----- 中国国内 -----
 		  const locationStr = city && region ? `${region}${city}` : (region || city || country);
 		  greeting = `你好呀，来自${locationStr}的朋友。`;
 		  
-		  // 根据城市/省份定制欢迎语
 		  const cityGreetings = {
 			'北京': '皇城根儿下，离挺近。说起来bunny很喜欢吃北京烤鸭......想尝尝北京的其他美食捏！（豆汁除外）',
 			'上海': 'wow，bunny有点好奇魔都的生活怎么样呢。',
@@ -269,7 +251,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 			'台湾': `用正體字給你打個招呼：D 說起來bunny也想去${city}看看捏。`,
 		  };
 
-		  // 匹配城市
 		  let matched = false;
 		  for (const [key, value] of Object.entries(cityGreetings)) {
 			if (city && city.includes(key)) {
@@ -285,7 +266,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  }
 
 		  if (!matched) {
-			// 默认国内欢迎语
 			const provinceGreetings = {
 			  '河北': '这么近，那么美，看来你和bunny在同一个省份捏。老乡QAQ',
 			  '河南': '俺是河南嘞🎶河南洛阳嘞🎶',
@@ -330,7 +310,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		  }
 
 		} else {
-		  // ----- 国外 -----
 		  const locationStr = city && region ? `${region}, ${city}` : (city || region || country);
 		  greeting = `👋 Hello! A warm welcome to you from ${locationStr}.`;
 		  
@@ -388,7 +367,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 
 	  // ===== 渲染到页面 =====
 	  async function renderVisitorInfo() {
-		// 获取所有需要更新的元素
 		const greetingElement = document.getElementById('greeting-text');
 		const extraElement = document.getElementById('extra-text');
 		const ipElement = document.getElementById('ip-text');
@@ -401,33 +379,28 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		let location = await getVisitorLocation();
 		let fromBrowser = false;
 
-		// 如果获取失败，使用浏览器备用方案
 		if (!location) {
 		  location = getLocationFromBrowser();
 		  fromBrowser = true;
 		}
 
-		// 生成欢迎语
 		const { greeting, extra } = getWelcomeMessage(location, fromBrowser);
 		
-		// 更新欢迎语
 		greetingElement.textContent = greeting;
 
-		// 更新额外信息
 		if (extraElement) {
 		  extraElement.textContent = extra;
 		}
 
-		// 更新 IP 信息
 		if (ipElement) {
 		  if (fromBrowser) {
-			ipElement.textContent = ``;
+			ipElement.textContent = '';
 		  } else {
 			const ipInfo = getIPInfo(location);
 			if (ipInfo) {
 			  ipElement.textContent = `IP: ${ipInfo.ip} (${ipInfo.ipType}) · ${ipInfo.isp}`;
 			} else {
-			  ipElement.textContent = 'IP信息获取失败';
+			  ipElement.textContent = 'IP信息获取失败捏。。';
 			}
 		  }
 		  ipElement.style.fontSize = '0.75rem';
@@ -436,7 +409,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		}
 	  }
 
-	  // 执行
 	  renderVisitorInfo();
 	});
 </script>
