@@ -70,19 +70,36 @@ import { menuLinks } from "@/site.config";
 	transform: translateY(-1px);
 }
 .site-nav-link[aria-current="page"] {
-	color: var(--ink-faint);
+	color: #8aa3b9cc;
+	font-weight: bold;
+	text-decoration: underline ;
 }
 
 .headpic {
   max-width: 100%;
 }
 
-
 @media (max-width: 768px) {
-.site-nav-links{
-	margin:0;
-	padding:10px;
-}
+  .site-nav-shell {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .site-nav-links {
+    margin: 0;
+    padding: 0em 0.2em; /* 左右留出空间给渐变 */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    mask-image: linear-gradient(to right, transparent, black 20px, black 80%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black 80%, transparent);
+  }
+  
+  .site-nav-links::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 </style>

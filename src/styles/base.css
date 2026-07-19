@@ -53,7 +53,7 @@ main{
     border: 1px solid var(--glass-border);
     box-shadow: var(--card-shadow);
     position: relative;
-    padding: 2rem;
+    padding: 2em;
     margin-bottom: 2rem;
     opacity: 0;
 	transform: translateY(30px);

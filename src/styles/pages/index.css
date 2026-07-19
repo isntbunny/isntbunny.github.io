@@ -97,6 +97,8 @@
   border: 1px solid var(--glass-border);
   box-shadow: 0 2px 14px var(--angel-shadow);
   transition: 0.25s;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .sitecard:hover {
@@ -127,7 +129,7 @@
 }
 
 .window {
-  padding:0;
+  padding:0em ;
   border-radius: 3px;
   background: #f2f6fa;
   border: 1px solid #c8d4e0;
