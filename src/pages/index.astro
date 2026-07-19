@@ -37,22 +37,35 @@ import GithubCommits from "@/components/GithubCommits.astro";
 		<div class="left-col">
 
 			<!-- 欢迎卡片 -->
-			<section class="sitecard welcome-card">
-				<h1>Welcome to my corner.</h1>
-				<p>退网中，乱七八糟的布局就先搁置不改了。</p>
-				<p class="badge-row">
-					<a href="https://postimages.org/" target="_blank">
-						<img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
-					</a>
-					<a href="https://postimg.cc/JsNvVCP5" target="_blank">
-						<img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
-					</a>
+			<div class="sitecard welcome-card window">
+				<div class="window-titlebar">
+				  <div class="window-controls">
+					<span class="dot close"></span>
+					<span class="dot minimize"></span>
+					<span class="dot maximize"></span>
+				  </div>
+				  <span class="window-title">Welcome</span>
+				</div>
+				<div class="window-content">
+				  <!-- 你原来的欢迎内容 -->
+				  <h1>Welcome to my corner.</h1>
+				  <p>你好呀，来自 的朋友。</p>
+				  <p class="badge-row">
+				  <a href="https://postimages.org/" target="_blank">
+					<img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
+				  </a>
+				  <a href="https://postimg.cc/JsNvVCP5" target="_blank">
+					<img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
+				  </a>
 				</p>
-			</section>
+				  <slot />
+				</div>
+			  </div>
 
 			<!-- Latest Status -->
 			<section class="sitecard">
 				<h2>✦ Latest Status</h2>
+				<p>退网中，乱七八糟的布局就先搁置不改了。</p>
 				<p>
 					now I'm 
 					<a href="https://www.imood.com/users/isntbunny">
@@ -205,4 +218,250 @@ import GithubCommits from "@/components/GithubCommits.astro";
   
 	  initSelect();
 	});
+
 </script>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+	  // ===== 访客地理位置 =====
+	  async function getVisitorLocation() {
+		try {
+		  // 使用 ip-api.com 获取访客信息
+		  const response = await fetch('https://ip-api.com/json/');
+		  const data = await response.json();
+		  
+		  if (data.status === 'success') {
+			return {
+			  country: data.country,
+			  countryCode: data.countryCode,
+			  region: data.regionName,
+			  city: data.city,
+			  isp: data.isp,
+			  timezone: data.timezone,
+			  ip: data.query
+			};
+		  } else {
+			return null;
+		  }
+		} catch (error) {
+		  console.error('获取位置信息失败:', error);
+		  return null;
+		}
+	  }
+  
+	  // ===== 根据地区生成欢迎语 =====
+	  function getWelcomeMessage(location) {
+		if (!location) {
+		  return {
+			greeting: '你好呀，来自远方的朋友。',
+			extra: `海内存知己，天涯若比邻。世界很大，互联网让我们相遇，很高兴，遇见你。`,
+		  };
+		}
+  
+		const { country, countryCode, region, city } = location;
+		
+		// 判断是否在中国
+		const isChina = countryCode === 'CN';
+		
+		let greeting = '';
+		let extra = '';
+  
+		if (isChina) {
+		  // ----- 中国国内 -----
+		  const locationStr = city && region ? `${region}${city}` : (region || city || country);
+		  greeting = `你好呀，来自${locationStr}的朋友。`;
+		  
+		  // 根据城市/省份定制欢迎语
+		  const cityGreetings = {
+			'北京': '皇城根儿下，离挺近。说起来bunny很喜欢吃北京烤鸭......想尝尝北京的其他美食捏！（豆汁除外）',
+			'上海': 'wow，bunny有点好奇魔都的生活怎么样呢。',
+			'广州': '早茶喝了吗？（虽然现在不一定是早上）',
+			'深圳': '听说是很现代的地方捏，bunny也想去深圳看看。',
+			'杭州': '上有天堂下有苏杭——',
+			'成都': '或者是——来自天府之国的朋友。成都有什么好玩的地方吗？',
+			'重庆': '山城的朋友！bunny觉得你们那边的火锅很好吃捏。',
+			'武汉': '刚连上网，武汉加油，中国加油！（bushi）',
+			'南京': `bunny也想去${city}看看捏。`,
+			'西安': `bunny也想去${city}看看捏。`,
+			'青岛': '青岛啤酒蛤蜊海鲜😋',
+			'厦门': 'bunny记得厦门有个鼓浪屿来着（）',
+			'昆明': '春城昆明，四季如春~',
+			'沈阳': 'bunny很喜欢看你们那边的小品。',
+			'哈尔滨': '冰雪大世界',
+			'香港': `用正體字給你打個招呼：D 說起來bunny也想去${city}看看捏。`,
+			'澳门': `用正體字給你打個招呼：D 說起來bunny也想去${city}看看捏。`,
+			'台湾': `用正體字給你打個招呼：D 說起來bunny也想去${city}看看捏。`,
+		  };
+  
+		  // 匹配城市
+		  let matched = false;
+		  for (const [key, value] of Object.entries(cityGreetings)) {
+			if (city && city.includes(key)) {
+			  extra = value;
+			  matched = true;
+			  break;
+			}
+			if (region && region.includes(key)) {
+			  extra = value;
+			  matched = true;
+			  break;
+			}
+		  }
+  
+		  if (!matched) {
+			// 默认国内欢迎语
+			const provinceGreetings = {
+			  '河北': '这么近，那么美，看来你和bunny在同一个省份捏。老乡QAQ',
+			  '河南': '俺是河南嘞🎶河南洛阳嘞🎶',
+			  '山东': '好客山东欢迎您——',
+			  '山西': '山西！醋和面食的天堂！bunny也喜欢吃！',
+			  '陕西': '三秦大地，历史厚重！',
+			  '甘肃': '丝绸之路',
+			  '青海': '好稀有的ip。',
+			  '内蒙古': '天苍苍野茫茫，风吹草低现牛羊',
+			  '新疆': '想尝尝大盘鸡和葡萄干！',
+			  '西藏': '想了解高原生活，还有藏传佛教！',
+			  '广西': '桂林山水甲天下~',
+			  '贵州': '走遍大地神州，最美多彩贵州！',
+			  '云南': '说起来菌子好吃吗？',
+			  '宁夏': '塞上江南！',
+			  '海南': '你们那一定是四季如夏吧。',
+			  '福建': '和广东人的种间关系是？',
+			  '江西': '想去景德镇画瓷器！',
+			  '安徽': '说到安徽bunny比较熟，河北这边经常见到安徽正宗牛肉板面的店铺。',
+			  '江苏': '是江南水乡！不过听说数学题也很难。',
+			  '浙江': '（思考）浙江有什么特色来着？浙菜好吃吗？',
+			  '湖南': '辣不怕！',
+			  '湖北': '你们那边有什么好玩的地方吗？',
+			  '广东': '银在广东已经piu泊sa年~',
+			  '四川': '有个问题，友友是不是经常吃火锅和辣的.jpg',
+			  '辽宁': '距离bunny很近',
+			  '吉林': '白山黑水！',
+			  '黑龙江': '冰雪大省'
+			};
+  
+			for (const [key, value] of Object.entries(provinceGreetings)) {
+			  if (region && region.includes(key)) {
+				extra = value;
+				matched = true;
+				break;
+			  }
+			}
+		  }
+  
+		  if (!matched) {
+			extra = '欢迎来到！';
+		  }
+  
+		} else {
+		  // ----- 国外 -----
+		  const locationStr = city && region ? `${region}, ${city}` : (city || region || country);
+		  greeting = `👋 Hello! A warm welcome to you from ${locationStr}.`;
+		  
+		  const countryGreetings = {
+			'United States': '🇺🇸 What\'s up! How\'s life in the States?',
+			'United Kingdom': '🇬🇧 Cheers mate! Fancy a cuppa?',
+			'Canada': '🍁 Eh! Sorry for the weather!',
+			'Australia': '🦘 G\'day mate! How\'s the barbie?',
+			'New Zealand': '🥝 Kia ora! Beautiful country!',
+			'Japan': '🇯🇵 こんにちは！日本の友達！',
+			'South Korea': '🇰🇷 안녕하세요! 한국 친구!',
+			'Germany': '🇩🇪 Hallo! Wie geht\'s?',
+			'France': '🇫🇷 Bonjour! Comment ça va?',
+			'Italy': '🇮🇹 Ciao! Buongiorno!',
+			'Spain': '🇪🇸 Hola! ¿Qué tal?',
+			'Russia': '🇷🇺 Привет! Как дела?',
+			'Singapore': '🇸🇬 Hello! Welcome to my corner!',
+			'Malaysia': '🇲🇾 Apa khabar! Selamat datang!',
+			'Thailand': '🇹🇭 สวัสดี! ยินดีต้อนรับ!',
+			'Vietnam': '🇻🇳 Xin chào! Chào mừng bạn!',
+			'India': '🇮🇳 Namaste! Welcome to my nook!'
+		  };
+  
+		  let matched = false;
+		  for (const [key, value] of Object.entries(countryGreetings)) {
+			if (country && country.includes(key)) {
+			  extra = value;
+			  matched = true;
+			  break;
+			}
+		  }
+  
+		  if (!matched) {
+			extra = '🌍 Welcome from across the globe!';
+		  }
+		}
+  
+		return { greeting, extra };
+	  }
+  
+	  // ===== 显示 IP 信息 =====
+	  function getIPInfo(location) {
+		if (!location) return null;
+		
+		const ip = location.ip || '未知';
+		// ip-api.com 不直接返回 IPv6 信息，可以用其他方式检测
+		// 简单检测：如果 ip 包含冒号就是 IPv6
+		const isIPv6 = ip.includes(':');
+		const ipType = isIPv6 ? 'IPv6' : 'IPv4';
+		
+		return {
+		  ip,
+		  ipType,
+		  isp: location.isp || '未知运营商'
+		};
+	  }
+  
+	  // ===== 渲染到页面 =====
+	  async function renderVisitorInfo() {
+		const location = await getVisitorLocation();
+		
+		// 找到欢迎卡片里的内容
+		const welcomeContent = document.querySelector('.window-content');
+		if (!welcomeContent) {
+		  console.warn('未找到 .window-content 元素');
+		  return;
+		}
+  
+		// 找到 welcome 标题和段落
+		const welcomeText = welcomeContent.querySelector('p');
+		if (!welcomeText) {
+		  console.warn('未找到欢迎段落');
+		  return;
+		}
+  
+		// 生成欢迎语
+		const { greeting, extra } = getWelcomeMessage(location);
+		
+		// 更新欢迎语
+		welcomeText.textContent = greeting;
+  
+		// 如果有 extra，在下方添加
+		let extraElement = welcomeContent.querySelector('.welcome-extra');
+		if (!extraElement) {
+		  extraElement = document.createElement('p');
+		  extraElement.className = 'welcome-extra';
+		  welcomeContent.insertBefore(extraElement, welcomeContent.querySelector('.badge-row'));
+		}
+		extraElement.textContent = extra;
+  
+		// 添加 IP 信息
+		const ipInfo = getIPInfo(location);
+		if (ipInfo) {
+		  let ipElement = welcomeContent.querySelector('.welcome-ip');
+		  if (!ipElement) {
+			ipElement = document.createElement('p');
+			ipElement.className = 'welcome-ip';
+			welcomeContent.insertBefore(ipElement, welcomeContent.querySelector('.badge-row'));
+		  }
+		  ipElement.textContent = `📡 当前 IP: ${ipInfo.ip} (${ipInfo.ipType}) · ${ipInfo.isp}`;
+		  ipElement.style.fontSize = '0.75rem';
+		  ipElement.style.color = 'var(--text-muted, #888)';
+		  ipElement.style.marginTop = '4px';
+		}
+	  }
+  
+	  // 执行
+	  renderVisitorInfo();
+	});
+  </script>

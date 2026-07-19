@@ -3,6 +3,9 @@
 /*******************/
 
 html {
+	  background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
+	    background-size: 3em 3em;
+		background-color: var(--paper-bg);
 	scroll-padding-top: calc(var(--header-height));
 }
 
@@ -20,7 +23,6 @@ h1::after, h1::before {
 }
 
 body.site-shell {
-	min-height: 100vh;
 	font-weight: 400;
 	line-height: 1.5;
 	color: var(--text-main);
@@ -28,12 +30,13 @@ body.site-shell {
 }
 
 body {
+	border: 1px solid var(--glass-border);
+	border: 1px solid blmack;
 	background-size: 3em 3em;
-	background-color: var(--paper-bg);
-	background-image:
-		radial-gradient(circle at 1px 1px, rgba(184, 212, 232, 0.22) 1px, transparent 0);
+	background-color: #ffffff;
 	opacity: 1;
-	padding: var(--header-height) 15% 0;
+	margin: 0em 8em ;
+	padding: 0em 2em ;
 	color: var(--angel-text);
 }
 
@@ -47,7 +50,7 @@ main#main {
 }
 
 .sitecard {
-    background: var(--card-bg);
+	background: var(--glass-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 24px;
