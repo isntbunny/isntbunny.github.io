@@ -28,8 +28,7 @@ body.site-shell {
 }
 
 body {
-	border: 1px solid var(--glass-border);
-	border: 1px solid blmack;
+	border: 2px solid #a1bfddaa;
 	background-size: 3em 3em;
 	background-color: #ffffff;
 	opacity: 1;
@@ -38,7 +37,7 @@ body {
 }
 
 main{
-	padding: 3em ;
+	padding: 2em ;
 }
 
 .small-muted {
