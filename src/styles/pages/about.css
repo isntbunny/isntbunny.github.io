@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;   
+  max-width: 100vw; /* 禁止整个页面横向滚动 */
+}
 
 h2{
   display: block;
@@ -137,29 +141,27 @@ main{
 .poid img {
   max-width: 100%;
 }
-
-.scroll-container{
-  width: 100%;
-  overflow-x: auto;
-}
-
-
-/* 底部滚动按钮栏 - 添加动画 */
 .scroll-container {
   width: 100%;
-  overflow: hidden;  /* 重要：隐藏溢出内容 */
+  max-width: 100vw;
+  overflow: hidden;
   position: relative;
   background: var(--card-bg, #f0f0f0);
   padding: 8px 0;
   border-radius: 8px;
+  box-sizing: border-box;
 }
+
+
+
 
 .scroll-track {
   display: flex;
-  flex-wrap: nowrap;  /* 不换行 */
+  flex-wrap: nowrap;
   gap: 2px;
-  width: max-content;  /* 宽度由内容决定 */
-  animation: scrollLeft 30s linear infinite;  /* 添加这个动画 */
+  width: max-content;
+  animation: scrollLeft 30s linear infinite;
+  will-change: transform; /* 优化动画性能 */
 }
 
 
@@ -197,48 +199,69 @@ main{
 
 /* 移动端适配 */
 @media (max-width: 768px) {
+  .scroll-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  
   .scroll-track {
-    gap: 12px;
+    /* 强制动画使用 transform，避免布局偏移 */
+    animation: scrollLeft 30s linear infinite;
   }
-  .scroll-track img {
-    height: 30px;
+  
+  /* 确保 body 不溢出 */
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
   }
-
 .profile-header h1{
     font-size: xx-large;
 }
 
-.profile-header{
-    display:grid;
-}
 
 .attribar{
   width:100%;
 }
 
-.profile-photo img{
-    display:none;
-    width: 100px;
-    border-radius: 0;
-}
-.left-col{
-    width:50%;
-}
-.right-col{
-    width:50%;
 }
 
-.stamppic, .blinkpic {
-    display:grid;
-    grid-template-columns: repeat(1, 110px);  /* 固定两列 */
-    gap: 1em;
-    overflow-y: auto;
-    align-content: flex-start;  /* 内容从顶部开始排列 */
+
+
+
+/* 修复所有可能导致溢出的图片 */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
+/* 特别针对 a 标签里的图片（比如那两张 01.png） */
+a img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 针对 poid 里的内容 */
 .poid {
   padding: 1rem;
-  justify-content: center;
-  align-items: left;
+  overflow: hidden; /* 防止内部内容溢出 */
 }
+
+.poid img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 针对 stamppic 里的印章图片 */
+.stamppic {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.stamppic img {
+  max-width: 100%;
+  height: auto;
+  width: 5em; /* 保持原有大小，但不会溢出 */
 }
