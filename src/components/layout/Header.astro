@@ -1,7 +1,10 @@
 ---
+import Snowflake from "@/components/Snowflake.astro";
 import { menuLinks } from "@/site.config";
 ---
-
+  <div style="z-index: 99999;">
+	    <Snowflake />
+		  </div>
 <header id="main-header">
 	<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"
 	>

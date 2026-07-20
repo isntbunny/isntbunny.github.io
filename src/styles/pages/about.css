@@ -5,7 +5,7 @@ h2{
 
 .profile-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -17,7 +17,6 @@ h2{
 .profile-photo img {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
   object-fit: cover;
   display: block;
 }
@@ -31,11 +30,13 @@ h2{
   color: var(--ink-soft);
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .attribar {
   display: flex;
   flex-wrap: wrap;
+  width: 100vh;
   gap: 0.5rem;
   align-items: center;
   border-top: 1px solid var(--angel-blue-light);
@@ -165,34 +166,72 @@ h2{
 }
 
 
-/* 底部滚动按钮栏 */
- .scroll-track {
-  scroll-behavior: smooth;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 8px; 
+/* 底部滚动按钮栏 - 添加动画 */
+.scroll-container {
+  width: 100%;
+  overflow: hidden;  /* 重要：隐藏溢出内容 */
+  position: relative;
+  background: var(--card-bg, #f0f0f0);
+  padding: 8px 0;
+  border-radius: 8px;
 }
 
+.scroll-track {
+  display: flex;
+  flex-wrap: nowrap;  /* 不换行 */
+  gap: 8px;
+  width: max-content;  /* 宽度由内容决定 */
+  animation: scrollLeft 30s linear infinite;  /* 添加这个动画 */
+}
 
-.buttons img {
+/* 鼠标悬停暂停滚动 */
+.scroll-container:hover .scroll-track {
+  animation-play-state: paused;
+}
+
+/* 悬停时图片放大 */
+.scroll-container:hover .scroll-track img {
+  transform: scale(1.1);
+}
+
+.scroll-track img {
+  height: 30px;
+  width: auto;
   flex-shrink: 0;
-  transition: 0.1s linear;
-  display: flex;
-  align-items: center;
-  justify-content: center;;
+  display: block;
+  image-rendering: pixelated;
+  transition: transform 0.2s ease;
 }
 
+/* 关键帧动画 - 向左滚动 */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);  /* 因为复制了一份图片，滚到一半就无缝衔接 */
+  }
+}
 
-
+/* 移动端适配 */
 @media (max-width: 768px) {
+  .scroll-track {
+    gap: 12px;
+  }
+  .scroll-track img {
+    height: 30px;
+  }
 
-  
 .profile-header h1{
     font-size: xx-large;
 }
 
 .profile-header{
     display:grid;
+}
+
+.attribar{
+  width:100%;
 }
 
 .profile-photo img{
