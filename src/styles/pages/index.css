@@ -148,6 +148,86 @@ html {
   color: var(--angel-blue);
 }
 
+.bubbling-me img{
+  position:absolute;
+  top:50%;
+  left:90%;
+  width:5em;
+}
+
+.bub-outer {
+  position: absolute;
+  top: 50%;
+  left:30%;
+  width: 60%;
+  margin: 0;
+  
+  /* 背景图变高：用 padding 撑高 */
+  padding-bottom: 30%;  /* 让容器变高 */
+  
+  background-image: url("https://i.postimg.cc/gjf2pH6T/bubbleright.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 248, 240, 0.12);
+  background-blend-mode: overlay;
+}
+
+.bub {
+  position: absolute;
+  top: 10%;      /* 文字区域在气泡偏上 */
+  left: 5%;     /* 左右收窄 */
+  right: 5%;
+  bottom: 10%;   /* 底部留更多空间给尖角 */
+  text-align: center;
+  
+  padding: 8px 10px;
+  
+  color: #2d3d4d;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  word-wrap: break-word;
+  
+  background: rgba(255, 248, 240, 0.05);
+  border-radius: 10px;
+}
+
+/* 滚动条 */
+.bub::-webkit-scrollbar {
+  width: 3px;
+}
+.bub::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 10px;
+}
+.bub::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 手机端 */
+@media (max-width: 480px) {
+  .bub-outer {
+    max-width: 100%;
+    padding-bottom: 35%; 
+  }
+  .bub {
+    top: 10%;
+    left: 3%;
+    right: 3%;
+    bottom: 20%;
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+
+
 /* ===== ToDo 占位 ===== */
 .todo-placeholder {
   min-height: 40px;
@@ -181,27 +261,6 @@ html {
   border-top: 1px dashed var(--border, #ddd);
   padding-top: 8px;
   margin-top: 8px;
-}
-
-.bubble {
-  display: inline-block;  /* 让容器贴合图片 */
-}
-
-.bubble img {
-  display: block;         /* 移除图片底部空隙 */
-  width: 130%;  /* 根据您的气泡图调整大小 */
-}
-
-.bub {
-  top: 50%;
-  left: 40%;
-  transform: translate(-50%, -50%);
-  width: 60%;             /* 文字宽度比气泡小 */
-  max-height: 65%;        /* 限制高度，防止溢出 */
-  text-align: left;
-  overflow:scroll;       /* 溢出的文字隐藏 */
-  word-wrap: break-word;  /* 长单词换行 */
-  padding: 0px;
 }
 
 /* ===== 响应式 ===== */
