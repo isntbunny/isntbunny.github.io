@@ -20,6 +20,11 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 @font-face {
                 font-family: Pixel Operator;
                 src: url('https://ghostingpen.net/fonts/PixelOperator.ttf');}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 :root {
 	/* 主页同款雾蓝手帐配色：所有页面请优先使用这些变量 */
 	--angel-blue: #b8d4e8;

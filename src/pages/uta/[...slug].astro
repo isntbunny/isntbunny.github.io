@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import "/src/styles/pages/blogpost.css";
 
 
 export async function getStaticPaths() {
@@ -31,3 +30,18 @@ const { Content } = await uta.render();
     {uta.data.date && <time>{uta.data.date.toLocaleDateString()}</time>}
     <Content />
 </Base>
+
+<style is:global>
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  p,
+  ul,
+  h1,
+  time {
+    text-align: center;
+  }
+  </style>
