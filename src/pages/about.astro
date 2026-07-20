@@ -57,7 +57,7 @@ import {
     </div>
   
   <div class="scroll-container">
-    <div class="scroll-track">
+    <div class="scroll-track blinkies">
           {blinkies.map((src, i) => (
             <img key={i} src={src} alt={`blinkie-${i}`} />
           ))}
@@ -90,7 +90,7 @@ import {
   </div>
 
     <div class="scroll-container">
-        <div class="scroll-track">
+        <div class="scroll-track buttons">
               {[...scrollImages, ...scrollImages].map((src, i) => (
                       <img key={i} src={src} alt={`scroll-${i}`} />
                             ))}

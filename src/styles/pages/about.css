@@ -6,6 +6,17 @@ h2{
 html{
   background-color: var(--angel-text);
 }
+html {
+  background-image: 
+    url("https://i.postimg.cc/7L5Lvs1q/i-love-you-by-kicked-in-teeth-dbstzed.png");
+  background-repeat: repeat;
+  background-size: 70px auto;
+  background-position: 
+    0px 0px,
+    100px 0px,
+    0px 100px;
+}
+
 
 main{
   margin: 0;
@@ -83,32 +94,21 @@ main{
   margin-right: 0.75rem;
 }
 
-.stamppic, .blinkpic {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);  /* 固定两列 */
-  gap: 10px;
-  height: 90px;
+.stamps {
+  height:10em;
   overflow-y: auto;
-  align-content: flex-start;  /* 内容从顶部开始排列 */
 }
 
-.stamps h2, .blinkies h2 {
-  position: sticky;
-  top: 0;
-  grid-column: span 2;  /* 标题占满两列 */
 
+.blinkies img{
+  width: 7.5em;
 }
 
-.stamps img, .blinkies img {
-  width: 100%;  /* 图片填满格子宽度 */
+.stamps img{
+  height:auto;
+  width: 5em;  /* 图片填满格子宽度 */
   margin: 0;
   vertical-align: middle;
-}
-
-.bottom-cards {
-  display: flex;
-  gap: 2rem;
-  margin: 2rem 0;
 }
 
 .skills-section {
@@ -159,10 +159,11 @@ main{
 .scroll-track {
   display: flex;
   flex-wrap: nowrap;  /* 不换行 */
-  gap: 8px;
+  gap: 2px;
   width: max-content;  /* 宽度由内容决定 */
   animation: scrollLeft 30s linear infinite;  /* 添加这个动画 */
 }
+
 
 /* 鼠标悬停暂停滚动 */
 .scroll-container:hover .scroll-track {
@@ -174,9 +175,12 @@ main{
   transform: scale(1.1);
 }
 
-.scroll-track img {
+.buttons img{
   height: 30px;
-  width: auto;
+}
+
+.scroll-track img {
+
   flex-shrink: 0;
   display: block;
   image-rendering: pixelated;
