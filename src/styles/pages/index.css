@@ -150,10 +150,10 @@ html {
 
 .bubbling-me img{
   position:absolute;
-  top:50%;
-  left:90%;
-  width:5em;
-}
+    top:50%;
+      left:90%;
+        width:8em;
+        }
 
 .bub-outer {
   position: absolute;
@@ -163,7 +163,7 @@ html {
   margin: 0;
   
   /* 背景图变高：用 padding 撑高 */
-  padding-bottom: 30%;  /* 让容器变高 */
+  padding-bottom: 32%;  /* 让容器变高 */
   
   background-image: url("https://i.postimg.cc/gjf2pH6T/bubbleright.png");
   background-size: 100% 100%;
@@ -211,11 +211,29 @@ html {
   background: transparent;
 }
 
+#statuscafe-content{
+    margin-bottom: 7px;
+}
+
+#statuscafe-username a{
+  text-decoration: none;
+}
+
+
 /* 手机端 */
 @media (max-width: 480px) {
+
+  .bubbling-me img{
+    position:absolute;
+    top:50%;
+    left:90%;
+    width:5em;
+  }
   .bub-outer {
-    max-width: 100%;
+    width: 100%;
     padding-bottom: 35%; 
+    left: 0;
+    top:0;
   }
   .bub {
     top: 10%;

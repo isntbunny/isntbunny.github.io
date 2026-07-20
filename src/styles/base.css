@@ -60,7 +60,7 @@ main{
 	background: var(--card-bg);
 	backdrop-filter: blur(3px);
 	border-radius: 24px;
-	margin: 2em;
+	margin:1em;
 	padding: 1em;
 	border: 1px solid var(--glass-border);
 	box-shadow: 0 2px 14px var(--angel-shadow);
