@@ -2,10 +2,17 @@
 /*这里存放的是布局样式*/
 /*******************/
 
-html {
-	background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
+html {  -webkit-mask-image: linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
+	  mask-image: linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
+	    mask-composite: intersect;
+		  -webkit-mask-composite: source-in, xor;  background-image:
+		  linear-gradient(to right, rgb(203 213 225) 1px, transparent 1px),
+		  linear-gradient(to bottom, rgb(203 213 225) 1px, transparent 1px);
+	  background-size: 20px 20px;
+	  background-position: center center;
+	/*background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
 	background-size: 3em 3em;
-	background-color: var(--paper-bg);
+	background-color: var(--paper-bg);*/
 	scroll-padding-top: calc(var(--header-height));
 }
 
@@ -34,6 +41,7 @@ body {
 	opacity: 1;
 	margin: 0em 8em ;
 	color: var(--angel-text);
+	box-shadow: var(--hover-shadow);
 }
 
 main{

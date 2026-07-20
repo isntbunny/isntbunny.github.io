@@ -6,10 +6,10 @@ import { menuLinks } from "@/site.config";
 	    <Snowflake />
 		  </div>
 <header id="main-header">
-	<a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"
+	<div class="hpwrapper"><a aria-current={Astro.url.pathname === "/" ? "page" : false} class="site-nav-link" href="/"
 	>
 	<img class="headpic" src="https://i.postimg.cc/52jdV8tV/1.gif"></a
->
+></div>
 	<nav aria-label="Main menu" class="site-nav-shell">
 		<div class="site-nav-links">
 
@@ -37,10 +37,10 @@ import { menuLinks } from "@/site.config";
 	z-index: 100;
 	min-height: var(--header-height);
 	padding: 0;
-	background: rgba(255, 255, 255, 0.58);
+	background:#e4ebf2;
 	backdrop-filter: blur(28px);
 	-webkit-backdrop-filter: blur(28px);
-	border-bottom: 1px solid var(--glass-border);
+	border-bottom: 1px solid #c8d4e0;
 	box-shadow: 0 8px 24px rgba(160, 190, 215, 0.16);
 }
 
@@ -78,9 +78,12 @@ import { menuLinks } from "@/site.config";
 	text-decoration: underline dotted;
 }
 
+
 .headpic {
   max-width: 100%;
-  border-bottom:1px solid var(--glass-border);
+  border-bottom: 1px solid #c8d4e0;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
