@@ -3,6 +3,7 @@ import { type CollectionEntry, render } from "astro:content";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import BaseLayout from "./Base.astro";
+import TOCHeading from "@/components/blog/TOCHeading.astro";
 
 interface Props {
 	post: CollectionEntry<"post">;
@@ -46,9 +47,7 @@ const wordCount = chineseChars + englishWords;
 			<Masthead content={post} readingTime={readingTime} wordCount={wordCount} />
 		</div>
 		<div style="display:flex; gap:2em;">
-			<div class="toc">
-				{!!headings.length && <TOC headings={headings} />}
-			</div>
+			<div><TOC /></div>
 			<div class="content">
 				<Content />
 			</div>
@@ -56,21 +55,3 @@ const wordCount = chineseChars + englishWords;
 	</article>
 
 </BaseLayout>
-
-<script>
-	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
-	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
-
-	function callback(entries: IntersectionObserverEntry[]) {
-		entries.forEach((entry) => {
-			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-		});
-	}
-
-	scrollBtn.addEventListener("click", () => {
-		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
-	});
-
-	const observer = new IntersectionObserver(callback);
-	observer.observe(targetHeader);
-</script>

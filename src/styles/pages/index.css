@@ -10,70 +10,9 @@
   position: relative;
 }
 
-.sticker-wall::after {
-  position: absolute;
-  top: -12px;
-  left: 28px;
-  background: var(--angel-blue-pale);
-  padding: 0 16px;
-  font-size: 13px;
-  color: var(--ink-faint);
-  letter-spacing: 3px;
-  border-radius: 30px;
-  border: 1px solid var(--white);
-  backdrop-filter: blur(4px);
+.sticker-wall img{
+  height:50px;
 }
-
-.sticker-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 20px;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.sticker {
-  background: var(--card-bg);
-  backdrop-filter: blur(2px);
-  padding: 8px 12px;
-  border-radius: 20px 8px 20px 8px;
-  box-shadow: 0 2px 10px var(--angel-shadow);
-  border: 1px solid var(--white);
-  transition: all 0.25s;
-  position: relative;
-}
-
-.sticker:hover {
-  transform: scale(1.05) rotate(0deg) !important;
-  box-shadow: 0 6px 20px var(--angel-shadow-strong);
-  background: var(--card-bg-hover);
-}
-
-.sticker::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 25%;
-  width: 30%;
-  height: 10px;
-  background: var(--glass-border);
-  border-radius: 20px 20px 0 0;
-  filter: blur(1px);
-  opacity: 0.5;
-}
-
-.mushroom-sticker img {
-  height: 60px;
-  width: auto;
-  display: block;
-  border-radius: 12px 4px 12px 4px;
-}
-
-/* 每个蘑菇不同的旋转偏移 */
-.mushroom-sticker:nth-child(1) { transform: rotate(-2deg) translateY(-2px); }
-.mushroom-sticker:nth-child(2) { transform: rotate(3deg) translateY(4px); }
-.mushroom-sticker:nth-child(3) { transform: rotate(-1deg) translateY(-3px); }
-.mushroom-sticker:nth-child(4) { transform: rotate(4deg) translateY(2px); }
 
 /* ===== 主网格双栏 ===== */
 .main-grid {
@@ -88,44 +27,6 @@
 }
 
 /* ===== 卡片 ===== */
-.sitecard {
-  background: var(--card-bg);
-  backdrop-filter: blur(3px);
-  border-radius: 24px;
-  padding: 1em;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 2px 14px var(--angel-shadow);
-  transition: 0.25s;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-.sitecard:hover {
-  background: var(--card-bg-hover);
-  box-shadow: 0 4px 20px var(--angel-shadow);
-}
-
-.sitecard h1 {
-  font-weight: 400;
-  color: var(--angel-text);
-  font-size: 22px;
-  letter-spacing: 2px;
-}
-
-.sitecard h2 {
-  font-weight: 400;
-  color: var(--angel-text);
-  font-size: 15px;
-  letter-spacing: 2px;
-  border-bottom: 1px dotted var(--angel-blue-light);
-}
-
-.sitecard p {
-  color: var(--ink-soft);
-  font-size: 15px;
-  line-height: 1.8;
-  margin: 4px 0;
-}
 
 .window {
   padding:0em ;
@@ -133,7 +34,7 @@
   background: #f2f6fa;
   border: 1px solid #c8d4e0;
   box-shadow: 0 2px 12px rgba(160, 180, 200, 0.15);
-  margin: 2em 0;
+  margin: 0;
 }
 
 .window-titlebar {

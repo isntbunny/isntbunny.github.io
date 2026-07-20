@@ -1,26 +1,21 @@
+
 .posts-page {
 	letter-spacing: 0.05em;
+	padding: 0em 4em;
 }
 
 .posts-page .card-chip {
 	font-size: 0.74rem;
-	padding: 0.15rem 0.45rem;
 }
 
 .posts-page section[data-year] {
 	display: grid;
 	gap: 14px;
-	margin-bottom: 26px;
 }
 
 .posts-page .posts-year {
 	font-size: 32px;
 	color: var(--blue);
-}
-
-.posts-page .posts-year-divider {
-	border-top: 2px dashed var(--angel-blue-light);
-	margin: 0%;
 }
 
 .posts-page .posts-month-grid {

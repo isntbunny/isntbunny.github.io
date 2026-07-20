@@ -30,10 +30,8 @@ import {
     </div>
   </div>
 
-  <div class="sitecard">
+  <div class="">
     <h2>GET TO KNOW ME!</h2>
-    <div class="aboutme-two-col">
-      <div class="left-col">
         <div class="my-hobbies">
           <h3>I love...</h3>
           <img src="https://i.postimg.cc/k4dPjffc/Programming.png" alt="Programming" />
@@ -48,9 +46,6 @@ import {
             </a>
           ))}
         </div>
-      </div>
-
-      <div class="right-col">
         <div class="stamps">
           <h3>Stamps</h3>
           <div class="stamppic">
@@ -58,20 +53,18 @@ import {
               <img key={i} src={src} alt={`stamp-${i}`} />
             ))}
           </div>
-        </div>
-        <div class="blinkies">
-          <h3>Blinkies</h3>
-          <div class="blinkpic">
-            {blinkies.map((src, i) => (
-              <img key={i} src={src} alt={`blinkie-${i}`} />
-            ))}
-          </div>
-        </div>
-      </div>
+         </div>
+    </div>
+  
+  <div class="scroll-container">
+    <div class="scroll-track">
+          {blinkies.map((src, i) => (
+            <img key={i} src={src} alt={`blinkie-${i}`} />
+          ))}
     </div>
   </div>
-
-  <div class="sitecard">
+  <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/c4cCf84W/01.png" alt="01"></a>
+  <div class="">
     <h2>MY SKILLS</h2>
     <ul>
       {skillCategories.map((category) => (
@@ -87,8 +80,8 @@ import {
       ))}
     </ul>
   </div>
-
-  <div class="poid sitecard">
+<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/c4cCf84W/01.png" alt="01"></a>
+  <div class="poid">
     <h2>IDEOLOGY</h2>
     <div>
       <p>自由意志社会主义desu</p>
@@ -96,12 +89,11 @@ import {
     </div>
   </div>
 
-  {/* 底部滚动按钮栏 - 修复 */}
-  <div class="scroll-container">
-    <div class="scroll-track">
-      {[...scrollImages, ...scrollImages].map((src, i) => (
-        <img key={i} src={src} alt={`scroll-${i}`} />
-      ))}
-    </div>
-  </div>
+    <div class="scroll-container">
+        <div class="scroll-track">
+              {[...scrollImages, ...scrollImages].map((src, i) => (
+                      <img key={i} src={src} alt={`scroll-${i}`} />
+                            ))}
+                                </div>
+                                  </div>
 </PageLayout>

@@ -5,11 +5,12 @@
 html {  -webkit-mask-image: linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
 	  mask-image: linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
 	    mask-composite: intersect;
-		  -webkit-mask-composite: source-in, xor;  background-image:
-		  linear-gradient(to right, rgb(203 213 225) 1px, transparent 1px),
-		  linear-gradient(to bottom, rgb(203 213 225) 1px, transparent 1px);
-	  background-size: 20px 20px;
-	  background-position: center center;
+		  -webkit-mask-composite: source-in, xor;  
+	background-image:
+	linear-gradient(to right, rgb(203 213 225) 1px, transparent 1px),
+		linear-gradient(to bottom, rgb(203 213 225) 1px, transparent 1px);
+	background-size: 20px 20px;
+	background-position: center center;
 	/*background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
 	background-size: 3em 3em;
 	background-color: var(--paper-bg);*/
@@ -30,6 +31,7 @@ h1::after, h1::before {
 }
 
 body.site-shell {
+	padding: 0;
 	margin-top: 0;
 	animation: pageFade 0.55s ease both;
 }
@@ -45,7 +47,8 @@ body {
 }
 
 main{
-	padding: 2em ;
+	padding: 0;
+	margin: 2em;
 }
 
 .small-muted {
@@ -54,7 +57,46 @@ main{
 }
 
 .sitecard {
-	background: var(--glass-bg);
+	background: var(--card-bg);
+	backdrop-filter: blur(3px);
+	border-radius: 24px;
+	margin: 2em;
+	padding: 1em;
+	border: 1px solid var(--glass-border);
+	box-shadow: 0 2px 14px var(--angel-shadow);
+	transition: 0.25s;
+	transform: translateY(30px);
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  
+  .sitecard:hover {
+	background: var(--card-bg-hover);
+	box-shadow: 0 4px 20px var(--angel-shadow);
+  }
+  
+  .sitecard h1 {
+	font-weight: 400;
+	color: var(--angel-text);
+	font-size: 22px;
+	letter-spacing: 2px;
+  }
+  
+  .sitecard h2 ,.sitecard h3{
+	font-weight: 400;
+	color: var(--angel-text);
+	font-size: 15px;
+	letter-spacing: 2px;
+	border-bottom: 1px dotted var(--angel-blue-light);
+  }
+  
+  .sitecard p {
+	color: var(--ink-soft);
+	font-size: small;
+	line-height: 1.5;
+  }
+
+.sitecard {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 24px;

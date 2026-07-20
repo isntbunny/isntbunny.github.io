@@ -79,11 +79,11 @@ h1,h2,h3,h4,h5{
     font-family: "smalle","Ark Pixel 12px P zh_tw" ;
     font-weight: bold;
     text-align: center;
-	line-height: 1.5;
+	line-height: 1;
 }
 
 p,ul,ol,li,dl,dt,dd,blockquote,address,figcaption {
-  font-size: small;
+  font-size: middle;
 }
 
 
