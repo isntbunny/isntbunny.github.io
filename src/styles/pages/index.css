@@ -159,7 +159,7 @@ html {
   position:absolute;
     top:45%;
       left:86%;
-        width:8em;
+        width:9em;
         }
 
 .bub-outer {
@@ -167,6 +167,7 @@ html {
   top: 50%;
   left:30%;
   width: 60%;
+  height:100%;
   margin: 0;
   
   /* 背景图变高：用 padding 撑高 */
@@ -185,13 +186,13 @@ html {
 
 .bub {
   position: absolute;
-  top: 10%;      /* 文字区域在气泡偏上 */
+  top: 8%;      /* 文字区域在气泡偏上 */
   left: 5%;     /* 左右收窄 */
   right: 5%;
   bottom: 20%;   /* 底部留更多空间给尖角 */
   text-align: center;
   
-  padding: 8px 10px;
+  padding: 5px 10px;
   
   color: #2d3d4d;
   font-size: 13px;
