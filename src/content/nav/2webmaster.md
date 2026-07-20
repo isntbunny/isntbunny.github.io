@@ -37,3 +37,5 @@ order: 2
 - [Cloudflare Dashboard](https://dash.cloudflare.com/) - Cloudflare 控制台
 - [File Manager](https://filemanager.ai/new3/index.php) - 文件管理器
 - [97站长社区](https://www.97z.net/) - 站长社区
+- [biu - 跨平台B站音乐播放器](https://xiaoyi.vc/biu.html) - 软件介绍
+- [Eno Music](https://xiaoyi.vc/eno-music.html) - 软件介绍

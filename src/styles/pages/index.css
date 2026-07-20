@@ -7,8 +7,15 @@ html {
     120px 0px;
 }
 
-.sticker-wall img{
-  height:50px;
+.sticker-snowfufu{
+  position:absolute;
+  top: 10em;
+  left:3em;
+  z-index: 999;
+}
+.sticker-snowfufu img{
+  transform: rotate(-20deg);
+  height:7em;
 }
 
 /* ===== 主网格双栏 ===== */

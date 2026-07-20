@@ -82,7 +82,6 @@ const uta = defineCollection({
   schema: z.object({
     title: z.string(),
     artist: z.string().optional(),
-    date: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     // 如果某些文件有 description，可以加上
     description: z.string().optional(),

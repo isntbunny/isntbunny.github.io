@@ -3,7 +3,8 @@ title: "编程"
 icon: "💻"
 order: 1
 ---
-
+- [pyqt教程](https://maicss.com/pyqt/) - PyQt 教程
+- [Nostr 入门](https://nostr.how/zh/get-started) - Nostr 教程
 - [GitHub](https://github.com) - 这个不必多说了吧（
 - [Stack Overflow](https://stackoverflow.com) - 程序猿问答社区（当练阅读英语了x）
 - [MDN Web Docs](https://developer.mozilla.org) - Mozilla Web 技术文档
@@ -17,16 +18,12 @@ order: 1
 - [菜鸟教程](https://www.runoob.com/) - 编程教程
 - [Git教程 - 廖雪峰](https://liaoxuefeng.com/books/git/what-is-git/svn-vs-git/index.html) - Git 教程
 - [DNS 设置教程](https://www.tjsky.net/tutorial/539) - DoH/DoT 设置
-- [biu - 跨平台B站音乐播放器](https://xiaoyi.vc/biu.html) - 软件介绍
-- [Eno Music](https://xiaoyi.vc/eno-music.html) - 软件介绍
-- [Nostr 入门](https://nostr.how/zh/get-started) - Nostr 教程
 - [零网初探](https://io-oi.me/tech/first-exploration-of-the-zeronet/) - ZeroNet 介绍
 - [Python解释器 - 廖雪峰](https://liaoxuefeng.com/books/python/install/interpreter/index.html) - Python 教程
 - [Phaser 3 入门教程](https://phaser.io/tutorials/making-your-first-phaser-3-game-chinese) - Phaser 游戏开发
 - [Python Tutor](https://pythontutor.com/visualize.html#mode=edit) - 代码可视化
 - [PythonAnywhere](https://www.pythonanywhere.com/user/isntbunny/) - Python 托管
 - [Colaboratory](https://colab.research.google.com/) - 在线 Jupyter
-- [pyqt教程](https://maicss.com/pyqt/) - PyQt 教程
 - [高中生程式解題系統](https://zerojudge.tw/) - 有点像leetcode
 - [洛谷](https://www.luogu.com.cn/) - OJ 平台
 - [Flame Engine](https://flame-engine.org/) - Flutter 游戏引擎

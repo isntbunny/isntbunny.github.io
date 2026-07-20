@@ -54,9 +54,9 @@ src
 -data 一些配置
 -layouts 布局
 -pages 放各种.astro页面
--plugins 插件
+-plugins astro插件（如处理markdown）
 -styles 顾名思义就是css样式
--utils js/ts代码
+-utils js/ts代码（主要是一些数学运算逻辑类的工具函数）
 .gitignore 里面声明的内容不会commit到仓库
 
 懒得写了以后再说

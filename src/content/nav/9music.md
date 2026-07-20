@@ -12,3 +12,4 @@ order: 9
 - [UTAU 资源下载](https://utaujc.jimdofree.com/download1) - UTAU 下载
 - [UTAU 中文教程](https://utaujc.jimdofree.com/utauchn1) - UTAU 教程
 - [Ocean](https://www.oceanwaves.io/) - 在线音乐制作
+- [在线 Audio Splitter 音频分轨器](https://audiocut.io/zh-CN/audio-splitter) - 分离人声、鼓组、贝斯等声部
