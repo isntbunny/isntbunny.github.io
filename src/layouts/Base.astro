@@ -26,13 +26,11 @@ const {
 		<ViewTransitions />
   	</head>
 	<body class="site-shell">
-    <div id="my-banner"></div>
 		<Header />
 		<main class="page-fade" id="main"><slot /></main>
 		<Footer />
 </html>
 
-<script src="https://keepandroidopen.org/banner.js?link=https://keepandroidopen.org/&hidebutton=off&id=my-banner"></script>
 <script>
 	// 确保页面切换时只替换 main 区域，避免重复渲染 header/footer
 	document.addEventListener('astro:before-swap', (e) => {

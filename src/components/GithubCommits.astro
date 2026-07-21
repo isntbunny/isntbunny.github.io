@@ -53,7 +53,6 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
 
 {commits.length > 0 && (
   <div class="commit-list">
-    <h3>Updates</h3>
     {sortedDates.map((dateKey) => {
       const dayCommits = groupedCommits[dateKey];
       

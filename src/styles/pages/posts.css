@@ -14,8 +14,11 @@
 }
 
 .posts-page .posts-year {
-	font-size: 32px;
-	color: var(--blue);
+	font-size: xx-large;
+	border-radius: 999px;
+	color: var(--angel-blue);
+	padding: 0.5em;
+	margin: 1em;
 }
 
 .posts-page .posts-month-grid {
@@ -24,8 +27,9 @@
 }
 
 .posts-page .posts-month {
+	color: white;
 	display: inline-block;
-	background: var(--angel-blue-pale);
+	background: var(--angel-blue);
 	border-radius: 999px;
 	padding: 4px 12px;
 }
@@ -33,7 +37,7 @@
 .posts-page .posts-list {
 	margin: 10px 0 0 24px;
 	padding-left: 14px;
-	border-left: 2px solid var(--angel-blue);
+	border-left: 2px solid var(--angel-blue-pale);
 	display: grid;
 	gap: 8px;
 }

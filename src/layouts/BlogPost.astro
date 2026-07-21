@@ -1,9 +1,7 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
 import Masthead from "@/components/blog/Masthead.astro";
-import TOC from "@/components/blog/TOC.astro";
 import BaseLayout from "./Base.astro";
-import TOCHeading from "@/components/blog/TOCHeading.astro";
 
 interface Props {
 	post: CollectionEntry<"post">;
@@ -13,7 +11,7 @@ const { post } = Astro.props;
 const { ogImage, title, description, updatedDate, publishDate } = post.data;
 const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
-const { Content, headings, remarkPluginFrontmatter } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 const readingTime = remarkPluginFrontmatter.readingTime || "未知";
 
@@ -47,7 +45,6 @@ const wordCount = chineseChars + englishWords;
 			<Masthead content={post} readingTime={readingTime} wordCount={wordCount} />
 		</div>
 		<div style="display:flex; gap:2em;">
-			<div><TOC /></div>
 			<div class="content">
 				<Content />
 			</div>

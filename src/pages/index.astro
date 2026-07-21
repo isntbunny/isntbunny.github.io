@@ -9,8 +9,13 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
   
   <!-- ===== 主网格 ===== -->
   <div class="main-grid">
-    <!-- ===== 左栏 ===== -->
+
     <div class="left-col">
+		<Window title="GitHub" class="github-commits">
+		  <GithubCommits />
+		</Window>
+	</div>
+    <div class="middle-col">
 
       <!-- ===== 欢迎卡片（使用Window组件） ===== -->
       <Window title="Welcome">
@@ -21,6 +26,7 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
         </div>
         <h1>「幸せのカウントダウン」</h1>
         <p>Hellllloooo, I'm Bunny. Welcome to my nook! This a place where I document my dairy and thoughts.</p>
+        <div class="bow-divider"></div>
         <p id="greeting-text">idntifying ur ip...</p>
         <p id="extra-text" class="welcome-extra"></p>
         <p id="ip-text" class="welcome-ip"></p>
@@ -31,6 +37,7 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
           <a href="https://postimg.cc/JsNvVCP5" target="_blank">
             <img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
           </a>
+
         </p>
         <slot />
       </Window>
@@ -43,28 +50,23 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
             <img src="https://moods.imood.com/display/uname-isntbunny/fg-000000/bg-ffffff/imood.gif" alt="The current mood of isntbunny at www.imood.com" border="0" />
           </a>
         </p>
-        
-        <div class="bubbling-me">
-          <a href="https://status.cafe/users/isntbunny">
-            <img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
-          </a>
-          <div class="bub-outer">
-            <div class="bub" id="statusBubble" style="cursor: pointer;">
-              <div id="statuscafe-content">最近好像没有什么可说的呢....让我想想。</div>
-            </div>
+        <div class="bubble">
+            <div class="bubbling-me"><a href="https://status.cafe/users/isntbunny"><img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' /></a>
+            <div class="bub-outer">
+                <div class="bub" id="statusBubble" style="cursor: pointer;">
+                    <div id="statuscafe-content">最近好像没有什么可说的呢....让我想想。</div>
+                </div>
+			
             <button id="refreshStatusBtn" class="refresh-btn" title="换一条状态">
               How are you？
             </button>
             <div id="statuscafe-username" style="text-align: end; border-top: 2px dotted var(--angel-blue); padding-top: 3px;">thinking</div>
           </div>
+		</div>
         </div>
         
-        <div class="bow-divider"></div>
       </Window>
 
-      <Window title="GitHub">
-        <GithubCommits />
-      </Window>
 
     </div>
 
@@ -76,10 +78,6 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
           距离<select id="yearSelect" class="year-select"></select>高考还有
         </div>
         <span class="days-number" id="countdownDays">--</span>天
-      </Window>
-
-      <Window title="✦ ToDo ✦">
-        <div class="todo-placeholder"></div>
       </Window>
 
       <Window title="✦ Guestbook ✦" class="guest" >

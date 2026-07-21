@@ -11,9 +11,22 @@ html {
 /* 主网格双栏 */
 .main-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "left middle right";
   gap: 2em;
   align-items: start;
+}
+
+.left-col{
+  grid-area: left;
+}
+
+.middle-col{
+  grid-area: middle;
+}
+
+.right-col{
+  grid-area: right;
 }
 
 
@@ -126,39 +139,17 @@ html {
 
 
 
-/* ===== Reading List ===== */
-.reading-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.reading-list li {
-  color: var(--ink-soft);
-  font-size: 15px;
-  padding: 4px 0 4px 20px;
-  position: relative;
-}
-
-.reading-list li::before {
-  content: '⊹';
-  position: absolute;
-  left: 0;
-  color: var(--angel-blue);
-}
-
-
 
 /* bubble */
 
 
 .bubbling-me img{
   position:absolute;
-    top:45%;
-      left:86%;
-        width:9em;
-        z-index: 12;
-        }
+  top:45%;
+  left:86%;
+  width:7em;
+  z-index: 12;
+}
 
 .bub-outer {
   position: absolute;
@@ -186,16 +177,6 @@ html {
   font-size: 13px;
 }
 
-.guest .window-content{
-  padding:0 !important;
-  margin:0;
-}
-
-.guest iframe{
-  padding: 1em;
-  background-color: white;
-}
-
 .bub {
   position: absolute;
   top: 8%;
@@ -211,7 +192,8 @@ html {
 
 .refresh-btn{
   position:absolute;
-  bottom:0;
+  bottom:0em;
+  right:3em;
 }
 
 #statuscafe-content {
@@ -240,6 +222,27 @@ html {
   position: absolute;
   right:0;
   bottom: 3em;
+}
+
+
+
+
+/* guest */
+
+.guest .window-content{
+  padding:0 !important;
+  margin:0;
+}
+
+.guest iframe{
+  padding: 1em;
+  background-color: white;
+}
+
+.github-commits .window-content{
+  max-height: 20em;
+  overflow: scroll;
+
 }
 
 
@@ -283,8 +286,14 @@ html {
 
   .main-grid {
     grid-template-columns: 1fr;
+    grid-template-areas: 
+    "middle"
+    "left" 
+    "right";
     gap:1em;
   }
+
+
 
   .sticker-wall {
     padding: 16px 18px;

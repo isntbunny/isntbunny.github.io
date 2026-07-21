@@ -23,17 +23,16 @@ html {
 	background-color: var(--paper-bg);*/
 }
 
-h1::after, h1::before {
-    content: "#"; 
-	color: transparent;
-    display: block;
-    width: auto;
-    height: 0.6em;
-    margin: 3px;
-    background-image: url("");
-    background-size: contain;
-    background-repeat: repeat-x;
-    background-position: center;
+
+
+body {
+	border: 2px solid #a1bfddaa;
+	background-size: 3em 3em;
+	background-color: #ffffff;
+	opacity: 1;
+	margin: 3em 14em ;
+	color: var(--angel-text);
+	box-shadow: var(--hover-shadow);
 }
 
 body.site-shell {
@@ -42,94 +41,11 @@ body.site-shell {
 	animation: pageFade 0.55s ease both;
 }
 
-body {
-	border: 2px solid #a1bfddaa;
-	background-size: 3em 3em;
-	background-color: #ffffff;
-	opacity: 1;
-	margin: 0em 8em ;
-	color: var(--angel-text);
-	box-shadow: var(--hover-shadow);
-}
-
 main{
 	padding: 0;
 	margin: 2em;
 }
 
-.small-muted {
-	font-weight: 300;
-	color: var(--text-muted);
-}
-
-.sitecard {
-	background: var(--card-bg);
-	backdrop-filter: blur(3px);
-	border-radius: 24px;
-	margin:1em;
-	padding: 1em;
-	border: 1px solid var(--glass-border);
-	box-shadow: 0 2px 14px var(--angel-shadow);
-	transition: 0.25s;
-	transform: translateY(30px);
-	transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
-  }
-
-  
-  .sitecard:hover {
-	background: var(--card-bg-hover);
-	box-shadow: 0 4px 20px var(--angel-shadow);
-  }
-  
-  .sitecard h1 {
-	font-weight: 400;
-	color: var(--angel-text);
-	font-size: 22px;
-	letter-spacing: 2px;
-  }
-  
-  .sitecard h2 ,.sitecard h3{
-	font-weight: 400;
-	color: var(--angel-text);
-	font-size: 15px;
-	letter-spacing: 2px;
-	border-bottom: 1px dotted var(--angel-blue-light);
-  }
-  
-  .sitecard p {
-	color: var(--ink-soft);
-	font-size: small;
-	line-height: 1.5;
-  }
-
-.sitecard {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 24px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--card-shadow);
-    position: relative;
-    padding: 2em;
-    margin-bottom: 2rem;
-    opacity: 0;
-	transform: translateY(30px);
-	transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-.sitecard.visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.sitecard:hover {
-	background: var(--card-bg-hover);
-	box-shadow: var(--hover-shadow);
-}
-
-
-a, button, img, .card, .gallery-tile, .bangumi-item, .sticker, .year-select {
-	transition-timing-function: ease;
-}
 
 main#main > *, .page-fade > * {
 	animation: contentFloat 0.55s ease both;
@@ -161,11 +77,14 @@ main#main > *, .page-fade > * {
 }
 
 @media (max-width: 768px) {
+
 	body {
 		padding:0em;
 		margin: 0;
 	}
+
 	main {
 		padding: 1em;
 	}
+
 }
