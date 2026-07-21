@@ -6,9 +6,6 @@ import GithubCommits from "@/components/GithubCommits.astro";
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
 	
-	<div class="sticker-snowfufu">
-	<img src="https://i.postimg.cc/Y0K0z6W2/fufu-snow.png" alt="fufu-snow">
-	</div>
 	<!-- ===== 主网格 ===== -->
 	<div class="main-grid">
 		<!-- ===== 左栏 ===== -->
@@ -16,6 +13,7 @@ import GithubCommits from "@/components/GithubCommits.astro";
 
 			<!-- 欢迎卡片 -->
 			<div class="window">
+				<div class="sticker-snowfufu"><a href="https://postimg.cc/nj2nHQ2N" target="_blank"><img src="https://i.postimg.cc/nj2nHQ2N/fufu-snow.png" alt="fufu-snow"></a></div>
 				<div class="window-titlebar">
 				  <div class="window-controls">
 					<span class="dot close"></span>
@@ -62,14 +60,14 @@ import GithubCommits from "@/components/GithubCommits.astro";
 					</div>
 					<script src="https://status.cafe/current-status.js?name=isntbunny" defer></script>
 			    </div>
+				<div class="bow-divider"></div>
 				<h3>What Am I Reading</h3>
 				<ul class="reading-list">
 					<li>红与黑</li>
 					<li>Animal Farm</li>
 				</ul>
 			</section>
-<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/7LCJmwdZ/bluebow.png" alt="bluebow"></a><a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/7LCJmwdZ/bluebow.png" alt="bluebow"></a>
-			<!-- Github Commits -->
+		<div class="bow-divider"></div>
 			<section class="">
 				<GithubCommits />
 			</section>

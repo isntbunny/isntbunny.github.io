@@ -3,7 +3,7 @@
 
 const owner = 'isntbunny';
 const repo = 'isntbunny.github.io'; 
-const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=10`;
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=30`;
 
 let commits = [];
 let errorMsg = '';
@@ -13,10 +13,10 @@ try {
   if (response.ok) {
     commits = await response.json();
   } else {
-    errorMsg = `GitHub API 请求失败（状态码：${response.status}）`;
+    errorMsg = `omg。GitHub API 请求失败捏qwq（状态码：${response.status}）`;
   }
 } catch (err) {
-  errorMsg = '网络错误，无法获取提交记录';
+  errorMsg = '嗯就是你的那个网络错误了，没法获取提交记录';
 }
 
 // 按日期分组
@@ -53,7 +53,7 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
 
 {commits.length > 0 && (
   <div class="commit-list">
-    <h3>最近更新</h3>
+    <h3>Updates</h3>
     {sortedDates.map((dateKey) => {
       const dayCommits = groupedCommits[dateKey];
       
@@ -79,7 +79,6 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
     
     <style>
       .commit-list h3 {
-        font-size: 1.2rem;
         margin-bottom: 1rem;
       }
       
@@ -123,7 +122,6 @@ const sortedDates = Object.keys(groupedCommits).sort((a, b) => {
       
       .msg {
         display: inline;
-        font-weight: 500;
         min-width: 150px;
         color: var(--angel-text);
       }

@@ -12,6 +12,20 @@ main{
   margin: 0;
 }
 
+
+
+            
+.sticker-fufu{
+              position:absolute;
+              top: 10em;
+              right:0em;
+              z-index: 999;
+            }
+            
+.sticker-fufu img{
+              height:7em;
+            }
+  
 .profile-header {
   display: flex;
   align-items: center;

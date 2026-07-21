@@ -1,7 +1,6 @@
 ---
 title: "This Song Is AI Generated "
 artist: "idk"
-date: "2005-06-06"
 tags: ["English", "hyperpop"]
 ---
 

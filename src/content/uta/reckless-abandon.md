@@ -1,7 +1,6 @@
 ---
 title: "Reckless Abandon"
 artist: "idk"
-date: "2005-06-06"
 tags: ["English", "hyperpop"]
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: "Fix You"
 artist: "idk"
-date: "2025-04-01"
 tags: ["English", "hyperpop"]
 ---
 
