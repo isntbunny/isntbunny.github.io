@@ -64,6 +64,10 @@ main#main > *, .page-fade > * {
   background-image: url('https://i.postimg.cc/7LCJmwdZ/bluebow.png');
 }
 
+.injector-divider {
+	background-image: url('https://i.postimg.cc/c4cCf84W/01.png');
+}
+
 @keyframes pageFade {
 	from { opacity: 0; }
 	to { opacity: 1; }
