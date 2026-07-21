@@ -60,6 +60,7 @@ src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');}
 
 
 * {
+	line-height: 1.6;
 	font-size: small;
 	box-sizing:border-box;
     font-family: "basiic","Ark Pixel 12px P zh_tw", monospace;

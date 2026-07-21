@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
+import Layout from "@/pages/layouts/Base.astro";
 
 
 export async function getStaticPaths() {
@@ -25,11 +25,11 @@ if (!uta) {
 const { Content } = await uta.render();
 ---
 
-<Base meta={{ title: uta.data.title }}>
+<Layout meta={{ title: uta.data.title }}>
     <h1>{uta.data.title}</h1>
     {uta.data.date && <time>{uta.data.date.toLocaleDateString()}</time>}
     <Content />
-</Base>
+</Layout>
 
 <style is:global>
   .content {

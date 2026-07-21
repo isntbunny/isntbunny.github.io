@@ -1,9 +1,9 @@
 ---
-import PageLayout from "@/layouts/Base.astro";
+import PageLayout from "@/pages/layouts/Base.astro";
 import "/src/styles/pages/index.css";
 import StatusBubble from "@/components/StatusBubble.astro";
 import GithubCommits from "@/components/GithubCommits.astro";
-import Window from "@/components/Window.astro";  // 新增的Window组件
+import Window from "@/components/Window.astro"; 
 ---
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
@@ -18,6 +18,11 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
 		<Window title="GitHub" class="github-commits">
 		  <GithubCommits />
 		</Window>
+
+    <Window title="FriendLinks">
+
+
+    </Window>
 	</div>
     <div class="middle-col">
 

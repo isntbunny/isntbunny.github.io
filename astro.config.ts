@@ -17,7 +17,7 @@ import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes
 import { remarkAdmonitions } from './src/plugins/remark-admonitions' /* Add admonitions */
 import { remarkGithubCard } from './src/plugins/remark-github-card'
 import { remarkReadingTime } from './src/plugins/remark-reading-time'
-import { expressiveCodeOptions, siteConfig } from './src/site.config'
+import { expressiveCodeOptions, siteConfig } from './src/data/site.config'
 
 // https://astro.build/config
 export default defineConfig({

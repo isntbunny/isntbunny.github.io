@@ -9,36 +9,21 @@ export type MenuLink = {
 };
 
 export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername: string } = {
-	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
-	author: "Eucaly",
-	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
-	date: {
-		locale: "zh-CN",
-		options: {
-			day: "numeric",
-			month: "short",
-			year: "numeric",
-		},
-	},
-	// Used as the default description meta property and webmanifest description
-	description: "",
-	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "zh-CN",
-	// Meta property, found in src/components/BaseHead.astro L:42
-	ogLocale: "zh_CN",
-	/* 
-		- Used to construct the meta title property found in src/components/BaseHead.astro L:11 
-		- The webmanifest name found in astro.config.ts L:42
-		- The link value found in src/components/layout/Header.astro L:35
-		- In the footer found in src/components/layout/Footer.astro L:12
-	*/
-	title: "変数エラー",
-	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
-	url: "https://isntbunny.github.io/",
-	backgroundImage: "https://i.postimg.cc/Y2bwBpkP/26898018.jpg",
-	// Bangumi.tv 用户名（用于番组计划页面 API 拉取）
-	bangumiUsername: "isntbunny",
-};
+  author: 'Eucaly',
+  date: {
+    locale: 'zh-CN',
+    options: {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    },
+  },
+  description: '',
+  lang: 'zh-CN',
+  ogLocale: 'zh_CN',
+  title: '変数エラー',
+  url: 'https://isntbunny.github.io/',
+}
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: MenuLink[] = [
@@ -46,7 +31,6 @@ export const menuLinks: MenuLink[] = [
   { path: '/uta/', title: 'LyricBook' },
   { path: '/gallery/', title: 'Gallery' },
   { path: '/nav/', title: 'MyNav' },
-  { path: '/friends/', title: 'Friends' },
   { path: '/about/', title: 'About' },
 ]
 
