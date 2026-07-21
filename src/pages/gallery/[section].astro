@@ -31,11 +31,8 @@ const groupedByYearMonth = allItems.reduce((acc, item, idx) => {
 const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompare(a));
 ---
 
-<PageLayout
-	meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}
->
+<PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
 	<a href="/gallery/" class="gallery-back">← Back</a>
-	
 	<h1>{sectionData.title}</h1>
 	{
 		sortedYears.map(year => (

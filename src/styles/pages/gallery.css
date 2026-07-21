@@ -4,6 +4,16 @@
 	grid-template-columns: 2fr 1fr;
 	grid-column-gap: 1em ;
 }
+a{
+	text-decoration-color: white;
+}
+.gallery-album-card{
+	
+	background-color: var(--angel-blue-pale);
+}
+.gallery-album img{
+	height: 10em;
+}
 
 .gallery-albumdesc{
 	position:relative;
@@ -25,21 +35,6 @@
 	flex-shrink: 0;
 	width:10em;  /* 固定宽度，或者用 min-width */
 	scroll-snap-align: start;
-}
-
-/* 隐藏滚动条（可选） */
-.gallery-grid::-webkit-scrollbar {
-	height: 6px;
-}
-
-.gallery-grid::-webkit-scrollbar-track {
-	background: var(--angel-blue-light);
-	border-radius: 3px;
-}
-
-.gallery-grid::-webkit-scrollbar-thumb {
-	background: var(--ink-faint);
-	border-radius: 3px;
 }
 
 

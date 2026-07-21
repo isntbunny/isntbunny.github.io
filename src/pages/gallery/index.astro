@@ -12,13 +12,14 @@ if (!gallery) throw new Error("Missing src/content/gallery/index.md");
 	<div class="gallery-album">
 		{
 			gallery.data.sections.map((section) => (
-				<a href={`/gallery/${section.slug}/`}>
+				<div class="gallery-album-card"><a href={`/gallery/${section.slug}/`}>
 					<img src={section.cover} alt={section.title} class="gallery-image" loading="lazy" />
 					<div class="gallery-albumdesc">
 					<h2>{section.title}</h2>
 					{section.description && <p class="small-muted">{section.description}</p>}
 					</div>
 				</a>
+				</div>
 			))
 		}
 	</div>
