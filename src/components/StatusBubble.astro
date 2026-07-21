@@ -14,7 +14,7 @@
         </div>
         <div class="bubbling-me">
             <a href="https://status.cafe/users/isntbunny">
-                <img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
+                <img id="bunnyImage" src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
             </a>
         </div>
     </div>
@@ -58,7 +58,9 @@
 }
 
 .bubbling-me img {
-    width: 7em;
+    height:23em;
+    width: 9em;
+    
 }
 
 .bub-pic {
@@ -130,7 +132,7 @@
     min-width: 60px;
     max-width: 160px;
     padding: 8px 12px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(4px);
@@ -226,7 +228,7 @@
 
 .mode-btn.active {
     background-color: rgba(255, 215, 0, 0.3);
-    border-color: gold;
+    border-color: rgba(255, 215, 0, 0.5);
 }
 
 #statuscafe-username {
@@ -299,6 +301,7 @@
         const nextContainer = document.getElementById('nextContainer');
         const usernameEl = document.getElementById('statuscafe-username');
         const bubble = document.getElementById('statusBubble');
+        const bunnyImage = document.getElementById('bunnyImage');
     
         // ---- 状态变量 ----
         let allMessages = [];
@@ -319,6 +322,13 @@
         // 防抖
         let lastClickTime = 0;
         const CLICK_DEBOUNCE = 500;
+
+        // GIF 控制相关
+        const originalGif = 'https://i.postimg.cc/9MLD69pb/Gif260720.gif';
+        // 🔧🔧🔧 替换成你的静态图片地址！比如截取GIF的第一帧保存为PNG
+        const staticImage = 'https://i.postimg.cc/HxG7bTwc/avatar250806.png';
+        let gifTimer = null;
+        let isStatic = false;
     
         // ---- 选项按钮的清理函数 ----
         function cleanupOptionListeners() {
@@ -327,6 +337,40 @@
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
             });
+        }
+
+        // ---- GIF 控制函数 ----
+        function switchToStaticImage() {
+            if (!bunnyImage) return;
+            if (isStatic) return;
+            
+            isStatic = true;
+            console.log('切换到静态图片'); // 调试
+            bunnyImage.style.transition = 'opacity 0.3s';
+            bunnyImage.style.opacity = '0';
+            setTimeout(() => {
+                bunnyImage.src = staticImage;
+                bunnyImage.style.opacity = '1';
+            }, 300);
+        }
+
+        function restoreGif() {
+            if (gifTimer) {
+                clearTimeout(gifTimer);
+                gifTimer = null;
+            }
+            
+            if (!bunnyImage) return;
+            if (!isStatic) return;
+            
+            isStatic = false;
+            console.log('恢复GIF'); // 调试
+            bunnyImage.style.transition = 'opacity 0.3s';
+            bunnyImage.style.opacity = '0';
+            setTimeout(() => {
+                bunnyImage.src = originalGif;
+                bunnyImage.style.opacity = '1';
+            }, 300);
         }
     
         // ---- 从 status.cafe 读取所有状态 ----
@@ -427,6 +471,9 @@
                 let index = 0;
                 element.textContent = '';
                 
+                // 🎯 开始打字时恢复 GIF
+                restoreGif();
+                
                 function typeChar() {
                     if (index < text.length) {
                         element.textContent += text.charAt(index);
@@ -437,6 +484,10 @@
                     } else {
                         isTyping = false;
                         autoScrollToBottom(element);
+                        
+                        // 🎯 打字完成后切换到静态图片
+                        switchToStaticImage();
+                        
                         resolve();
                     }
                 }
@@ -535,6 +586,7 @@
                 optionsContainer.style.display = 'none';
                 nextContainer.style.display = 'none';
                 usernameEl.textContent = `完成！`;
+                switchToStaticImage();
                 return;
             }
             
@@ -589,12 +641,29 @@
             });
             
             usernameEl.textContent = `已答对 ${learnedIds.length}/${totalWords}`;
+            
+            // 🎯 显示题目时先恢复 GIF，然后3秒后切换到静态图片
+            restoreGif();
+            if (gifTimer) clearTimeout(gifTimer);
+            gifTimer = setTimeout(() => {
+                // 只有在还没回答的情况下才切换静态图
+                if (!isAnswered) {
+                    switchToStaticImage();
+                }
+            }, 3000);
         }
     
         // ---- 处理回答 ----
         function handleAnswer(btn, selectedWord) {
             if (isAnswered) return;
             isAnswered = true;
+            
+            // 🎯 回答时清除定时器，恢复 GIF
+            if (gifTimer) {
+                clearTimeout(gifTimer);
+                gifTimer = null;
+            }
+            restoreGif();
             
             const isCorrect = selectedWord.id === currentWord.id;
             const optionBtns = optionsContainer.querySelectorAll('.option-btn');
@@ -633,12 +702,13 @@
             
             // 显示下一个按钮
             nextContainer.style.display = 'block';
-            //usernameEl.textContent = `已答对 ${learnedIds.length}/${totalWords}`;
+            
+            // 🎯 回答完成后切换到静态图片
+            switchToStaticImage();
         }
     
         // ---- 处理下一个 ----
         function handleNext() {
-            console.log('handleNext 被调用了'); // 调试用
             showQuestion();
         }
     
@@ -652,6 +722,11 @@
             wordModeBtn.classList.remove('active');
             refreshBtn.style.display = 'inline-block';
             cleanupOptionListeners();
+            
+            if (gifTimer) {
+                clearTimeout(gifTimer);
+                gifTimer = null;
+            }
         }
     
         // ---- 切换模式 ----
@@ -677,33 +752,31 @@
         }
     
         // ============================================
-        // 🔧🔧🔧 事件绑定 - 完全重写 🔧🔧🔧
+        // 事件绑定
         // ============================================
         
-        // 绑定刷新按钮
         if (refreshBtn) {
             refreshBtn.addEventListener('click', nextStatus);
         }
         
-        // 绑定单词模式按钮
         if (wordModeBtn) {
             wordModeBtn.addEventListener('click', toggleWordMode);
         }
         
-        // 🔧 关键修复：在 nextContainer 上使用事件委托
-        if (nextContainer) {
-            nextContainer.onclick = function(e) {
-                console.log('nextContainer 被点击了', e.target); // 调试用
-                if (e.target && e.target.id === 'nextWordBtn') {
-                    console.log('nextWordBtn 被点击了'); // 调试用
+        // 绑定下一个按钮
+        const nextBtn = document.getElementById('nextWordBtn');
+        if (nextBtn) {
+            nextBtn.replaceWith(nextBtn.cloneNode(true));
+            const newNextBtn = document.getElementById('nextWordBtn');
+            if (newNextBtn) {
+                newNextBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     handleNext();
-                }
-            };
+                });
+            }
         }
         
-        // 绑定泡泡点击
         if (bubble) {
             bubble.addEventListener('click', () => {
                 if (isWordMode) return;
@@ -768,4 +841,4 @@
         
         init();
     }
-    </script>
+</script>

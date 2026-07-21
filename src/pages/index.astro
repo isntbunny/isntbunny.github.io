@@ -13,16 +13,17 @@ import Window from "@/components/Window.astro";
 	<div class="home-sticker">
 		
 	</div>
-
     <div class="left-col">
+    <Window title="Countdown">
+      <div class="distance-label">
+          距离<select id="yearSelect" class="year-select"></select>高考还有
+      </div>
+        <span class="days-number" id="countdownDays">--</span>天
+    </Window>
 		<Window title="GitHub" class="github-commits">
 		  <GithubCommits />
 		</Window>
 
-    <Window title="FriendLinks">
-
-
-    </Window>
 	</div>
     <div class="middle-col">
 
@@ -59,12 +60,15 @@ import Window from "@/components/Window.astro";
 
     <!-- ===== 右栏 ===== -->
     <div class="right-col">
+      
+      <Window title="FriendLinks">
+  
+  
+      </Window>
 
-      <Window title="Countdown">
-        <div class="distance-label">
-          距离<select id="yearSelect" class="year-select"></select>高考还有
-        </div>
-        <span class="days-number" id="countdownDays">--</span>天
+      <Window title="Webrings">
+
+
       </Window>
 
       <Window title="Guestbook" class="guest" >
