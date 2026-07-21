@@ -131,12 +131,7 @@ html {
   border-radius: 4px;
 }
 
-/* ===== Status 样式 ===== */
-#statuscafe-content {
-  color: var(--ink-soft);
 
-  font-style: italic;
-}
 
 #statuscafe-username {
   color: var(--ink-faint);
@@ -209,11 +204,10 @@ html {
   top: 50%;
   left:30%;
   width: 60%;
-  height:100%;
   margin: 0;
   
   /* 背景图变高：用 padding 撑高 */
-  padding-bottom: 32%;  /* 让容器变高 */
+  padding-bottom: 20%;  /* 让容器变高 */
   
   background-image: url("https://i.postimg.cc/gjf2pH6T/bubbleright.png");
   background-size: 100% 100%;
@@ -228,46 +222,61 @@ html {
 
 .bub {
   position: absolute;
-  top: 8%;      /* 文字区域在气泡偏上 */
-  left: 5%;     /* 左右收窄 */
+  top: 8%;
+  left: 5%;
   right: 5%;
-  bottom: 20%;   /* 底部留更多空间给尖角 */
-  text-align: center;
-  
+  bottom: 14%;
   padding: 5px 10px;
-  
-  color: #2d3d4d;
-  font-size: 13px;
-  line-height: 1.6;
+  line-height: 2;
   text-align: center;
-  
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;   /* 关键：不让 .bub 滚动，让内部元素滚动 */
   word-wrap: break-word;
-  
-  background: rgba(255, 248, 240, 0.05);
-  border-radius: 10px;
 }
 
-/* 滚动条 */
-.bub::-webkit-scrollbar {
-  width: 3px;
+#statuscafe-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;          /* 占满父容器高度 */
+  max-height: 100%;
+  overflow-y: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  padding-right: 4px;
+  /* 滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
 }
-.bub::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.15);
-  border-radius: 10px;
+
+#statuscafe-content::-webkit-scrollbar {
+  width: 4px;
 }
-.bub::-webkit-scrollbar-track {
+#statuscafe-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+#statuscafe-content::-webkit-scrollbar-track {
   background: transparent;
 }
 
 #statuscafe-content{
-    margin-bottom: 7px;
+
 }
 
 #statuscafe-username a{
   text-decoration: none;
 }
+
+#statuscafe-username{
+  position: absolute;
+  right:0;
+  bottom: 3em;
+}
+
+
+
 
 
 /* 手机端 */
