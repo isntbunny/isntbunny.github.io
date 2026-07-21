@@ -2,122 +2,116 @@
 import PageLayout from "@/layouts/Base.astro";
 import "/src/styles/pages/index.css";
 import GithubCommits from "@/components/GithubCommits.astro";
+import Window from "@/components/Window.astro";  // 新增的Window组件
 ---
 
 <PageLayout meta={{ title: "Home", description: "主页" }}>
-	
-	<!-- ===== 主网格 ===== -->
-	<div class="main-grid">
-		<!-- ===== 左栏 ===== -->
-		<div class="left-col">
+  
+  <!-- ===== 主网格 ===== -->
+  <div class="main-grid">
+    <!-- ===== 左栏 ===== -->
+    <div class="left-col">
 
-			<!-- 欢迎卡片 -->
-			<div class="window">
-				<div class="sticker-snowfufu"><a href="https://postimg.cc/nj2nHQ2N" target="_blank"><img src="https://i.postimg.cc/nj2nHQ2N/fufu-snow.png" alt="fufu-snow"></a></div>
-				<div class="window-titlebar">
-				  <div class="window-controls">
-					<span class="dot close"></span>
-					<span class="dot minimize"></span>
-					<span class="dot maximize"></span>
-				  </div>
-				  <span class="window-title">Welcome</span>
-				</div>
-				<div class="window-content">
-				  <h1>「幸せのカウントダウン」</h1>
-				  <p>Hellllloooo, I'm Bunny. Welcome to my nook! This a place where I document my dairy and thoughts. </p>
-				  <p id="greeting-text">idntifying ur ip...</p>
-				  <p id="extra-text" class="welcome-extra"></p>
-				  <p id="ip-text" class="welcome-ip"></p>
-				  <p class="badge-row">
-				  <a href="https://postimages.org/" target="_blank">
-					<img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
-				  </a>
-				  <a href="https://postimg.cc/JsNvVCP5" target="_blank">
-					<img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
-				  </a>
-				</p>
-				<slot />
-				</div>
-			  </div>
+      <!-- ===== 欢迎卡片（使用Window组件） ===== -->
+      <Window title="Welcome">
+        <div class="sticker-snowfufu">
+          <a href="https://postimg.cc/nj2nHQ2N" target="_blank">
+            <img src="https://i.postimg.cc/nj2nHQ2N/fufu-snow.png" alt="fufu-snow">
+          </a>
+        </div>
+        <h1>「幸せのカウントダウン」</h1>
+        <p>Hellllloooo, I'm Bunny. Welcome to my nook! This a place where I document my dairy and thoughts.</p>
+        <p id="greeting-text">idntifying ur ip...</p>
+        <p id="extra-text" class="welcome-extra"></p>
+        <p id="ip-text" class="welcome-ip"></p>
+        <p class="badge-row">
+          <a href="https://postimages.org/" target="_blank">
+            <img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
+          </a>
+          <a href="https://postimg.cc/JsNvVCP5" target="_blank">
+            <img src="https://i.postimg.cc/JsNvVCP5/vscbutton.gif" alt="vscbutton" />
+          </a>
+        </p>
+        <slot />
+      </Window>
 
-			<!-- Latest Status -->
-			<section class="sitecard">
-				<h2>✦ Latest Status ✦</h2>
-				<p>乱七八糟的布局.jpg 个人与画廊页面仍在施工中(^._.^)ﾉ</p>
-				<p>
-					now I'm 
-					<a href="https://www.imood.com/users/isntbunny">
-						<img src="https://moods.imood.com/display/uname-isntbunny/fg-000000/bg-ffffff/imood.gif" alt="The current mood of isntbunny at www.imood.com" border="0" />
-					</a>
-				</p>
-				<div class="bubbling-me">
-					<a href="https://status.cafe/users/isntbunny">
-						<img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
-					</a>
-					<div class="bub-outer">
-						<div class="bub" id="statusBubble" style="cursor: pointer;">
-							<div id="statuscafe-content"？>最近好像没有什么可说的呢....让我想想。</div>
-						</div>
-						<!-- 刷新按钮 -->
-						<button id="refreshStatusBtn" class="refresh-btn" title="换一条状态">
-							How are you？
-						</button>
-						<div id="statuscafe-username" style="text-align: end; border-top: 2px dotted var(--angel-blue); padding-top: 3px;">thinking</div>
-					</div>
-				</div>
-				<!-- status.cafe 的脚本保留 -->
-				<div class="bow-divider"></div>
-				<h3>What Am I Reading</h3>
-				<ul class="reading-list">
-					<li>红与黑</li>
-					<li>Animal Farm</li>
-				</ul>
-			</section>
-			
-			<div class="bow-divider"></div>
-			<section class="">
-				<GithubCommits />
-			</section>
+      <!-- ===== Latest Status（使用Window组件） ===== -->
+      <Window title="✦ Latest Status ✦">
+        <p>乱七八糟的布局.jpg 个人与画廊页面仍在施工中(^._.^)ﾉ</p>
+        <p>
+          now I'm 
+          <a href="https://www.imood.com/users/isntbunny">
+            <img src="https://moods.imood.com/display/uname-isntbunny/fg-000000/bg-ffffff/imood.gif" alt="The current mood of isntbunny at www.imood.com" border="0" />
+          </a>
+        </p>
+        
+        <!-- ===== 重点：Bubbling-me 气泡说话小人 ===== -->
+        <div class="bubbling-me">
+          <a href="https://status.cafe/users/isntbunny">
+            <img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
+          </a>
+          <div class="bub-outer">
+            <div class="bub" id="statusBubble" style="cursor: pointer;">
+              <div id="statuscafe-content">最近好像没有什么可说的呢....让我想想。</div>
+            </div>
+            <!-- 刷新按钮 -->
+            <button id="refreshStatusBtn" class="refresh-btn" title="换一条状态">
+              How are you？
+            </button>
+            <div id="statuscafe-username" style="text-align: end; border-top: 2px dotted var(--angel-blue); padding-top: 3px;">thinking</div>
+          </div>
+        </div>
+        
+        <div class="bow-divider"></div>
+        <h3>What Am I Reading</h3>
+        <ul class="reading-list">
+          <li>红与黑</li>
+          <li>Animal Farm</li>
+        </ul>
+      </Window>
 
-		</div>
+      <!-- ===== GithubCommits（使用Window组件） ===== -->
+      <Window title="GitHub 动态">
+        <GithubCommits />
+      </Window>
 
-		<!-- ===== 右栏 ===== -->
-		<div class="right-col">
+    </div>
 
-			<!-- Countdown -->
-			<section class="sitecard">
-				<h2>✦ Countdown ✦</h2>
-				<div class="distance-label">
-					距离<select id="yearSelect" class="year-select"></select>高考还有
-				</div>
-				<span class="days-number" id="countdownDays">--</span>天
-			</section>
-			
-			<!-- ToDo -->
-			<section class="sitecard">
-				<h2>✦ ToDo ✦</h2>
-				<div class="todo-placeholder"></div>
-			</section>
-			
-			<section class="sitecard">
-				<h2>✦ Guestbook ✦</h2>
-				<iframe
-					src="https://www3.cbox.ws/box/?boxid=3552712&boxtag=FGVbRe"
-					width="100%"
-					height="450"
-					allowtransparency="yes"
-					allow="autoplay"
-					frameborder="0"
-					marginheight="0"
-					marginwidth="0"
-					scrolling="auto"
-				>
-				</iframe>
-			</section>
+    <!-- ===== 右栏 ===== -->
+    <div class="right-col">
 
-		</div>
+      <!-- ===== Countdown（使用Window组件） ===== -->
+      <Window title="✦ Countdown ✦">
+        <div class="distance-label">
+          距离<select id="yearSelect" class="year-select"></select>高考还有
+        </div>
+        <span class="days-number" id="countdownDays">--</span>天
+      </Window>
 
-	</div>
+      <!-- ===== ToDo（使用Window组件） ===== -->
+      <Window title="✦ ToDo ✦">
+        <div class="todo-placeholder"></div>
+      </Window>
+
+      <!-- ===== Guestbook（使用Window组件） ===== -->
+      <Window title="✦ Guestbook ✦">
+        <iframe
+          src="https://www3.cbox.ws/box/?boxid=3552712&boxtag=FGVbRe"
+          width="100%"
+          height="450"
+          allowtransparency="yes"
+          allow="autoplay"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          scrolling="auto"
+        >
+        </iframe>
+      </Window>
+
+    </div>
+
+  </div>
 
 </PageLayout>
 
@@ -234,13 +228,10 @@ function initStatusSwitcher() {
 	// 调整居中状态
 	function updateAlignment(element) {
 		if (isOverflowing(element)) {
-			// 如果溢出，取消居中，让内容从顶部开始
 			element.style.alignItems = 'flex-start';
 			element.style.justifyContent = 'flex-start';
-			// 滚动到底部
 			element.scrollTop = element.scrollHeight;
 		} else {
-			// 未溢出，居中
 			element.style.alignItems = 'center';
 			element.style.justifyContent = 'center';
 			element.scrollTop = 0;
@@ -267,9 +258,7 @@ function initStatusSwitcher() {
 			
 			let index = 0;
 			element.textContent = '';
-			// 重置滚动和居中
 			element.scrollTop = 0;
-			// 先设为居中，等打字过程中动态调整
 			element.style.alignItems = 'center';
 			element.style.justifyContent = 'center';
 			
@@ -278,9 +267,7 @@ function initStatusSwitcher() {
 					element.textContent += text.charAt(index);
 					index++;
 					
-					// 每次打字后检查是否溢出，动态调整对齐
 					updateAlignment(element);
-					// 如果溢出，滚动到底部
 					if (isOverflowing(element)) {
 						element.scrollTop = element.scrollHeight;
 					}
@@ -289,7 +276,6 @@ function initStatusSwitcher() {
 					setTimeout(typeChar, delay);
 				} else {
 					isTyping = false;
-					// 最终调整一次
 					updateAlignment(element);
 					if (isOverflowing(element)) {
 						element.scrollTop = element.scrollHeight;
@@ -317,7 +303,6 @@ function initStatusSwitcher() {
 		statusContent.textContent = '';
 		await typeText(statusContent, msg.text, 89);
 		
-		// 更新底部时间
 		if (usernameEl) {
 			if (msg.type === 'status' && msg.time) {
 				usernameEl.textContent = `📅 ${msg.time}`;
