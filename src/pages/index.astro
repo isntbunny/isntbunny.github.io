@@ -35,7 +35,6 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
         <slot />
       </Window>
 
-      <!-- ===== Latest Status（使用Window组件） ===== -->
       <Window title="✦ Latest Status ✦">
         <p>乱七八糟的布局.jpg 个人与画廊页面仍在施工中(^._.^)ﾉ</p>
         <p>
@@ -45,7 +44,6 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
           </a>
         </p>
         
-        <!-- ===== 重点：Bubbling-me 气泡说话小人 ===== -->
         <div class="bubbling-me">
           <a href="https://status.cafe/users/isntbunny">
             <img src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
@@ -54,7 +52,6 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
             <div class="bub" id="statusBubble" style="cursor: pointer;">
               <div id="statuscafe-content">最近好像没有什么可说的呢....让我想想。</div>
             </div>
-            <!-- 刷新按钮 -->
             <button id="refreshStatusBtn" class="refresh-btn" title="换一条状态">
               How are you？
             </button>
@@ -63,15 +60,9 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
         </div>
         
         <div class="bow-divider"></div>
-        <h3>What Am I Reading</h3>
-        <ul class="reading-list">
-          <li>红与黑</li>
-          <li>Animal Farm</li>
-        </ul>
       </Window>
 
-      <!-- ===== GithubCommits（使用Window组件） ===== -->
-      <Window title="GitHub 动态">
+      <Window title="GitHub">
         <GithubCommits />
       </Window>
 
@@ -80,7 +71,6 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
     <!-- ===== 右栏 ===== -->
     <div class="right-col">
 
-      <!-- ===== Countdown（使用Window组件） ===== -->
       <Window title="✦ Countdown ✦">
         <div class="distance-label">
           距离<select id="yearSelect" class="year-select"></select>高考还有
@@ -88,13 +78,11 @@ import Window from "@/components/Window.astro";  // 新增的Window组件
         <span class="days-number" id="countdownDays">--</span>天
       </Window>
 
-      <!-- ===== ToDo（使用Window组件） ===== -->
       <Window title="✦ ToDo ✦">
         <div class="todo-placeholder"></div>
       </Window>
 
-      <!-- ===== Guestbook（使用Window组件） ===== -->
-      <Window title="✦ Guestbook ✦">
+      <Window title="✦ Guestbook ✦" class="guest" >
         <iframe
           src="https://www3.cbox.ws/box/?boxid=3552712&boxtag=FGVbRe"
           width="100%"

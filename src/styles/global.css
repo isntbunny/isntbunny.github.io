@@ -2,7 +2,9 @@
 @import "./components/github-card.css";
 
 @import "./base.css";
+
 @import url("https://cdn.jsdelivr.net/gh/isntbunny/web-fonts@main/ark/result.css");
+
 
 @font-face {
   font-family: "Decima Mono Pro";
@@ -17,9 +19,10 @@
 @font-face {
 font-family: 'smalle'; 
 src: url('https://file.garden/Z2X1AFY0KC4btVJr/links/smalle.ttf');} 
+
 @font-face {
-                font-family: Pixel Operator;
-                src: url('https://ghostingpen.net/fonts/PixelOperator.ttf');}
+    font-family: Pixel Operator;
+    src: url('https://ghostingpen.net/fonts/PixelOperator.ttf');}
 
 *, *::before, *::after {
 	box-sizing: border-box;
