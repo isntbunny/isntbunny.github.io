@@ -117,7 +117,7 @@ function getLocationFromBrowser(): VisitorLocation {
 function getWelcomeMessage(location: VisitorLocation, fromBrowser = false): WelcomeMessage {
   if (fromBrowser) {
     return {
-      greeting: `你好呀，来自${location.country}的朋友。`,
+      greeting: `欢迎这位来自${location.country}的朋友`,
       extra: `你使用的是 ${getBrowserInfo().language} 系统，时区为 ${location.timezone}。海内存知己，天涯若比邻。世界很大，互联网让我们相遇，很高兴遇见你。`,
     }
   }
@@ -211,11 +211,11 @@ function getWelcomeMessage(location: VisitorLocation, fromBrowser = false): Welc
 
     const countryGreetings: Record<string, string> = {
       'United States': "🇺🇸 What's up! How's life in the States?",
-      'United Kingdom': '🇬🇧 Cheers mate! Fancy a cuppa?',
+      'United Kingdom': '🇬🇧 Cheers mate! F',
       Canada: '🍁 Eh! Sorry for the weather!',
       Australia: "🦘 G'dday mate! How's the barbie?",
       'New Zealand': '🥝 Kia ora! Beautiful country!',
-      Japan: '🇯🇵 こんにちは！日本の友達！',
+      Japan: '🇯🇵 こんにちは！',
       'South Korea': '🇰🇷 안녕하세요! 한국 친구!',
       Germany: "🇩🇪 Hallo! Wie geht's?",
       France: '🇫🇷 Bonjour! Comment ça va?',
