@@ -50,7 +50,6 @@ export const wordList = [
   { id: 48, english: 'even though', chinese: '即使' },
   { id: 49, english: 'extra-curricular', chinese: '课外的' },
   { id: 50, english: 'fall apart', chinese: '散开, 崩溃, 破碎' },
-  // ... 继续添加所有单词直到 401
 ]
 
 // 学习进度存储（本地）

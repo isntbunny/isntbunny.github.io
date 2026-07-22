@@ -1,263 +1,806 @@
+/* ============================================
+   ABOUT 页面 · Y2K 密集分栏手帐风格
+   设计理念：杂志式分栏 × 超多微动画 × 可爱堆叠
+   ============================================ */
 
-html{
+/* ----- 1. 全局背景 ----- */
+html {
   background-image: 
     url("https://i.postimg.cc/7L5Lvs1q/i-love-you-by-kicked-in-teeth-dbstzed.png");
   background-repeat: repeat;
   background-size: 65px auto;
-  background-position:
-    100px 0px,
+  background-attachment: fixed;
 }
 
-main{
-  margin: 0;
+body {
+  background: var(--paper-bg-soft);
+  background-image: 
+    radial-gradient(circle at 10% 30%, rgba(160, 206, 239, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(160, 206, 239, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(160, 206, 239, 0.03) 0%, transparent 70%);
 }
 
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  position: relative;
+}
 
+/* ----- 2. 浮动装饰（散落各处） ----- */
+.floating-deco {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 1.2rem;
+  opacity: 0.25;
+  animation: floatAround 12s ease-in-out infinite;
+}
 
-            
-.sticker-fufu{
-              position:absolute;
-              top: 10em;
-              right:0em;
-              z-index: 999;
-            }
-            
-.sticker-fufu img{
-              height:7em;
-            }
-  
+.floating-deco:nth-child(1) { top: 8%; left: 3%; animation-delay: 0s; }
+.floating-deco:nth-child(2) { top: 15%; right: 2%; animation-delay: 1.5s; }
+.floating-deco:nth-child(3) { bottom: 20%; left: 2%; animation-delay: 3s; }
+.floating-deco:nth-child(4) { bottom: 10%; right: 3%; animation-delay: 4.5s; }
+.floating-deco:nth-child(5) { top: 45%; left: 1%; animation-delay: 2s; }
+.floating-deco:nth-child(6) { top: 55%; right: 1%; animation-delay: 3.5s; }
+
+@keyframes floatAround {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(8px, -12px) rotate(5deg) scale(1.1); }
+  50% { transform: translate(-5px, 8px) rotate(-3deg) scale(0.9); }
+  75% { transform: translate(12px, 5px) rotate(4deg) scale(1.05); }
+}
+
+/* ----- 3. 贴纸 - 跨列大贴纸 ----- */
+.sticker-fufu {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-self: end;
+  align-self: start;
+  z-index: 10;
+  animation: stickerBounce 3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 24px var(--angel-shadow-strong));
+}
+
+.sticker-fufu img {
+  height: 8em;
+  width: auto;
+  transition: transform 0.3s ease;
+  image-rendering: pixelated;
+}
+
+.sticker-fufu:hover img {
+  transform: scale(1.15) rotate(-8deg) scaleX(-1);
+}
+
+@keyframes stickerBounce {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  30% { transform: translateY(-12px) rotate(3deg); }
+  60% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+/* ----- 4. 个人资料头部（跨两列） ----- */
 .profile-header {
+  grid-column: 1 / 3;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  padding: 1.8rem 2.2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 28px 28px 28px 8px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 
+    0 8px 32px var(--angel-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  position: relative;
+  overflow: hidden;
+  animation: slideInDown 0.8s ease-out;
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(160,206,239,0.12), transparent 70%);
+  border-radius: 50%;
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
 }
 
 .profile-photo {
   flex-shrink: 0;
+  position: relative;
 }
 
 .profile-photo img {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  display: block;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 20px var(--angel-shadow-strong);
+  animation: photoPulse 3s ease-in-out infinite;
+}
+
+@keyframes photoPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--angel-shadow-strong); }
+  50% { box-shadow: 0 4px 40px rgba(160, 206, 239, 0.5); }
+}
+
+.profile-photo::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed var(--angel-blue-light);
+  animation: spin 10s linear infinite;
 }
 
 .myname {
-  font-size: 2.5rem;
-  margin: 0 0 0.25rem 0;
+  font-size: 2.6rem !important;
+  margin: 0;
+  text-align: left;
+  font-family: "smalle", "Ark Pixel 12px P zh_tw", monospace;
+  background: linear-gradient(135deg, #4E677C, #a0ceef, #4E677C);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientMove 4s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.myname::before,
+.myname::after {
+  display: none !important;
 }
 
 .mybio {
   color: var(--ink-soft);
   font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  text-align: center;
+  margin: 0 0 0.6rem 0;
+  text-align: left;
+  animation: textFade 2s ease-in-out infinite alternate;
+}
+
+@keyframes textFade {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 .attribar {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
-  width: 100vh;
-  gap: 0.5rem;
+  gap: 0.3rem;
   align-items: center;
-  border-top: 1px solid var(--angel-blue-light);
-  border-bottom: 1px solid var(--angel-blue-light);
-  padding: 0.2rem 0;
-  justify-content: center;
-  background: var(--card-bg);
+  padding: 0.3rem 0.8rem;
+  background: rgba(255,255,255,0.4);
+  border-radius: 40px;
+  border: 1px solid rgba(160,206,239,0.2);
+  width: fit-content;
 }
 
 .attribar img {
   height: 14px;
   width: auto;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: tinyWiggle 4s ease-in-out infinite;
 }
 
-.sociallinks h3 {
-  margin-bottom: 0.75rem;
+.attribar img:nth-child(2) { animation-delay: 0.3s; }
+.attribar img:nth-child(3) { animation-delay: 0.6s; }
+.attribar img:nth-child(4) { animation-delay: 0.9s; }
+.attribar img:nth-child(5) { animation-delay: 1.2s; }
+.attribar img:nth-child(6) { animation-delay: 1.5s; }
+
+@keyframes tinyWiggle {
+  0%, 80%, 100% { transform: rotate(0deg) scale(1); }
+  85% { transform: rotate(-5deg) scale(1.1); }
+  90% { transform: rotate(5deg) scale(1.1); }
+  95% { transform: rotate(-3deg) scale(1.05); }
 }
 
-.sociallinks img {
-  width: auto;
-  margin-right: 0.5rem;
-  vertical-align: middle;
+.attribar img:hover {
+  transform: scale(1.3) rotate(-8deg);
 }
 
-.my-hobbies {
-  text-align: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
+/* ----- 5. 通用卡片样式（所有分栏卡片） ----- */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px 20px 20px 6px;
+  border: 1px solid var(--glass-border);
+  padding: 1.2rem 1.2rem 1.5rem;
+  box-shadow: 0 4px 20px var(--angel-shadow);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: cardAppear 0.6s ease-out backwards;
 }
 
-.my-hobbies h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 40px var(--angel-shadow-strong);
+  border-color: rgba(160, 206, 239, 0.3);
 }
 
-.my-hobbies img {
-  width: auto;
-  margin-right: 0.75rem;
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes cardAppear {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-
-.blinkies img{
-  width: 7.5em;
-}
-
-.stamps img{
-  height:auto;
-  width: 5em;  /* 图片填满格子宽度 */
-  margin: 0;
-  vertical-align: middle;
-}
-
-.skills-section {
-  flex: 1;
-  padding: 1rem;
-}
-
-.skills-section h2 {
-  margin-bottom: 0.75rem;
-  font-size: 1.2rem;
-}
-
-
-.skills-section h3 {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
+/* ----- 6. 标题样式 ----- */
+h2 {
+  font-size: 1.3rem !important;
+  margin: 0 0 0.8rem 0;
+  font-family: "smalle", "Ark Pixel 12px P zh_tw", monospace;
   color: var(--angel-text);
-  text-align: center;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
+h2::before {
+  content: '✧';
+  color: var(--angel-blue);
+  font-size: 0.9rem;
+  animation: sparkle 2s ease-in-out infinite;
+}
 
-.poid {
-  padding: 1rem;
+h2::after {
+  content: '✧';
+  color: var(--angel-blue-light);
+  font-size: 0.9rem;
+  animation: sparkle 2s ease-in-out infinite 0.6s;
+}
+
+h2::before,
+h2::after {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+h3 {
+  font-size: 0.95rem !important;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem 0;
+  font-family: "smalle", "Ark Pixel 12px P zh_tw", monospace;
+  letter-spacing: 0.5px;
+}
+
+h3::before {
+  content: '▸ ';
+  color: var(--angel-blue);
+  animation: arrowMove 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowMove {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* ----- 7. 分栏布局：我的爱好（左） + 社交链接（右） ----- */
+.hobbies-card {
+  grid-column: 1 / 2;
+}
+
+.hobbies-card .icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   justify-content: center;
-  align-items: left;
 }
 
-.poid img {
-  max-width: 100%;
+.hobbies-card img {
+  height: 38px;
+  width: auto;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: iconFloat 3s ease-in-out infinite;
 }
+
+.hobbies-card img:nth-child(1) { animation-delay: 0s; }
+.hobbies-card img:nth-child(2) { animation-delay: 0.5s; }
+.hobbies-card img:nth-child(3) { animation-delay: 1s; }
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+
+.hobbies-card img:hover {
+  transform: scale(1.2) rotate(-8deg) translateY(-4px);
+}
+
+.social-card {
+  grid-column: 2 / 3;
+}
+
+.social-card .icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.social-card a {
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.social-card a:hover {
+  transform: translateY(-6px) scale(1.08) rotate(-4deg);
+}
+
+.social-card img {
+  height: 30px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--angel-shadow);
+  transition: all 0.3s ease;
+}
+
+.social-card img:hover {
+  box-shadow: 0 6px 24px var(--angel-shadow-strong);
+}
+
+/* ----- 8. 印章（跨两列，但紧凑） ----- */
+.stamps-card {
+  grid-column: 1 / 3;
+}
+
+.stamppic {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+}
+
+.stamppic img {
+  height: auto;
+  width: 4.5em;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  image-rendering: pixelated;
+  animation: stampWobble 5s ease-in-out infinite;
+}
+
+.stamppic img:nth-child(2) { animation-delay: 0.2s; }
+.stamppic img:nth-child(3) { animation-delay: 0.4s; }
+.stamppic img:nth-child(4) { animation-delay: 0.6s; }
+.stamppic img:nth-child(5) { animation-delay: 0.8s; }
+.stamppic img:nth-child(6) { animation-delay: 1s; }
+
+@keyframes stampWobble {
+  0%, 80%, 100% { transform: rotate(0deg) scale(1); }
+  85% { transform: rotate(-3deg) scale(1.05); }
+  90% { transform: rotate(3deg) scale(1.05); }
+  95% { transform: rotate(-1deg) scale(1.02); }
+}
+
+.stamppic img:hover {
+  transform: scale(1.2) rotate(-6deg);
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px var(--angel-shadow));
+}
+
+/* ----- 9. Blinkies 滚动条（跨两列） ----- */
+.scroll-card {
+  grid-column: 1 / 3;
+  padding: 0.6rem 0;
+}
+
 .scroll-container {
   width: 100%;
-  max-width: 100vw;
   overflow: hidden;
   position: relative;
-  background: var(--card-bg, #f0f0f0);
-  padding: 8px 0;
-  border-radius: 8px;
+  padding: 6px 0;
+}
+
+.scroll-container::before,
+.scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scroll-container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--card-bg), transparent);
+}
+
+.scroll-container::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--card-bg), transparent);
 }
 
 .scroll-track {
   display: flex;
   flex-wrap: nowrap;
-  gap: 2px;
+  gap: 4px;
   width: max-content;
-  animation: scrollLeft 30s linear infinite;
-  will-change: transform; /* 优化动画性能 */
+  animation: scrollLeft 25s linear infinite;
 }
 
-
-/* 鼠标悬停暂停滚动 */
 .scroll-container:hover .scroll-track {
   animation-play-state: paused;
 }
 
-/* 悬停时图片放大 */
-.scroll-container:hover .scroll-track img {
-  transform: scale(1.1);
-}
-
-.buttons img{
-  height: 30px;
-}
-
 .scroll-track img {
-
   flex-shrink: 0;
   display: block;
   image-rendering: pixelated;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  height: 28px;
+  width: auto;
 }
 
-/* 关键帧动画 - 向左滚动 */
+.scroll-container:hover .scroll-track img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
 @keyframes scrollLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);  /* 因为复制了一份图片，滚到一半就无缝衔接 */
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
-  .scroll-container {
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
-  .scroll-track {
-    /* 强制动画使用 transform，避免布局偏移 */
-    animation: scrollLeft 30s linear infinite;
-  }
-  
-  /* 确保 body 不溢出 */
-  body {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-.profile-header h1{
-    font-size: xx-large;
+/* ----- 10. 技能（分两列） ----- */
+.skills-card {
+  grid-column: 1 / 3;
 }
 
-
-.attribar{
-  width:100%;
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.8rem;
 }
 
+.skill-group {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  padding: 0.8rem;
+  transition: all 0.3s ease;
+  animation: skillPulse 4s ease-in-out infinite;
 }
 
+.skill-group:nth-child(2) { animation-delay: 0.5s; }
+.skill-group:nth-child(3) { animation-delay: 1s; }
 
-
-
-/* 修复所有可能导致溢出的图片 */
-img {
-  max-width: 100%;
-  height: auto;
+@keyframes skillPulse {
+  0%, 100% { background: rgba(255, 255, 255, 0.3); }
+  50% { background: rgba(160, 206, 239, 0.1); }
 }
 
-/* 特别针对 a 标签里的图片（比如那两张 01.png） */
-a img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+.skill-group:hover {
+  background: rgba(160, 206, 239, 0.12);
+  transform: scale(1.02);
 }
 
-/* 针对 poid 里的内容 */
-.poid {
-  padding: 1rem;
-  overflow: hidden; /* 防止内部内容溢出 */
+.skill-group h3 {
+  font-size: 0.8rem !important;
+  margin: 0 0 0.3rem 0;
+  text-align: center;
 }
 
-.poid img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.skill-group h3::before {
+  display: none;
 }
 
-/* 针对 stamppic 里的印章图片 */
-.stamppic {
+.skill-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 0.2rem 0.4rem;
+  justify-content: center;
 }
 
-.stamppic img {
+.skill-group li {
+  padding: 0.1rem 0.6rem;
+  background: rgba(160, 206, 239, 0.1);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  color: var(--angel-text);
+  border: 1px solid rgba(160, 206, 239, 0.08);
+  transition: all 0.3s ease;
+  animation: skillTag 3s ease-in-out infinite;
+}
+
+.skill-group li:nth-child(2) { animation-delay: 0.2s; }
+.skill-group li:nth-child(3) { animation-delay: 0.4s; }
+.skill-group li:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes skillTag {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.skill-group li:hover {
+  background: var(--angel-blue-pale);
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.skill-group img {
+  height: 22px;
+  width: auto;
+  margin: 0 1px;
+  transition: all 0.3s ease;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.skill-group img:hover {
+  transform: scale(1.2) rotate(-6deg);
+}
+
+/* ----- 11. 意识形态 + 底部图（分两列） ----- */
+.ideology-card {
+  grid-column: 1 / 2;
+}
+
+.ideology-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-align: center;
+  font-weight: 300;
+  animation: textPulse 3s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+.ideology-card img {
   max-width: 100%;
   height: auto;
-  width: 5em; /* 保持原有大小，但不会溢出 */
+  border-radius: 12px;
+  box-shadow: 0 4px 16px var(--angel-shadow);
+  transition: all 0.4s ease;
+  animation: imgPulse 4s ease-in-out infinite;
+}
+
+@keyframes imgPulse {
+  0%, 100% { box-shadow: 0 4px 16px var(--angel-shadow); }
+  50% { box-shadow: 0 8px 32px var(--angel-shadow-strong); }
+}
+
+.ideology-card img:hover {
+  transform: scale(1.02) rotate(-1deg);
+}
+
+.footer-card {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--angel-shadow);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: footerFloat 5s ease-in-out infinite;
+}
+
+@keyframes footerFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-6px) rotate(1deg); }
+  60% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+.footer-card img:hover {
+  transform: scale(1.03) translateY(-8px) rotate(-2deg);
+  box-shadow: 0 8px 40px var(--angel-shadow-strong);
+}
+
+/* ----- 12. Buttons 滚动条（跨两列） ----- */
+.buttons-card {
+  grid-column: 1 / 3;
+  padding: 0.6rem 0;
+}
+
+.buttons-card .scroll-track img {
+  height: 30px;
+  width: auto;
+}
+
+/* ----- 13. 分割装饰 ----- */
+.divider {
+  grid-column: 1 / 3;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--angel-blue-light), var(--angel-blue), var(--angel-blue-light), transparent);
+  border-radius: 2px;
+  animation: dividerShimmer 3s ease-in-out infinite;
+}
+
+@keyframes dividerShimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.divider-dots {
+  display: flex;
+  gap: 8px;
+  font-size: 0.6rem;
+  color: var(--angel-blue-light);
+  animation: dotsSpin 6s linear infinite;
+}
+
+@keyframes dotsSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ----- 14. 响应式设计 ----- */
+@media (max-width: 860px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.2rem;
+  }
+
+  .myname, .mybio {
+    text-align: center;
+  }
+
+  .attribar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-photo img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .sticker-fufu img {
+    height: 5em;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 0.6rem;
+  }
+
+  .profile-header,
+  .stamps-card,
+  .scroll-card,
+  .skills-card,
+  .buttons-card,
+  .divider {
+    grid-column: 1 / 2;
+  }
+
+  .hobbies-card {
+    grid-column: 1 / 2;
+  }
+
+  .social-card {
+    grid-column: 1 / 2;
+  }
+
+  .ideology-card {
+    grid-column: 1 / 2;
+  }
+
+  .footer-card {
+    grid-column: 1 / 2;
+  }
+
+  .sticker-fufu {
+    grid-column: 1 / 2;
+    justify-self: center;
+    top: -0.5rem;
+    right: auto;
+  }
+
+  .sticker-fufu img {
+    height: 4em;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stamppic img {
+    width: 3.5em;
+  }
+
+  .profile-photo img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .myname {
+    font-size: 1.8rem !important;
+  }
+
+  h2 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ----- 15. 滚动条美化 ----- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--angel-blue-pale), var(--angel-blue-light));
+  border-radius: 10px;
+  animation: scrollbarGlow 3s ease-in-out infinite;
+}
+
+@keyframes scrollbarGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--angel-blue);
 }
