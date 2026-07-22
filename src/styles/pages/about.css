@@ -20,15 +20,6 @@ body {
     radial-gradient(circle at 50% 50%, rgba(160, 206, 239, 0.03) 0%, transparent 70%);
 }
 
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  position: relative;
-}
 
 /* ----- 2. 浮动装饰（散落各处） ----- */
 .floating-deco {
