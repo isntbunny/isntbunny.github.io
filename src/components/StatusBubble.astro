@@ -38,7 +38,7 @@
         <input 
             type="text" 
             id="wordInput" 
-            placeholder="输入中文意思..." 
+            placeholder="input here..." 
             autocomplete="off"
             style="
                 flex: 1;
@@ -302,7 +302,7 @@ function initStatusSwitcher() {
     const bubble = document.getElementById('statusBubble');
     const bunnyImage = document.getElementById('bunnyImage');
     
-    // 输入框相关（新增）
+    // 输入框相关
     const wordInput = document.getElementById('wordInput');
     const submitAnswerBtn = document.getElementById('submitAnswerBtn');
 
@@ -328,21 +328,9 @@ function initStatusSwitcher() {
 
     // GIF 控制相关
     const originalGif = 'https://i.postimg.cc/9MLD69pb/Gif260720.gif';
-    // 🔧🔧🔧 替换成你的静态图片地址！比如截取GIF的第一帧保存为PNG
     const staticImage = 'https://i.postimg.cc/HxG7bTwc/avatar250806.png';
     let gifTimer = null;
     let isStatic = false;
-
-    // ---- 选项按钮的清理函数 ----
-    function cleanupOptionListeners() {
-        const optionBtns = optionsContainer?.querySelectorAll('.option-btn');
-        if (optionBtns) {
-            optionBtns.forEach(btn => {
-                const newBtn = btn.cloneNode(true);
-                btn.parentNode.replaceChild(newBtn, btn);
-            });
-        }
-    }
 
     // ---- GIF 控制函数 ----
     function switchToStaticImage() {
@@ -350,7 +338,6 @@ function initStatusSwitcher() {
         if (isStatic) return;
         
         isStatic = true;
-        console.log('切换到静态图片');
         bunnyImage.style.transition = 'opacity 0.1s';
         bunnyImage.style.opacity = '1';
         setTimeout(() => {
@@ -369,7 +356,6 @@ function initStatusSwitcher() {
         if (!isStatic) return;
         
         isStatic = false;
-        console.log('恢复GIF');
         bunnyImage.style.transition = 'opacity 0.3s';
         bunnyImage.style.opacity = '0';
         setTimeout(() => {
@@ -476,7 +462,6 @@ function initStatusSwitcher() {
             let index = 0;
             element.textContent = '';
             
-            // 🎯 开始打字时恢复 GIF
             restoreGif();
             
             function typeChar() {
@@ -489,10 +474,7 @@ function initStatusSwitcher() {
                 } else {
                     isTyping = false;
                     autoScrollToBottom(element);
-                    
-                    // 🎯 打字完成后切换到静态图片
                     switchToStaticImage();
-                    
                     resolve();
                 }
             }
@@ -557,50 +539,8 @@ function initStatusSwitcher() {
     }
 
     // ============================================
-    // ---- 单词学习功能（输入框版本） ----
+    // ---- 单词学习功能 ----
     // ============================================
-
-    /**
-     * 模糊匹配：判断用户输入是否包含正确答案中的任意一个字
-     */
-     function isFuzzyMatch(userInput, correctAnswer) {
-    if (!userInput || !correctAnswer) return false;
-    
-    const trimmedInput = userInput.trim();
-    if (trimmedInput.length === 0) return false;
-    
-    // 完全匹配直接通过
-    if (trimmedInput === correctAnswer) return true;
-    
-    // 将正确答案拆成单个汉字
-    const correctChars = correctAnswer.split('').filter(char => {
-        return /[\u4e00-\u9fa5]/.test(char);
-    });
-    
-    // 如果正确答案只有1个字，那匹配1个字就算对
-    if (correctChars.length <= 1) {
-        for (const char of correctChars) {
-            if (trimmedInput.includes(char)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    // 正确答案有2个字及以上时，需要匹配至少2个字
-    let matchCount = 0;
-    for (const char of correctChars) {
-        if (trimmedInput.includes(char)) {
-            matchCount++;
-            if (matchCount >= 2) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
-}
-
 
     function getWordQueue() {
         const unlearned = wordList.filter(w => !learnedIds.includes(w.id));
@@ -643,15 +583,14 @@ function initStatusSwitcher() {
         currentWord = wordQueue[0];
         isAnswered = false;
         
-        // 固定模式：显示英文，让用户输入中文
-        wordQuestion.textContent = ` ${currentWord.english}`;
+        // 固定显示中文，让用户输入英文
+        wordQuestion.textContent = ` ${currentWord.chinese}`;
         wordMeta.textContent = `已答对 ${learnedIds.length}/${totalWords}`;
         
         wordFeedback.textContent = '';
         wordFeedback.style.opacity = '0';
         wordFeedback.style.color = '';
         
-        // 显示输入框
         if (wordInput) {
             wordInput.style.display = 'block';
             wordInput.value = '';
@@ -666,7 +605,6 @@ function initStatusSwitcher() {
         
         usernameEl.textContent = `已答对 ${learnedIds.length}/${totalWords}`;
         
-        // 🎯 显示题目时恢复 GIF，3秒后切换静态图片
         restoreGif();
         if (gifTimer) clearTimeout(gifTimer);
         gifTimer = setTimeout(() => {
@@ -676,14 +614,13 @@ function initStatusSwitcher() {
         }, 3000);
     }
 
-    // ---- 处理回答（输入框版本） ----
+    // ---- 处理回答 ----
     function handleAnswer() {
         if (isAnswered || !currentWord) return;
         if (!wordInput) return;
         
         const userInput = wordInput.value;
         if (userInput.trim().length === 0) {
-            // 空输入提示
             wordFeedback.textContent = '请输入你的答案哦~';
             wordFeedback.style.color = '#f59e0b';
             wordFeedback.style.opacity = '1';
@@ -692,41 +629,34 @@ function initStatusSwitcher() {
         
         isAnswered = true;
         
-        // 🎯 回答时清除定时器，恢复 GIF
         if (gifTimer) {
             clearTimeout(gifTimer);
             gifTimer = null;
         }
         restoreGif();
         
-        // 禁用输入框和按钮
         if (wordInput) wordInput.disabled = true;
         if (submitAnswerBtn) submitAnswerBtn.disabled = true;
         
-        const correctAnswer = currentWord.chinese;
-        const isCorrect = isFuzzyMatch(userInput, correctAnswer);
+        const correctAnswer = currentWord.english.trim().toLowerCase();
+        const userAnswer = userInput.trim().toLowerCase();
+        const isCorrect = (userAnswer === correctAnswer);
         
         if (isCorrect) {
             if (!learnedIds.includes(currentWord.id)) {
                 learnedIds.push(currentWord.id);
                 saveLearnedWords(learnedIds);
             }
-            wordFeedback.textContent = `答对了捏！厉害—— (${correctAnswer})`;
+            wordFeedback.textContent = '答对了捏！厉害——';
             wordFeedback.style.color = '#4ade80';
         } else {
-            wordFeedback.textContent = `啊哦。有点小失误。正确答案是：「${correctAnswer}」`;
+            wordFeedback.textContent = `啊哦。有点小失误。正确答案是：「${currentWord.english}」`;
             wordFeedback.style.color = '#f87171';
         }
         
         wordFeedback.style.opacity = '1';
-        
-        // 从队列中移除当前单词
         wordQueue = wordQueue.filter(w => w.id !== currentWord.id);
-        
-        // 显示下一个按钮
         nextContainer.style.display = 'block';
-        
-        // 🎯 回答完成后切换到静态图片
         switchToStaticImage();
     }
 
@@ -744,7 +674,6 @@ function initStatusSwitcher() {
         wordModeBtn.textContent = '背单词';
         wordModeBtn.classList.remove('active');
         refreshBtn.style.display = 'inline-block';
-        cleanupOptionListeners();
         
         if (gifTimer) {
             clearTimeout(gifTimer);
@@ -769,7 +698,6 @@ function initStatusSwitcher() {
             wordModeBtn.classList.add('active');
             refreshBtn.style.display = 'none';
             
-            // 显示输入框（确保可见）
             if (wordInput) wordInput.style.display = 'block';
             if (submitAnswerBtn) submitAnswerBtn.style.display = 'block';
             
@@ -777,80 +705,66 @@ function initStatusSwitcher() {
             prepareQuestion();
         }
     }
-
     // ============================================
-    // 事件绑定
-    // ============================================
-    
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', nextStatus);
-    }
-    
-    if (wordModeBtn) {
-        wordModeBtn.addEventListener('click', toggleWordMode);
-    }
-    
-    // 绑定确认按钮
-    if (submitAnswerBtn) {
-        submitAnswerBtn.replaceWith(submitAnswerBtn.cloneNode(true));
-        const newSubmitBtn = document.getElementById('submitAnswerBtn');
-        if (newSubmitBtn) {
-            newSubmitBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleAnswer();
-            });
-        }
-    }
-    
-    // 绑定下一个按钮
-    const nextBtn = document.getElementById('nextWordBtn');
-    if (nextBtn) {
-        nextBtn.replaceWith(nextBtn.cloneNode(true));
-        const newNextBtn = document.getElementById('nextWordBtn');
-        if (newNextBtn) {
-            newNextBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleNext();
-            });
-        }
-    }
-    
-    // 输入框回车键提交
-    if (wordInput) {
-        wordInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (isAnswered) {
-                    handleNext();
-                } else {
-                    handleAnswer();
-                }
-            }
-        });
-    }
-    
-    if (bubble) {
-        bubble.addEventListener('click', () => {
-            if (isWordMode) return;
-            const now = Date.now();
-            if (now - lastClickTime < CLICK_DEBOUNCE) return;
-            lastClickTime = now;
-            nextStatus();
-        });
-    }
+// 事件绑定
+// ============================================
 
-    // ---- 键盘快捷键（简化版） ----
-    document.addEventListener('keydown', (e) => {
-        if (!isWordMode) return;
-        
-        if (isAnswered && (e.key === 'Enter' || e.key === ' ')) {
+if (refreshBtn) {
+    refreshBtn.addEventListener('click', nextStatus);
+}
+
+if (wordModeBtn) {
+    wordModeBtn.addEventListener('click', toggleWordMode);
+}
+
+if (submitAnswerBtn) {
+    submitAnswerBtn.replaceWith(submitAnswerBtn.cloneNode(true));
+    const newSubmitBtn = document.getElementById('submitAnswerBtn');
+    if (newSubmitBtn) {
+        newSubmitBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            handleAnswer();
+        });
+    }
+}
+
+const nextBtn = document.getElementById('nextWordBtn');
+if (nextBtn) {
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
+    const newNextBtn = document.getElementById('nextWordBtn');
+    if (newNextBtn) {
+        newNextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             handleNext();
-            return;
+        });
+    }
+}
+
+if (wordInput) {
+    wordInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            e.stopPropagation();
+            if (isAnswered) {
+                handleNext();
+            } else {
+                handleAnswer();
+            }
         }
     });
+}
+
+if (bubble) {
+    bubble.addEventListener('click', () => {
+        if (isWordMode) return;
+        const now = Date.now();
+        if (now - lastClickTime < CLICK_DEBOUNCE) return;
+        lastClickTime = now;
+        nextStatus();
+    });
+}
 
     // ---- 页面加载初始化 ----
     async function init() {
@@ -878,11 +792,9 @@ function initStatusSwitcher() {
             if (usernameEl) usernameEl.textContent = '故障中';
         }
         
-        // 🎯 初始化完成后切换到静态图片
         switchToStaticImage();
     }
     
     init();
 }
-
 </script>
