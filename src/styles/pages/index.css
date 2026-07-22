@@ -5,6 +5,7 @@ html {
   background-size: 90px 50px;
   background-position: 
     120px 0px;
+  background-attachment: fixed;
 }
 
 
