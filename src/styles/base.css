@@ -101,7 +101,7 @@ main#main > *, .page-fade > * {
 	}
 
 	main {
-		padding: 1em;
+		padding: 0em;
 	}
 
 }

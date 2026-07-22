@@ -63,7 +63,7 @@ html {
   .main-grid {
     grid-template-columns: 1fr;
     grid-template-areas:  "middle""left" "right";
-    gap:1em;
+    gap:0em;
   }
 
   .days-number {
