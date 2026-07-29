@@ -9,8 +9,10 @@ order: 7
 - [Pixilart](https://www.pixilart.com/) - 像素画
 - [万格改名](https://id.star-legend.cn/tools/xkzm.html) - 昵称生成
 - [火星文生成器](http://www.yishuzi.com/g/m18.htm) - 火星文转换
+
 - [skribbl.io](https://skribbl.io/) - 你画我猜
 - [Gartic Phone](https://garticphone.com/zh-CN) - 画画接龙
+
 - [Live Piano](https://livepiano.ctnicholas.dev/) - 在线钢琴
 - [在线数织](http://gnim.fun/nonogram/) - 数织游戏
 - [Moderator Mayhem](https://moderatormayhem.engine.is/) - 内容审核游戏
@@ -20,12 +22,17 @@ order: 7
 - [Will You Press The Button?](https://willyoupressthebutton.com/) - 趣味选择
 - [colornames.org](https://colornames.org/) - 颜色命名
 - [N-back](https://n-back.github.io/) - 脑力训练
+
 - [心理测试](https://www.idrlabs.com/tests.php?loc=cn) - 心理测试
 - [政治坐标测试](https://kmarxist.github.io/IdeoVector) - 政治坐标
+
 - [有趣之家](https://youquhome.com/) - 趣味网站
 - [无法战胜的海螺试验场](https://lab.magiconch.com/) - 趣味工具
 - [Neal.fun](https://neal.fun/) - 趣味网站
 - [FUUN.FUN](https://fuun.fun/) - 趣味网站
+
+- [SkylineWebcams](https://www.skylinewebcams.com/zh.html) - 全球摄像头
+
 - [表情包制作](https://st.ayaka.one/) - 表情包工具
 - [vv的表情包检索](https://vv.xy0v0.top/) - 表情包搜索
 - [占卜网站](https://cn.shindanmaker.com/) - 占卜生成

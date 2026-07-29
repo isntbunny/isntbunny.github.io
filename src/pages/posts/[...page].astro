@@ -53,7 +53,6 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 					<div class="posts-month-grid">
 						{Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
 							<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
-								<span class="posts-month">{month}</span>
 								<ul class="posts-list">
 									{list.map((post) => (
 										<li class="posts-list-item">

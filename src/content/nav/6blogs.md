@@ -15,5 +15,4 @@ order: 6
 - [不上班研究所](https://www.toocool.cc/) - 自由职业交流
 - [让小产品的变现更简单](https://www.ezindie.com/) - 独立开发者社区
 - [奔跑中的奶酪](https://www.runningcheese.com/bookmarklets) - 小书签集合
-- [SkylineWebcams](https://www.skylinewebcams.com/zh.html) - 全球摄像头
 - [诺贝尔奖讯](https://www.nobelpress.org/) - 诺贝尔奖信息

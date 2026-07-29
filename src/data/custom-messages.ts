@@ -4,4 +4,5 @@ export const customMessages = [
   'four legs good, two legs bad.',
   'humm',
   '想和你成为朋友。',
+  '你有什么头猪吗？',
 ]

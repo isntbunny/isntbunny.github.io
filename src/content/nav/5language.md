@@ -1,6 +1,6 @@
 ---
 title: "语言学习"
-icon: "🔗"
+icon: "🗣️"
 order: 5
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "音乐作曲相关"
-icon: "📝"
+icon: "🎶"
 order: 9
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "图书资源"
-icon: "🔗"
+icon: "📖"
 order: 4
 ---
 
