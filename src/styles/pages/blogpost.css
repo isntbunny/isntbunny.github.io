@@ -1,3 +1,13 @@
+.headpic{display:none;}
+body{
+  border: 0;
+  margin: 0em;
+}
+
+main{
+  margin: 4em 10em;
+}
+*{font-size: medium;}
 
 h1,h2,h3,h4,h5{
   text-indent: 0;
