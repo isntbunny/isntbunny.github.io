@@ -11,6 +11,7 @@
 .posts-page section[data-year] {
 	display: grid;
 	gap: 14px;
+	margin-bottom: 2em; /* 年份之间增加间距 */
 }
 
 .posts-page .posts-year {
@@ -18,26 +19,12 @@
 	border-radius: 999px;
 	color: var(--angel-blue);
 	padding: 0.5em;
-	margin: 1em;
-}
-
-.posts-page .posts-month-grid {
-	display: grid;
-	gap: 14px;
-}
-
-.posts-page .posts-month {
-	color: white;
-	display: inline-block;
-	background: var(--angel-blue);
-	border-radius: 999px;
-	padding: 4px 12px;
+	margin: 1em 1em 0.5em 1em; /* 调整下边距 */
 }
 
 .posts-page .posts-list {
-	margin: 10px 0 0 24px;
-	padding-left: 14px;
-	border-left: 2px solid var(--angel-blue-pale);
+	margin: 0 0 0 24px; /* 去掉上边距 */
+	padding-left: 0px;
 	display: grid;
 	gap: 8px;
 }
@@ -47,6 +34,7 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 8px;
+	padding: 4px 0; 
 }
 
 .posts-page .posts-list-link {
@@ -57,17 +45,18 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	flex-shrink: 0; 
 }
 
 .posts-page .posts-date {
 	font-size: 12px;
 }
 
-@media (max-width:820px) {
-	.posts-page{
+@media (max-width: 820px) {
+	.posts-page {
 		padding: 0em;
 	}
-	main{
+	main {
 		margin: 0.5em;
 	}
 }

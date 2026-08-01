@@ -80,7 +80,7 @@ h4 { font-size: 1.1em; }
 h5 { font-size: 1em; }
 
 h1,h2,h3,h4,h5{
-    font-family: "smalle","Ark Pixel 12px P zh_tw" ,monospace;
+    font-family: "smalle",monospace;
     font-weight: bold;
     text-align: center;
 	line-height: 1;

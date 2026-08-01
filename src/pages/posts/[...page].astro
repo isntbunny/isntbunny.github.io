@@ -23,14 +23,12 @@ const meta = {
 	title: "Posts",
 };
 
-const grouped = page.data.reduce<Record<string, Record<string, CollectionEntry<"post">[]>>>(
+// 只按年份分组
+const grouped = page.data.reduce<Record<string, CollectionEntry<"post">[]>>(
 	(acc, post) => {
-		const date = post.data.publishDate;
-		const year = String(date.getFullYear());
-		const month = date.toLocaleString("zh-CN", { month: "long" });
-		acc[year] ??= {};
-		acc[year][month] ??= [];
-		acc[year][month].push(post);
+		const year = String(post.data.publishDate.getFullYear());
+		acc[year] ??= [];
+		acc[year].push(post);
 		return acc;
 	},
 	{},
@@ -49,27 +47,23 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 					data-year={year}
 				>
 					<h2 class="posts-year">{year}</h2>
-					<hr class="posts-year-divider" />
-					<div class="posts-month-grid">
-						{Object.entries(grouped[year] ?? {}).map(([month, list], monthIndex) => (
-							<section class="fade-stagger" style={`animation-delay:${monthIndex * 0.05}s`}>
-								<ul class="posts-list">
-									{list.map((post) => (
-										<li class="posts-list-item">
-											<a href={`/posts/${post.id}/`} class="posts-list-link">
-												{post.data.title}
-											</a>
-											<div class="posts-meta">
-												<time class="small-muted posts-date">
-													{post.data.publishDate.toLocaleDateString("zh-CN")}
-												</time>
-											</div>
-										</li>
-									))}
-								</ul>
-							</section>
+					<ul class="posts-list">
+						{grouped[year].map((post) => (
+							<li class="posts-list-item">
+								<a href={`/posts/${post.id}/`} class="posts-list-link">
+									{post.data.title}
+								</a>
+								<div class="posts-meta">
+									<time class="small-muted posts-date">
+										{post.data.publishDate.toLocaleDateString("zh-CN", {
+											month: "numeric",
+											day: "numeric",
+										})}
+									</time>
+								</div>
+							</li>
 						))}
-					</div>
+					</ul>
 				</section>
 			))
 		}
@@ -78,4 +72,4 @@ const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
 
 <style>
 	@import url("@/styles/pages/posts.css");
- </style>
+</style>
