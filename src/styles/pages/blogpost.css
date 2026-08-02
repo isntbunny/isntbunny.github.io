@@ -1,22 +1,25 @@
-.headpic{display:none;}
+.headpic{
+    display:none;
+}
 
 body{
-  border: 0;
-  margin: 0em;
+    border: 0;
+    margin: 0em;
 }
 
 main{
-  margin: 4em 12em;
+    margin: 4em 12em;
 }
 
 *{
-  font-size: large;font-family: Georgia, 'Times New Roman', Times, serif;}
+    font-size: large;font-family: Georgia, 'Times New Roman', Times, serif;}
 
 .content p{}
 
 h1,h2,h3,h4,h5{
-  text-indent: 0;
-  white-space: inherit;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-indent: 0;
+    white-space: inherit;
 }
 
 h1::before,h1::after {
@@ -28,42 +31,40 @@ h1::before,h1::after {
 h1::before,h1::after { content: " # "; }
 
 .content{
-  width: 100%;
+    width: 100%;
 }
 
 code{
-  padding: 1em;
-  margin: 1em;
+    padding: 1em;
+    margin: 1em;
 }
 
 @media (max-width: 768px) {
 img {
-width:100%;
+    width:100%;
 }
 /* 让包裹代码块和按钮的容器左对齐并限制宽度 */
 .expressive-code {
-  width: 100%;
-  margin-left: 0;
+    width: 100%;
+    margin-left: 0;
 }
 /* 让复制按钮保持在右上角 */
 .expressive-code .copy {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
 }
-/* 在移动端改为垂直排列 */
 @media (max-width: 768px) {
-  .blogpost > div {
-    flex-direction: column;
-    gap: 1em;
-  }
+    .blogpost > div {
+        flex-direction: column;
+        gap: 1em;
+    }
   
-  /* 目录在移动端可以隐藏或缩小 */
-  .toc {
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
+    .toc {
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
   }
   
 }

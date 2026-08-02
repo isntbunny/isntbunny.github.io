@@ -1,3 +1,4 @@
+<!-- Masthead.astro -->
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -6,46 +7,226 @@ import FormattedDate from "@/components/FormattedDate.astro";
 interface Props {
 	content: CollectionEntry<"post">;
 	readingTime: string;
-	wordCount?: number | null;
+	wordCount: number;
 }
 
-const {
-	content: { data },
-	readingTime,
-	wordCount,
-} = Astro.props;
+const { content, readingTime, wordCount } = Astro.props;
+const { data } = content;
 ---
 
-{
-	data.coverImage && (
-		<div class="mb-6 aspect-video">
-			<Image
-				alt={data.coverImage.alt}
-				layout="constrained"
-				width={748}
-				height={420}
-				priority
-				src={data.coverImage.src}
-			/>
+<div class="masthead-wrapper">
+	{
+		data.coverImage && (
+			<div class="cover-image">
+				<Image
+					alt={data.coverImage.alt}
+					layout="constrained"
+					width={748}
+					height={420}
+					priority
+					src={data.coverImage.src}
+				/>
+			</div>
+		)
+	}
+	
+	<div class="header-content">
+		{data.draft ? <span class="draft-badge">📝 Draft</span> : null}
+		
+		<h1 class="post-title">{data.title}</h1>
+		
+		<div class="meta-grid">
+			<div class="meta-item meta-date">
+				<span class="meta-label">Published</span>
+				<span class="meta-value">
+					<FormattedDate date={data.publishDate} />
+				</span>
+			</div>
+			
+			<div class="meta-item meta-reading">
+				<span class="meta-label">Reading</span>
+				<span class="meta-value">{readingTime}</span>
+			</div>
+			
+			<div class="meta-item meta-words">
+				<span class="meta-label">Words</span>
+				<span class="meta-value">{wordCount ? `${wordCount}字` : '--'}</span>
+			</div>
 		</div>
-	)
-}
-{data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
-<h1 class="title mb-3 text-center text-3xl sm:text-4xl">{data.title}</h1>
-<div class="flex items-center justify-between gap-3">
-	<p class="font-semibold">
-		<FormattedDate date={data.publishDate} />
-	</p>
-	<div class="flex gap-2">
-		{wordCount && <span class="font-semibold">{wordCount}字</span>}
-		<p class="font-semibold">{readingTime}</p>
+		
+		{
+			data.updatedDate && (
+				<div class="updated-wrapper">
+					<span class="updated-badge">
+						🔄 Updated:
+						<FormattedDate class="updated-date" date={data.updatedDate} />
+					</span>
+				</div>
+			)
+		}
 	</div>
 </div>
-{
-	data.updatedDate && (
-		<span class="bg-quote/5 text-quote mt-2 inline-block rounded-lg px-2 py-1">
-			Updated:
-			<FormattedDate class="ms-1" date={data.updatedDate} />
-		</span>
-	)
-}
+
+<style>
+	.masthead-wrapper {
+		max-width: 768px;
+		margin: 0 auto 2.5rem;
+		padding: 0 1rem;
+	}
+
+	.cover-image {
+		margin-bottom: 2rem;
+		aspect-ratio: 16 / 9;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+		transition: transform 0.3s ease;
+	}
+
+	.cover-image:hover {
+		transform: scale(1.01);
+	}
+
+	.header-content {
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		padding: 2rem 2.5rem;
+		border-radius: 16px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+		border: 1px solid rgba(0, 0, 0, 0.04);
+	}
+
+	.draft-badge {
+		display: inline-block;
+		margin-bottom: 0.75rem;
+		padding: 0.25rem 1rem;
+		background: #fef2f2;
+		color: #dc2626;
+		font-size: 0.875rem;
+		font-weight: 600;
+		border-radius: 20px;
+		border: 1px solid #fecaca;
+	}
+
+	.post-title {
+		margin-bottom: 1.5rem;
+		font-size: 2.25rem;
+		font-weight: 800;
+		text-align: center;
+		line-height: 1.2;
+		color: #1a1a2e;
+	}
+
+	@media (min-width: 640px) {
+		.post-title {
+			font-size: 2.75rem;
+		}
+	}
+
+	.meta-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		padding: 1.25rem 0;
+		border-top: 2px solid rgba(0, 0, 0, 0.06);
+		border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+		margin-bottom: 1rem;
+	}
+
+	.meta-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.25rem;
+	}
+
+	.meta-label {
+		font-size: 0.7rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #94a3b8;
+	}
+
+	.meta-value {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #1e293b;
+	}
+
+	.meta-date .meta-value {
+		color: #2563eb;
+	}
+
+	.meta-reading .meta-value {
+		color: #7c3aed;
+	}
+
+	.meta-words .meta-value {
+		color: #059669;
+	}
+
+	.updated-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	.updated-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.35rem 1.25rem;
+		border-radius: 20px;
+		background: #f1f5f9;
+		color: #475569;
+		font-size: 0.8rem;
+		font-weight: 500;
+		border: 1px solid #e2e8f0;
+	}
+
+	.updated-date {
+		font-weight: 600;
+		color: #1e293b;
+	}
+
+	@media (max-width: 640px) {
+		.header-content {
+			padding: 1.5rem;
+		}
+
+		.meta-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+
+		.meta-words {
+			grid-column: span 2;
+		}
+
+		.post-title {
+			font-size: 1.75rem;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.meta-grid {
+			grid-template-columns: 1fr;
+			gap: 0.75rem;
+		}
+
+		.meta-words {
+			grid-column: span 1;
+		}
+
+		.meta-item {
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 0.5rem 0;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		}
+
+		.meta-item:last-child {
+			border-bottom: none;
+		}
+	}
+</style>

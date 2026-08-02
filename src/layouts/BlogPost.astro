@@ -15,18 +15,16 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
 const readingTime = remarkPluginFrontmatter.readingTime || "未知";
 
-// 手动计算字数（从文章原始内容中计算）
+// 手动计算字数
 const rawContent = post.body || "";
-// 移除 markdown 标记，只保留纯文本
 const plainText = rawContent
-  .replace(/```[\s\S]*?```/g, "") // 移除代码块
-  .replace(/!\[[^\]]*\]\([^)]+\)/g, "") // 移除图片
-  .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // 保留链接文字
-  .replace(/[#*`~>_\-+=![\]]/g, "") // 移除 markdown 符号
-  .replace(/\s+/g, " ") // 多个空白合并为一个
+  .replace(/```[\s\S]*?```/g, "")
+  .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+  .replace(/[#*`~>_\-+=![\]]/g, "")
+  .replace(/\s+/g, " ")
   .trim();
 
-// 计算中文字符 + 英文单词
 const chineseChars = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
 const englishWords = (plainText.match(/[a-zA-Z]+/g) || []).length;
 const wordCount = chineseChars + englishWords;
@@ -50,5 +48,4 @@ const wordCount = chineseChars + englishWords;
 			</div>
 		</div>
 	</article>
-
 </BaseLayout>

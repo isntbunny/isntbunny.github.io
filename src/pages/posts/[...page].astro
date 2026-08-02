@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
-import { getAllPosts } from "@/data/post";
+import { getAllPosts, getAllCategories } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
@@ -18,58 +18,216 @@ interface Props {
 
 const { page } = Astro.props;
 
+const allCategories = await getAllCategories();
+const allPosts = page.data;
+
 const meta = {
 	description: "Read my collection of posts and the things that interest me",
 	title: "Posts",
 };
 
-// 只按年份分组
-const grouped = page.data.reduce<Record<string, CollectionEntry<"post">[]>>(
-	(acc, post) => {
-		const year = String(post.data.publishDate.getFullYear());
-		acc[year] ??= [];
-		acc[year].push(post);
-		return acc;
-	},
-	{},
-);
-
-const yearKeys = Object.keys(grouped).sort((a, b) => +b - +a);
+const categoryLabels: Record<string, string> = {
+	"programming": "💻 编程",
+	"english-learning": "📚 英语学习",
+	"tech": "🔧 技术",
+	"life": "🌱 生活",
+	"uncategorized": "📁 未分类",
+};
 ---
 
 <PageLayout meta={meta}>
 	<div class="posts-page">
-		{
-			yearKeys.map((year, yearIndex) => (
-				<section
-					class="fade-stagger"
-					style={`animation-delay:${yearIndex * 0.1}s`}
-					data-year={year}
-				>
-					<h2 class="posts-year">{year}</h2>
-					<ul class="posts-list">
-						{grouped[year].map((post) => (
-							<li class="posts-list-item">
-								<a href={`/posts/${post.id}/`} class="posts-list-link">
-									{post.data.title}
-								</a>
-								<div class="posts-meta">
-									<time class="small-muted posts-date">
-										{post.data.publishDate.toLocaleDateString("zh-CN", {
-											month: "numeric",
-											day: "numeric",
-										})}
-									</time>
-								</div>
-							</li>
-						))}
-					</ul>
-				</section>
-			))
-		}
+		<div class="category-tabs" id="categoryTabs">
+			<button class="tab active" data-category="all">📋 全部</button>
+			{allCategories.map((cat) => (
+				<button class="tab" data-category={cat}>
+					{categoryLabels[cat] || cat}
+				</button>
+			))}
+		</div>
+
+		<div id="postsContainer">
+			{
+				Object.entries(
+					allPosts.reduce<Record<string, CollectionEntry<"post">[]>>(
+						(acc, post) => {
+							const year = String(post.data.publishDate.getFullYear());
+							if (!acc[year]) {
+								acc[year] = [];
+							}
+							acc[year].push(post);
+							return acc;
+						},
+						{}
+					)
+				)
+				.sort((a, b) => +b[0] - +a[0])
+				.map(([year, posts]) => (
+					<section data-year={year}>
+						<h2 class="posts-year">{year}</h2>
+						<ul class="posts-list">
+							{posts.map((post) => {
+								const pathParts = post.id.split("/");
+								const category = pathParts.length > 1 ? pathParts[0] : "uncategorized";
+								return (
+									<li class="posts-list-item" data-category={category}>
+										<a href={`/posts/${post.id}/`} class="posts-list-link">
+											{post.data.title}
+										</a>
+										<div class="posts-meta">
+											<time class="small-muted posts-date">
+												{post.data.publishDate.toLocaleDateString("zh-CN", {
+													month: "numeric",
+													day: "numeric",
+												})}
+											</time>
+											{category !== "uncategorized" && (
+												<span class="category-tag">{categoryLabels[category] || category}</span>
+											)}
+										</div>
+									</li>
+								);
+							})}
+						</ul>
+					</section>
+				))
+			}
+		</div>
 	</div>
 </PageLayout>
 
 <style>
 	@import url("@/styles/pages/posts.css");
+
+	.category-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 2.5rem;
+		padding-bottom: 1rem;
+		border-bottom: 2px solid #e5e7eb;
+	}
+
+	.tab {
+		padding: 0.5rem 1.25rem;
+		border-radius: 20px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: #6b7280;
+		background: #f3f4f6;
+		transition: all 0.2s ease;
+		text-decoration: none;
+		border: 1px solid transparent;
+		cursor: pointer;
+	}
+
+	.tab:hover {
+		color: #1f2937;
+		background: #e5e7eb;
+		transform: translateY(-1px);
+	}
+
+	.tab.active {
+		color: white;
+		background: #2563eb;
+		border-color: #2563eb;
+		box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+	}
+
+	.category-tag {
+		font-size: 0.7rem;
+		padding: 0.15rem 0.6rem;
+		border-radius: 12px;
+		background: #dbeafe;
+		color: #2563eb;
+		margin-left: 0.5rem;
+		white-space: nowrap;
+	}
+
+	.posts-list-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.5rem 0;
+	}
+
+	.posts-list-item.hidden {
+		display: none;
+	}
+
+	.no-posts {
+		text-align: center;
+		padding: 3rem 0;
+		color: #6b7280;
+		font-size: 1.1rem;
+	}
 </style>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', function() {
+		const tabs = document.querySelectorAll('.tab');
+		const posts = document.querySelectorAll('.posts-list-item');
+		const sections = document.querySelectorAll('#postsContainer > section');
+
+		function filterPosts(category) {
+			tabs.forEach(function(tab) {
+				if (tab.dataset.category === category) {
+					tab.classList.add('active');
+				} else {
+					tab.classList.remove('active');
+				}
+			});
+
+			let hasVisiblePosts = false;
+			posts.forEach(function(post) {
+				const postCategory = post.dataset.category || 'uncategorized';
+				if (category === 'all' || postCategory === category) {
+					post.classList.remove('hidden');
+					hasVisiblePosts = true;
+				} else {
+					post.classList.add('hidden');
+				}
+			});
+
+			sections.forEach(function(section) {
+				const visiblePosts = section.querySelectorAll('.posts-list-item:not(.hidden)');
+				if (visiblePosts.length === 0) {
+					section.style.display = 'none';
+				} else {
+					section.style.display = 'block';
+				}
+			});
+
+			let noPostsMsg = document.querySelector('.no-posts');
+			if (!hasVisiblePosts) {
+				if (!noPostsMsg) {
+					noPostsMsg = document.createElement('p');
+					noPostsMsg.className = 'no-posts';
+					noPostsMsg.textContent = '这个分类还没有文章 🚧';
+					document.getElementById('postsContainer').appendChild(noPostsMsg);
+				}
+				noPostsMsg.style.display = 'block';
+			} else if (noPostsMsg) {
+				noPostsMsg.style.display = 'none';
+			}
+		}
+
+		tabs.forEach(function(tab) {
+			tab.addEventListener('click', function() {
+				const category = this.dataset.category;
+				if (category) {
+					filterPosts(category);
+					const url = new URL(window.location.href);
+					url.searchParams.set('category', category);
+					window.history.pushState({}, '', url);
+				}
+			});
+		});
+
+		const params = new URLSearchParams(window.location.search);
+		const initialCategory = params.get('category') || 'all';
+		if (initialCategory !== 'all') {
+			filterPosts(initialCategory);
+		}
+	});
+</script>
