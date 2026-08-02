@@ -51,6 +51,8 @@ code {
 }
 
 @media (max-width: 768px) {
+    main{margin: 2em;}
+
     img {
         width: 100%;
     }
