@@ -294,7 +294,7 @@ export async function initVisitorInfo(): Promise<void> {
     } else {
       const ipInfo = getIPInfo(location)
       if (ipInfo) {
-        ipElement.textContent = `IP: ${ipInfo.ip} (${ipInfo.ipType}) · ${ipInfo.isp}`
+        ipElement.textContent = `IP: ${ipInfo.ip} (${ipInfo.ipType}) - ${ipInfo.isp}`
       } else {
         ipElement.textContent = 'IP信息获取失败捏。。'
       }
