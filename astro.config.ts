@@ -18,6 +18,8 @@ import { remarkAdmonitions } from './src/plugins/remark-admonitions' /* Add admo
 import { remarkGithubCard } from './src/plugins/remark-github-card'
 import { remarkReadingTime } from './src/plugins/remark-reading-time'
 import { expressiveCodeOptions, siteConfig } from './src/data/site.config'
+import { remarkBgColor } from './src/plugins/remark-bgcolor' // 路径根据实际调整
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -77,7 +79,7 @@ export default defineConfig({
       ],
       rehypeUnwrapImages,
     ],
-    remarkPlugins: [remarkReadingTime, remarkDirective, remarkGithubCard, remarkAdmonitions],
+    remarkPlugins: [remarkReadingTime, remarkDirective, remarkGithubCard, remarkAdmonitions, remarkBgColor],
     remarkRehype: {
       footnoteLabelProperties: {
         className: [''],
