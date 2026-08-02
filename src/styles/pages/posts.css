@@ -1,62 +1,126 @@
-
 .posts-page {
-	letter-spacing: 0.05em;
-	padding: 0em 4em;
+    letter-spacing: 0.05em;
+    padding: 0 4em;
 }
 
 .posts-page .card-chip {
-	font-size: 0.74rem;
+    font-size: 0.74rem;
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.category-tab {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-tab:hover {
+    background: #e5e7eb;
+    color: #1f2937;
+    transform: translateY(-1px);
+}
+
+.category-tab.active {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 .posts-page section[data-year] {
-	display: grid;
-	gap: 14px;
-	margin-bottom: 2em; /* 年份之间增加间距 */
+    display: grid;
+    gap: 14px;
+    margin-bottom: 2em;
+}
+
+.posts-page section[data-year][hidden] {
+    display: none;
 }
 
 .posts-page .posts-year {
-	font-size: xx-large;
-	border-radius: 999px;
-	color: var(--angel-blue);
-	padding: 0.5em;
-	margin: 1em 1em 0.5em 1em; /* 调整下边距 */
+    margin: 1em 1em 0.5em;
+    padding: 0.5em;
+    border-radius: 999px;
+    color: var(--angel-blue);
+    font-size: xx-large;
 }
 
 .posts-page .posts-list {
-	margin: 0 0 0 24px; /* 去掉上边距 */
-	padding-left: 0px;
-	display: grid;
-	gap: 8px;
+    display: grid;
+    gap: 8px;
+    margin: 0 0 0 24px;
+    padding-left: 0;
 }
 
 .posts-page .posts-list-item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 8px;
-	padding: 4px 0; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.posts-page .posts-list-item.hidden {
+    display: none;
 }
 
 .posts-page .posts-list-link {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .posts-page .posts-meta {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	flex-shrink: 0; 
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 8px;
 }
 
 .posts-page .posts-date {
-	font-size: 12px;
+    font-size: 12px;
+}
+
+.category-tag {
+    margin-left: 0.5rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.no-posts {
+    padding: 3rem 0;
+    color: #6b7280;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.no-posts[hidden] {
+    display: none;
 }
 
 @media (max-width: 820px) {
-	.posts-page {
-		padding: 0em;
-	}
-	main {
-		margin: 0.5em;
-	}
+    .posts-page {
+        padding: 0;
+    }
+
+    main {
+        margin: 0.5em;
+    }
 }

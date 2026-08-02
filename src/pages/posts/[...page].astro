@@ -1,233 +1,185 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
-import { getAllPosts, getAllCategories } from "@/data/post";
+import { getAllCategories, getAllPosts, getPostCategory } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = (await getAllPosts()).sort(collectionDateSort);
-	return paginate(allPosts, {
-		pageSize: allPosts.length || 1,
-	});
+    const allPosts = (await getAllPosts()).sort(
+        (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+    );
+    return paginate(allPosts, {
+        pageSize: allPosts.length || 1,
+    });
 }) satisfies GetStaticPaths;
 
 interface Props {
-	page: Page<CollectionEntry<"post">>;
+    page: Page<CollectionEntry<"post">>;
 }
 
 const { page } = Astro.props;
 
 const allCategories = await getAllCategories();
 const allPosts = page.data;
+const postsByYear = Object.entries(
+    allPosts.reduce<Record<string, CollectionEntry<"post">[]>>((acc, post) => {
+        const year = String(post.data.publishDate.getFullYear());
+        if (!acc[year]) {
+            acc[year] = [];
+        }
+        acc[year].push(post);
+        return acc;
+    }, {}),
+).sort((a, b) => +b[0] - +a[0]);
 
 const meta = {
-	description: "Read my collection of posts and the things that interest me",
-	title: "Posts",
+    description: "Read my collection of posts and the things that interest me",
+    title: "Posts",
 };
 
 const categoryLabels: Record<string, string> = {
-	"programming": "💻 编程",
-	"english-learning": "📚 英语学习",
-	"tech": "🔧 技术",
-	"life": "🌱 生活",
-	"uncategorized": "📁 未分类",
+    all: "📋 全部",
+    english: "📚 English",
+    programming: "💻 Programming",
+    uncategorized: "📁 未分类",
 };
 ---
 
 <PageLayout meta={meta}>
-	<div class="posts-page">
-		<div class="category-tabs" id="categoryTabs">
-			<button class="tab active" data-category="all">📋 全部</button>
-			{allCategories.map((cat) => (
-				<button class="tab" data-category={cat}>
-					{categoryLabels[cat] || cat}
-				</button>
-			))}
-		</div>
+    <div class="posts-page">
+        <div class="category-tabs" id="categoryTabs" aria-label="文章分类">
+            <button
+                class="category-tab active"
+                type="button"
+                data-category="all"
+                aria-pressed="true"
+            >
+                {categoryLabels.all}
+            </button>
+            {
+                allCategories.map((cat) => (
+                    <button
+                        class="category-tab"
+                        type="button"
+                        data-category={cat}
+                        aria-pressed="false"
+                    >
+                        {categoryLabels[cat] || cat}
+                    </button>
+                ))
+            }
+        </div>
 
-		<div id="postsContainer">
-			{
-				Object.entries(
-					allPosts.reduce<Record<string, CollectionEntry<"post">[]>>(
-						(acc, post) => {
-							const year = String(post.data.publishDate.getFullYear());
-							if (!acc[year]) {
-								acc[year] = [];
-							}
-							acc[year].push(post);
-							return acc;
-						},
-						{}
-					)
-				)
-				.sort((a, b) => +b[0] - +a[0])
-				.map(([year, posts]) => (
-					<section data-year={year}>
-						<h2 class="posts-year">{year}</h2>
-						<ul class="posts-list">
-							{posts.map((post) => {
-								const pathParts = post.id.split("/");
-								const category = pathParts.length > 1 ? pathParts[0] : "uncategorized";
-								return (
-									<li class="posts-list-item" data-category={category}>
-										<a href={`/posts/${post.id}/`} class="posts-list-link">
-											{post.data.title}
-										</a>
-										<div class="posts-meta">
-											<time class="small-muted posts-date">
-												{post.data.publishDate.toLocaleDateString("zh-CN", {
-													month: "numeric",
-													day: "numeric",
-												})}
-											</time>
-											{category !== "uncategorized" && (
-												<span class="category-tag">{categoryLabels[category] || category}</span>
-											)}
-										</div>
-									</li>
-								);
-							})}
-						</ul>
-					</section>
-				))
-			}
-		</div>
-	</div>
+        <div id="postsContainer">
+            {
+                postsByYear.map(([year, posts]) => (
+                    <section data-year={year}>
+                        <h2 class="posts-year">{year}</h2>
+                        <ul class="posts-list">
+                            {posts.map((post) => {
+                                const category = getPostCategory(post);
+                                return (
+                                    <li class="posts-list-item" data-category={category}>
+                                        <a href={`/posts/${post.id}/`} class="posts-list-link">
+                                            {post.data.title}
+                                        </a>
+                                        <div class="posts-meta">
+                                            <time class="small-muted posts-date">
+                                                {post.data.publishDate.toLocaleDateString("zh-CN", {
+                                                    month: "numeric",
+                                                    day: "numeric",
+                                                })}
+                                            </time>
+                                            {category !== "uncategorized" && (
+                                                <span class="category-tag">
+                                                    {categoryLabels[category] || category}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </section>
+                ))
+            }
+        </div>
+    </div>
 </PageLayout>
 
 <style>
-	@import url("@/styles/pages/posts.css");
-
-	.category-tabs {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-bottom: 2.5rem;
-		padding-bottom: 1rem;
-		border-bottom: 2px solid #e5e7eb;
-	}
-
-	.tab {
-		padding: 0.5rem 1.25rem;
-		border-radius: 20px;
-		font-size: 0.9rem;
-		font-weight: 500;
-		color: #6b7280;
-		background: #f3f4f6;
-		transition: all 0.2s ease;
-		text-decoration: none;
-		border: 1px solid transparent;
-		cursor: pointer;
-	}
-
-	.tab:hover {
-		color: #1f2937;
-		background: #e5e7eb;
-		transform: translateY(-1px);
-	}
-
-	.tab.active {
-		color: white;
-		background: #2563eb;
-		border-color: #2563eb;
-		box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-	}
-
-	.category-tag {
-		font-size: 0.7rem;
-		padding: 0.15rem 0.6rem;
-		border-radius: 12px;
-		background: #dbeafe;
-		color: #2563eb;
-		margin-left: 0.5rem;
-		white-space: nowrap;
-	}
-
-	.posts-list-item {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0.5rem 0;
-	}
-
-	.posts-list-item.hidden {
-		display: none;
-	}
-
-	.no-posts {
-		text-align: center;
-		padding: 3rem 0;
-		color: #6b7280;
-		font-size: 1.1rem;
-	}
+    @import url("@/styles/pages/posts.css");
 </style>
 
 <script is:inline>
-	document.addEventListener('DOMContentLoaded', function() {
-		const tabs = document.querySelectorAll('.tab');
-		const posts = document.querySelectorAll('.posts-list-item');
-		const sections = document.querySelectorAll('#postsContainer > section');
+    function initializeCategoryTabs() {
+        const tabs = Array.from(document.querySelectorAll(".category-tab"));
+        const posts = Array.from(document.querySelectorAll(".posts-list-item"));
+        const sections = Array.from(document.querySelectorAll("#postsContainer > section"));
+        const postsContainer = document.getElementById("postsContainer");
+        const tabsContainer = document.getElementById("categoryTabs");
 
-		function filterPosts(category) {
-			tabs.forEach(function(tab) {
-				if (tab.dataset.category === category) {
-					tab.classList.add('active');
-				} else {
-					tab.classList.remove('active');
-				}
-			});
+        if (!tabs.length || !postsContainer || !tabsContainer || tabsContainer.dataset.initialized === "true") {
+            return;
+        }
 
-			let hasVisiblePosts = false;
-			posts.forEach(function(post) {
-				const postCategory = post.dataset.category || 'uncategorized';
-				if (category === 'all' || postCategory === category) {
-					post.classList.remove('hidden');
-					hasVisiblePosts = true;
-				} else {
-					post.classList.add('hidden');
-				}
-			});
+        tabsContainer.dataset.initialized = "true";
 
-			sections.forEach(function(section) {
-				const visiblePosts = section.querySelectorAll('.posts-list-item:not(.hidden)');
-				if (visiblePosts.length === 0) {
-					section.style.display = 'none';
-				} else {
-					section.style.display = 'block';
-				}
-			});
+        function filterPosts(category) {
+            tabs.forEach((tab) => {
+                const isActive = tab.dataset.category === category;
+                tab.classList.toggle("active", isActive);
+                tab.setAttribute("aria-pressed", String(isActive));
+            });
 
-			let noPostsMsg = document.querySelector('.no-posts');
-			if (!hasVisiblePosts) {
-				if (!noPostsMsg) {
-					noPostsMsg = document.createElement('p');
-					noPostsMsg.className = 'no-posts';
-					noPostsMsg.textContent = '这个分类还没有文章 🚧';
-					document.getElementById('postsContainer').appendChild(noPostsMsg);
-				}
-				noPostsMsg.style.display = 'block';
-			} else if (noPostsMsg) {
-				noPostsMsg.style.display = 'none';
-			}
-		}
+            let hasVisiblePosts = false;
+            posts.forEach((post) => {
+                const postCategory = post.dataset.category || "uncategorized";
+                const shouldShow = category === "all" || postCategory === category;
+                post.classList.toggle("hidden", !shouldShow);
+                hasVisiblePosts ||= shouldShow;
+            });
 
-		tabs.forEach(function(tab) {
-			tab.addEventListener('click', function() {
-				const category = this.dataset.category;
-				if (category) {
-					filterPosts(category);
-					const url = new URL(window.location.href);
-					url.searchParams.set('category', category);
-					window.history.pushState({}, '', url);
-				}
-			});
-		});
+            sections.forEach((section) => {
+                const visiblePosts = section.querySelectorAll(".posts-list-item:not(.hidden)");
+                section.hidden = visiblePosts.length === 0;
+            });
 
-		const params = new URLSearchParams(window.location.search);
-		const initialCategory = params.get('category') || 'all';
-		if (initialCategory !== 'all') {
-			filterPosts(initialCategory);
-		}
-	});
+            let noPostsMsg = document.querySelector(".no-posts");
+            if (!hasVisiblePosts) {
+                if (!noPostsMsg) {
+                    noPostsMsg = document.createElement("p");
+                    noPostsMsg.className = "no-posts";
+                    noPostsMsg.textContent = "这个分类还没有文章 🚧";
+                    postsContainer.appendChild(noPostsMsg);
+                }
+                noPostsMsg.removeAttribute("hidden");
+            } else if (noPostsMsg) {
+                noPostsMsg.setAttribute("hidden", "");
+            }
+        }
+
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const category = tab.dataset.category || "all";
+                filterPosts(category);
+
+                const url = new URL(window.location.href);
+                if (category === "all") {
+                    url.searchParams.delete("category");
+                } else {
+                    url.searchParams.set("category", category);
+                }
+                window.history.pushState({}, "", url);
+            });
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const initialCategory = params.get("category") || "all";
+        const hasInitialTab = tabs.some((tab) => tab.dataset.category === initialCategory);
+        filterPosts(hasInitialTab ? initialCategory : "all");
+    }
+
+    document.addEventListener("astro:page-load", initializeCategoryTabs);
+    document.addEventListener("DOMContentLoaded", initializeCategoryTabs, { once: true });
 </script>
