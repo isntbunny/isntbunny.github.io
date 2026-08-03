@@ -5,7 +5,6 @@ import { getAllPosts } from "@/data/post";
 import PostLayout from "@/layouts/BlogPost.astro";
 import "/src/styles/pages/blogpost.css";
 
-// if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
 export const getStaticPaths = (async () => {
 	const blogEntries = await getAllPosts();
 	return blogEntries.map((post) => ({
@@ -18,8 +17,40 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const DEFAULT_BANNER = "https://i.postimg.cc/90kCFCst/241031.png";
+const bannerSrc = post.data.banner || DEFAULT_BANNER;
 ---
 
 <PostLayout post={post}>
+	<div class="sticky-banner">
+		<img src={bannerSrc} alt="Banner" class="banner-image" />
+	</div>
 	<Content />
 </PostLayout>
+
+<style>
+	.sticky-banner {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		width: 100%;
+		height: 1px;
+		overflow: hidden;
+		background: var(--angel-blue-pale);
+		box-shadow: 0 2px 12px var(--angel-shadow);
+	}
+
+	.banner-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	@media (max-width: 768px) {
+		.sticky-banner {
+			height: 40px;
+		}
+	}
+</style>

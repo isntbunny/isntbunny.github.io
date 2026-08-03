@@ -1,68 +1,74 @@
 .posts-page {
     letter-spacing: 0.05em;
-    padding: 0 4em;
+    padding: 0 7em;
 }
 
 .posts-page .card-chip {
     font-size: 0.74rem;
 }
 
+/* ===== Tab 容器 ===== */
 .category-tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1rem;
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
 }
 
+/* ===== Tab 基础样式 ===== */
 .category-tab {
     padding: 0.5rem 1.25rem;
-    border: 1px solid transparent;
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
-    background: #f3f4f6;
-    color: #6b7280;
+    background: var(--card-bg);
+    color: var(--text-muted);
     font-size: 0.9rem;
     font-weight: 500;
-    text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
 }
 
 .category-tab:hover {
-    background: #e5e7eb;
-    color: #1f2937;
-    transform: translateY(-1px);
+    background: var(--card-bg-hover);
+    color: var(--text-main);
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
 }
 
+/* ===== 激活状态（JS 控制背景色，CSS 只负责通用样式） ===== */
 .category-tab.active {
-    border-color: #2563eb;
-    background: #2563eb;
-    color: white;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(160, 206, 239, 0.45);
 }
 
+/* ===== 文章列表 ===== */
 .posts-page section[data-year] {
     display: grid;
     gap: 14px;
     margin-bottom: 2em;
 }
-
 .posts-page section[data-year][hidden] {
     display: none;
 }
 
 .posts-page .posts-year {
-    margin: 1em 1em 0.5em;
+    margin: 1em 0em;
     padding: 0.5em;
     border-radius: 999px;
-    color: var(--angel-blue);
-    font-size: xx-large;
+    border: 2px dashed var(--ink-faint);
+    color: var(--ink-faint);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 900;
+    font-size: x-large;
 }
 
 .posts-page .posts-list {
     display: grid;
     gap: 8px;
-    margin: 0 0 0 24px;
+    margin: 0 0;
     padding-left: 0;
 }
 
@@ -71,9 +77,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 4px 0;
+    padding: 0;
 }
-
 .posts-page .posts-list-item.hidden {
     display: none;
 }
@@ -93,23 +98,21 @@
     font-size: 12px;
 }
 
+/* ===== 文章分类标签（JS 控制颜色，CSS 只负责基础样式） ===== */
 .category-tag {
     margin-left: 0.5rem;
     padding: 0.15rem 0.6rem;
     border-radius: 12px;
-    background: #dbeafe;
-    color: #2563eb;
     font-size: 0.7rem;
     white-space: nowrap;
 }
 
 .no-posts {
     padding: 3rem 0;
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 1.1rem;
     text-align: center;
 }
-
 .no-posts[hidden] {
     display: none;
 }
@@ -118,7 +121,6 @@
     .posts-page {
         padding: 0;
     }
-
     main {
         margin: 0.5em;
     }

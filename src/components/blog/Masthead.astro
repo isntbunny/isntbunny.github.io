@@ -1,4 +1,3 @@
-<!-- Masthead.astro -->
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -36,19 +35,19 @@ const { data } = content;
 		<h1 class="post-title">{data.title}</h1>
 		
 		<div class="meta-grid">
-			<div class="meta-item meta-date">
+			<div class="meta-item">
 				<span class="meta-label">Published</span>
 				<span class="meta-value">
 					<FormattedDate date={data.publishDate} />
 				</span>
 			</div>
 			
-			<div class="meta-item meta-reading">
+			<div class="meta-item">
 				<span class="meta-label">Reading</span>
 				<span class="meta-value">{readingTime}</span>
 			</div>
 			
-			<div class="meta-item meta-words">
+			<div class="meta-item">
 				<span class="meta-label">Words</span>
 				<span class="meta-value">{wordCount ? `${wordCount}字` : '--'}</span>
 			</div>
@@ -68,90 +67,74 @@ const { data } = content;
 </div>
 
 <style>
-	.masthead-wrapper {
-	}
-
 	.cover-image {
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
 		aspect-ratio: 16 / 9;
-		border-radius: 16px;
+		border-radius: 12px;
 		overflow: hidden;
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-		transition: transform 0.3s ease;
-	}
-
-	.cover-image:hover {
-		transform: scale(1.01);
+		box-shadow: var(--card-shadow);
 	}
 
 	.header-content {
-		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-		padding: 2rem 2.5rem;
-		border-radius: 16px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-		border: 1px solid rgba(0, 0, 0, 0.04);
+		background: var(--card-bg);
+		padding: 1.5rem 2rem;
+		border-radius: 12px;
+		box-shadow: var(--card-shadow);
+		border: 1px solid var(--glass-border);
+		backdrop-filter: blur(4px);
 	}
 
 	.draft-badge {
 		display: inline-block;
-		margin-bottom: 0.75rem;
-		padding: 0.25rem 1rem;
+		margin-bottom: 0.5rem;
+		padding: 0.15rem 0.8rem;
 		background: #fef2f2;
 		color: #dc2626;
-		font-size: 0.875rem;
+		font-size: 0.75rem;
 		font-weight: 600;
-		border-radius: 20px;
+		border-radius: 16px;
 		border: 1px solid #fecaca;
+	}
+
+	.post-title {
+		font-size: 1.8rem;
+		margin-bottom: 1rem;
 	}
 
 	@media (min-width: 640px) {
 		.post-title {
-			font-size: 2.75rem;
+			font-size: 2.2rem;
 		}
 	}
 
 	.meta-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1.5rem;
-		padding: 1.25rem 0;
-		border-top: 2px solid rgba(0, 0, 0, 0.06);
-		border-bottom: 2px solid rgba(0, 0, 0, 0.06);
-		margin-bottom: 1rem;
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		padding: 0.75rem 0;
+		border-top: 1px solid var(--glass-border);
+		border-bottom: 1px solid var(--glass-border);
+		margin-bottom: 0.75rem;
 	}
 
 	.meta-item {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		gap: 0.25rem;
+		align-items: baseline;
+		gap: 0.4rem;
 	}
 
 	.meta-label {
-		font-size: 0.7rem;
-		font-weight: 600;
+		font-size: 0.65rem;
+		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: #94a3b8;
+		letter-spacing: 0.06em;
+		color: var(--text-muted);
 	}
 
 	.meta-value {
-		font-size: 1rem;
-		font-weight: 600;
-		color: #1e293b;
-	}
-
-	.meta-date .meta-value {
-		color: #2563eb;
-	}
-
-	.meta-reading .meta-value {
-		color: #7c3aed;
-	}
-
-	.meta-words .meta-value {
-		color: #059669;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--text-main);
 	}
 
 	.updated-wrapper {
@@ -163,54 +146,60 @@ const { data } = content;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.25rem;
-		padding: 0.35rem 1.25rem;
-		border-radius: 20px;
-		background: #f1f5f9;
-		color: #475569;
-		font-size: 0.8rem;
+		padding: 0.2rem 1rem;
+		border-radius: 16px;
+		background: var(--angel-blue-pale);
+		color: var(--text-muted);
+		font-size: 0.7rem;
 		font-weight: 500;
-		border: 1px solid #e2e8f0;
+		border: 1px solid var(--glass-border);
 	}
 
 	.updated-date {
 		font-weight: 600;
-		color: #1e293b;
+		color: var(--text-main);
 	}
 
 	@media (max-width: 640px) {
 		.header-content {
-			padding: 1.5rem;
+			padding: 1rem 1.25rem;
+		}
+
+		.post-title {
+			font-size: 1.4rem;
 		}
 
 		.meta-grid {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 1rem;
+			flex-wrap: wrap;
+			gap: 0.5rem 1.5rem;
+			padding: 0.5rem 0;
 		}
 
-		.meta-words {
-			grid-column: span 2;
+		.meta-item {
+			flex-direction: column;
+			align-items: center;
+			gap: 0.1rem;
 		}
 	}
 
 	@media (max-width: 400px) {
-		.meta-grid {
-			grid-template-columns: 1fr;
-			gap: 0.75rem;
+		.header-content {
+			padding: 0.75rem 1rem;
 		}
 
-		.meta-words {
-			grid-column: span 1;
+		.post-title {
+			font-size: 1.2rem;
+		}
+
+		.meta-grid {
+			flex-direction: column;
+			gap: 0.3rem;
+			align-items: center;
 		}
 
 		.meta-item {
 			flex-direction: row;
-			justify-content: space-between;
-			padding: 0.5rem 0;
-			border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-		}
-
-		.meta-item:last-child {
-			border-bottom: none;
+			gap: 0.4rem;
 		}
 	}
 </style>

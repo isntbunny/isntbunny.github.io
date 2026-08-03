@@ -37,13 +37,17 @@ const meta = {
     title: "Posts",
 };
 
+// 动态生成分类标签
 const categoryLabels: Record<string, string> = {
     all: "全部",
-    english: "English",
-    programming: "Programming",
-    dailylife: "Daily-life",
     uncategorized: "未分类",
 };
+
+allCategories.forEach(cat => {
+    if (!categoryLabels[cat]) {
+        categoryLabels[cat] = cat.charAt(0).toUpperCase() + cat.slice(1);
+    }
+});
 ---
 
 <PageLayout meta={meta}>
@@ -92,7 +96,7 @@ const categoryLabels: Record<string, string> = {
                                                 })}
                                             </time>
                                             {category !== "uncategorized" && (
-                                                <span class="category-tag">
+                                                <span class="category-tag" data-category={category}>
                                                     {categoryLabels[category] || category}
                                                 </span>
                                             )}
@@ -113,6 +117,58 @@ const categoryLabels: Record<string, string> = {
 </style>
 
 <script is:inline>
+    // ============================================================
+    // 🎨 调色板 - 所有颜色自动从这里分配
+    // ============================================================
+    const PALETTE = [
+        // 与手帐风格呼应的柔和色系
+        { bg: '#7bc4a8', text: '#5ba08a', tagBg: '#d4f0e6', tagText: '#5ba08a' },  // 薄荷绿
+        { bg: '#e8b88a', text: '#c99a6e', tagBg: '#f5e6d6', tagText: '#c99a6e' },  // 暖橙
+        { bg: '#e8b4c8', text: '#c991a8', tagBg: '#f5e0e8', tagText: '#c991a8' },  // 粉
+        { bg: '#b8d4e8', text: '#7a9fb8', tagBg: '#dceaf5', tagText: '#7a9fb8' },  // 天蓝
+        { bg: '#c9b8d4', text: '#9a7fb0', tagBg: '#e8dcf0', tagText: '#9a7fb0' },  // 淡紫
+        { bg: '#d4c9a8', text: '#a89a7a', tagBg: '#f0e8d4', tagText: '#a89a7a' },  // 卡其
+        { bg: '#a8d4c9', text: '#7aa89a', tagBg: '#d4f0e8', tagText: '#7aa89a' },  // 青绿
+        { bg: '#e8c9b8', text: '#b89a7a', tagBg: '#f5e8d4', tagText: '#b89a7a' },  // 杏色
+        { bg: '#b8c9d4', text: '#7a9aa8', tagBg: '#dce8f0', tagText: '#7a9aa8' },  // 灰蓝
+        { bg: '#d4b8c9', text: '#a87a9a', tagBg: '#f0dce8', tagText: '#a87a9a' },  // 玫瑰
+    ];
+
+    // ============================================================
+    // 颜色分配器 - 记住每个分类分配了什么颜色
+    // ============================================================
+    const colorMap = new Map();
+    let colorIndex = 0;
+
+    function getColors(category) {
+        if (colorMap.has(category)) {
+            return colorMap.get(category);
+        }
+
+        // 特殊分类固定颜色
+        const specials = {
+            'uncategorized': { bg: '#cddbe9', text: '#4e677c', tagBg: '#cddbe9', tagText: '#4e677c' },
+        };
+
+        if (specials[category]) {
+            colorMap.set(category, specials[category]);
+            return specials[category];
+        }
+
+        // 从调色板取色（循环使用）
+        const colors = PALETTE[colorIndex % PALETTE.length];
+        colorIndex++;
+        colorMap.set(category, colors);
+        return colors;
+    }
+
+    // "全部" 固定蓝色
+    const ALL_COLORS = { bg: '#a0ceef', border: '#a0ceef', text: '#a0ceef' };
+    const DEFAULT_COLORS = { bg: '#a0ceef', border: '#acd9f6', text: '#6986a1', tagBg: '#d7ebfc', tagText: '#6986a1' };
+
+    // ============================================================
+    // 初始化函数
+    // ============================================================
     function initializeCategoryTabs() {
         const tabs = Array.from(document.querySelectorAll(".category-tab"));
         const posts = Array.from(document.querySelectorAll(".posts-list-item"));
@@ -126,11 +182,61 @@ const categoryLabels: Record<string, string> = {
 
         tabsContainer.dataset.initialized = "true";
 
+        // ============================================================
+        // 应用颜色
+        // ============================================================
+        function applyColors() {
+            // ---- Tab 按钮 ----
+            tabs.forEach((tab) => {
+                const cat = tab.dataset.category;
+                let colors;
+
+                if (cat === 'all') {
+                    colors = ALL_COLORS;
+                } else {
+                    colors = getColors(cat);
+                }
+
+                tab.style.borderColor = colors.border || colors.bg;
+                tab.style.color = colors.text || colors.bg;
+                tab.dataset.bgColor = colors.bg;
+            });
+
+            // ---- 文章标签 ----
+            document.querySelectorAll('.category-tag').forEach((tag) => {
+                const cat = tag.dataset.category;
+                const colors = getColors(cat);
+                tag.style.background = colors.tagBg || colors.bg;
+                tag.style.color = colors.tagText || '#ffffff';
+            });
+        }
+
+        // ============================================================
+        // 过滤文章
+        // ============================================================
         function filterPosts(category) {
             tabs.forEach((tab) => {
                 const isActive = tab.dataset.category === category;
                 tab.classList.toggle("active", isActive);
                 tab.setAttribute("aria-pressed", String(isActive));
+
+                if (isActive) {
+                    const bg = tab.dataset.bgColor || DEFAULT_COLORS.bg;
+                    tab.style.background = bg;
+                    tab.style.color = '#ffffff';
+                    tab.style.borderColor = bg;
+                } else {
+                    const cat = tab.dataset.category;
+                    let colors;
+                    if (cat === 'all') {
+                        colors = ALL_COLORS;
+                    } else {
+                        colors = getColors(cat);
+                    }
+                    tab.style.background = 'var(--card-bg)';
+                    tab.style.color = colors.text || colors.bg;
+                    tab.style.borderColor = colors.border || colors.bg;
+                }
             });
 
             let hasVisiblePosts = false;
@@ -160,6 +266,9 @@ const categoryLabels: Record<string, string> = {
             }
         }
 
+        // ============================================================
+        // 绑定事件
+        // ============================================================
         tabs.forEach((tab) => {
             tab.addEventListener("click", () => {
                 const category = tab.dataset.category || "all";
@@ -174,6 +283,11 @@ const categoryLabels: Record<string, string> = {
                 window.history.pushState({}, "", url);
             });
         });
+
+        // ============================================================
+        // 初始化
+        // ============================================================
+        applyColors();
 
         const params = new URLSearchParams(window.location.search);
         const initialCategory = params.get("category") || "all";
