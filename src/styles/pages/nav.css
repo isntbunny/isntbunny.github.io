@@ -735,27 +735,6 @@ button:focus-visible {
   gap: 8px;
 }
 
-.group-icon {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-
-  display: grid;
-  place-items: center;
-
-  color: var(--md-primary);
-
-  transition: transform 260ms var(--md-motion-emphasized);
-}
-
-.group-icon .material-symbols-outlined {
-  font-size: 18px;
-}
-
-.group:hover .group-icon {
-  transform: rotate(90deg);
-}
-
 .group-name {
   flex: 1;
   min-width: 0;
@@ -1421,9 +1400,6 @@ button:focus-visible {
     min-height: 68px;
   }
 
-  .link-desc {
-    display: none;
-  }
 }
 
 @media (max-width: 360px) {

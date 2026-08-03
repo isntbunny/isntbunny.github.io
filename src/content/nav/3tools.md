@@ -3,6 +3,7 @@ title: "工具"
 icon: "🔧"
 order: 3
 ---
+## 效率
 - [taskade](https://taskade.com/) - 任务管理
 - [Trello](https://trello.com/) - 看板
 - [notion](https://www.notion.so/) - 笔记

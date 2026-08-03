@@ -18,5 +18,3 @@ order: 4
 - [道德经全文](https://daodejing.shop/) - 道德经阅读
 - [Markdown 官方教程](https://markdown.com.cn/basic-syntax/) - Markdown 教程
 - [Fandom](https://www.fandom.com/) - 游戏维基
-- [Element](https://app.element.io/) - Matrix 客户端
-- [Public Matrix Homeserver List](https://servers.joinmatrix.org/) - Matrix 服务器列表
