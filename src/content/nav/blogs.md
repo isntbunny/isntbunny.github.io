@@ -3,12 +3,17 @@ title: "文章与博客"
 icon: "📝"
 order: 6
 ---
-
+## 文档
+- [AList文档](https://alistgo.com/zh/) - AList 文档
+- [Markdown 官方教程](https://markdown.com.cn/basic-syntax/) - Markdown 教程
+- [LaTeX 入门](https://oi-wiki.org/tools/latex/) - OI Wiki
+## 博客
 - [阮一峰的网络日志](https://ruanyifeng.com/blog/) - 科技爱好者周刊
 - [CSS-Tricks](https://css-tricks.com) - CSS 技巧
 - [Dev.to](https://dev.to) - 开发者社区
 - [小网络之美](https://benhoyt.com/writings/the-small-web-is-beautiful/) - 文章
 - [如何在github主页放一条贪吃蛇](https://developer.aliyun.com/article/1601063) - 技术文章
+## 其他
 - [上海交通大学生存手册](https://survivesjtu.gitbook.io/survivesjtumanual/) - 交大生存指南
 - [上海交通大学飞跃手册](https://survivesjtu.github.io/SJTU-Application/#/) - 留学申请手册
 - [不上班研究所](https://www.toocool.cc/) - 自由职业交流

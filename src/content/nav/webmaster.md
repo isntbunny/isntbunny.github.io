@@ -22,22 +22,28 @@ order: 2
 - [Cloudflare Dashboard](https://dash.cloudflare.com/) - Cloudflare 控制台
 - [File Manager](https://filemanager.ai/new3/index.php) - 文件管理器
 
-## indieweb
+## 工具
 - [IndieWeb资源](https://ramblingmerlin.neocities.org/recources) - 资源收集
 - [88x31 按钮生成器](https://pixelwolf.net/PWapps/88x31/) - 制作经典 88x31 徽标
 - [用户框生成器](http://yerich.net/userbox/) - 制作维基风格用户框
+- [barra的错误信息生成器](https://barrarchiverio.cl/p/error/) - 
 - [Desktop Pet Generator](https://esheep.petrucci.ch/pets/generator.php) - 桌面宠物生成
 - [STAMPS](https://y2k.neocities.org/stamps) - 邮票贴纸
+- [GitHub 日历示例](https://bloggify.github.io/github-calendar/) - GitHub 贡献日历
+- [GitHub 贡献图生成器](https://ghchart.rshah.org/) - 自定义 GitHub 风格贡献图
 
-## 第三方服务
-- [智能留言本](https://www.smartgb.com/) - 免费留言本服务
-- [Atabook](https://atabook.org/) - 免费留言板
-- [Control Panel · Cbox](https://www.cbox.ws/admin?home) - 留言板管理
+## webring
+- [NoAI Webring](https://baccyflap.com/noai/) - Webring
+- [Null Webring](https://nuthead.neocities.org/ring/) - Webring
+- [Ghostk Webring](https://webring.ghostk.id/online/) - Webring
+
+## 服务
+- [智能留言本](https://www.smartgb.com/) - 免费留言本
+- [Atabook](https://atabook.org/) - 留言板
+- [Cbox](https://www.cbox.ws/) - 实时留言板
 - [Create New Group](https://chatango.com/creategroup#type_selected) - Chatango 群组
 
 ## 资源
-- [GitHub 日历示例](https://bloggify.github.io/github-calendar/) - GitHub 贡献日历
-- [GitHub 贡献图生成器](https://ghchart.rshah.org/) - 自定义 GitHub 风格贡献图
 - [中文网字计划](https://chinese-font.netlify.app/zh-cn/) - 中文字体
 - [免费商用字体下载](https://font.sucai999.com/search/0_13_1.html) - 免费字体
 - [Favicon Generator](https://favicon.io/favicon-converter/) - 图标生成

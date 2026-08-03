@@ -6,8 +6,8 @@
   color-scheme: light;
 
   /* --- 主色（浅蓝） --- */
-  --md-primary: #0b57d0;
-  --md-primary-hover: #0842a0;
+  --md-primary: #1852b0;
+  --md-primary-hover: #2862c0;
   --md-primary-pressed: #062e6f;
 
   --md-primary-container: #d3e3fd;
@@ -29,7 +29,7 @@
   --md-on-surface-variant: #44474e;
 
   --md-outline: #74777f;
-  --md-outline-variant: #c4c7ce;
+  --md-outline-variant: #dddddd;
 
   --md-blue-50: #eaf1fe;
   --md-blue-100: #d3e3fd;
@@ -43,22 +43,22 @@
   --md-blue-900: #072a63;
 
   --md-shadow-1:
-    0 1px 2px rgba(11, 87, 208, 0.12),
-    0 1px 3px 1px rgba(60, 64, 67, 0.08);
+    0 1px 2px rgba(11, 87, 208, 0.04),
+    0 1px 3px 1px rgba(60, 64, 67, 0.02);
 
   --md-shadow-2:
-    0 1px 2px rgba(11, 87, 208, 0.14),
-    0 2px 6px 2px rgba(60, 64, 67, 0.1);
+    0 1px 2px rgba(11, 87, 208, 0.04),
+    0 2px 6px 2px rgba(60, 64, 67, 0.04);
 
   --md-shadow-3:
-    0 2px 4px rgba(11, 87, 208, 0.14),
-    0 4px 12px 3px rgba(60, 64, 67, 0.12);
+    0 2px 4px rgba(11, 87, 208, 0.05),
+    0 4px 12px 3px rgba(60, 64, 67, 0.04);
 
   --md-motion-standard: cubic-bezier(0.2, 0, 0, 1);
   --md-motion-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
   --md-motion-decelerated: cubic-bezier(0, 0, 0, 1);
 
-  --app-bar-height: 72px;
+  --app-bar-height: 70px;
   --content-width: 1440px;
   --sidebar-width: 236px;
   --sidebar-width-collapsed: 0px;
@@ -76,14 +76,6 @@ html {
 
   /* 修复移动端滚动到边界时的连锁弹跳/传导 */
   overscroll-behavior-y: contain;
-}
-
-body {
-  min-height: 100vh;
-  margin: 0;
-  overflow-x: hidden;
-
-  color: var(--md-on-surface);
   background:
     radial-gradient(
       circle at 12% 2%,
@@ -96,6 +88,12 @@ body {
       transparent 30rem
     ),
     var(--md-surface-container-low);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
 
   font-family:
     'Roboto',
@@ -160,20 +158,24 @@ button:focus-visible {
 
 .app-bar {
   position: sticky;
-  top: 0;
+  top:1em;
   z-index: 100;
+  box-shadow: 900ms #041e49 ;
 
   height: var(--app-bar-height);
-  padding: 0 24px;
+  width: auto;
+  padding: 24px;
+  border-radius: 999px;
+  margin: 1em;
 
   display: flex;
   align-items: center;
 
-  background: rgba(238, 243, 251, 0.9);
-  border-bottom: 1px solid rgba(196, 199, 197, 0.6);
+  background: rgba(246, 247, 255, 0.5);
+  border: 1px solid rgba(196, 199, 197, 0.65);
 
   backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(50px) saturate(150%);
 
   /* 提升为独立合成层，避免弹性滚动时 sticky + 模糊重复重绘造成卡顿 */
   transform: translateZ(0);
@@ -273,7 +275,7 @@ button:focus-visible {
   background: var(--md-primary-container);
   border-radius: 14px;
 
-  box-shadow: inset 0 0 0 1px rgba(11, 87, 208, 0.08);
+  /*box-shadow: inset 0 0 0 1px rgba(11, 87, 208, 0.03);*/
 
   animation: icon-enter 620ms var(--md-motion-emphasized) both;
 }
@@ -326,12 +328,12 @@ button:focus-visible {
   max-width: var(--content-width);
   min-height: calc(100vh - var(--app-bar-height));
 
-  margin: 0 auto;
-  padding: 22px 24px 56px;
+  margin: 0;
+  padding: 1.5em;
 
   display: flex;
   align-items: flex-start;
-  gap: 24px;
+  gap: 1em;
 }
 
 /* ============================================================
@@ -340,7 +342,7 @@ button:focus-visible {
 
 .sidebar {
   position: sticky;
-  top: calc(var(--app-bar-height) + 22px);
+  top: calc(var(--app-bar-height) + 2em);
 
   flex: 0 0 var(--sidebar-width);
   width: var(--sidebar-width);
@@ -357,7 +359,7 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(196, 199, 197, 0.55);
 
-  box-shadow: var(--md-shadow-1);
+  /*box-shadow: var(--md-shadow-1);*/
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -551,7 +553,7 @@ button:focus-visible {
   border: 1px solid rgba(196, 199, 197, 0.55);
   border-radius: 24px;
 
-  box-shadow: var(--md-shadow-1);
+  /*box-shadow: var(--md-shadow-1);*/
 
   transition:
     box-shadow 280ms var(--md-motion-standard),
@@ -586,7 +588,7 @@ button:focus-visible {
 
 .section-card:hover {
   border-color: rgba(11, 87, 208, 0.24);
-  box-shadow: var(--md-shadow-2);
+  /*box-shadow: var(--md-shadow-2);*/
   transform: translateY(-2px);
 }
 
@@ -793,7 +795,7 @@ button:focus-visible {
   text-decoration: none;
 
   background: var(--md-surface);
-  border: 1px solid rgba(196, 199, 197, 0.65);
+  border: 1px solid rgba(196, 199, 197, 0.40);
   border-radius: 14px;
 
   transition:
@@ -821,7 +823,7 @@ button:focus-visible {
 
 .link-card:hover {
   border-color: rgba(11, 87, 208, 0.46);
-  box-shadow: var(--md-shadow-1);
+  /*box-shadow: var(--md-shadow-1);*/
   transform: translateY(-2px);
 }
 
@@ -963,10 +965,10 @@ button:focus-visible {
   text-align: center;
 
   background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(196, 199, 197, 0.55);
+  border: 1px solid rgba(196, 199, 197, 0.35);
   border-radius: 26px;
 
-  box-shadow: var(--md-shadow-1);
+  /*box-shadow: var(--md-shadow-1);*/
 
   animation: section-enter 550ms var(--md-motion-emphasized) both;
 }
@@ -1217,7 +1219,7 @@ button:focus-visible {
     border-radius: 0;
 
     background: rgba(238, 243, 251, 0.92);
-    box-shadow: 0 4px 10px rgba(11, 87, 208, 0.08);
+   /* box-shadow: 0 4px 10px rgba(11, 87, 208, 0.08);*/
 
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
@@ -1271,10 +1273,10 @@ button:focus-visible {
     gap: 7px;
 
     background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(196, 199, 197, 0.65);
+    border: 1px solid rgba(196, 199, 197, 0.45);
     border-radius: 999px;
 
-    box-shadow: 0 1px 2px rgba(11, 87, 208, 0.08);
+    /*box-shadow: 0 1px 2px rgba(11, 87, 208, 0.08);*/
 
     font-size: 11px;
 
@@ -1285,10 +1287,9 @@ button:focus-visible {
     color: #ffffff;
     background: var(--md-primary);
     border-color: var(--md-primary);
-
     box-shadow:
-      0 1px 2px rgba(11, 87, 208, 0.28),
-      0 3px 8px rgba(11, 87, 208, 0.16);
+      0 1px 2px rgba(11, 87, 208, 0.18),
+      0 3px 8px rgba(11, 87, 208, 0.06);
   }
 
   .sidebar-link.active:hover {

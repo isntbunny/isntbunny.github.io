@@ -1,10 +1,11 @@
 ---
-title: "音乐作曲相关"
+title: "音乐"
 icon: "🎶"
 order: 9
 ---
-
+## 听歌
 - [YouTube Music](https://music.youtube.com/) - 音乐
+## 作曲
 - [Two Moons](https://two-moons.site/) - 学习乐理
 - [音乐地图](https://www.music-map.com/) - 根据艺术家发现相似音乐
 - [灰机wiki](https://utauchn.huijiwiki.com/wiki/%E7%99%BB%E5%BD%95%E9%9F%B3%E6%BA%90%E4%B8%80%E8%A7%88) - UTAU 资源
