@@ -12,88 +12,118 @@ import {
 
 <PageLayout meta={{ description: "About me", title: "About" }}>
 
-  <div class="profile-header">
-    <div class="profile-photo">
-      <img src="https://i.postimg.cc/HxG7bTwc/avatar250806.png" alt="profile photo" />
-    </div>
-    <div class="header-info">
-      <h1 class="myname">Hi, I'm Eucaly</h1>
-      <p class="mybio">小透明高中生/术力口厨/oc人</p>
-      <div class="attribar">
-        <img src="https://i.postimg.cc/cL2S3sYZ/female.gif" alt="female" />
-        <img src="https://i.postimg.cc/1tZ1WJJw/Chinese.png" alt="Chinese" />
-        <img src="https://i.postimg.cc/wvdYW00t/nerd.gif" alt="nerd" />
-        <img src="https://i.postimg.cc/s2WR9t9B/geek.gif" alt="geek" />
-        <img src="https://i.postimg.cc/BvFGcd5d/freespeech.gif" alt="freespeech" />
-        <img src="https://i.postimg.cc/1zFZcLc3/fucknazis.gif" alt="fucknazis" />
+  <div class="about-grid">
+
+    <!-- ===== 个人资料 ===== -->
+    <div class="profile-header">
+      <div class="profile-photo">
+        <img src="https://i.postimg.cc/HxG7bTwc/avatar250806.png" alt="profile photo" />
+      </div>
+      <div>
+        <h1 class="myname">Hi, I'm Eucaly</h1>
+        <p class="mybio">小透明高中生 / 术力口厨 / oc人</p>
+        <div class="attribar">
+          <img src="https://i.postimg.cc/cL2S3sYZ/female.gif" alt="female" />
+          <img src="https://i.postimg.cc/1tZ1WJJw/Chinese.png" alt="Chinese" />
+          <img src="https://i.postimg.cc/wvdYW00t/nerd.gif" alt="nerd" />
+          <img src="https://i.postimg.cc/s2WR9t9B/geek.gif" alt="geek" />
+          <img src="https://i.postimg.cc/BvFGcd5d/freespeech.gif" alt="freespeech" />
+          <img src="https://i.postimg.cc/1zFZcLc3/fucknazis.gif" alt="fucknazis" />
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="">
-    <h2>GET TO KNOW ME!</h2>
-    <div class="sticker-fufu"><a href="https://postimg.cc/qh4kVGs2" target="_blank"><img src="https://i.postimg.cc/qh4kVGs2/fufu-miku.png" alt="fufu-miku"></a></div>
-				
-        <div class="my-hobbies">
-          <h3>I love...</h3>
-          drawing, singing, animes, programming
-        </div>
-        <div class="sociallinks">
-          <h3>contact me</h3>
-          {socialLinks.map(({ name, url, img }) => (
-            <a key={name} href={url}>
-              <img src={img} alt={name} />
-            </a>
-          ))}
-        </div>
-        <div class="stamps">
-          <h3>Stamps</h3>
-          <div class="stamppic">
-            {stamps.map((src, i) => (
-              <img key={i} src={src} alt={`stamp-${i}`} />
-            ))}
-          </div>
-         </div>
+    <!-- ===== 爱好 ===== -->
+    <div class="card hobbies-card">
+      <h2>I love...</h2>
+      <div class="hobby-tags">
+        <span class="hobby-tag">drawing</span>
+        <span class="hobby-tag">singing</span>
+        <span class="hobby-tag">anime</span>
+        <span class="hobby-tag">programming</span>
+      </div>
     </div>
-  
-  <div class="scroll-container">
-    <div class="scroll-track blinkies">
-          {blinkies.map((src, i) => (
+
+    <!-- ===== 社交 ===== -->
+    <div class="card social-card">
+      <h2>Contact</h2>
+      <div class="social-icons">
+        {socialLinks.map(({ name, url, img }) => (
+          <a key={name} href={url} target="_blank" rel="noopener">
+            <img src={img} alt={name} />
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 印章 ===== -->
+    <div class="card card-full">
+      <h2>Stamps</h2>
+      <div class="stamppic">
+        {stamps.map((src, i) => (
+          <img key={i} src={src} alt={`stamp-${i}`} />
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 滚动 LED ===== -->
+    <div class="scroll-card card-full">
+      <div class="scroll-container">
+        <div class="scroll-track">
+          {[...blinkies, ...blinkies].map((src, i) => (
             <img key={i} src={src} alt={`blinkie-${i}`} />
           ))}
-    </div>
-  </div>
-  <div class="injector-divider"></div>
-  <div>
-    <h2>MY SKILLS</h2>
-    <ul>
-      {skillCategories.map((category) => (
-        <div key={category.title}>
-          <h3>{category.title}</h3>
-          {category.items.map((item, i) => {
-            if (typeof item === "string") {
-              return <li key={i}>{item}</li>;
-            }
-            return <img key={i} src={item.icon} alt={item.name} height="25px" />;
-          })}
         </div>
-      ))}
-    </ul>
-  </div>
-<a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/c4cCf84W/01.png" alt="01"></a>
-  <div class="poid">
-    <h2>IDEOLOGY</h2>
-    <div>
-      <p>自由意志社会主义desu</p>
+      </div>
+    </div>
+
+    <!-- ===== 技能 ===== -->
+    <div class="card card-full">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        {skillCategories.map((category) => (
+          <div key={category.title} class="skill-group">
+            <h3>{category.title}</h3>
+            <ul>
+              {category.items.map((item, i) => {
+                if (typeof item === "string") {
+                  return <li key={i}>{item}</li>;
+                }
+                return (
+                  <li key={i} class="skill-icon-item">
+                    <img src={item.icon} alt={item.name} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 意识形态 ===== -->
+    <div class="card ideology-card">
+      <h2>Ideology</h2>
+      <p>自由意志社会主义 desu</p>
       <img src="https://i.postimg.cc/BZpfg5DS/9axes.jpg" alt="9axes" />
     </div>
+
+    <!-- ===== 注射器图片分割线（仅底部） ===== -->
+    <div class="divider-image card-full">
+      <img src="https://i.postimg.cc/c4cCf84W/01.png" alt="divider" />
+    </div>
+
+    <!-- ===== 滚动按钮 ===== -->
+    <div class="scroll-card card-full">
+      <div class="scroll-container">
+        <div class="scroll-track">
+          {[...scrollImages, ...scrollImages].map((src, i) => (
+            <img key={i} src={src} alt={`scroll-${i}`} />
+          ))}
+        </div>
+      </div>
+    </div>
+
   </div>
 
-    <div class="scroll-container">
-        <div class="scroll-track buttons">
-              {[...scrollImages, ...scrollImages].map((src, i) => (
-                      <img key={i} src={src} alt={`scroll-${i}`} />
-                            ))}
-                                </div>
-                                  </div>
 </PageLayout>

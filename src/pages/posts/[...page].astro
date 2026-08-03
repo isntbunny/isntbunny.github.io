@@ -85,16 +85,18 @@ allCategories.forEach(cat => {
                                 const category = getPostCategory(post);
                                 return (
                                     <li class="posts-list-item" data-category={category}>
-                                        <a href={`/posts/${post.id}/`} class="posts-list-link">
-                                            {post.data.title}
-                                        </a>
-                                        <div class="posts-meta">
+                                        <div class="posts-left">
                                             <time class="small-muted posts-date">
                                                 {post.data.publishDate.toLocaleDateString("zh-CN", {
                                                     month: "numeric",
                                                     day: "numeric",
                                                 })}
                                             </time>
+                                            <a href={`/posts/${post.id}/`} class="posts-list-link">
+                                                {post.data.title}
+                                            </a>
+                                        </div>
+                                        <div class="posts-meta">
                                             {category !== "uncategorized" && (
                                                 <span class="category-tag" data-category={category}>
                                                     {categoryLabels[category] || category}

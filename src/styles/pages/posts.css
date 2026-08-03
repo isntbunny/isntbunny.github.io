@@ -1,6 +1,6 @@
 .posts-page {
     letter-spacing: 0.05em;
-    padding: 0 7em;
+    padding: 0 6em;
 }
 
 .posts-page .card-chip {
@@ -72,6 +72,7 @@
     padding-left: 0;
 }
 
+/* ===== 文章列表项 ===== */
 .posts-page .posts-list-item {
     display: flex;
     align-items: center;
@@ -83,19 +84,37 @@
     display: none;
 }
 
-.posts-page .posts-list-link {
-    font-size: 16px;
+/* ===== 左侧：日期 + 标题 ===== */
+.posts-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
 }
 
+.posts-page .posts-list-link {
+    font-size: 16px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.posts-page .posts-date {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 3.5em;
+    flex-shrink: 0;
+}
+
+/* ===== 右侧：分类标签 ===== */
 .posts-page .posts-meta {
     display: flex;
     flex-shrink: 0;
     align-items: center;
     gap: 8px;
-}
-
-.posts-page .posts-date {
-    font-size: 12px;
 }
 
 /* ===== 文章分类标签（JS 控制颜色，CSS 只负责基础样式） ===== */
@@ -123,5 +142,27 @@
     }
     main {
         margin: 0.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .posts-left {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .posts-page .posts-list-link {
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    .posts-page .posts-date {
+        font-size: 11px;
+        min-width: 2.8em;
+    }
+
+    .category-tag {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
     }
 }
