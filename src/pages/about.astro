@@ -5,7 +5,6 @@ import {
   stamps,
   blinkies,
   scrollImages,
-  socialLinks,
   skillCategories,
 } from "@/data/about-stickers";
 ---
@@ -35,7 +34,7 @@ import {
 
     <!-- ===== 爱好 ===== -->
     <div class="card hobbies-card">
-      <h2>I love...</h2>
+      <h2>Interests</h2>
       <div class="hobby-tags">
         <span class="hobby-tag">drawing</span>
         <span class="hobby-tag">singing</span>
@@ -46,13 +45,10 @@ import {
 
     <!-- ===== 社交 ===== -->
     <div class="card social-card">
-      <h2>Contact</h2>
+      <h2>Contact Me</h2>
       <div class="social-icons">
-        {socialLinks.map(({ name, url, img }) => (
-          <a key={name} href={url} target="_blank" rel="noopener">
-            <img src={img} alt={name} />
-          </a>
-        ))}
+        <li>isntbunny@outlook.com</li>
+        <li>Matrix: hensuuerror:catgirl.org</li>
       </div>
     </div>
 

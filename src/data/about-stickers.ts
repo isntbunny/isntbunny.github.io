@@ -102,28 +102,6 @@ export interface SocialLink {
   img: string
 }
 
-export const socialLinks: SocialLink[] = [
-  {
-    name: 'email',
-    url: 'mailto:Eucaly<isntbunny@outlook.com>?subject=Hello%20^^&body=I%20found%20you%20at%20your%20website',
-    img: 'https://i.postimg.cc/c1hGm7Y8/email.gif',
-  },
-  {
-    name: 'github',
-    url: 'https://github.com/isntbunny',
-    img: 'https://i.postimg.cc/gjzFpr9h/github.gif',
-  },
-  {
-    name: 'twitter',
-    url: 'https:',
-    img: 'https://i.postimg.cc/Fzr5v1ts/Twitter.gif',
-  },
-  {
-    name: 'discord',
-    url: '#',
-    img: 'https://i.postimg.cc/fLjn1mPb/discord1.gif',
-  },
-]
 
 // ============ 技能 ============
 export interface SkillCategory {
