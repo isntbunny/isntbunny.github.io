@@ -1,6 +1,6 @@
 ---
 title: "站长工具"
-icon: "🔗"
+icon: "fa-solid fa-globe"
 order: 2
 ---
 

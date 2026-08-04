@@ -1,6 +1,6 @@
 ---
 title: "资源"
-icon: "📖"
+icon: "fa-solid fa-book"
 order: 4
 ---
 ## 资源

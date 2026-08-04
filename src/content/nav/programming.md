@@ -1,6 +1,6 @@
 ---
 title: "编程相关"
-icon: "💻"
+icon: "fa-solid fa-code"
 order: 2
 ---
 ## 文档与教程

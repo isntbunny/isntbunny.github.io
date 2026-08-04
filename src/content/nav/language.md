@@ -1,6 +1,6 @@
 ---
 title: "语言学习"
-icon: "🗣️"
+icon: "fa-solid fa-earth-americas"
 order: 5
 ---
 ## 阅读

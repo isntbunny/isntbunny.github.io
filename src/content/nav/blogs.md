@@ -1,6 +1,6 @@
 ---
 title: "文章与博客"
-icon: "📝"
+icon: "fa-solid fa-square-rss"
 order: 6
 ---
 ## 文档

@@ -1,6 +1,6 @@
 ---
 title: "音乐"
-icon: "🎶"
+icon: "fa-solid fa-music"
 order: 9
 ---
 ## 听歌

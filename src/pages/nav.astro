@@ -17,7 +17,7 @@ try {
     const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
 
     let sectionTitle = '未命名';
-    let sectionIcon = '📁';
+    let sectionIcon = 'fa-solid fa-folder'; // 默认图标
     let sectionOrder = 0;
 
     if (frontmatterMatch) {
@@ -28,15 +28,23 @@ try {
         yaml.match(/title:\s*'([^']+)'/) ||
         yaml.match(/title:\s*(.+)/);
 
+      // 🔧 修复：更健壮的 icon 解析
+      let iconValue = '';
       const iconMatch =
         yaml.match(/icon:\s*"([^"]+)"/) ||
         yaml.match(/icon:\s*'([^']+)'/) ||
         yaml.match(/icon:\s*(.+)/);
 
+      if (iconMatch) {
+        // 清理引号和多余空格
+        iconValue = iconMatch[1].trim().replace(/^["']|["']$/g, '');
+      }
+
       const orderMatch = yaml.match(/order:\s*(\d+)/);
 
       sectionTitle = titleMatch?.[1]?.trim() || '未命名';
-      sectionIcon = iconMatch?.[1]?.trim() || '📁';
+      // 🔧 修复：如果解析成功则使用，否则保持默认
+      sectionIcon = iconValue || 'fa-solid fa-folder';
       sectionOrder = orderMatch ? Number.parseInt(orderMatch[1], 10) : 0;
     }
 
@@ -140,13 +148,17 @@ const totalLinkCount = sections.reduce(
       rel="stylesheet"
     />
 
-    <!-- Google Material Symbols 图标 -->
+    <!-- Font Awesome 图标库 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..600,0..1,-25..200&display=block"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
 
-    <!-- 在渲染前尽早读取折叠状态，避免刷新时出现闪烁 -->
+    <!-- 在渲染前尽早读取折叠状态 -->
     <script is:inline>
       (function () {
         try {
@@ -163,7 +175,7 @@ const totalLinkCount = sections.reduce(
 
   <body>
     <div class="nav-app">
-      <header class="app-bar">
+      <header class="app-bar" id="appBar">
         <div class="app-bar-inner">
           <div class="app-bar-left">
             <button
@@ -171,18 +183,14 @@ const totalLinkCount = sections.reduce(
               class="icon-btn"
               type="button"
               aria-expanded="true"
-              aria-controls="sidebar"
+              aria-controls="sidebar mobileSidebar"
               aria-label="折叠或展开分类导航"
               hidden={sections.length === 0}
             >
-              <span class="material-symbols-outlined" aria-hidden="true">
-                menu_open
-              </span>
+              <i class="fa-solid fa-angles-left toggle-icon" aria-hidden="true"></i>
             </button>
 
             <div class="brand">
-              <!--<span class="app-icon" aria-hidden="true" style="color:white">†</span>-->
-
               <div class="brand-text">
                 <h1 class="app-title">Tami的工具箱</h1>
                 <p class="app-subtitle">ciallo ~ (◠ v・)—☆</p>
@@ -192,12 +200,57 @@ const totalLinkCount = sections.reduce(
 
           <span class="total-chip">{totalLinkCount} 个链接</span>
         </div>
+
+        {
+          sections.length > 0 && (
+            <nav
+              class="app-bar-categories sidebar-collapsible"
+              id="mobileSidebar"
+              aria-label="分类导航"
+            >
+              <div class="sidebar-nav">
+                {sections.map((section, index) => (
+                  <a
+                    href={`#${section.id}`}
+                    class:list={[
+                      'sidebar-link',
+                      {
+                        active: index === 0,
+                      },
+                    ]}
+                    data-section-id={section.id}
+                  >
+                    <span class="sidebar-state-layer" aria-hidden="true" />
+
+                    <span class="sidebar-icon" aria-hidden="true">
+                      {/* 🔧 修复：确保图标类名正确 */}
+                      <i class={section.icon || 'fa-solid fa-folder'} />
+                    </span>
+
+                    <span class="sidebar-label">{section.title}</span>
+
+                    <span class="sidebar-badge">
+                      {section.groups.reduce(
+                        (total, group) => total + group.items.length,
+                        0,
+                      )}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          )
+        }
       </header>
 
       <div class="app-body">
         {
           sections.length > 0 && (
-            <aside class="sidebar" id="sidebar" aria-label="页面导航">
+            <aside
+              class="sidebar sidebar-collapsible"
+              id="sidebar"
+              aria-label="页面导航"
+            >
               <nav class="sidebar-nav">
                 {sections.map((section, index) => (
                   <a
@@ -213,7 +266,8 @@ const totalLinkCount = sections.reduce(
                     <span class="sidebar-state-layer" aria-hidden="true" />
 
                     <span class="sidebar-icon" aria-hidden="true">
-                      {section.icon}
+                      {/* 🔧 修复：确保图标类名正确 */}
+                      <i class={section.icon || 'fa-solid fa-folder'} />
                     </span>
 
                     <span class="sidebar-label">{section.title}</span>
@@ -237,7 +291,7 @@ const totalLinkCount = sections.reduce(
               sections.length === 0 ? (
                 <div class="empty-state">
                   <div class="empty-icon-wrapper" aria-hidden="true">
-                    <span class="material-symbols-outlined">folder_off</span>
+                    <i class="fa-solid fa-folder-open" />
                   </div>
 
                   <h2>这里暂时空空的</h2>
@@ -266,7 +320,8 @@ const totalLinkCount = sections.reduce(
                               class="section-icon-wrapper"
                               aria-hidden="true"
                             >
-                              <span class="section-icon">{section.icon}</span>
+                              {/* 🔧 修复：确保图标类名正确 */}
+                              <i class={`section-icon ${section.icon || 'fa-solid fa-folder'}`} />
                             </div>
 
                             <div class="section-heading">
@@ -330,9 +385,7 @@ const totalLinkCount = sections.reduce(
                                             class="external-icon"
                                             aria-hidden="true"
                                           >
-                                            <span class="material-symbols-outlined">
-                                              open_in_new
-                                            </span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square" />
                                           </span>
                                         </span>
 
@@ -368,16 +421,21 @@ const totalLinkCount = sections.reduce(
       const STORAGE_KEY = 'nav-sidebar-collapsed';
 
       const toggleBtn = document.getElementById('sidebarToggle');
-      const sidebar = document.getElementById('sidebar');
-      const toggleIcon = toggleBtn?.querySelector('.material-symbols-outlined');
+      const toggleIcon = toggleBtn?.querySelector('.toggle-icon');
+      const collapsibles = Array.from(
+        document.querySelectorAll('.sidebar-collapsible'),
+      );
 
       /* --------------------------------------------------------
-         1. 折叠按钮：展开 / 折叠分类导航
+         1. 折叠按钮功能
          -------------------------------------------------------- */
       function applyCollapsed(collapsed, { persist = true } = {}) {
-        if (!sidebar || !toggleBtn) return;
+        if (!collapsibles.length || !toggleBtn) return;
 
-        sidebar.classList.toggle('is-collapsed', collapsed);
+        collapsibles.forEach((el) => {
+          el.classList.toggle('is-collapsed', collapsed);
+        });
+
         toggleBtn.setAttribute('aria-expanded', String(!collapsed));
         toggleBtn.setAttribute(
           'aria-label',
@@ -385,93 +443,112 @@ const totalLinkCount = sections.reduce(
         );
 
         if (toggleIcon) {
-          toggleIcon.textContent = collapsed ? 'menu' : 'menu_open';
+          toggleIcon.classList.toggle('fa-angles-left', !collapsed);
+          toggleIcon.classList.toggle('fa-angles-right', collapsed);
         }
 
         if (persist) {
           try {
             localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
           } catch {
-            /* localStorage 不可用时静默忽略 */
+            /* 静默忽略 */
           }
         }
       }
 
-      if (sidebar && toggleBtn) {
-        // 与 head 中内联脚本写入的初始状态保持一致，避免刷新闪烁
+      if (collapsibles.length && toggleBtn) {
         const initialCollapsed =
           document.documentElement.dataset.sidebarCollapsed === '1';
 
         applyCollapsed(initialCollapsed, { persist: false });
 
         toggleBtn.addEventListener('click', () => {
-          const nextCollapsed = !sidebar.classList.contains('is-collapsed');
+          const nextCollapsed = !collapsibles[0].classList.contains(
+            'is-collapsed',
+          );
           applyCollapsed(nextCollapsed);
         });
       }
 
       /* --------------------------------------------------------
-         2. 滚动监听高亮当前分类（做了节流，避免与移动端惯性/回弹
-            滚动互相干扰导致的卡顿）
+         2. 滚动监听高亮当前分类
          -------------------------------------------------------- */
       const sidebarLinks = Array.from(
         document.querySelectorAll('.sidebar-link'),
       );
 
-      const sectionElements = sidebarLinks
-        .map((link) => {
-          const sectionId = link.getAttribute('data-section-id');
-          if (!sectionId) return null;
-
-          const section = document.getElementById(sectionId);
-          if (!section) return null;
-
-          return { link, section };
+      const sectionEntries = Array.from(
+        document.querySelectorAll('.section-card'),
+      )
+        .map((section) => {
+          const id = section.id;
+          const links = sidebarLinks.filter(
+            (link) => link.dataset.sectionId === id,
+          );
+          if (!links.length) return null;
+          return { id, section, links };
         })
         .filter(Boolean);
 
       let rafId = null;
-      let pendingLink = null;
+      let pendingActiveId = null;
 
-      const isChipInView = (link) => {
+      const flushActiveId = () => {
+        rafId = null;
+        if (!pendingActiveId) return;
+
+        const id = pendingActiveId;
+        pendingActiveId = null;
+
+        sidebarLinks.forEach((link) => {
+          link.classList.toggle('active', link.dataset.sectionId === id);
+        });
+
+        scheduleChipReveal(id);
+      };
+
+      const setActiveId = (id) => {
+        pendingActiveId = id;
+        if (rafId !== null) return;
+        rafId = requestAnimationFrame(flushActiveId);
+      };
+
+      let chipRevealTimer = null;
+
+      const scheduleChipReveal = (id) => {
+        if (window.innerWidth > 860) return;
+
+        window.clearTimeout(chipRevealTimer);
+        chipRevealTimer = window.setTimeout(() => revealChip(id), 150);
+      };
+
+      const revealChip = (id) => {
+        const link = sidebarLinks.find(
+          (item) =>
+            item.dataset.sectionId === id &&
+            item.closest('.app-bar-categories'),
+        );
+        if (!link) return;
+
         const nav = link.parentElement;
-        if (!nav) return true;
+        if (!nav) return;
 
         const navRect = nav.getBoundingClientRect();
         const linkRect = link.getBoundingClientRect();
 
-        return linkRect.left >= navRect.left && linkRect.right <= navRect.right;
-      };
+        const inView =
+          linkRect.left >= navRect.left && linkRect.right <= navRect.right;
 
-      const flushActiveLink = () => {
-        rafId = null;
-        if (!pendingLink) return;
-
-        const link = pendingLink;
-        pendingLink = null;
-
-        sidebarLinks.forEach((item) => {
-          item.classList.toggle('active', item === link);
-        });
-
-        // 只在横向分类条上滚动，且仅在目标不在可视区域时才滚动，
-        // 避免频繁触发的滚动动画与页面本身的惯性/回弹滚动打架。
-        if (window.innerWidth <= 860 && !isChipInView(link)) {
+        if (!inView) {
           link.scrollIntoView({
-            behavior: 'auto',
+            behavior: 'smooth',
             block: 'nearest',
             inline: 'nearest',
           });
         }
       };
 
-      const setActiveLink = (activeLink) => {
-        pendingLink = activeLink;
-        if (rafId !== null) return;
-        rafId = requestAnimationFrame(flushActiveLink);
-      };
-
-      if (sectionElements.length > 0) {
+      if (sectionEntries.length > 0) {
         const observer = new IntersectionObserver(
           (entries) => {
             const visibleEntries = entries
@@ -485,12 +562,12 @@ const totalLinkCount = sections.reduce(
             const currentEntry = visibleEntries[0];
             if (!currentEntry) return;
 
-            const currentItem = sectionElements.find(
+            const currentItem = sectionEntries.find(
               (item) => item.section === currentEntry.target,
             );
 
             if (currentItem) {
-              setActiveLink(currentItem.link);
+              setActiveId(currentItem.id);
             }
           },
           {
@@ -499,15 +576,16 @@ const totalLinkCount = sections.reduce(
           },
         );
 
-        sectionElements.forEach((item) => {
+        sectionEntries.forEach((item) => {
           observer.observe(item.section);
         });
       }
 
       sidebarLinks.forEach((link) => {
         link.addEventListener('click', () => {
+          const id = link.dataset.sectionId;
           sidebarLinks.forEach((item) => {
-            item.classList.toggle('active', item === link);
+            item.classList.toggle('active', item.dataset.sectionId === id);
           });
         });
       });
@@ -541,13 +619,19 @@ const totalLinkCount = sections.reduce(
 
             currentElement.appendChild(ripple);
 
-            ripple.addEventListener(
-              'animationend',
-              () => {
+            // 动画结束后移除 ripple 元素
+            const removeRipple = () => {
+              ripple.removeEventListener('animationend', removeRipple);
+              ripple.remove();
+            };
+            ripple.addEventListener('animationend', removeRipple);
+
+            // 安全兜底：如果动画事件没触发，5秒后自动移除
+            setTimeout(() => {
+              if (ripple.parentNode) {
                 ripple.remove();
-              },
-              { once: true },
-            );
+              }
+            }, 5000);
           },
           { passive: true },
         );

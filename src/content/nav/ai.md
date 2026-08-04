@@ -1,6 +1,6 @@
 ---
 title: "AI工具"
-icon: "AI"
+icon: "fa-brands fa-android"
 order: 8
 ---
 ## 生成式

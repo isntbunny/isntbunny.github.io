@@ -1,6 +1,6 @@
 ---
 title: "奇妙网站"
-icon: "?"
+icon: "fa-solid fa-snowman"
 order: 7
 ---
 ## 绘画

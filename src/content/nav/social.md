@@ -1,6 +1,6 @@
 ---
 title: "社交"
-icon: ">"
+icon: "fa-solid fa-comment"
 order: 1
 ---
 ## 邮件

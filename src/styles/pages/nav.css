@@ -107,9 +107,8 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
-  overscroll-behavior-y: contain;
-  /* iOS 上避免弹性滚动期间反复触发下拉刷新等系统手势 */
-  -webkit-overflow-scrolling: touch;
+  /* overscroll-behavior 只在 html 上设置一次即可；同时在 html 和 body 上
+     设置会在部分 iOS 版本上互相冲突，出现回弹卡顿/抽搐的观感。 */
 }
 
 button,
@@ -129,27 +128,16 @@ button:focus-visible {
 }
 
 /* ============================================================
-   Material Symbols 图标
+   Font Awesome 图标（统一替代原来的 emoji / Material Symbols）
    ============================================================ */
 
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 22px;
+.icon-btn i,
+.sidebar-icon i,
+.section-icon,
+.external-icon i,
+.empty-icon-wrapper i {
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
   -webkit-font-smoothing: antialiased;
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
 }
 
 /* ============================================================
@@ -250,7 +238,7 @@ button:focus-visible {
   opacity: 0.14;
 }
 
-.icon-btn .material-symbols-outlined {
+.icon-btn i {
   transition: transform 260ms var(--md-motion-emphasized);
 }
 
@@ -334,6 +322,24 @@ button:focus-visible {
   display: flex;
   align-items: flex-start;
   gap: 1em;
+}
+
+/* ============================================================
+   移动端并入 app-bar 的横向分类条
+   桌面端默认隐藏，只在 <=860px 时显示（见下方媒体查询）
+   ============================================================ */
+
+.app-bar-categories {
+  display: none;
+}
+
+.app-bar-categories.is-collapsed {
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 /* ============================================================
@@ -638,6 +644,7 @@ button:focus-visible {
 }
 
 .section-icon {
+  color: var(--md-on-primary-container);
   font-size: 20px;
 }
 
@@ -701,12 +708,13 @@ button:focus-visible {
    ============================================================ */
 
 .groups {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
 .group {
+  min-width: 0;
   padding: 14px;
 
   background: var(--md-surface-container-low);
@@ -776,7 +784,7 @@ button:focus-visible {
 
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: 1fr 1fr;
   gap: 9px;
 }
 
@@ -896,8 +904,8 @@ button:focus-visible {
     transform 220ms var(--md-motion-emphasized);
 }
 
-.external-icon .material-symbols-outlined {
-  font-size: 16px;
+.external-icon i {
+  font-size: 14px;
 }
 
 .link-card:hover .external-icon {
@@ -987,8 +995,8 @@ button:focus-visible {
   animation: empty-float 3s ease-in-out infinite;
 }
 
-.empty-icon-wrapper .material-symbols-outlined {
-  font-size: 34px;
+.empty-icon-wrapper i {
+  font-size: 30px;
   color: var(--md-primary);
 }
 
@@ -1148,23 +1156,40 @@ button:focus-visible {
 
 @media (max-width: 860px) {
   :root {
-    --app-bar-height: 62px;
+    /* 移动端 app-bar 现在包含标题行 + 分类条两行，整体更高 */
+    --app-bar-height: 128px;
   }
 
   html {
-    scroll-padding-top: 118px;
+    scroll-padding-top: 148px;
   }
 
-  /* 移动端降低模糊强度，减轻弹性滚动期间的重绘负担 */
+  /* 移动端降低模糊强度，减轻弹性滚动期间的重绘负担。
+     标题行 + 分类条现在同属一个 sticky 容器（.app-bar），
+     不再像之前那样拆成两个独立的 sticky 元素互相打架，
+     这是修复移动端滚动抽搐/乱跳的关键。 */
   .app-bar {
+    top: 0;
+    margin: 0;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    height: auto;
     padding:
-      0
+      max(10px, env(safe-area-inset-top))
       max(14px, env(safe-area-inset-right))
-      0
+      8px
       max(14px, env(safe-area-inset-left));
+
+    border-radius: 0 0 22px 22px;
 
     backdrop-filter: blur(10px) saturate(140%);
     -webkit-backdrop-filter: blur(10px) saturate(140%);
+  }
+
+  .app-bar-inner {
+    gap: 12px;
   }
 
   .app-icon {
@@ -1200,47 +1225,25 @@ button:focus-visible {
     gap: 10px;
   }
 
+  /* 桌面端的竖排侧栏在移动端完全隐藏，改用并入 app-bar 的横向分类条 */
   .sidebar {
-    position: sticky;
-    top: var(--app-bar-height);
-    z-index: 60;
+    display: none;
+  }
 
-    width: 100%;
-    max-width: 100%;
-    max-height: 74px;
-    margin: 0 -10px;
-    padding: 8px 10px;
-    width: calc(100% + 20px);
-
-    overflow-x: hidden;
-    overflow-y: visible;
-
-    border-width: 0 0 1px;
-    border-radius: 0;
-
-    background: rgba(238, 243, 251, 0.92);
-   /* box-shadow: 0 4px 10px rgba(11, 87, 208, 0.08);*/
-
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  /* 横向分类条：现在是 app-bar 内部的第二行，不再单独 sticky，
+     不再有自己的模糊背景/边框，跟随 app-bar 一起滚动定位，
+     从根源上去掉了“两个 sticky 元素打架”的问题。 */
+  .app-bar-categories {
+    display: block;
+    max-height: 60px;
+    margin-top: 8px;
+    overflow: hidden;
 
     transition:
       max-height 280ms var(--md-motion-emphasized),
       opacity 220ms var(--md-motion-standard),
-      padding 280ms var(--md-motion-emphasized),
-      border-color 220ms var(--md-motion-standard);
-  }
-
-  /* 移动端折叠：整条分类栏收起，不影响横向宽度逻辑 */
-  .sidebar.is-collapsed {
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    opacity: 0;
-    border-width: 0;
-    box-shadow: none;
-    overflow: hidden;
-    pointer-events: none;
+      margin-top 280ms var(--md-motion-emphasized),
+      padding-top 280ms var(--md-motion-emphasized);
   }
 
   .sidebar-nav {
@@ -1255,8 +1258,9 @@ button:focus-visible {
     scroll-snap-type: x proximity;
     scrollbar-width: none;
 
+    /* 分类条只允许横向滑动手势，避免和页面竖直滚动互相抢占，
+       这也是移动端出现“乱滑动”的常见原因之一。 */
     touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
   }
 
@@ -1312,7 +1316,7 @@ button:focus-visible {
   }
 
   .section-card {
-    scroll-margin-top: 122px;
+    scroll-margin-top: 148px;
 
     padding: 16px;
 
@@ -1344,13 +1348,17 @@ button:focus-visible {
     font-size: 10px;
   }
 
+  .groups {
+    grid-template-columns: 1fr;
+  }
+
   .group {
     padding: 11px;
     border-radius: 15px;
   }
 
   .links-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 7px;
   }
 
@@ -1567,9 +1575,8 @@ button:focus-visible {
   }
 
   @media (max-width: 860px) {
-    .sidebar {
+    .app-bar {
       background: rgba(20, 24, 31, 0.93);
-      border-bottom-color: rgba(67, 71, 78, 0.78);
     }
 
     .sidebar-link {
