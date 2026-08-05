@@ -13,15 +13,16 @@ import Window from "@/components/Window.astro";
 		
 	</div>
     <div class="left-col">
-    <Window title="Countdown">
+    <div>
       <div class="distance-label">
           距离<select id="yearSelect" class="year-select"></select>高考还有
       </div>
         <span class="days-number" id="countdownDays">--</span>天
-    </Window>
+    </div>
 
-    <Window title="Photos" class="">
-    </Window>
+    <div class="photo">
+
+  </div>
 
     <Window title="Fanlistings">
       <img src="http://fan.after-death.org/magica/codes/50x50_08.png">
@@ -39,9 +40,6 @@ import Window from "@/components/Window.astro";
         </div>
         <p>Hellllloooo, I'm Takotami. Welcome to my nook! This a place where I document my dairy and thoughts.</p>
         <div class="bow-divider"></div>
-        <p id="greeting-text">idntifying ur ip...</p>
-        <p id="extra-text" class="welcome-extra"></p>
-        <p id="ip-text" class="welcome-ip"></p>
         <p class="badge-row">
           <a href="https://postimages.org/" target="_blank">
             <img src="https://i.postimg.cc/vZksnQnq/made-with-windows.gif" alt="made-with-windows" />
@@ -99,11 +97,9 @@ import Window from "@/components/Window.astro";
 </PageLayout>
 
 <script>
-import { initVisitorInfo } from '@/utils/visitor-info';
 import { initCountdown } from '@/utils/countdown';
 	    
 document.addEventListener('astro:page-load', () => {
-	initVisitorInfo();
 	initCountdown();
 });
 
