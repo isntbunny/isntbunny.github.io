@@ -9,6 +9,7 @@ order: 4
 - [MangaDex](https://mangadex.org/) - 漫画阅读
 - [Call of the Night](https://batocomic.com/title/85562) - 在线漫画
 - [Fandom](https://www.fandom.com/) - 游戏维基
+- [快搜](https://www.kuai.so/#/) - 资源搜索
 ## 阅读
 - [ZLibrary](https://zh.z-library.sk/) - 电子书下载
 - [Library Genesis](https://libgen.is/) - 电子书下载

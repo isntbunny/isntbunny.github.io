@@ -10,6 +10,8 @@ order: 8
 - [Cleverbot](https://www.cleverbot.com/) - cleverbot
 - [Jenova](https://jenova.ai/) - 
 - [Codex](https://chatgpt.com/codex/) - chatgpt
+- [PinMe](https://pinme.eth.limo/) - 一条命令搭起你的web应用
+- [Base44](https://app.base44.com/) - ai
 ## 艺术 
 - [Suno](https://suno.com) - 
 - [Udio](https://udio.com/) -
