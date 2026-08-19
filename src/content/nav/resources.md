@@ -6,8 +6,6 @@ order: 4
 ## 资源
 - [Internet Archive](https://archive.org/) - 互联网档案馆
 - [YTS MX](https://en.rarbg-official.com/) - 电影下载
-- [MangaDex](https://mangadex.org/) - 漫画阅读
-- [Call of the Night](https://batocomic.com/title/85562) - 在线漫画
 - [Fandom](https://www.fandom.com/) - 游戏维基
 - [快搜](https://www.kuai.so/#/) - 资源搜索
 ## 阅读
