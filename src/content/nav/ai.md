@@ -13,8 +13,8 @@ order: 8
 - [PinMe](https://pinme.eth.limo/) - 一条命令搭起你的web应用
 - [Base44](https://app.base44.com/) - ai
 ## 艺术 
-- [Suno](https://suno.com) - 
-- [Udio](https://udio.com/) -
+- [Suno](https://suno.com) - ai作曲
+- [Udio](https://udio.com/) - ai作曲
 - [PixelSprite](https://sprite.cocona.art/) - ai像素角色gif动画
 ## 角色扮演
 - [Character Tavern](https://character-tavern.com/) - 角色扮演

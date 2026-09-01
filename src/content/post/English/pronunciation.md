@@ -1,5 +1,5 @@
 ---
-title: "英语语音与连读规则总结"
+title: "【笔记】英语兔 - 英语语音+连读规则"
 description: 表达积累
 publishDate: 2025-01-09
 ---

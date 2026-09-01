@@ -29,9 +29,9 @@ order: 3
 - [Greasy Fork](https://greasyfork.org/zh-CN) - 用户脚本
 - [bypass-paywalls-chrome-clean](https://gitflic.ru/project/magnolia1234/bypass-paywalls-chrome-clean) - 绕过付费墙
 - [BugMeNot](https://bugmenot.com/) - 共享登录
-## 图片?
+## 图片
 - [Pinterest](https://pinterest.con) - Pinterest 
-- [tenor Capoo 表情](https://tenor.com/zh-CN/view/capoo-cat-work-gif-23725276?utm_source=share-button&utm_medium=Social&utm_content=pinterest) - GIF 表情
+- [tenor表情](https://tenor.com) - GIF 表情
 - [pixiv图片查询](https://yweiwu30.github.io/PixivID/) - Pixiv 查询
 - [百度图像搜索极简版](https://lab.magiconch.com/baidu-images/) - 图片搜索
 - [GIF帧拆分](https://uutool.cn/gif2img/) - GIF 工具

@@ -5,4 +5,5 @@ export const customMessages = [
   'humm',
   '想和你成为朋友。',
   '你有什么头猪吗？',
+  '何度生まれ変わってもすきだよ',
 ]
