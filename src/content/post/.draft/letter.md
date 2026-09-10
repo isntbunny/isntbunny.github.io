@@ -12,9 +12,12 @@
 - `It struck me that...` – 我突然想到……
 - `It occurred to her that...` – 她突然意识到……
 
+经历， go through
 
 ### 我只是在发呆。
-I was just spacing out.
+I was just spacing out
+
+在英语口语中，"spacing out" 带有一种轻松、无害的调侃意味，常用于解释自己为什么没听到别人说话、为什么反应慢半拍。例如："Sorry, I was spacing out for a second."（抱歉，我刚才走神了。）
 
 ## 责任
 
@@ -27,6 +30,9 @@ I was just spacing out.
 
 ### resonate /rez3neit/
 These issues resonated with the voters. 这些问题引起了投票者的共鸣。
+
+
+I've come to realize that my affection for you ebbs and flows—and I can't quite put my finger on why.
 
 ##
 - not at all. 不客气
