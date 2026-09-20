@@ -1,249 +1,107 @@
 /*******************/
 /*这里存放的是布局样式*/
 /*******************/
+body {
+	max-width: 100vw; /* 禁止整个页面横向滚动 */
+}
+
+html {  
+	min-height: 100dvh;
+    -webkit-mask-image: 
+	    linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
+    mask-image: 
+	    linear-gradient(to bottom,transparent,#fff 50px calc(100% - 50px),transparent),linear-gradient(to right,transparent,#fff 50px calc(100% - 50px),transparent);
+	mask-composite: intersect;
+	-webkit-mask-composite: source-in, xor; 
+	background-image:
+	    linear-gradient(to right, rgb(203 213 225) 1px, transparent 1px),
+		linear-gradient(to bottom, rgb(203 213 225) 1px, transparent 1px);
+	background-size: 20px 20px;
+	background-position: center center;
+	/*background: linear-gradient(90deg,#a1bfddaa 25%, transparent 26%, transparent 49%, #A1BFDD70 50%, #A1BFDD70 75%, transparent 76%);
+	background-size: 3em 3em;
+	background-color: var(--paper-bg);*/
+}
 
 
 
-h1::after, h1::before {
-    content: ""; 
-	color: #ffffff00;                    /* 伪元素不需要文字内容 */
-    display: block;                  /* 块级元素，让图片另起一行 */
-    width: auto;                     /* 图片显示宽度 */
-    height: 0.6em;                   /* 图片显示高度 */
-    margin: 3px;                /* 与标题文字的间距 */
-    background-image: url("");
-    background-size: contain;        /* 按比例缩放以适应宽或高 */
-    background-repeat:repeat-x;
-    background-position: center;
+body {
+	border: 2px solid #a1bfddaa;
+	background-size: 3em 3em;
+	background-color: #ffffff;
+	opacity: 1;
+	margin: 3em 14em ;
+	color: var(--angel-text);
+	box-shadow: var(--hover-shadow);
 }
 
 body.site-shell {
-	min-height: 100vh;
-	font-weight: 400;
-	line-height: 1.5;
-	color: var(--text-main);
+	padding: 0;
+	margin-top: 0;
 	animation: pageFade 0.55s ease both;
-	margin-top: 3em;
 }
 
-body {
-	background:
-		linear-gradient(45deg, transparent 49%, #becfe8 49% 51%, transparent 51%),
-		linear-gradient(-45deg, transparent 49%, #becfe8 49% 51%, transparent 51%);
-	background-size: 3em 3em;
-	background-color: #eff6ff;
-	opacity: 1;
-	padding: 0px 15%;
-	color: #4d657a;
-}
-
-.small-muted {
-	font-weight: 300;
-	color: var(--text-muted);
+main{
+	padding: 0;
+	margin: 2em;
 }
 
 
-/* 卡片 */
-
-.sitecard {
-    background: rgb(255 255 255 / 0.73);
-    backdrop-filter: blur(13px);
-    -webkit-backdrop-filter: blur(13px);
-    border-radius: 25px;
-    border: 1px solid rgb(184 234 255 / 0);
-    box-shadow: rgb(77 143 214 / 0.34) 0px 8px 32px 0px;  
-    position: relative;
-    padding: 2rem;
-    margin-bottom: 2rem;
-
+main#main > *, .page-fade > * {
+	animation: contentFloat 0.55s ease both;
 }
 
-/* 标题导航栏 */
-#main-header { 
-	position: fixed;
-	inset: 0 0 auto 0;
-	z-index: 100;
-	padding: 1em;
-	background: rgba(255, 255, 255, 0.8);
-	backdrop-filter: blur(8px);
-	border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+[class$="divider"]{
+	width: 100%;
+	height: 40px; /* 根据图片高度调整 */
+	background-repeat: repeat-x;
+	background-size: auto; /* 保持比例，填满高度 */
+	margin: 0;
 }
 
-.site-nav-shell {
-    text-decoration: none;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	max-width: 920px;
-	margin: 0 auto;
+/* 分隔線 */
+.bow-divider {
+  background-image: url('https://i.postimg.cc/7LCJmwdZ/bluebow.png');
 }
 
-.site-logo {
-    font-family: "smalle";
-    text-decoration: none;
-	font-weight: 600;
-}
-
-.site-nav-links {
-	font-family: "smalle";
-	display: flex;
-	flex-wrap: wrap;
-	gap: 16px;
-}
-
-.site-nav-link {
-    text-decoration: none;
-	position: relative;
-	color: var(--text-main);
-}
-
-.site-nav-link:hover {
-	color: var(--primary-300);
-}
-.site-nav-link[aria-current="page"] {
-	color: #acbccc;
-}
-
-.site-footer {
-	text-align: center;
-	font-size: 14px;
-	color: var(--text-muted);
-	border-top: 1px solid var(--border);
+.injector-divider {
+	background-image: url('https://i.postimg.cc/c4cCf84W/01.png');
 }
 
 @keyframes pageFade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes contentFloat {
 	from {
 		opacity: 0;
+		transform: translateY(10px);
 	}
 	to {
 		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
-/* 手机端📱 */
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
 
 @media (max-width: 768px) {
-    .sitecard {
 
-    }
-
-	main#main {
-		width: calc(100%);
-		margin-top: 12px;
-	}
-	#main-header {
-		padding: 12px;
-	}
-	.site-nav-links {
-		display:none;
-	}
-
-
-    /*🍔*/
-
-    .hamburger {
-		background-color: #acbccc;
-		border: 1px solid #acbccc;
-        display:block;
-		padding: 0em 1em;
+	body {
+		padding:0em;
 		margin: 0;
-		color:#ffffff;
-		border-radius:15px;
-		font-weight: 800;
-		font-family: "smalle";
-    }
-
-	.ham-nav-menu {
-		border:1px dashed #becfe8;
-		border-top: none;
-        display: none;
-        position: fixed;
-        top: 3.14em;
-        width: 100%;
-		left:0;
-        height: auto;
-	    background: rgb(255 255 255 / 0.73);
-        padding: 0;
-        z-index: 100;
-    }
-
-	.ham-nav-menu p{
-		text-align: center;
-		font-size:medium;
-	}
-	.ham-nav-menu p ::before {
-		content: "- ";
-	}
-	
-	.ham-nav-menu p ::after {
-		content: " -";
 	}
 
-	.ham-nav-menu a{
-        text-decoration: none !important;
-	}
-	/* 基础样式 */
-	.ham-nav-menu {
-	  display: none;
-	  overflow: hidden;
-	  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-	  max-height: 0;
-	  opacity: 0;
-	}
-	
-	/* 展开状态 */
-	.ham-nav-menu.ham-open {
-	  display: block;
-	  max-height: 500px;  /* 足够大的值，根据你的菜单项数量调整 */
-	  opacity: 1;
-	}
-	
-	/* 或者用 transform 动画（更流畅） */
-	.ham-nav-menu {
-	  display: none;
-	  transform-origin: top;
-	  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-	  transform: scaleY(0);
-	  opacity: 0;
-	}
-	
-	.ham-nav-menu.ham-open {
-	  display: block;
-	  transform: scaleY(1);
-	  opacity: 1;
+	main {
+		padding: 0em;
 	}
 
-	.ham-nav-menu ul {
-  padding-left: 0;
-  text-align: center;
-}
-
-.ham-nav-menu p {
-  margin: 0;
-  text-align: center;
-}
-
-.ham-nav-menu a {
-  display: inline-block;    /* 或者用 block */
-  text-align: center;
-}
-
-
-    body{
-        margin-top: 20px;
-       padding: 0% 4%;
-    }
-}
-
-
-/* 桌面端💻 */
-@media (min-width: 769px) {
-    .hamburger {
-        display: none;
-    }
-
-	.ham-nav-menu {
-		display:none;
-	}
 }

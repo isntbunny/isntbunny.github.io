@@ -1,0 +1,641 @@
+---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import 'src/styles/pages/nav.css';
+
+const navDir = path.join(process.cwd(), 'src/content/nav');
+let sections = [];
+
+try {
+  const files = await fs.readdir(navDir);
+  const mdFiles = files.filter((file) => file.endsWith('.md'));
+
+  for (const file of mdFiles) {
+    const fullPath = path.join(navDir, file);
+    const content = await fs.readFile(fullPath, 'utf-8');
+
+    const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+
+    let sectionTitle = '未命名';
+    let sectionIcon = 'fa-solid fa-folder'; // 默认图标
+    let sectionOrder = 0;
+
+    if (frontmatterMatch) {
+      const yaml = frontmatterMatch[1];
+
+      const titleMatch =
+        yaml.match(/title:\s*"([^"]+)"/) ||
+        yaml.match(/title:\s*'([^']+)'/) ||
+        yaml.match(/title:\s*(.+)/);
+
+      // 🔧 修复：更健壮的 icon 解析
+      let iconValue = '';
+      const iconMatch =
+        yaml.match(/icon:\s*"([^"]+)"/) ||
+        yaml.match(/icon:\s*'([^']+)'/) ||
+        yaml.match(/icon:\s*(.+)/);
+
+      if (iconMatch) {
+        // 清理引号和多余空格
+        iconValue = iconMatch[1].trim().replace(/^["']|["']$/g, '');
+      }
+
+      const orderMatch = yaml.match(/order:\s*(\d+)/);
+
+      sectionTitle = titleMatch?.[1]?.trim() || '未命名';
+      // 🔧 修复：如果解析成功则使用，否则保持默认
+      sectionIcon = iconValue || 'fa-solid fa-folder';
+      sectionOrder = orderMatch ? Number.parseInt(orderMatch[1], 10) : 0;
+    }
+
+    const body = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+    const lines = body.split(/\r?\n/);
+
+    const groups = [];
+    const groupMap = new Map();
+
+    let currentGroup = '其他';
+
+    for (const line of lines) {
+      const headingMatch = line.match(/^##\s+(.+)/);
+
+      if (headingMatch) {
+        currentGroup = headingMatch[1].trim();
+        continue;
+      }
+
+      const linkMatch = line.match(
+        /^\s*-\s*\[([^\]]+)\]\(([^)]+)\)\s*(?:-\s*)?(.*)$/,
+      );
+
+      if (!linkMatch) continue;
+
+      const name = linkMatch[1].trim();
+      const url = linkMatch[2].trim();
+      const desc = linkMatch[3]?.trim() || '';
+
+      if (!groupMap.has(currentGroup)) {
+        groupMap.set(currentGroup, []);
+      }
+
+      groupMap.get(currentGroup).push({
+        name,
+        url,
+        desc,
+      });
+    }
+
+    for (const [groupName, groupLinks] of groupMap.entries()) {
+      groups.push({
+        group: groupName,
+        items: groupLinks,
+      });
+    }
+
+    const normalizedId = sectionTitle
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\p{L}\p{N}-]/gu, '');
+
+    sections.push({
+      title: sectionTitle,
+      icon: sectionIcon,
+      order: sectionOrder,
+      id: normalizedId || `section-${sections.length + 1}`,
+      groups,
+    });
+  }
+
+  sections.sort((a, b) => a.order - b.order);
+} catch (error) {
+  console.error('读取导航文件失败:', error);
+}
+
+const totalLinkCount = sections.reduce(
+  (sectionTotal, section) =>
+    sectionTotal +
+    section.groups.reduce(
+      (groupTotal, group) => groupTotal + group.items.length,
+      0,
+    ),
+  0,
+);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
+    <meta name="theme-color" content="#eef3fb" />
+
+    <meta name="description" content="网址导航" />
+
+    <title>Tami的工具箱</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google 可读字体：Roboto（西文）+ Noto Sans SC（中文） -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome 图标库 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- 在渲染前尽早读取折叠状态 -->
+    <script is:inline>
+      (function () {
+        try {
+          var collapsed = localStorage.getItem('nav-sidebar-collapsed') === '1';
+          document.documentElement.dataset.sidebarCollapsed = collapsed
+            ? '1'
+            : '0';
+        } catch (e) {
+          document.documentElement.dataset.sidebarCollapsed = '0';
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div class="nav-app">
+      <header class="app-bar" id="appBar">
+        <div class="app-bar-inner">
+          <div class="app-bar-left">
+            <button
+              id="sidebarToggle"
+              class="icon-btn"
+              type="button"
+              aria-expanded="true"
+              aria-controls="sidebar mobileSidebar"
+              aria-label="折叠或展开分类导航"
+              hidden={sections.length === 0}
+            >
+              <i class="fa-solid fa-angles-left toggle-icon" aria-hidden="true"></i>
+            </button>
+
+            <div class="brand">
+              <div class="brand-text">
+                <h1 class="app-title">Tami的工具箱</h1>
+                <p class="app-subtitle">ciallo ~ (◠ v・)—☆</p>
+              </div>
+            </div>
+          </div>
+
+          <span class="total-chip">{totalLinkCount} 个链接</span>
+        </div>
+
+        {
+          sections.length > 0 && (
+            <nav
+              class="app-bar-categories sidebar-collapsible"
+              id="mobileSidebar"
+              aria-label="分类导航"
+            >
+              <div class="sidebar-nav">
+                {sections.map((section, index) => (
+                  <a
+                    href={`#${section.id}`}
+                    class:list={[
+                      'sidebar-link',
+                      {
+                        active: index === 0,
+                      },
+                    ]}
+                    data-section-id={section.id}
+                  >
+                    <span class="sidebar-state-layer" aria-hidden="true" />
+
+                    <span class="sidebar-icon" aria-hidden="true">
+                      {/* 🔧 修复：确保图标类名正确 */}
+                      <i class={section.icon || 'fa-solid fa-folder'} />
+                    </span>
+
+                    <span class="sidebar-label">{section.title}</span>
+
+                    <span class="sidebar-badge">
+                      {section.groups.reduce(
+                        (total, group) => total + group.items.length,
+                        0,
+                      )}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          )
+        }
+      </header>
+
+      <div class="app-body">
+        {
+          sections.length > 0 && (
+            <aside
+              class="sidebar sidebar-collapsible"
+              id="sidebar"
+              aria-label="页面导航"
+            >
+              <nav class="sidebar-nav">
+                {sections.map((section, index) => (
+                  <a
+                    href={`#${section.id}`}
+                    class:list={[
+                      'sidebar-link',
+                      {
+                        active: index === 0,
+                      },
+                    ]}
+                    data-section-id={section.id}
+                  >
+                    <span class="sidebar-state-layer" aria-hidden="true" />
+
+                    <span class="sidebar-icon" aria-hidden="true">
+                      {/* 🔧 修复：确保图标类名正确 */}
+                      <i class={section.icon || 'fa-solid fa-folder'} />
+                    </span>
+
+                    <span class="sidebar-label">{section.title}</span>
+
+                    <span class="sidebar-badge">
+                      {section.groups.reduce(
+                        (total, group) => total + group.items.length,
+                        0,
+                      )}
+                    </span>
+                  </a>
+                ))}
+              </nav>
+            </aside>
+          )
+        }
+
+        <main class="main-content">
+          <div class="container">
+            {
+              sections.length === 0 ? (
+                <div class="empty-state">
+                  <div class="empty-icon-wrapper" aria-hidden="true">
+                    <i class="fa-solid fa-folder-open" />
+                  </div>
+
+                  <h2>这里暂时空空的</h2>
+
+                  <p>添加 Markdown 文件后，导航内容就会出现在这里。</p>
+
+                  <code>src/content/nav/</code>
+                </div>
+              ) : (
+                <div class="sections-grid">
+                  {sections.map((section, sectionIndex) => {
+                    const totalLinks = section.groups.reduce(
+                      (total, group) => total + group.items.length,
+                      0,
+                    );
+
+                    return (
+                      <section
+                        class="section-card"
+                        id={section.id}
+                        style={`--section-index: ${sectionIndex}`}
+                      >
+                        <div class="section-header">
+                          <div class="section-header-left">
+                            <div
+                              class="section-icon-wrapper"
+                              aria-hidden="true"
+                            >
+                              {/* 🔧 修复：确保图标类名正确 */}
+                              <i class={`section-icon ${section.icon || 'fa-solid fa-folder'}`} />
+                            </div>
+
+                            <div class="section-heading">
+                              <h2>{section.title}</h2>
+
+                              <span class="section-description">
+                                {section.groups.length} 个分组
+                              </span>
+                            </div>
+                          </div>
+
+                          <span class="chip">{totalLinks}</span>
+                        </div>
+
+                        <div class="groups">
+                          {section.groups.map((group, groupIndex) => (
+                            <section
+                              class="group"
+                              style={`--group-index: ${groupIndex}`}
+                            >
+                              <header class="group-header">
+                                <h3 class="group-name">{group.group}</h3>
+
+                                <span class="group-count">
+                                  {group.items.length}
+                                </span>
+                              </header>
+
+                              <div class="links-grid">
+                                {group.items.map((link, linkIndex) => {
+                                  let hostname = '';
+
+                                  try {
+                                    hostname = new URL(
+                                      link.url,
+                                    ).hostname.replace(/^www\./, '');
+                                  } catch {
+                                    hostname = link.url;
+                                  }
+
+                                  return (
+                                    <a
+                                      href={link.url}
+                                      class="link-card"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      style={`--link-index: ${linkIndex}`}
+                                    >
+                                      <span
+                                        class="link-state-layer"
+                                        aria-hidden="true"
+                                      />
+
+                                      <span class="link-content">
+                                        <span class="link-top-row">
+                                          <span class="link-name">
+                                            {link.name}
+                                          </span>
+
+                                          <span
+                                            class="external-icon"
+                                            aria-hidden="true"
+                                          >
+                                            <i class="fa-solid fa-arrow-up-right-from-square" />
+                                          </span>
+                                        </span>
+
+                                        <span class="link-url">
+                                          {hostname}
+                                        </span>
+
+                                        {link.desc && (
+                                          <span class="link-desc">
+                                            {link.desc}
+                                          </span>
+                                        )}
+                                      </span>
+                                    </a>
+                                  );
+                                })}
+                              </div>
+                            </section>
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  })}
+                </div>
+              )
+            }
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = 'nav-sidebar-collapsed';
+
+      const toggleBtn = document.getElementById('sidebarToggle');
+      const toggleIcon = toggleBtn?.querySelector('.toggle-icon');
+      const collapsibles = Array.from(
+        document.querySelectorAll('.sidebar-collapsible'),
+      );
+
+      /* --------------------------------------------------------
+         1. 折叠按钮功能
+         -------------------------------------------------------- */
+      function applyCollapsed(collapsed, { persist = true } = {}) {
+        if (!collapsibles.length || !toggleBtn) return;
+
+        collapsibles.forEach((el) => {
+          el.classList.toggle('is-collapsed', collapsed);
+        });
+
+        toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+        toggleBtn.setAttribute(
+          'aria-label',
+          collapsed ? '展开分类导航' : '折叠分类导航',
+        );
+
+        if (toggleIcon) {
+          toggleIcon.classList.toggle('fa-angles-left', !collapsed);
+          toggleIcon.classList.toggle('fa-angles-right', collapsed);
+        }
+
+        if (persist) {
+          try {
+            localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
+          } catch {
+            /* 静默忽略 */
+          }
+        }
+      }
+
+      if (collapsibles.length && toggleBtn) {
+        const initialCollapsed =
+          document.documentElement.dataset.sidebarCollapsed === '1';
+
+        applyCollapsed(initialCollapsed, { persist: false });
+
+        toggleBtn.addEventListener('click', () => {
+          const nextCollapsed = !collapsibles[0].classList.contains(
+            'is-collapsed',
+          );
+          applyCollapsed(nextCollapsed);
+        });
+      }
+
+      /* --------------------------------------------------------
+         2. 滚动监听高亮当前分类
+         -------------------------------------------------------- */
+      const sidebarLinks = Array.from(
+        document.querySelectorAll('.sidebar-link'),
+      );
+
+      const sectionEntries = Array.from(
+        document.querySelectorAll('.section-card'),
+      )
+        .map((section) => {
+          const id = section.id;
+          const links = sidebarLinks.filter(
+            (link) => link.dataset.sectionId === id,
+          );
+          if (!links.length) return null;
+          return { id, section, links };
+        })
+        .filter(Boolean);
+
+      let rafId = null;
+      let pendingActiveId = null;
+
+      const flushActiveId = () => {
+        rafId = null;
+        if (!pendingActiveId) return;
+
+        const id = pendingActiveId;
+        pendingActiveId = null;
+
+        sidebarLinks.forEach((link) => {
+          link.classList.toggle('active', link.dataset.sectionId === id);
+        });
+
+        scheduleChipReveal(id);
+      };
+
+      const setActiveId = (id) => {
+        pendingActiveId = id;
+        if (rafId !== null) return;
+        rafId = requestAnimationFrame(flushActiveId);
+      };
+
+      let chipRevealTimer = null;
+
+      const scheduleChipReveal = (id) => {
+        if (window.innerWidth > 860) return;
+
+        window.clearTimeout(chipRevealTimer);
+        chipRevealTimer = window.setTimeout(() => revealChip(id), 150);
+      };
+
+      const revealChip = (id) => {
+        const link = sidebarLinks.find(
+          (item) =>
+            item.dataset.sectionId === id &&
+            item.closest('.app-bar-categories'),
+        );
+        if (!link) return;
+
+        const nav = link.parentElement;
+        if (!nav) return;
+
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+
+        const inView =
+          linkRect.left >= navRect.left && linkRect.right <= navRect.right;
+
+        if (!inView) {
+          link.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'nearest',
+          });
+        }
+      };
+
+      if (sectionEntries.length > 0) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleEntries = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort(
+                (first, second) =>
+                  Math.abs(first.boundingClientRect.top) -
+                  Math.abs(second.boundingClientRect.top),
+              );
+
+            const currentEntry = visibleEntries[0];
+            if (!currentEntry) return;
+
+            const currentItem = sectionEntries.find(
+              (item) => item.section === currentEntry.target,
+            );
+
+            if (currentItem) {
+              setActiveId(currentItem.id);
+            }
+          },
+          {
+            rootMargin: '-15% 0px -65% 0px',
+            threshold: [0, 0.1, 0.3],
+          },
+        );
+
+        sectionEntries.forEach((item) => {
+          observer.observe(item.section);
+        });
+      }
+
+      sidebarLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          const id = link.dataset.sectionId;
+          sidebarLinks.forEach((item) => {
+            item.classList.toggle('active', item.dataset.sectionId === id);
+          });
+        });
+      });
+
+      /* --------------------------------------------------------
+         3. Material Ripple 点击水波纹
+         -------------------------------------------------------- */
+      const rippleElements = document.querySelectorAll(
+        '.link-card, .sidebar-link, .icon-btn',
+      );
+
+      rippleElements.forEach((element) => {
+        element.addEventListener(
+          'pointerdown',
+          (event) => {
+            const currentElement = event.currentTarget;
+            if (!(currentElement instanceof HTMLElement)) return;
+
+            const rect = currentElement.getBoundingClientRect();
+            const ripple = document.createElement('span');
+
+            const size = Math.max(rect.width, rect.height) * 1.6;
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.className = 'material-ripple';
+            ripple.style.width = `${size}px`;
+            ripple.style.height = `${size}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            currentElement.appendChild(ripple);
+
+            // 动画结束后移除 ripple 元素
+            const removeRipple = () => {
+              ripple.removeEventListener('animationend', removeRipple);
+              ripple.remove();
+            };
+            ripple.addEventListener('animationend', removeRipple);
+
+            // 安全兜底：如果动画事件没触发，5秒后自动移除
+            setTimeout(() => {
+              if (ripple.parentNode) {
+                ripple.remove();
+              }
+            }, 5000);
+          },
+          { passive: true },
+        );
+      });
+    </script>
+  </body>
+</html>

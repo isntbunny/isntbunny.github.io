@@ -1,35 +1,122 @@
+
+.gallery-album{
+	display: grid; 
+	grid-template-columns: 2fr 1fr;
+	grid-column-gap: 1em ;
+}
+a{
+	text-decoration-color: white;
+}
+.gallery-album-card{
+	
+	background-color: var(--angel-blue-pale);
+}
+.gallery-album img{
+	height: 10em;
+}
+
+.gallery-albumdesc{
+	position:relative;
+}
+
+
 .gallery-grid {
-	display: grid;
-	gap: 24px;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	display: flex;
+	gap: 2em;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding: 0em;
 }
-.sections-grid {
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+
+.gallery-tile {
+	text-align:center;
+	background-color: white;
+	border-radius: 12px;
+	flex-shrink: 0;
+	width:10em;  /* 固定宽度，或者用 min-width */
+	scroll-snap-align: start;
 }
+
+
+.gallery-year-section {
+	background: var(--card-bg);
+	padding: 2em;
+	border-radius: 10px;
+}
+
+.gallery-back{
+	background-color: white;
+	width: 5em;
+	padding:4px;
+	text-align: center;
+	border-radius: 10px;
+	display:block;
+}
+
+.gallery-year-title {
+	background-color: var(--angel-gray);
+	color: var(--white);
+	font-size: 1.75rem;
+	padding:1em;
+	border-bottom: 2px solid var(--angel-blue-light);
+}
+
+.gallery-month-group {
+	display: flex;
+	gap: 2em;
+	margin-bottom: 2em;
+	padding:0em;
+}
+
+.gallery-month-title {
+	flex-shrink: 0;
+	width: 100px;
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--angel-text);
+	padding: 1em;
+	background-color:gainsboro;
+}
+
+.gallery-month-group .gallery-grid {
+	flex: 1;
+}
+
 .gallery-image {
 	width: 100%;
-	aspect-ratio: 16/9;
+	aspect-ratio: 1/1;
 	object-fit: cover;
-	border-radius: 12px;
+	border-radius: 12px 12px 0px 0px;
 	display: block;
 	opacity: 0;
 	animation: imgFade 0.4s ease forwards;
 }
+
 @keyframes imgFade {
 	to {
 		opacity: 1;
 	}
 }
+
 .gallery-tile {
 	cursor: pointer;
 	position: relative;
 }
+
+.gallery-image-wrapper {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;  /* 正方形比例放在包裹层 */
+	border-radius: 12px;
+	overflow: hidden;      /* 让圆角裁剪图片边缘 */
+}
+
 .gallery-skeleton {
 	position: absolute;
-	inset: 20px;
+	inset: 0;
 	border-radius: 12px;
-	background: linear-gradient(90deg, #d4f0f5, #e8f6fa, #d4f0f5);
-	background-size: 200% 100%;
+	background: linear-gradient(90deg, var(--angel-blue-light), var(--angel-blue-pale), var(--angel-blue-light));
+	background-size: 200% 200%;
 	animation: shimmer 1.2s infinite;
 }
 @keyframes shimmer {
@@ -40,6 +127,7 @@
 		background-position: -200% 0;
 	}
 }
+
 .gallery-lightbox {
 	position: fixed;
 	inset: 0;
@@ -51,6 +139,11 @@
 	gap: 10px;
 	padding: 24px;
 }
+
+.gallery-lightbox[hidden] {
+	display: none !important;
+  }
+
 .gallery-lightbox img {
 	max-width: min(920px, 100%);
 	max-height: 76vh;
@@ -59,13 +152,13 @@
 	border-radius: 12px;
 }
 .gallery-lightbox p {
-	color: #fff;
+	color: var(--white);
 	text-align: center;
 }
 .gallery-arrow {
 	border: 1px solid rgba(255, 255, 255, 0.4);
 	background: rgba(255, 255, 255, 0.1);
-	color: #fff;
+	color: var(--white);
 	border-radius: 20px;
 	padding: 10px;
 }

@@ -1,107 +1,172 @@
-
-.mushroom {
-	position: fixed;
-	margin: 1rem;
-    bottom: 1px;      
-	left: 0px;        /* 距离左边20px */
-	display: flex;
-    gap: 10px;         /* 图片之间的间距 */
-    z-index: 99;      /* 确保在最上层 */
+html {
+  background-image: 
+    url("https://i.postimg.cc/QMFML4Qm/pixel-beminewindow.png")!important;
+  background-repeat:repeat;
+  background-size: 90px 50px;
+  background-position: 
+    120px 0px;
+  background-attachment: fixed;
 }
 
-.mushroom img {
-	width: 65px;       /* 设置宽度 */
-	height: auto;      /* 高度自动 */
+
+/* 主网格双栏 */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "left middle right";
+  gap: 2em;
+  align-items: start;
 }
 
-#statuscafe {
-	padding: 0.5em;
-	border-radius: 15px;
+.left-col{
+  grid-area: left;
 }
 
-#statuscafe-username {
-	
+.middle-col{
+  grid-area: middle;
 }
 
-#statuscafe-content {
+.right-col{
+  grid-area: right;
 }
 
-.welcome-card {
-    background-color: white;
-    padding-top: 6em;
-	padding-bottom: 2em;
-	padding-inline: 4em;
-    margin: 0;
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    left: 0;
-    right: 0;
-	z-index:10;
-	margin-bottom: 3em;
-	    box-shadow:  20px 20px 42px rgb(200, 220, 244),
-		                 -20px -20px 42px rgb(255, 255, 255);
+
+/* 貼紙 */
+
+.sticker-snowfufu{
+  display: none;
+  position:absolute;
+  top: 0em;
+  left:3em;
+  z-index: 999;
+}
+      
+.sticker-snowfufu img{      
+  transform: rotate(-20deg);           
+  height:7em;         
+}
+
+@media (max-width: 860px) {
+    .sticker-snowfufu{
+        display: block;
+        position: absolute;
+        top:-1.5em;
+        left:auto;
+        right: 0em;
+  }
+  .sticker-snowfufu img {
+    z-index: 999 !important;
+    height: 4em;
+    transform: rotate(0deg);
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:  "middle""left" "right";
+    gap:0em;
+  }
+
+  .days-number {
+    font-size: 34px;
+  }
+}
+
+/* welcome */
+
+.welcome-extra {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--angel-blue);
+}
+
+.welcome-ip {
+  font-size: 0.75rem;
+  color: var(--text-muted, #999);
+  border-top: 1px dashed var(--border, #ddd);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+#ip-text::before {
+  content: "";
+  display: none;
+}
+
+@media (max-width: 768px) {
+#ip-text::before {
+    content: "检测到您正在用手机访问，因为本站暂时没有很好地适配手机端，可能呈现不出最好的效果或遇到显示错乱的情况：（ ";
+    display: block;
+  }
+}
+
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge-row img {
+  height: 32px;
+  width: auto;
+  border-radius: 4px;
+}
+
+
+/* ===== Countdown ===== */
+.distance-label {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.year-select {
+  background: var(--white);
+  border: 1px solid var(--angel-blue-light);
+  border-radius: 30px;
+  padding: 2px 12px;
+  font-size: 14px;
+  color: var(--angel-text);
+  margin: 0 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.year-select:focus {
+  border-color: var(--angel-blue);
+  box-shadow: 0 0 0 3px var(--angel-shadow);
+}
+
+.days-number {
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--angel-text);
+  letter-spacing: 4px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+
+/* guest */
+
+.guest .window-content{
+  padding:0 !important;
+  margin:0;
+}
+
+.guest iframe{
+  padding: 1em;
+  background-color: white;
+}
+
+.github-commits .window-content{
+  max-height: 20em;
+  overflow: scroll;
 
 }
 
-.welcome-card h1{
-	margin-top: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    animation: neon-pulse 1.5s infinite;
-	background: linear-gradient(to right, #a0c6ff 0%, #dddddd 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
 
-@keyframes neon-pulse {
-    0%, 100% { 
-        opacity: 1;
-        filter: brightness(1.1);
-    }
-    50% { 
-        opacity: 7;
-        filter: brightness(0.9);
-    }
-}
-/* 竖条纹背景层 */
-.welcome-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5em;
-    background: repeating-linear-gradient(
-        90deg,
-        #c2dfff,
-        #c2dfff 20px,
-        white 20px,
-        white 40px
-    );
-    z-index: 0;
-}
-
-/* 心形图片层 - 增加高度让图片完整显示 */
-.welcome-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6em;  /* 从 3em 改为 6em，留出空间 */
-    background: url('https://i.postimg.cc/7LCJmwdZ/bluebow.png') repeat-x top;
-    background-size: 12em;
-    background-position: 0 4.3em;
-    background-repeat: repeat-x;
-    z-index: 1;
-    pointer-events: none;
-	opacity:0.7;
-}
-
-/* 内容区域 */
-.welcome-card > * {
-    position: relative;
-    z-index: 2;
+.status-window .window-content{
+  padding: 0!important;
+margin: 0;
 }

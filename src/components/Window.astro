@@ -1,0 +1,89 @@
+---
+// src/components/Window.astro
+export interface Props {
+  title?: string;
+  class?: string;
+}
+
+const { title = "窗口", class: className = "" } = Astro.props;
+---
+
+<div class={`window ${className}`}>
+  <div class="window-titlebar">
+    <div class="window-controls">
+      <span class="dot close"></span>
+      <span class="dot minimize"></span>
+      <span class="dot maximize"></span>
+    </div>
+    <span class="window-title">{title}</span>
+  </div>
+  <div class="window-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .window {
+    padding: 0;
+    border-radius: 3px;
+    background: #f2f6fa;
+    border: 1px solid #c8d4e0;
+    box-shadow: 0 2px 12px rgba(160, 180, 200, 0.15);
+    margin: 0 0 1.5em 0;
+    position: relative;
+  }
+
+  .window-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #e4ebf2;
+    border-bottom: 1px solid #c8d4e0;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .window-controls {
+    display: flex;
+    gap: 6px;
+    margin-right: 10px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .dot.close {
+    background: #e8b4b4;
+    border-color: #d49a9a;
+  }
+  .dot.minimize {
+    background: #d4c8a0;
+    border-color: #c4b88a;
+  }
+  .dot.maximize {
+    background: #a8c8b0;
+    border-color: #8ab49a;
+  }
+
+  .window-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5a6a;
+    letter-spacing: 0.3px;
+  }
+
+  .window-content {
+    padding: 1em 1.2em;
+    background: #f6f9fc;
+    border-radius: 0 0 3px 3px;
+  }
+
+  /* 允许覆盖样式 */
+  .window-content :global(.no-padding) {
+    padding: 0;
+  }
+</style>

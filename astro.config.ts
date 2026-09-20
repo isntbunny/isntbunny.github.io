@@ -17,7 +17,9 @@ import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes
 import { remarkAdmonitions } from './src/plugins/remark-admonitions' /* Add admonitions */
 import { remarkGithubCard } from './src/plugins/remark-github-card'
 import { remarkReadingTime } from './src/plugins/remark-reading-time'
-import { expressiveCodeOptions, siteConfig } from './src/site.config'
+import { expressiveCodeOptions, siteConfig } from './src/data/site.config'
+import { remarkBgColor } from './src/plugins/remark-bgcolor' // 路径根据实际调整
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,7 +33,7 @@ export default defineConfig({
     webmanifest({
       // See: https://github.com/alextim/astro-lib/blob/main/packages/astro-webmanifest/README.md
       name: siteConfig.title,
-      short_name: 'Astro_Cactus', // optional
+      short_name: 'Astro_BunnyOverflow', // optional
       description: siteConfig.description,
       lang: siteConfig.lang,
       icon: 'public/icon.svg', // the source for generating favicon & icons
@@ -77,7 +79,7 @@ export default defineConfig({
       ],
       rehypeUnwrapImages,
     ],
-    remarkPlugins: [remarkReadingTime, remarkDirective, remarkGithubCard, remarkAdmonitions],
+    remarkPlugins: [remarkReadingTime, remarkDirective, remarkGithubCard, remarkAdmonitions, remarkBgColor],
     remarkRehype: {
       footnoteLabelProperties: {
         className: [''],
