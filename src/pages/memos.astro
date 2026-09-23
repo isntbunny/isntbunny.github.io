@@ -1,0 +1,221 @@
+---
+// src/pages/blog.astro
+import { customMessages } from '@/data/custom-messages';
+
+// ---- 服务端预处理：过滤 + 排序 ----
+function parseDate(s) {
+    if (!s || typeof s !== 'string') return null;
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
+    if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return null;
+}
+
+function formatDate(d) {
+    return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+}
+
+const customItems = customMessages
+    .map(m => {
+        const d = parseDate(m.date);
+        if (!d) return null;
+        return {
+            text: m.text,
+            displayDate: formatDate(d),
+            _date: d.getTime(),
+        };
+    })
+    .filter(Boolean);
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>短博客</title>
+    <style is:global>
+        :root {
+            --bg: #eef7f0;
+            --text: #2b3d31;
+            --muted: #8aa896;
+            --accent-dark: #2f7d4f;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            padding: 3rem 1rem;
+            min-height: 100vh;
+        }
+
+        .blog {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 1.6em;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--accent-dark);
+        }
+
+        .blog-header p {
+            color: var(--muted);
+            font-size: 0.85em;
+            margin-top: 0.4rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ---- 每张白卡 ---- */
+        .post-card {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 1.4rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(74, 157, 107, 0.08);
+            border-top: 3px solid #4a9d6b;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 157, 107, 0.16);
+        }
+
+        .post-date {
+            display: inline-block;
+            font-size: 0.72em;
+            font-weight: 600;
+            color: #2f7d4f;
+            background: #e3f2e8;
+            letter-spacing: 0.06em;
+            padding: 0.2em 0.75em;
+            border-radius: 3px;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-text {
+            font-size: 0.97em;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            color: #34453a;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 3rem 0;
+            font-size: 0.9em;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 500px) {
+            body { padding: 1.5rem 0.75rem; }
+            .post-card { padding: 1.1rem 1.1rem; }
+            .blog-header h1 { font-size: 1.3em; }
+        }
+    </style>
+</head>
+<body>
+    <main class="blog">
+        <header class="blog-header">
+            <h1>短博客</h1>
+            <p>一些碎语</p>
+        </header>
+
+        <div id="feed">
+            {customItems.length === 0 && (
+                <p class="empty">暂时没有内容~</p>
+            )}
+            {customItems.map(item => (
+                <div class="post-card" data-date={item._date}>
+                    <time class="post-date">{item.displayDate}</time>
+                    <p class="post-text">{item.text}</p>
+                </div>
+            ))}
+        </div>
+    </main>
+
+    <script>
+        // ---- 客户端只负责补 Atom 内容 ----
+        function parseIso(s) {
+            const iso = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})$/.exec(s.trim());
+            if (!iso) return null;
+            const d = new Date(s.trim());
+            return isNaN(d) ? null : d;
+        }
+
+        function formatDate(d) {
+            return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+        }
+
+        function createCard(text, displayDate, timestamp) {
+            const card = document.createElement('div');
+            card.className = 'post-card';
+            card.dataset.date = timestamp;
+
+            const time = document.createElement('time');
+            time.className = 'post-date';
+            time.textContent = displayDate;
+
+            const p = document.createElement('p');
+            p.className = 'post-text';
+            p.textContent = text;
+
+            card.appendChild(time);
+            card.appendChild(p);
+            return card;
+        }
+
+        async function loadAtom() {
+            const feed = document.getElementById('feed');
+            if (!feed) return;
+
+            try {
+                const res = await fetch('https://status.cafe/users/isntbunny.atom');
+                const xmlText = await res.text();
+                const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+                const entries = xml.querySelectorAll('entry');
+
+                entries.forEach(entry => {
+                    const content = entry.querySelector('content')?.textContent;
+                    const title = entry.querySelector('title')?.textContent;
+                    const message = (content || title || '').trim();
+                    const published = entry.querySelector('published')?.textContent;
+                    if (!message || !published) return;
+
+                    const d = parseIso(published);
+                    if (!d) return;
+
+                    feed.appendChild(createCard(message, formatDate(d), d.getTime()));
+                });
+
+                // 移除"暂无内容"占位（如果有）
+                const empty = feed.querySelector('.empty');
+                if (empty) empty.remove();
+
+                // 按 data-date 从新到旧重排所有卡片
+                const cards = [...feed.querySelectorAll('.post-card')];
+                cards.sort((a, b) => Number(b.dataset.date) - Number(a.dataset.date));
+                cards.forEach(c => feed.appendChild(c));
+
+            } catch (err) {
+                console.error('Atom 拉取失败:', err);
+            }
+        }
+
+        loadAtom();
+    </script>
+</body>
+</html>

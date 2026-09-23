@@ -27,11 +27,12 @@ export const siteConfig: SiteConfig & { backgroundImage: string; bangumiUsername
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: MenuLink[] = [
-  { path: '/posts/', title: 'Posts' },
-  { path: '/uta/', title: 'LyricBook' },
-  { path: '/gallery/', title: 'Gallery' },
-  { path: '/nav/', title: 'MyNav' },
-  { path: '/about/', title: 'About' },
+    { path: '/posts/', title: 'Posts' },
+    { path: '/memos/', title: 'Memos' },
+    { path: '/uta/', title: 'LyricBook' },
+    { path: '/gallery/', title: 'Gallery' },
+    { path: '/nav/', title: 'MyNav' },
+    { path: '/about/', title: 'About' },
 ]
 
 // https://expressive-code.com/reference/configuration/
