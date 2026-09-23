@@ -1,7 +1,29 @@
 ---
 // src/pages/blog.astro
-import { customMessages } from '@/data/custom-messages';
+import fs from 'node:fs';
+import path from 'node:path';
+import { parse as parseToml } from 'smol-toml';
 
+// ---- 读所有 memos/*.toml ----
+const memosDir = path.resolve('src/data/memos');
+const allMemos = [];
+
+for (const file of fs.readdirSync(memosDir).sort()) {
+    if (!file.endsWith('.toml')) continue;
+    const raw = fs.readFileSync(path.join(memosDir, file), 'utf8');
+    const data = parseToml(raw);
+    if (Array.isArray(data.memos)) allMemos.push(...data.memos);
+}
+
+const customMessages = allMemos.map(m => ({
+    text: m.text,
+    date: m.date,
+    images: m.images,
+    location: m.location,
+    mode: m.mode,
+}));
+
+// ---- 日期工具 ----
 function parseDate(s) {
     if (!s || typeof s !== 'string') return null;
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());

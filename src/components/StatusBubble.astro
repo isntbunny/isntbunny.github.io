@@ -279,8 +279,34 @@ document.addEventListener('astro:page-load', () => {
     initStatusSwitcher();
 });
 
-import { customMessages } from '@/data/custom-messages';
+import fs from 'node:fs';
+import path from 'node:path';
+import { parse as parseToml } from 'smol-toml';
 import { wordList, getLearnedWords, saveLearnedWords } from '@/data/words';
+
+// ---- 只读取 mood / thoughts / uncategorized ----
+const memosDir = path.resolve('src/data/memos');
+const WANTED = new Set(['mood', 'thoughts', 'uncategorized']);
+const customMessages = [];
+
+for (const file of fs.readdirSync(memosDir).sort()) {
+    if (!file.endsWith('.toml')) continue;
+    const name = path.basename(file, '.toml');
+    if (!WANTED.has(name)) continue;
+    const raw = fs.readFileSync(path.join(memosDir, file), 'utf8');
+    const data = parseToml(raw);
+    if (Array.isArray(data.memos)) {
+        for (const m of data.memos) {
+            customMessages.push({
+                text: m.text,
+                date: m.date,
+                images: m.images,
+                location: m.location,
+                mode: m.mode,
+            });
+        }
+    }
+}
 
 function initStatusSwitcher() {
     // ---- DOM 元素 ----
