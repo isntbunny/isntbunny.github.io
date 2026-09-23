@@ -13,9 +13,7 @@
             </div>
         </div>
         <div class="bubbling-me">
-           <!-- <a href="https://status.cafe/users/isntbunny">-->
-                <img id="bunnyImage" src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
-            
+            <img id="bunnyImage" src='https://i.postimg.cc/9MLD69pb/Gif260720.gif' border='0' alt='Gif260720' />
         </div>
     </div>
     
@@ -31,54 +29,53 @@
         <div id="statuscafe-username">thinking</div>
     </div>
     
-    <!-- 选项区域 -->
-    <!-- 输入框区域（替换原来的选项区域） -->
-<div id="wordOptions" style="display: none; position: absolute; bottom: 3.5em; left: 0; right: 0; padding: 0 10px; z-index: 100;">
-    <div id="inputContainer" style="display: flex; gap: 8px; justify-content: center; align-items: center; max-width: 100%;">
-        <input 
-            type="text" 
-            id="wordInput" 
-            placeholder="input here..." 
-            autocomplete="off"
-            style="
-                flex: 1;
-                max-width: 200px;
-                padding: 10px 16px;
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                border-radius: 20px;
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(4px);
-                color: #333;
-                font-size: 0.9em;
-                outline: none;
-                transition: all 0.25s ease;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            "
-        >
-        <button 
-            id="submitAnswerBtn" 
-            style="
-                padding: 10px 20px;
-                border: 2px solid rgba(255, 255, 255, 0.4);
-                border-radius: 20px;
-                background: rgba(255, 255, 255, 0.9);
-                backdrop-filter: blur(4px);
-                color: #333;
-                font-size: 0.9em;
-                cursor: pointer;
-                transition: all 0.25s ease;
-                font-weight: 600;
-                white-space: nowrap;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            "
-            onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.borderColor='#667eea'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)';"
-            onmouseout="this.style.transform=''; this.style.borderColor='rgba(255, 255, 255, 0.4)'; this.style.boxShadow='0 2px 10px rgba(0, 0, 0, 0.1)';"
-        >确认</button>
+    <!-- 输入框区域 -->
+    <div id="wordOptions" style="display: none; position: absolute; bottom: 3.5em; left: 0; right: 0; padding: 0 10px; z-index: 100;">
+        <div id="inputContainer" style="display: flex; gap: 8px; justify-content: center; align-items: center; max-width: 100%;">
+            <input 
+                type="text" 
+                id="wordInput" 
+                placeholder="input here..." 
+                autocomplete="off"
+                style="
+                    flex: 1;
+                    max-width: 200px;
+                    padding: 10px 16px;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    border-radius: 20px;
+                    background: rgba(255, 255, 255, 0.85);
+                    backdrop-filter: blur(4px);
+                    color: #333;
+                    font-size: 0.9em;
+                    outline: none;
+                    transition: all 0.25s ease;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                "
+            >
+            <button 
+                id="submitAnswerBtn" 
+                style="
+                    padding: 10px 20px;
+                    border: 2px solid rgba(255, 255, 255, 0.4);
+                    border-radius: 20px;
+                    background: rgba(255, 255, 255, 0.9);
+                    backdrop-filter: blur(4px);
+                    color: #333;
+                    font-size: 0.9em;
+                    cursor: pointer;
+                    transition: all 0.25s ease;
+                    font-weight: 600;
+                    white-space: nowrap;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                "
+                onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.borderColor='#667eea'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)';"
+                onmouseout="this.style.transform=''; this.style.borderColor='rgba(255, 255, 255, 0.4)'; this.style.boxShadow='0 2px 10px rgba(0, 0, 0, 0.1)';"
+            >确认</button>
+        </div>
+        <div id="nextContainer" style="display: none; text-align: center; margin-top: 4px;">
+            <button id="nextWordBtn" class="next-btn">下一个 ➜</button>
+        </div>
     </div>
-    <div id="nextContainer" style="display: none; text-align: center; margin-top: 4px;">
-        <button id="nextWordBtn" class="next-btn">下一个 ➜</button>
-    </div>
-</div>
 </section>
 
 <style>
@@ -97,7 +94,6 @@
 
 .bubbling-me img {
     width: 9em;
-    
 }
 
 .bub-pic {
@@ -154,6 +150,7 @@
 #wordFeedback {
     color: var(--text-color, #555);
 }
+
 #wordOptions {
     pointer-events: none;
 }
@@ -295,7 +292,6 @@ function initStatusSwitcher() {
     const wordFeedback = document.getElementById('wordFeedback');
     const wordMeta = document.getElementById('wordMeta');
     const wordOptions = document.getElementById('wordOptions');
-    const optionsContainer = document.getElementById('optionsContainer');
     const nextContainer = document.getElementById('nextContainer');
     const usernameEl = document.getElementById('statuscafe-username');
     const bubble = document.getElementById('statusBubble');
@@ -310,13 +306,11 @@ function initStatusSwitcher() {
     let currentIndex = -1;
     let isLoading = false;
     let isTyping = false;
-    let statusLoaded = false;
     
     // 单词学习相关
     let isWordMode = false;
     let currentWord = null;
     let isAnswered = false;
-    let isEnglishMode = true;
     let wordQueue = [];
     let learnedIds = getLearnedWords();
     let totalWords = wordList.length;
@@ -379,35 +373,13 @@ function initStatusSwitcher() {
                 const message = content || title;
                 
                 const published = entry.querySelector('published')?.textContent;
-                let timeAgo = '';
-                if (published) {
-                    const date = new Date(published);
-                    const now = new Date();
-                    const diffMs = now - date;
-                    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                    
-                    if (diffDays === 0) {
-                        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-                        if (diffHours === 0) {
-                            const diffMins = Math.floor(diffMs / (1000 * 60));
-                            timeAgo = diffMins <= 1 ? '刚刚' : `${diffMins} 分钟前`;
-                        } else {
-                            timeAgo = `${diffHours} 小时前`;
-                        }
-                    } else if (diffDays === 1) {
-                        timeAgo = '昨天';
-                    } else {
-                        timeAgo = `${diffDays} 天前`;
-                    }
-                }
                 
                 if (message && message.trim()) {
                     const cleanMsg = message.trim();
                     if (cleanMsg.length > 0) {
                         messages.push({
                             text: cleanMsg,
-                            time: timeAgo,
-                            date: published
+                            date: published || null
                         });
                     }
                 }
@@ -423,24 +395,72 @@ function initStatusSwitcher() {
     // ---- 合并所有消息 ----
     function mergeMessages(statusMessages) {
         const merged = [];
+        
         statusMessages.forEach(msg => {
             merged.push({ 
                 type: 'status', 
                 text: msg.text,
-                time: msg.time,
                 date: msg.date
             });
         });
+        
         const shuffled = [...customMessages].sort(() => Math.random() - 0.5);
         shuffled.forEach(msg => {
             merged.push({ 
                 type: 'custom', 
-                text: msg,
-                time: '',
-                date: null
+                text: msg.text,
+                date: msg.date || null
             });
         });
+        
         return merged.sort(() => Math.random() - 0.5);
+    }
+
+    // ---- 日期格式化 ----
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+
+        // 纯日期 'YYYY-MM-DD' 用本地时间构造，避免 UTC 偏移
+        let date;
+        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+        if (m) {
+            date = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+        } else {
+            date = new Date(dateStr);   // ISO 带时区的走这条
+        }
+
+        if (isNaN(date)) return dateStr;
+
+        const now = new Date();
+        const diffMs = now - date;
+        if (diffMs < 0) return dateStr;
+
+        const diffMins  = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffDays  = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffMins < 1)   return '刚刚';
+        if (diffMins < 60)  return `${diffMins} 分钟前`;
+        if (diffHours < 24) return `${diffHours} 小时前`;
+        if (diffDays === 1) return '昨天';
+        if (diffDays < 7)   return `${diffDays} 天前`;
+
+        if (diffDays < 14) return '一周前';
+        if (diffDays < 21) return '两周前';
+        if (diffDays < 30) return '三周前';
+
+        if (diffDays < 180) {
+            const halfMonths = Math.floor(diffDays / 15);
+            const whole = Math.floor(halfMonths / 2);
+            return halfMonths % 2 === 1 ? `${whole} 个半月前` : `${whole} 个月前`;
+        }
+
+        if (diffDays < 365) return '半年前';
+
+        const years = Math.floor(diffDays / 365);
+        if (years === 1) return '一年前';
+        if (years === 2) return '两年前';
+        return `${years} 年前`;
     }
 
     // ---- 自动滚动到底部 ----
@@ -495,10 +515,10 @@ function initStatusSwitcher() {
         autoScrollToBottom(statusContent);
         
         if (usernameEl) {
-            if (msg.type === 'status' && msg.time) {
-                usernameEl.textContent = `${msg.time}`;
+            if (msg.type === 'status') {
+                usernameEl.textContent = msg.date ? formatDate(msg.date) : 'thinking';
             } else if (msg.type === 'custom') {
-                usernameEl.textContent = '刚刚说道';
+                usernameEl.textContent = msg.date ? formatDate(msg.date) : '刚刚说道';
             } else {
                 usernameEl.textContent = 'thinking';
             }
@@ -704,66 +724,67 @@ function initStatusSwitcher() {
             prepareQuestion();
         }
     }
+
     // ============================================
-// 事件绑定
-// ============================================
+    // 事件绑定
+    // ============================================
 
-if (refreshBtn) {
-    refreshBtn.addEventListener('click', nextStatus);
-}
-
-if (wordModeBtn) {
-    wordModeBtn.addEventListener('click', toggleWordMode);
-}
-
-if (submitAnswerBtn) {
-    submitAnswerBtn.replaceWith(submitAnswerBtn.cloneNode(true));
-    const newSubmitBtn = document.getElementById('submitAnswerBtn');
-    if (newSubmitBtn) {
-        newSubmitBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            handleAnswer();
-        });
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', nextStatus);
     }
-}
 
-const nextBtn = document.getElementById('nextWordBtn');
-if (nextBtn) {
-    nextBtn.replaceWith(nextBtn.cloneNode(true));
-    const newNextBtn = document.getElementById('nextWordBtn');
-    if (newNextBtn) {
-        newNextBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            handleNext();
-        });
+    if (wordModeBtn) {
+        wordModeBtn.addEventListener('click', toggleWordMode);
     }
-}
 
-if (wordInput) {
-    wordInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            e.stopPropagation();
-            if (isAnswered) {
-                handleNext();
-            } else {
+    if (submitAnswerBtn) {
+        submitAnswerBtn.replaceWith(submitAnswerBtn.cloneNode(true));
+        const newSubmitBtn = document.getElementById('submitAnswerBtn');
+        if (newSubmitBtn) {
+            newSubmitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 handleAnswer();
-            }
+            });
         }
-    });
-}
+    }
 
-if (bubble) {
-    bubble.addEventListener('click', () => {
-        if (isWordMode) return;
-        const now = Date.now();
-        if (now - lastClickTime < CLICK_DEBOUNCE) return;
-        lastClickTime = now;
-        nextStatus();
-    });
-}
+    const nextBtn = document.getElementById('nextWordBtn');
+    if (nextBtn) {
+        nextBtn.replaceWith(nextBtn.cloneNode(true));
+        const newNextBtn = document.getElementById('nextWordBtn');
+        if (newNextBtn) {
+            newNextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleNext();
+            });
+        }
+    }
+
+    if (wordInput) {
+        wordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                if (isAnswered) {
+                    handleNext();
+                } else {
+                    handleAnswer();
+                }
+            }
+        });
+    }
+
+    if (bubble) {
+        bubble.addEventListener('click', () => {
+            if (isWordMode) return;
+            const now = Date.now();
+            if (now - lastClickTime < CLICK_DEBOUNCE) return;
+            lastClickTime = now;
+            nextStatus();
+        });
+    }
 
     // ---- 页面加载初始化 ----
     async function init() {
@@ -773,7 +794,6 @@ if (bubble) {
             
             const statusMessages = await fetchAllStatuses();
             allMessages = mergeMessages(statusMessages);
-            statusLoaded = true;
             
             if (allMessages.length > 0) {
                 currentIndex = 0;
