@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import PageLayout from "@/layouts/Base.astro";
 import "/src/styles/pages/gallery.css";
 
 export const getStaticPaths = (async () => {
@@ -14,58 +13,44 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { sectionData } = Astro.props;
-const allItems = sectionData.months.flatMap((group) =>
-	group.items.map((item) => ({ ...item, month: group.month })),
-);
-const groupedByYearMonth = allItems.reduce((acc, item, idx) => {
-	const year = item.date ? new Date(item.date).getFullYear() : item.month?.slice(0, 4);
-	const monthFull = item.month; // "2025-12"
-	const monthNum = monthFull?.slice(5, 7); // 提取 "12"
-	
-	if (!acc[year]) acc[year] = {};
-	if (!acc[year][monthNum]) acc[year][monthNum] = [];
-	acc[year][monthNum].push({ ...item, globalIndex: idx });
-	return acc;
-}, {});
 
-const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompare(a));
+// months: [{ month: "2025-12", items: [{ title, description, image, date }, ...] }, ...]
+const months = (sectionData.months || []).slice();
 ---
 
-<PageLayout meta={{ title: sectionData.title, description: sectionData.description ?? "Gallery section" }}>
-	<a href="/gallery/" class="gallery-back">← Back</a>
-	<h1>{sectionData.title}</h1>
-	{
-		sortedYears.map(year => (
-			<section class="gallery-year-section">
-				<h2 class="gallery-year-title">{year}</h2>
-				{Object.entries(groupedByYearMonth[year])
-					.sort((a, b) => b[0].localeCompare(a[0])) // 月份倒序
-					.map(([month, items]) => (
-						<div class="gallery-month-group">
-							<h3 class="gallery-month-title">{month}</h3>
-							<div class="gallery-grid">
-								{items.map((item) => (
-									<article
-										class="site-card gallery-tile"
-										data-index={item.globalIndex}
-										data-src={item.image}
-										data-title={item.title}
-										data-desc={item.description ?? item.month}
-									>
-										<div style="position: relative;">
-											<div class="gallery-skeleton" />
-											<img src={item.image} alt={item.title} class="gallery-image" loading="lazy" />
-										</div>
-										<p>{item.title}</p>
-										<p class="small-muted">{item.description ?? item.month}</p>
-									</article>
-								))}
-							</div>
-						</div>
-					))}
-			</section>
-		))
-	}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>{sectionData.title}</title>
+</head>
+<body class="gallery-book-page">
+	<a href="/gallery/" class="book-back">Back</a>
+
+	<header class="book-header">
+		<h1 class="book-title">{sectionData.title}</h1>
+		{sectionData.description && (
+			<p class="book-subtitle">{sectionData.description}</p>
+		)}
+	</header>
+
+	<div class="book-stage">
+		<div class="book" id="book">
+			<div class="book-page book-page-left">
+				<div class="page-inner" id="pageLeftInner"></div>
+			</div>
+			<div class="book-page book-page-right">
+				<div class="page-inner" id="pageRightInner"></div>
+			</div>
+		</div>
+	</div>
+
+	<nav class="book-controls">
+		<button class="book-nav" id="prevBtn" aria-label="Previous">←</button>
+		<div class="book-page-indicator" id="pageIndicator">— / —</div>
+		<button class="book-nav" id="nextBtn" aria-label="Next">→</button>
+	</nav>
 
 	<div class="gallery-lightbox" id="gallery-lightbox" hidden>
 		<button class="gallery-arrow" data-dir="prev" type="button">←</button>
@@ -75,131 +60,272 @@ const sortedYears = Object.keys(groupedByYearMonth).sort((a, b) => b.localeCompa
 		</div>
 		<button class="gallery-arrow" data-dir="next" type="button">→</button>
 	</div>
-</PageLayout>
 
-<script is:inline>
-	(function() {
-	  // 等待 DOM 就绪
-	  if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', init);
-	  } else {
-		init();
-	  }
-	
-	  function init() {
-		console.log('Gallery init started');
-		
-		// 获取元素
-		const box = document.getElementById('gallery-lightbox');
-		const lightboxImage = document.getElementById('gallery-lightbox-image');
-		const text = document.getElementById('gallery-lightbox-text');
-		
-		// 关键：强制确保弹窗是隐藏的
-		if (box) {
-		  box.setAttribute('hidden', 'hidden');
-		  box.style.display = ''; // 确保不是被其他样式覆盖
-		  console.log('Lightbox hidden');
-		} else {
-		  console.error('Lightbox element not found');
-		  return;
+	<script define:vars={{ months }}>
+	// ============================================================
+	// 状态
+	// ============================================================
+	let currentSpread = 0;
+	const totalSpreads = Math.max(1, Math.ceil(months.length / 2));
+
+	const book = document.getElementById('book');
+	const pageLeftInner = document.getElementById('pageLeftInner');
+	const pageRightInner = document.getElementById('pageRightInner');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
+	const indicator = document.getElementById('pageIndicator');
+
+	// ============================================================
+	// 工具
+	// ============================================================
+	const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+	function escapeHtml(s) {
+		return String(s ?? '').replace(/[&<>"']/g, c => ({
+			'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+		}[c]));
+	}
+
+	function parseMonthLabel(label) {
+		if (!label) return { year: '', monthName: '' };
+		const m = /^(\d{4})-(\d{2})$/.exec(label);
+		if (!m) return { year: '', monthName: label };
+		return {
+			year: m[1],
+			monthName: MONTH_NAMES[parseInt(m[2], 10) - 1] || m[2],
+		};
+	}
+
+	function tileTilt(idx) {
+		const tilts = [-1.2, 0.8, -0.5, 1.5, -0.9, 0.3, -1.5, 1.1, -0.3, 0.9];
+		return tilts[idx % tilts.length];
+	}
+
+	function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+	// ============================================================
+	// 渲染页面内容（返回 HTML 字符串）
+	// ============================================================
+	function renderPageHTML(month) {
+		if (!month) {
+			return `<div class="page-empty"><div>The end</div></div>`;
 		}
-		
-		// 获取所有卡片
-		const tiles = document.querySelectorAll('.gallery-tile');
-		console.log('Found tiles:', tiles.length);
-		
-		// 骨架屏处理
-		tiles.forEach(tile => {
-		  const img = tile.querySelector('img');
-		  const skeleton = tile.querySelector('.gallery-skeleton');
-		  if (img && skeleton) {
-			if (img.complete) {
-			  skeleton.setAttribute('hidden', 'hidden');
+
+		const { year, monthName } = parseMonthLabel(month.month);
+		const items = month.items || [];
+
+		let html = `
+			<div class="page-month-header">
+				<div class="page-year">${escapeHtml(year)}</div>
+				<div class="page-month">${escapeHtml(monthName)}</div>
+			</div>
+			<div class="page-grid">
+		`;
+
+		items.forEach((item, idx) => {
+			const tilt = tileTilt(idx);
+			const desc = item.description || month.month;
+			html += `
+				<article class="page-tile" style="--tilt: ${tilt}deg"
+					data-src="${escapeHtml(item.image)}"
+					data-title="${escapeHtml(item.title)}"
+					data-desc="${escapeHtml(desc)}">
+					<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />
+					<div class="page-tile-caption">${escapeHtml(item.title)}</div>
+				</article>
+			`;
+		});
+
+		html += `</div>`;
+		return html;
+	}
+
+	function renderPage(innerEl, month) {
+		innerEl.innerHTML = renderPageHTML(month);
+	}
+
+	function renderSpread() {
+		const leftIdx = currentSpread * 2;
+		const rightIdx = leftIdx + 1;
+
+		renderPage(pageLeftInner, months[leftIdx]);
+		renderPage(pageRightInner, months[rightIdx]);
+
+		if (indicator) {
+			if (!months.length) {
+				indicator.textContent = '0 / 0';
 			} else {
-			  img.addEventListener('load', () => {
-				skeleton.setAttribute('hidden', 'hidden');
-			  });
+				const startPage = leftIdx + 1;
+				const endPage = Math.min(rightIdx + 1, months.length);
+				indicator.textContent = `${startPage} – ${endPage} / ${months.length}`;
 			}
-		  }
-		});
-		
-		// 当前索引
-		let currentIndex = 0;
-		
-		// 打开弹窗函数
-		function openLightbox(index) {
-		  console.log('Opening lightbox at index:', index);
-		  const tile = tiles[index];
-		  if (!tile) return;
-		  
-		  const src = tile.getAttribute('data-src');
-		  const title = tile.getAttribute('data-title');
-		  const desc = tile.getAttribute('data-desc');
-		  
-		  if (!src) return;
-		  
-		  lightboxImage.src = src;
-		  lightboxImage.alt = title || '';
-		  text.textContent = `${title || ''} — ${desc || ''}`;
-		  box.removeAttribute('hidden');
-		  currentIndex = index;
 		}
-		
-		// 关闭弹窗函数
-		function closeLightbox() {
-		  console.log('Closing lightbox');
-		  box.setAttribute('hidden', 'hidden');
+
+		if (prevBtn) prevBtn.disabled = currentSpread <= 0;
+		if (nextBtn) nextBtn.disabled = currentSpread >= totalSpreads - 1;
+	}
+
+	// ============================================================
+	// 仿真翻页 —— 一张纸绕书脊旋转
+	// ============================================================
+	let isAnimating = false;
+	const FLIP_DURATION = 750;
+
+	async function turnPage(direction) {
+		if (isAnimating) return;
+
+		const newSpread = direction === 'next' ? currentSpread + 1 : currentSpread - 1;
+		if (newSpread < 0 || newSpread >= totalSpreads) return;
+
+		isAnimating = true;
+
+		// 创建翻动纸张
+		const sheet = document.createElement('div');
+		sheet.className = 'flip-sheet';
+		sheet.dataset.dir = direction;
+
+		const front = document.createElement('div');
+		front.className = 'flip-face flip-front';
+
+		const back = document.createElement('div');
+		back.className = 'flip-face flip-back';
+
+		if (direction === 'next') {
+			// 翻下一页：
+			//   正面 = 当前右页（months[currentSpread * 2 + 1]）
+			//   背面 = 下一跨页的左页（months[newSpread * 2]）
+			//   铰链在左边缘（书脊）
+			front.innerHTML = `<div class="page-inner">${renderPageHTML(months[currentSpread * 2 + 1])}</div>`;
+			back.innerHTML  = `<div class="page-inner">${renderPageHTML(months[newSpread * 2])}</div>`;
+
+			sheet.style.left = '50%';
+			sheet.style.right = '0';
+			sheet.style.transformOrigin = 'left center';
+		} else {
+			// 翻上一页：
+			//   正面 = 当前左页（months[currentSpread * 2]）
+			//   背面 = 上一跨页的右页（months[newSpread * 2 + 1]）
+			//   铰链在右边缘（书脊）
+			front.innerHTML = `<div class="page-inner">${renderPageHTML(months[currentSpread * 2])}</div>`;
+			back.innerHTML  = `<div class="page-inner">${renderPageHTML(months[newSpread * 2 + 1])}</div>`;
+
+			sheet.style.left = '0';
+			sheet.style.right = '50%';
+			sheet.style.transformOrigin = 'right center';
 		}
-		
-		// 绑定图片点击事件
-		tiles.forEach((tile, index) => {
-		  const img = tile.querySelector('img');
-		  if (!img) return;
-		  if (img.hasAttribute('data-bound')) return;
-		  
-		  img.setAttribute('data-bound', 'true');
-		  img.style.cursor = 'pointer';
-		  img.addEventListener('click', (e) => {
-			e.stopPropagation();
-			openLightbox(index);
-		  });
+
+		sheet.appendChild(front);
+		sheet.appendChild(back);
+		book.appendChild(sheet);
+
+		// 下一帧触发动画
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				sheet.classList.add(direction === 'next' ? 'flipping-next' : 'flipping-prev');
+			});
 		});
-		
-		// 绑定弹窗背景点击关闭
-		box.addEventListener('click', (e) => {
-		  if (e.target === box) {
+
+		await wait(FLIP_DURATION);
+
+		// 动画完成，更新实际内容并移除翻页纸
+		currentSpread = newSpread;
+		renderSpread();
+		sheet.remove();
+
+		isAnimating = false;
+	}
+
+	// ============================================================
+	// 事件
+	// ============================================================
+	prevBtn?.addEventListener('click', () => turnPage('prev'));
+	nextBtn?.addEventListener('click', () => turnPage('next'));
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowLeft') turnPage('prev');
+		if (e.key === 'ArrowRight') turnPage('next');
+	});
+
+	// 点击书的左右边缘翻页
+	book?.addEventListener('click', (e) => {
+		if (e.target.closest('.page-tile')) return;
+		const rect = book.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		if (x < rect.width * 0.12) turnPage('prev');
+		else if (x > rect.width * 0.88) turnPage('next');
+	});
+
+	// ============================================================
+	// 灯箱
+	// ============================================================
+	const box = document.getElementById('gallery-lightbox');
+	const lbImg = document.getElementById('gallery-lightbox-image');
+	const lbText = document.getElementById('gallery-lightbox-text');
+	let lbIndex = 0;
+
+	function getAllTiles() {
+		return [...document.querySelectorAll('.page-tile')];
+	}
+
+	function showTile(tile) {
+		if (!tile) return;
+		lbImg.src = tile.dataset.src || '';
+		lbImg.alt = tile.dataset.title || '';
+		lbText.textContent = `${tile.dataset.title || ''} — ${tile.dataset.desc || ''}`;
+	}
+
+	function openLightbox(tile) {
+		const tiles = getAllTiles();
+		lbIndex = tiles.indexOf(tile);
+		if (lbIndex < 0) return;
+		showTile(tile);
+		box.removeAttribute('hidden');
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeLightbox() {
+		box.setAttribute('hidden', 'hidden');
+		lbImg.src = '';
+		document.body.style.overflow = '';
+	}
+
+	document.addEventListener('click', (e) => {
+		const tile = e.target.closest('.page-tile');
+		if (!tile) return;
+		e.stopPropagation();
+		openLightbox(tile);
+	});
+
+	box?.addEventListener('click', (e) => {
+		if (e.target === box) closeLightbox();
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && box && !box.hasAttribute('hidden')) {
 			closeLightbox();
-		  }
-		});
-		
-		// 绑定左右箭头
-		const prevBtn = document.querySelector('.gallery-arrow[data-dir="prev"]');
-		const nextBtn = document.querySelector('.gallery-arrow[data-dir="next"]');
-		
-		if (prevBtn) {
-		  prevBtn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const newIndex = (currentIndex - 1 + tiles.length) % tiles.length;
-			openLightbox(newIndex);
-		  });
 		}
-		
-		if (nextBtn) {
-		  nextBtn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const newIndex = (currentIndex + 1) % tiles.length;
-			openLightbox(newIndex);
-		  });
-		}
-		
-		// ESC 键关闭
-		document.addEventListener('keydown', (e) => {
-		  if (e.key === 'Escape' && box && !box.hasAttribute('hidden')) {
-			closeLightbox();
-		  }
-		});
-		
-		console.log('Gallery init complete');
-	  }
-	})();
-	</script>
+	});
+
+	document.querySelector('.gallery-arrow[data-dir="prev"]')?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		const tiles = getAllTiles();
+		if (!tiles.length) return;
+		lbIndex = (lbIndex - 1 + tiles.length) % tiles.length;
+		showTile(tiles[lbIndex]);
+	});
+
+	document.querySelector('.gallery-arrow[data-dir="next"]')?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		const tiles = getAllTiles();
+		if (!tiles.length) return;
+		lbIndex = (lbIndex + 1) % tiles.length;
+		showTile(tiles[lbIndex]);
+	});
+
+	// ============================================================
+	// 启动
+	// ============================================================
+	renderSpread();
+</script>
+</body>
+</html>

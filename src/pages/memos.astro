@@ -2,7 +2,6 @@
 // src/pages/blog.astro
 import { customMessages } from '@/data/custom-messages';
 
-// ---- 日期工具 ----
 function parseDate(s) {
     if (!s || typeof s !== 'string') return null;
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s.trim());
@@ -10,9 +9,11 @@ function parseDate(s) {
     return null;
 }
 
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
 function formatShort(d) {
-    const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-    return `${months[d.getMonth()]}${d.getDate()}日`;
+    return `${MONTHS_SHORT[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
 const customItems = customMessages
@@ -21,37 +22,46 @@ const customItems = customMessages
         if (!d) return null;
         return {
             kind: 'note',
+            mode: m.mode || 0,
             text: m.text,
             shortDate: formatShort(d),
             _date: d.getTime(),
+            images: m.images || [],
+            location: m.location || '',
         };
     })
     .filter(Boolean);
 
 const allItems = customItems.sort((a, b) => b._date - a._date);
 
+const allImages = [];
+allItems.forEach(item => {
+    item.images.forEach((src, i) => {
+        allImages.push({ src, _date: item._date, key: `${item._date}-${i}` });
+    });
+});
+
 const profile = {
     name: 'Eucaly',
     handle: '@isntbunny',
-    bio: '好累',
-    banner: 'https://i.postimg.cc/gjf2pH6T/bubbleright.png',
+    bio: 'So tired',
+    banner: 'https://i.postimg.cc/d3zzJNbS/Image-1766402411102.jpg',
     avatar: 'https://i.postimg.cc/HxG7bTwc/avatar250806.png',
 };
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>短博客 · isntbunny</title>
+    <title>Notes · isntbunny</title>
     <style is:global>
         :root {
             --bg-page: #eef7f0;
             --bg-card: #ffffff;
             --text: #0f1419;
             --text-secondary: #536471;
-            --text-muted: #8aa896;
             --accent: #2f7d4f;
             --accent-light: #e3f2e8;
             --border: #e6e9ea;
@@ -64,7 +74,7 @@ const profile = {
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'PingFang SC', sans-serif;
             background: var(--bg-page);
             color: var(--text);
             line-height: 1.5;
@@ -74,7 +84,6 @@ const profile = {
             justify-content: center;
         }
 
-        /* ---- 整体布局：日历 + 主内容 ---- */
         .layout {
             display: flex;
             gap: 1.5rem;
@@ -83,8 +92,9 @@ const profile = {
             max-width: 900px;
         }
 
-        /* ---- 左侧日历 ---- */
+        /* ---- Calendar ---- */
 .calendar {
+    position: relative;
     width: 220px;
     min-width: 0;
     flex-shrink: 0;
@@ -94,7 +104,6 @@ const profile = {
     padding: 0.75rem 0.6rem;
     position: sticky;
     top: 2rem;
-    overflow: hidden;
 }
 
 .cal-header {
@@ -106,10 +115,37 @@ const profile = {
 }
 
 .cal-title {
+    flex: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
     font-weight: 700;
     font-size: 0.85em;
     color: var(--text);
     white-space: nowrap;
+    padding: 0.3em 0.5em;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+}
+
+.cal-title::after {
+    content: '';
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -1px);
+    opacity: 0.5;
+}
+
+.cal-title:hover {
+    background: var(--accent-light);
+    color: var(--accent);
 }
 
 .cal-nav {
@@ -131,20 +167,13 @@ const profile = {
     line-height: 1;
 }
 
-.cal-nav:hover:not(:disabled) {
-    background: var(--accent-light);
-    color: var(--accent);
-}
-
-.cal-nav:disabled {
-    opacity: 0.25;
-    cursor: default;
-}
+.cal-nav:hover:not(:disabled) { background: var(--accent-light); color: var(--accent); }
+.cal-nav:disabled { opacity: 0.25; cursor: default; }
 
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    gap: 2px;
     min-width: 0;
 }
 
@@ -165,50 +194,146 @@ const profile = {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    font-size: 0.7em;
+    border-radius: 6px;
+    font-size: 0.72em;
     color: var(--text);
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
     user-select: none;
 }
 
-.cal-day.empty {
-    cursor: default;
-    pointer-events: none;
+.cal-day:not(.empty):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px var(--accent);
+    z-index: 2;
 }
 
-.cal-day:not(.empty):hover {
-    background: var(--accent-light);
-}
+/* ---- 热力图色阶 ---- *//* ---- 热力图色阶 ---- */
+.cal-day.level-1 { background: #d9f0dd; }
+.cal-day.level-2 { background: #a6dcb5; }
+.cal-day.level-3, { background: #4caf7d; color: #fff; font-weight: 700; }
 
 .cal-day.today {
     color: var(--accent);
     font-weight: 700;
 }
-
-.cal-day.has-post::after {
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--accent);
-}
+.cal-day.today.level-3,
+.cal-day.today.level-4 { color: #fff; }
 
 .cal-day.selected {
     background: var(--accent);
     color: #fff;
-    font-weight: 700;
+    font-weight: 900;
+    border-radius: 50%;
+    z-index: 3;
 }
 
-.cal-day.selected::after {
+
+/* ---- 年份 / 月份选择器 ---- */
+.cal-picker {
+    position: absolute;
+    top: calc(100% - 0.4rem);
+    left: 0.6rem;
+    right: 0.6rem;
     background: #fff;
+    border-radius: 12px;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 16px 40px rgba(0, 0, 0, 0.12);
+    padding: 0.7rem 0.6rem 0.6rem;
+    z-index: 30;
+    animation: pickerIn 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+    transform-origin: top center;
 }
-        /* ---- 主内容 ---- */
+
+.cal-picker[hidden] { display: none; }
+
+@keyframes pickerIn {
+    from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cal-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.2rem 0.6rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+    gap: 0.3rem;
+}
+
+.cal-picker-label {
+    font-size: 0.78em;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    flex: 1;
+    text-align: center;
+}
+
+.cal-picker-back,
+.cal-picker-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    line-height: 1;
+    font-family: inherit;
+    padding: 0;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.cal-picker-back:hover,
+.cal-picker-close:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.cal-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.cal-picker-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75em;
+    font-weight: 600;
+    color: var(--text);
+    padding: 0.6em 0.3em;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    font-variant-numeric: tabular-nums;
+}
+
+.cal-picker-item:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.cal-picker-item:active {
+    transform: scale(0.94);
+}
+
+.cal-picker-item.is-current {
+    background: var(--accent);
+    color: #fff;
+}
+
+
+        /* ---- App ---- */
         .app {
             width: 100%;
             max-width: 600px;
@@ -218,7 +343,6 @@ const profile = {
             overflow: hidden;
         }
 
-        /* ---- Banner ---- */
         .banner {
             width: 100%;
             height: 180px;
@@ -228,11 +352,7 @@ const profile = {
             background-color: #d4ebd9;
         }
 
-        /* ---- 资料 ---- */
-        .profile {
-            position: relative;
-            padding: 0 1.2rem 0;
-        }
+        .profile { position: relative; padding: 0 1.2rem 0; }
 
         .avatar {
             width: 100px;
@@ -262,7 +382,7 @@ const profile = {
         .profile-meta span { display: flex; align-items: center; gap: 0.3rem; }
         .profile-meta strong { color: var(--text); font-weight: 700; }
 
-        /* ---- Tab ---- */
+        /* ---- Tabs ---- */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border);
@@ -283,11 +403,7 @@ const profile = {
         }
 
         .tab:hover { background: var(--hover); color: var(--text); }
-
-        .tab.active {
-            color: var(--text);
-            font-weight: 700;
-        }
+        .tab.active { color: var(--text); font-weight: 700; }
 
         .tab.active::after {
             content: '';
@@ -301,14 +417,12 @@ const profile = {
             border-radius: 3px 3px 0 0;
         }
 
-        /* ---- 内容区 ---- */
         .panel { display: none; }
         .panel.active { display: block; }
 
-        /* ---- 推文 ---- */
+        /* ---- Tweet (block layout, repost label sits above) ---- */
         .tweet {
-            display: flex;
-            gap: 0.75rem;
+            display: block;
             padding: 1rem 1.2rem;
             border-bottom: 1px solid var(--border);
             transition: background 0.15s;
@@ -318,14 +432,36 @@ const profile = {
         .tweet:hover { background: var(--hover); }
         .tweet:last-child { border-bottom: none; }
 
-        .tweet.flash {
-            animation: flash 1.6s ease;
-        }
+        .tweet.flash { animation: flash 1.6s ease; }
 
         @keyframes flash {
             0%, 100% { background: transparent; }
             30% { background: #fff8e1; }
             60% { background: #fff8e1; }
+        }
+
+        /* ---- Repost label ---- */
+        .repost-context {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.45rem;
+            padding-left: 3.5rem;
+        }
+
+        .repost-context svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .tweet-row {
+            display: flex;
+            gap: 0.75rem;
         }
 
         .tweet-avatar {
@@ -353,24 +489,145 @@ const profile = {
             margin-bottom: 0.15rem;
         }
 
-        .tweet-name { font-weight: 700; font-size: 0.95em; color: var(--text); }
+        .tweet-name { font-weight: 700; font-size: 0.95em; }
         .tweet-handle { font-size: 0.88em; color: var(--text-secondary); }
         .tweet-sep { color: var(--text-secondary); font-size: 0.88em; }
         .tweet-date { font-size: 0.88em; color: var(--text-secondary); }
 
         .tweet-text {
             font-size: 0.95em;
-            color: var(--text);
             white-space: pre-wrap;
             word-wrap: break-word;
             line-height: 1.55;
             margin-top: 0.1rem;
         }
 
+        .tweet-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.82em;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .tweet-location svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+        /* ---- Image grid ---- */
+        .tweet-images {
+            display: grid;
+            gap: 2px;
+            margin-top: 0.7rem;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--border);
+            max-width: 100%;
+        }
+
+        .tweet-images.count-1 { grid-template-columns: 1fr; }
+        .tweet-images.count-1 img { aspect-ratio: 16 / 10; }
+
+        .tweet-images.count-2 { grid-template-columns: 1fr 1fr; }
+        .tweet-images.count-2 img { aspect-ratio: 1; }
+
+        .tweet-images.count-3 {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .tweet-images.count-3 img:first-child { grid-row: span 2; aspect-ratio: auto; }
+        .tweet-images.count-3 img:not(:first-child) { aspect-ratio: 1; }
+
+        .tweet-images.count-4 {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .tweet-images.count-4 img { aspect-ratio: 1; }
+
+        .tweet-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+            transition: opacity 0.15s;
+        }
+        .tweet-images img:hover { opacity: 0.92; }
+
         .tweet.kind-event .tweet-avatar { background: #fff4e5; color: #d97706; }
         .tweet.kind-event .tweet-text::before { content: '📅 '; margin-right: 0.15em; }
 
-        /* ---- 推文底部操作栏 ---- */
+        /* ---- Sensitive content ---- */
+.sensitive-wrap {
+    position: relative;
+}
+
+/* 未揭示时给个最小高度，防止短内容撑不住遮罩 */
+.sensitive-wrap:not(.revealed) {
+    min-height: 150px;
+}
+
+.sensitive-content {
+    transition: filter 0.3s ease;
+}
+
+.sensitive-wrap:not(.revealed) .sensitive-content {
+    filter: blur(7px);
+    user-select: none;
+    pointer-events: none;
+    /* 内容太短时也要铺满容器，避免模糊区看着奇怪 */
+    min-height: 150px;
+}
+
+.sensitive-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0rem;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    padding: 0rem;
+    z-index: 2;
+    transition: background 0.15s;
+}
+
+.sensitive-overlay:hover { background: rgba(255, 255, 255, 0.7); }
+
+.sensitive-wrap.revealed .sensitive-overlay { display: none; }
+
+.sensitive-title {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.sensitive-sub {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.sensitive-btn {
+    margin-top: 0.3rem;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text);
+    font-size: 0.85em;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.sensitive-btn:hover { background: #f4f4f4; border-color: #ccc; }
+
+        /* ---- Actions ---- */
         .tweet-actions {
             display: flex;
             justify-content: space-between;
@@ -404,12 +661,7 @@ const profile = {
             transition: background 0.15s;
         }
 
-        .action svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-            transition: fill 0.15s;
-        }
+        .action svg { width: 18px; height: 18px; fill: currentColor; transition: fill 0.15s; }
 
         .action.reply:hover { color: var(--reply); }
         .action.reply:hover .icon-wrap { background: rgba(29, 155, 240, 0.1); }
@@ -423,7 +675,24 @@ const profile = {
         .action.share:hover { color: var(--reply); }
         .action.share:hover .icon-wrap { background: rgba(29, 155, 240, 0.1); }
 
-        /* ---- 空状态 ---- */
+        /* ---- Media grid ---- */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .media-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+            transition: opacity 0.15s;
+        }
+        .media-grid img:hover { opacity: 0.9; }
+
+        /* ---- Empty ---- */
         .empty {
             text-align: center;
             color: var(--text-secondary);
@@ -431,21 +700,65 @@ const profile = {
             font-size: 0.95em;
         }
 
-        .empty-title {
+        .empty-title { font-size: 1.5em; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+        .empty-sub { color: var(--text-secondary); max-width: 320px; margin: 0 auto; line-height: 1.5; }
+
+        /* ---- Lightbox ---- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            cursor: zoom-out;
+            animation: lbFade 0.2s ease;
+        }
+
+        .lightbox.active { display: flex; }
+
+        @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            cursor: default;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: lbZoom 0.25s ease;
+            object-fit: contain;
+        }
+
+        @keyframes lbZoom {
+            from { transform: scale(0.94); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            color: #fff;
             font-size: 1.5em;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 0.5rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            font-family: inherit;
+            padding: 0;
         }
+        .lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
 
-        .empty-sub {
-            color: var(--text-secondary);
-            max-width: 320px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-        /* ---- 响应式 ---- */
+        /* ---- Responsive ---- */
         @media (max-width: 900px) {
             .calendar { display: none; }
             .layout { max-width: 600px; justify-content: center; }
@@ -458,24 +771,33 @@ const profile = {
             .avatar { width: 80px; height: 80px; margin-top: -40px; }
             .tweet { padding: 0.9rem 1rem; }
             .tweet-avatar { width: 40px; height: 40px; }
+            .repost-context { padding-left: 3.2rem; }
             .action .icon-wrap { width: 30px; height: 30px; }
             .action svg { width: 16px; height: 16px; }
+            .lightbox { padding: 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="layout">
-        <!-- ---- 左侧日历 ---- -->
-        <aside class="calendar">
-            <div class="cal-header">
-                <button class="cal-nav" id="calPrev" aria-label="上个月">‹</button>
-                <div class="cal-title" id="calTitle">—</div>
-                <button class="cal-nav" id="calNext" aria-label="下个月">›</button>
-            </div>
-            <div class="cal-grid" id="calGrid"></div>
-        </aside>
+        <aside class="calendar" id="calendarEl">
+    <div class="cal-header">
+        <button class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+        <button class="cal-title" id="calTitle" type="button">—</button>
+        <button class="cal-nav" id="calNext" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
 
-        <!-- ---- 主内容 ---- -->
+    <!-- 年份 / 月份选择器 -->
+    <div class="cal-picker" id="calPicker" hidden>
+        <div class="cal-picker-header">
+            <button class="cal-picker-back" id="calPickerBack" type="button" hidden>‹</button>
+            <span class="cal-picker-label" id="calPickerLabel"></span>
+            <button class="cal-picker-close" id="calPickerClose" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="cal-picker-grid" id="calPickerGrid"></div>
+    </div>
+</aside>
         <main class="app">
             <div class="banner"></div>
 
@@ -486,58 +808,114 @@ const profile = {
                     <div class="profile-handle">{profile.handle}</div>
                     <div class="profile-bio">{profile.bio}</div>
                     <div class="profile-meta">
-                        <span><strong>{allItems.length}</strong> 碎语</span>
-                        <span><strong>2022.11.01</strong> 加入</span>
+                        <span><strong>{allItems.length}</strong> posts</span>
+                        <span>Joined <strong>November 2022</strong></span>
                     </div>
                 </div>
 
                 <nav class="tabs" id="tabs">
-                    <div class="tab active" data-panel="notes">碎语</div>
-                    <div class="tab" data-panel="media">媒体</div>
-                    <div class="tab" data-panel="likes">喜欢</div>
+                    <div class="tab active" data-panel="notes">Posts</div>
+                    <div class="tab" data-panel="media">Media</div>
+                    <div class="tab" data-panel="likes">Likes</div>
                 </nav>
             </section>
 
-            <!-- 碎语 -->
+            <!-- Posts -->
             <div class="panel active" id="panel-notes">
                 <div id="feed">
                     {allItems.length === 0 && (
-                        <p class="empty">暂时没有内容~</p>
+                        <p class="empty">Nothing here yet~</p>
                     )}
                     {allItems.map(item => (
-                        <article class={`tweet kind-${item.kind}`} data-date={item._date}>
-                            <div class="tweet-avatar">
-                                {item.kind === 'event' ? '📅' : <img src={profile.avatar} alt="" />}
-                            </div>
-                            <div class="tweet-body">
-                                <div class="tweet-header">
-                                    <span class="tweet-name">{profile.name}</span>
-                                    <span class="tweet-handle">{profile.handle}</span>
-                                    <span class="tweet-sep">·</span>
-                                    <time class="tweet-date">{item.shortDate}</time>
+                        <article
+                            class={`tweet kind-${item.kind}`}
+                            data-date={item._date}
+                            data-mode={item.mode || 0}
+                        >
+                            {item.mode === 1 && (
+                                <div class="repost-context">
+                                    <svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
+                                    <span>{profile.name} reposted</span>
                                 </div>
-                                <p class="tweet-text">{item.text}</p>
-                                <div class="tweet-actions">
-                                    <button class="action reply" type="button" aria-label="回复">
-                                        <span class="icon-wrap">
-                                            <svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>
-                                        </span>
-                                    </button>
-                                    <button class="action retweet" type="button" aria-label="转推">
-                                        <span class="icon-wrap">
-                                            <svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
-                                        </span>
-                                    </button>
-                                    <button class="action like" type="button" aria-label="喜欢">
-                                        <span class="icon-wrap">
-                                            <svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
-                                        </span>
-                                    </button>
-                                    <button class="action share" type="button" aria-label="分享">
-                                        <span class="icon-wrap">
-                                            <svg viewBox="0 0 24 24"><path d="M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.3 3.3-1.41-1.42L12 2.59zM21 15l-.02 3.51c0 1.38-1.12 2.49-2.5 2.49H5.5C4.11 21 3 19.88 3 18.5V15h2v3.5c0 .28.22.5.5.5h12.98c.28 0 .5-.22.5-.5L19 15h2z"/></svg>
-                                        </span>
-                                    </button>
+                            )}
+
+                            <div class="tweet-row">
+                                <div class="tweet-avatar">
+                                    {item.kind === 'event' ? '📅' : <img src={profile.avatar} alt="" />}
+                                </div>
+                                <div class="tweet-body">
+                                    <div class="tweet-header">
+                                        <span class="tweet-name">{profile.name}</span>
+                                        <span class="tweet-handle">{profile.handle}</span>
+                                        <span class="tweet-sep">·</span>
+                                        <time class="tweet-date">{item.shortDate}</time>
+                                    </div>
+
+                                    {item.mode === 2 ? (
+                                        <div class="sensitive-wrap" data-sensitive>
+                                            <div class="sensitive-content">
+                                                <p class="tweet-text">{item.text}</p>
+                                                {item.location && (
+                                                    <div class="tweet-location">
+                                                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+                                                        <span>{item.location}</span>
+                                                    </div>
+                                                )}
+                                                {item.images.length > 0 && (
+                                                    <div class={`tweet-images count-${Math.min(item.images.length, 4)}`}>
+                                                        {item.images.slice(0, 4).map(src => (
+                                                            <img src={src} alt="" data-lightbox={src} loading="lazy" />
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div class="sensitive-overlay" data-reveal>
+                                                <div class="sensitive-title">Sensitive content</div>
+                                                <div class="sensitive-sub">This post may contain content that some viewers might find upsetting.</div>
+                                                <button class="sensitive-btn" type="button">View</button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <p class="tweet-text">{item.text}</p>
+                                            {item.location && (
+                                                <div class="tweet-location">
+                                                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+                                                    <span>{item.location}</span>
+                                                </div>
+                                            )}
+                                            {item.images.length > 0 && (
+                                                <div class={`tweet-images count-${Math.min(item.images.length, 4)}`}>
+                                                    {item.images.slice(0, 4).map(src => (
+                                                        <img src={src} alt="" data-lightbox={src} loading="lazy" />
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
+                                    )}
+
+                                    <div class="tweet-actions">
+                                        <button class="action reply" type="button" aria-label="Reply">
+                                            <span class="icon-wrap">
+                                                <svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>
+                                            </span>
+                                        </button>
+                                        <button class="action retweet" type="button" aria-label="Repost">
+                                            <span class="icon-wrap">
+                                                <svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
+                                            </span>
+                                        </button>
+                                        <button class="action like" type="button" aria-label="Like">
+                                            <span class="icon-wrap">
+                                                <svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
+                                            </span>
+                                        </button>
+                                        <button class="action share" type="button" aria-label="Share">
+                                            <span class="icon-wrap">
+                                                <svg viewBox="0 0 24 24"><path d="M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.3 3.3-1.41-1.42L12 2.59zM21 15l-.02 3.51c0 1.38-1.12 2.49-2.5 2.49H5.5C4.11 21 3 19.88 3 18.5V15h2v3.5c0 .28.22.5.5.5h12.98c.28 0 .5-.22.5-.5L19 15h2z"/></svg>
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -545,26 +923,40 @@ const profile = {
                 </div>
             </div>
 
-            <!-- 媒体 -->
+            <!-- Media -->
             <div class="panel" id="panel-media">
-                <div class="empty">
-                    <div class="empty-title">还没有媒体</div>
-                    <p class="empty-sub">当ta发布带有照片或视频的推文时，就会显示在这里。</p>
-                </div>
+                {allImages.length === 0 ? (
+                    <div class="empty">
+                        <div class="empty-title">No media yet</div>
+                        <p class="empty-sub">When they post photos or videos, they'll show up here.</p>
+                    </div>
+                ) : (
+                    <div class="media-grid">
+                        {allImages.map(img => (
+                            <img src={img.src} alt="" data-lightbox={img.src} loading="lazy" />
+                        ))}
+                    </div>
+                )}
             </div>
 
-            <!-- 喜欢 -->
+            <!-- Likes -->
             <div class="panel" id="panel-likes">
                 <div class="empty">
-                    <div class="empty-title">还没有喜欢</div>
-                    <p class="empty-sub">点击喜欢，就能在这里看到你喜欢的推文。</p>
+                    <div class="empty-title">No likes yet</div>
+                    <p class="empty-sub">Tap the heart on any post to like it, and it'll show up here.</p>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+        <img id="lightboxImg" alt="" />
+    </div>
+
     <script>
-        // ---------- 工具 ----------
+        // ---------- Utils ----------
         function parseIso(s) {
             const iso = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})$/.exec(s.trim());
             if (!iso) return null;
@@ -572,9 +964,11 @@ const profile = {
             return isNaN(d) ? null : d;
         }
 
+        const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
         function formatShort(d) {
-            const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-            return `${months[d.getMonth()]}${d.getDate()}日`;
+            return `${MONTHS_SHORT[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
         }
 
         function getDateKey(ms) {
@@ -582,25 +976,31 @@ const profile = {
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         }
 
-        // ---------- 操作栏 HTML ----------
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        // ---------- Actions HTML ----------
         const ACTIONS_HTML = `
             <div class="tweet-actions">
-                <button class="action reply" type="button" aria-label="回复">
+                <button class="action reply" type="button" aria-label="Reply">
                     <span class="icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>
                     </span>
                 </button>
-                <button class="action retweet" type="button" aria-label="转推">
+                <button class="action retweet" type="button" aria-label="Repost">
                     <span class="icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
                     </span>
                 </button>
-                <button class="action like" type="button" aria-label="喜欢">
+                <button class="action like" type="button" aria-label="Like">
                     <span class="icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
                     </span>
                 </button>
-                <button class="action share" type="button" aria-label="分享">
+                <button class="action share" type="button" aria-label="Share">
                     <span class="icon-wrap">
                         <svg viewBox="0 0 24 24"><path d="M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.3 3.3-1.41-1.42L12 2.59zM21 15l-.02 3.51c0 1.38-1.12 2.49-2.5 2.49H5.5C4.11 21 3 19.88 3 18.5V15h2v3.5c0 .28.22.5.5.5h12.98c.28 0 .5-.22.5-.5L19 15h2z"/></svg>
                     </span>
@@ -608,39 +1008,79 @@ const profile = {
             </div>
         `;
 
-        // ---------- 生成推文 ----------
-        function createTweet(text, shortDate, timestamp) {
+        const REPOST_ICON = `<svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>`;
+
+        const LOCATION_ICON = `<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>`;
+
+        // ---------- Create tweet ----------
+        function createTweet(text, shortDate, timestamp, images, location, mode) {
+            mode = mode || 0;
             const article = document.createElement('article');
             article.className = 'tweet';
             article.dataset.date = timestamp;
+            article.dataset.mode = mode;
 
-            const avatar = document.createElement('div');
-            avatar.className = 'tweet-avatar';
-            const img = document.createElement('img');
-            img.src = 'https://i.postimg.cc/HxG7bTwc/avatar250806.png';
-            img.alt = '';
-            avatar.appendChild(img);
+            let repostHtml = '';
+            if (mode === 1) {
+                repostHtml = `<div class="repost-context">${REPOST_ICON}<span>Eucaly reposted</span></div>`;
+            }
 
-            const body = document.createElement('div');
-            body.className = 'tweet-body';
-            body.innerHTML = `
-                <div class="tweet-header">
-                    <span class="tweet-name">Eucaly</span>
-                    <span class="tweet-handle">@isntbunny</span>
-                    <span class="tweet-sep">·</span>
-                    <time class="tweet-date">${shortDate}</time>
+            let innerHtml = '';
+            if (images && images.length) {
+                const cls = `count-${Math.min(images.length, 4)}`;
+                innerHtml += `<div class="tweet-images ${cls}">` +
+                    images.slice(0, 4).map(src =>
+                        `<img src="${escapeHtml(src)}" alt="" data-lightbox="${escapeHtml(src)}" loading="lazy" />`
+                    ).join('') +
+                    `</div>`;
+            }
+            if (location) {
+                innerHtml = `<div class="tweet-location">${LOCATION_ICON}<span>${escapeHtml(location)}</span></div>` + innerHtml;
+            }
+
+            // 敏感内容包裹
+            let bodyContentHtml;
+            if (mode === 2) {
+                bodyContentHtml = `
+                    <div class="sensitive-wrap" data-sensitive>
+                        <div class="sensitive-content">
+                            <p class="tweet-text"></p>
+                            ${innerHtml}
+                        </div>
+                        <div class="sensitive-overlay" data-reveal>
+                            <div class="sensitive-title">Sensitive content</div>
+                            <div class="sensitive-sub">This post may contain content that some viewers might find upsetting.</div>
+                            <button class="sensitive-btn" type="button">View</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                bodyContentHtml = `<p class="tweet-text"></p>${innerHtml}`;
+            }
+
+            article.innerHTML = `
+                ${repostHtml}
+                <div class="tweet-row">
+                    <div class="tweet-avatar"><img src="https://i.postimg.cc/HxG7bTwc/avatar250806.png" alt="" /></div>
+                    <div class="tweet-body">
+                        <div class="tweet-header">
+                            <span class="tweet-name">Eucaly</span>
+                            <span class="tweet-handle">@isntbunny</span>
+                            <span class="tweet-sep">·</span>
+                            <time class="tweet-date">${shortDate}</time>
+                        </div>
+                        ${bodyContentHtml}
+                        ${ACTIONS_HTML}
+                    </div>
                 </div>
-                <p class="tweet-text"></p>
-                ${ACTIONS_HTML}
             `;
-            body.querySelector('.tweet-text').textContent = text;
 
-            article.appendChild(avatar);
-            article.appendChild(body);
+            // 用 textContent 写入正文，防止 HTML 注入
+            article.querySelector('.tweet-text').textContent = text;
             return article;
         }
 
-        // ---------- 拉 Atom ----------
+        // ---------- Load Atom ----------
         async function loadAtom() {
             const feed = document.getElementById('feed');
             if (!feed || feed.dataset.loaded === '1') return;
@@ -662,7 +1102,7 @@ const profile = {
                     const d = parseIso(published);
                     if (!d) return;
 
-                    feed.appendChild(createTweet(message, formatShort(d), d.getTime()));
+                    feed.appendChild(createTweet(message, formatShort(d), d.getTime(), [], '', 0));
                 });
 
                 const empty = feed.querySelector('.empty');
@@ -672,22 +1112,19 @@ const profile = {
                 items.sort((a, b) => Number(b.dataset.date) - Number(a.dataset.date));
                 items.forEach(c => feed.appendChild(c));
 
-                // 有新的日期后刷新日历绿点
                 renderCalendar();
-
             } catch (err) {
-                console.error('Atom 拉取失败:', err);
+                console.error('Failed to load Atom feed:', err);
             }
         }
 
-        // ---------- Tab ----------
+        // ---------- Tabs ----------
         function initTabs() {
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-
                     const panelId = 'panel-' + tab.dataset.panel;
                     document.querySelectorAll('.panel').forEach(p => {
                         p.classList.toggle('active', p.id === panelId);
@@ -696,6 +1133,7 @@ const profile = {
             });
         }
 
+        // ---------- Actions: stop propagation + press feedback ----------
         function initActionGuards() {
             document.addEventListener('click', (e) => {
                 const btn = e.target.closest('.action');
@@ -707,121 +1145,287 @@ const profile = {
             });
         }
 
-        // ============================================
-        // ---------- 日历 ----------
-        // ============================================
-        const CAL_MIN_Y = 2022;
-        const CAL_MIN_M = 10; // 0-based，10 = 11月
-
-        let calYear, calMonth;
-
-        function collectPostDates() {
-            const set = new Set();
-            document.querySelectorAll('.tweet[data-date]').forEach(el => {
-                set.add(getDateKey(Number(el.dataset.date)));
+        // ---------- Sensitive reveal ----------
+        function initSensitive() {
+            document.addEventListener('click', (e) => {
+                const overlay = e.target.closest('[data-reveal]');
+                if (!overlay) return;
+                e.stopPropagation();
+                e.preventDefault();
+                const wrap = overlay.closest('[data-sensitive]');
+                if (wrap) wrap.classList.add('revealed');
             });
-            return set;
         }
 
-        function renderCalendar() {
-            const titleEl = document.getElementById('calTitle');
-            const gridEl = document.getElementById('calGrid');
-            const prevBtn = document.getElementById('calPrev');
-            const nextBtn = document.getElementById('calNext');
-            if (!titleEl || !gridEl) return;
+        // ---------- Lightbox ----------
+        function initLightbox() {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            const closeBtn = document.getElementById('lightboxClose');
+            if (!lb) return;
 
-            titleEl.textContent = `${calYear}年${calMonth + 1}月`;
+            document.addEventListener('click', (e) => {
+                const img = e.target.closest('[data-lightbox]');
+                if (!img) return;
+                // 如果在未揭示的敏感内容里，不打开灯箱
+                const sensitiveWrap = img.closest('[data-sensitive]');
+                if (sensitiveWrap && !sensitiveWrap.classList.contains('revealed')) return;
 
-            const now = new Date();
-            const nowY = now.getFullYear();
-            const nowM = now.getMonth();
+                e.stopPropagation();
+                e.preventDefault();
+                lbImg.src = img.dataset.lightbox;
+                lb.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
 
-            const isAtMin = calYear === CAL_MIN_Y && calMonth === CAL_MIN_M;
-            const isAtMax = calYear === nowY && calMonth === nowM;
-            prevBtn.disabled = isAtMin;
-            nextBtn.disabled = isAtMax;
+            function close() {
+                lb.classList.remove('active');
+                lbImg.src = '';
+                document.body.style.overflow = '';
+            }
 
-            const dates = collectPostDates();
-            const todayKey = getDateKey(Date.now());
+            closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+            lb.addEventListener('click', close);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lb.classList.contains('active')) close();
+            });
+        }
 
-            const firstDay = new Date(calYear, calMonth, 1);
-            const offset = (firstDay.getDay() + 6) % 7; // 周一开始
-            const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+        // ============================================
+// ---------- Calendar ----------
+// ============================================
+const CAL_MIN_Y = 2023;
+const CAL_MIN_M = 1; // 0-based, 10 = November
 
-            const weekdays = ['一','二','三','四','五','六','日'];
-            let html = weekdays.map(w => `<div class="cal-weekday">${w}</div>`).join('');
+let calYear, calMonth;
+let pickerMode = 'year'; // 'year' | 'month'
+let pickerYear = null;
 
-            for (let d = 1; d <= daysInMonth; d++) {
-    const key = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    const classes = ['cal-day'];
-    if (key === todayKey) classes.push('today');
-    if (dates.has(key)) classes.push('has-post');
-
-    // 1 号用 grid-column-start 直接推到正确的列，前面不留空 div
-    const colStyle = d === 1 ? ` style="grid-column-start:${offset + 1}"` : '';
-    html += `<div class="${classes.join(' ')}" data-key="${key}"${colStyle}>${d}</div>`;
+// 收集每天的帖子数量
+function collectPostCounts() {
+    const map = new Map();
+    document.querySelectorAll('.tweet[data-date]').forEach(el => {
+        const key = getDateKey(Number(el.dataset.date));
+        map.set(key, (map.get(key) || 0) + 1);
+    });
+    return map;
 }
 
-            gridEl.innerHTML = html;
-        }
+// 数量 -> 色阶
+function getLevel(count) {
+    if (count <= 0) return 0;
+    if (count === 1) return 1;   // 1 篇 → 淡绿
+    if (count <= 3) return 2;    // 2-3 篇 → 浅绿
+    return 3;                    // 4 篇及以上 → 绿
+}
 
-        function shiftMonth(delta) {
-            calMonth += delta;
-            if (calMonth < 0) { calMonth = 11; calYear--; }
-            if (calMonth > 11) { calMonth = 0; calYear++; }
+// ---------- 渲染日历 ----------
+function renderCalendar() {
+    const titleEl = document.getElementById('calTitle');
+    const gridEl = document.getElementById('calGrid');
+    const prevBtn = document.getElementById('calPrev');
+    const nextBtn = document.getElementById('calNext');
+    if (!titleEl || !gridEl) return;
+
+    titleEl.textContent = `${MONTHS_LONG[calMonth]} ${calYear}`;
+
+    const now = new Date();
+    const nowY = now.getFullYear();
+    const nowM = now.getMonth();
+
+    prevBtn.disabled = (calYear === CAL_MIN_Y && calMonth === CAL_MIN_M);
+    nextBtn.disabled = (calYear === nowY && calMonth === nowM);
+
+    const counts = collectPostCounts();
+    const todayKey = getDateKey(Date.now());
+
+    const firstDay = new Date(calYear, calMonth, 1);
+    const offset = firstDay.getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+    const weekdays = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    let html = weekdays.map(w => `<div class="cal-weekday">${w}</div>`).join('');
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const key = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const classes = ['cal-day'];
+
+        if (key === todayKey) classes.push('today');
+
+        const c = counts.get(key) || 0;
+        const lv = getLevel(c);
+        if (lv > 0) classes.push('level-' + lv);
+
+        const colStyle = d === 1 ? ` style="grid-column-start:${offset + 1}"` : '';
+        const title = c > 0 ? ` title="${c} post${c > 1 ? 's' : ''}"` : '';
+        html += `<div class="${classes.join(' ')}" data-key="${key}"${colStyle}${title}>${d}</div>`;
+    }
+
+    gridEl.innerHTML = html;
+}
+
+// ---------- 年月选择器 ----------
+function showYearPicker() {
+    pickerMode = 'year';
+    const label = document.getElementById('calPickerLabel');
+    const grid = document.getElementById('calPickerGrid');
+    const back = document.getElementById('calPickerBack');
+    if (!label || !grid) return;
+
+    back.hidden = true;
+    label.textContent = 'Select year';
+
+    const nowY = new Date().getFullYear();
+    let html = '';
+    for (let y = nowY; y >= CAL_MIN_Y; y--) {
+        const isCurrent = (y === calYear) ? ' is-current' : '';
+        html += `<button class="cal-picker-item${isCurrent}" data-year="${y}" type="button">${y}</button>`;
+    }
+    grid.innerHTML = html;
+}
+
+function showMonthPicker(year) {
+    pickerMode = 'month';
+    pickerYear = year;
+    const label = document.getElementById('calPickerLabel');
+    const grid = document.getElementById('calPickerGrid');
+    const back = document.getElementById('calPickerBack');
+    if (!label || !grid) return;
+
+    back.hidden = false;
+    label.textContent = String(year);
+
+    const now = new Date();
+    const minM = (year === CAL_MIN_Y) ? CAL_MIN_M : 0;
+    const maxM = (year === now.getFullYear()) ? now.getMonth() : 11;
+
+    let html = '';
+    for (let m = minM; m <= maxM; m++) {
+        const isCurrent = (year === calYear && m === calMonth) ? ' is-current' : '';
+        html += `<button class="cal-picker-item${isCurrent}" data-month="${m}" type="button">${MONTHS_SHORT[m]}</button>`;
+    }
+    grid.innerHTML = html;
+}
+
+function openPicker() {
+    const picker = document.getElementById('calPicker');
+    if (!picker) return;
+    picker.hidden = false;
+    showYearPicker();
+}
+
+function closePicker() {
+    const picker = document.getElementById('calPicker');
+    if (picker) picker.hidden = true;
+}
+
+function initPicker() {
+    const calendarEl = document.getElementById('calendarEl');
+    const title = document.getElementById('calTitle');
+    const picker = document.getElementById('calPicker');
+    const grid = document.getElementById('calPickerGrid');
+    const back = document.getElementById('calPickerBack');
+    const close = document.getElementById('calPickerClose');
+    if (!calendarEl || !title || !picker) return;
+
+    title.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (picker.hidden) openPicker();
+        else closePicker();
+    });
+
+    close?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closePicker();
+    });
+
+    back?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showYearPicker();
+    });
+
+    grid?.addEventListener('click', (e) => {
+        const item = e.target.closest('.cal-picker-item');
+        if (!item) return;
+        e.stopPropagation();
+
+        if (item.dataset.year) {
+            showMonthPicker(parseInt(item.dataset.year, 10));
+        } else if (item.dataset.month != null) {
+            calYear = pickerYear;
+            calMonth = parseInt(item.dataset.month, 10);
+            closePicker();
             renderCalendar();
         }
+    });
 
-        function initCalendar() {
-            const now = new Date();
-            calYear = now.getFullYear();
-            calMonth = now.getMonth();
+    // 点击外部关闭
+    document.addEventListener('click', (e) => {
+        if (picker.hidden) return;
+        if (!calendarEl.contains(e.target)) closePicker();
+    });
 
-            const prevBtn = document.getElementById('calPrev');
-            const nextBtn = document.getElementById('calNext');
-            const gridEl = document.getElementById('calGrid');
-            if (!gridEl) return;
+    // ESC 关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !picker.hidden) closePicker();
+    });
+}
 
-            prevBtn.addEventListener('click', () => shiftMonth(-1));
-            nextBtn.addEventListener('click', () => shiftMonth(1));
+// ---------- 月份翻页 ----------
+function shiftMonth(delta) {
+    calMonth += delta;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+}
 
-            gridEl.addEventListener('click', (e) => {
-                const day = e.target.closest('.cal-day[data-key]');
-                if (!day) return;
+// ---------- 日历点击 ----------
+function initCalendar() {
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth = now.getMonth();
 
-                const key = day.dataset.key;
+    const prevBtn = document.getElementById('calPrev');
+    const nextBtn = document.getElementById('calNext');
+    const gridEl = document.getElementById('calGrid');
+    if (!gridEl) return;
 
-                // 高亮当前选中
-                document.querySelectorAll('.cal-day.selected')
-                    .forEach(el => el.classList.remove('selected'));
-                day.classList.add('selected');
+    prevBtn.addEventListener('click', () => shiftMonth(-1));
+    nextBtn.addEventListener('click', () => shiftMonth(1));
 
-                // 找到该日期第一条推文
-                const target = [...document.querySelectorAll('.tweet[data-date]')]
-                    .find(el => getDateKey(Number(el.dataset.date)) === key);
+    gridEl.addEventListener('click', (e) => {
+        const day = e.target.closest('.cal-day[data-key]');
+        if (!day) return;
 
-                if (target) {
-                    // 确保"碎语" tab 处于激活状态
-                    const notesTab = document.querySelector('.tab[data-panel="notes"]');
-                    if (notesTab && !notesTab.classList.contains('active')) {
-                        notesTab.click();
-                    }
-                    // 等 tab 切换完再滚
-                    setTimeout(() => {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        target.classList.add('flash');
-                        setTimeout(() => target.classList.remove('flash'), 1600);
-                    }, 50);
-                }
-            });
+        const key = day.dataset.key;
+        document.querySelectorAll('.cal-day.selected')
+            .forEach(el => el.classList.remove('selected'));
+        day.classList.add('selected');
 
-            renderCalendar();
+        const target = [...document.querySelectorAll('.tweet[data-date]')]
+            .find(el => getDateKey(Number(el.dataset.date)) === key);
+
+        if (target) {
+            const notesTab = document.querySelector('.tab[data-panel="notes"]');
+            if (notesTab && !notesTab.classList.contains('active')) notesTab.click();
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.classList.add('flash');
+                setTimeout(() => target.classList.remove('flash'), 1600);
+            }, 50);
         }
+    });
 
-        // ---------- 初始化 ----------
+    initPicker();
+    renderCalendar();
+}
+
+        // ---------- Init ----------
         function init() {
             initTabs();
             initActionGuards();
+            initSensitive();
+            initLightbox();
             initCalendar();
             loadAtom();
         }

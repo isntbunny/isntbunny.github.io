@@ -8,19 +8,28 @@ if (!gallery) throw new Error("Missing src/content/gallery/index.md");
 ---
 
 <PageLayout meta={{ title: "Gallery", description: gallery.data.description ?? "Art gallery" }}>
-	<h1>Gallery</h1>
-	<div class="gallery-album">
-		{
-			gallery.data.sections.map((section) => (
-				<div class="gallery-album-card"><a href={`/gallery/${section.slug}/`}>
-					<img src={section.cover} alt={section.title} class="gallery-image" loading="lazy" />
-					<div class="gallery-albumdesc">
-					<h2>{section.title}</h2>
-					{section.description && <p class="small-muted">{section.description}</p>}
-					</div>
-				</a>
+	<div class="gallery-index-page">
+		<h1>Gallery</h1>
+
+		<div class="gallery-album">
+			{gallery.data.sections.map((section) => (
+				<div class="gallery-album-card">
+					<a href={`/gallery/${section.slug}/`}>
+						<img
+							src={section.cover}
+							alt={section.title}
+							class="gallery-image"
+							loading="lazy"
+						/>
+						<div class="gallery-albumdesc">
+							<h2>{section.title}</h2>
+							{section.description && (
+								<p class="small-muted">{section.description}</p>
+							)}
+						</div>
+					</a>
 				</div>
-			))
-		}
+			))}
+		</div>
 	</div>
 </PageLayout>
