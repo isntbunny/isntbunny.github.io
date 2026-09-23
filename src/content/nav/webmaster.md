@@ -32,11 +32,6 @@ order: 2
 - [GitHub 日历示例](https://bloggify.github.io/github-calendar/) - GitHub 贡献日历
 - [GitHub 贡献图生成器](https://ghchart.rshah.org/) - 自定义 GitHub 风格贡献图
 
-## webring
-- [NoAI Webring](https://baccyflap.com/noai/) - Webring
-- [Null Webring](https://nuthead.neocities.org/ring/) - Webring
-- [Ghostk Webring](https://webring.ghostk.id/online/) - Webring
-
 ## 服务
 - [智能留言本](https://www.smartgb.com/) - 免费留言本
 - [Atabook](https://atabook.org/) - 留言板
