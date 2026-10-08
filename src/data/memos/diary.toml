@@ -689,7 +689,8 @@ text = """
 [[memos]]
 date = "2025-12-16"
 text = """
-考英语前还有中午考完又碰到同桌，嗯对还有前同桌。下午没去，因为今天妈妈生日，中午包饺子我尝试了擀皮和包。晚上第二天凌晨妈妈做了奶油蛋糕，这次的奶油好吃多了！！不稀，很甜！
+考英语前还有中午考完又碰到同桌，嗯对还有前同桌。
+下午没去，中午包饺子我尝试了擀皮和包。晚上第二天凌晨妈妈做了奶油蛋糕，这次的奶油好吃多了！！不稀，很甜！
 """
 
 [[memos]]
@@ -701,7 +702,7 @@ text = """
 [[memos]]
 date = "2025-12-19"
 text = """
-因为昨晚学物理和妈妈到很晚，中午我们两个都是1点才起床，没吃饭，下午很饿不过碰巧没有零食投喂，同桌说明天带，我说明天我争取早起，还是不用了。生物和化学听懂了耶，语文课聊天过去了，数学课老师开会，让同学讲题，于是也和同桌玩真心话大冒险玩过去了
+因为昨晚学物理到很晚，中午1点才起床，没吃饭，下午很饿不过碰巧没有零食投喂，同桌说明天带，我说明天我争取早起，还是不用了。生物和化学听懂了耶，语文课聊天过去了，数学课老师开会，让同学讲题，于是也和同桌玩真心话大冒险玩过去了
 """
 
 [[memos]]
@@ -740,4 +741,40 @@ text = """
 date = "2026-02-19"
 text = """
 今天整理了书签和密码~干净了很多
+"""
+
+[[memos]]
+date = "2026-02-19"
+text = """
+I browsed through my OneDrive cloud storage. if I can recover the photos I deleted..... except selfie
+"""
+
+[[memos]]
+date = "2026-02-22"
+text = """
+codex抱歉是我的问题qwq是我合并冲突的时候听信ds建议选择incoming changes然后commit导致更改了和没更改一样XD（codex超好用的！！！
+"""
+
+[[memos]]
+date = "2026-02-22"
+text = """
+真是服了这个codex。
+"""
+
+[[memos]]
+date = "2026-02-22"
+text = """
+I love chatgpt better than deepseek. the only one shortcoming is it isn't free.
+"""
+
+[[memos]]
+date = "2026-02-23"
+text = """
+my mom maked butter milk biscuit，yummy yummmy ~~~big cookies and small cookies, all sweet
+"""
+
+[[memos]]
+date = "2026-02-23"
+text = """
+last night I slept at 4 o'clock so I got up late
 """
